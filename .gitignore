@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+.ipynb_checkpoints/
+.DS_Store
+data/raw/*.csv
+data/processed/*
+!data/processed/.gitkeep
+data/split/**/*.pt
+checkpoints/*
+!checkpoints/.gitkeep
+.venv-intel/

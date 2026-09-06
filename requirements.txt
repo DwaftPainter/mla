@@ -1,0 +1,8 @@
+# Current supported platforms; Python 3.11/3.12 recommended.
+torch>=2.6,<3; sys_platform != 'darwin' or platform_machine != 'x86_64'
+numpy>=2.1,<3; sys_platform != 'darwin' or platform_machine != 'x86_64'
+# Last official Intel Mac wheels: use Python 3.9-3.12.
+torch==2.2.2; sys_platform == 'darwin' and platform_machine == 'x86_64'
+numpy==1.26.4; sys_platform == 'darwin' and platform_machine == 'x86_64'
+PyYAML>=6.0.2,<7
+pytest>=8.3,<9
