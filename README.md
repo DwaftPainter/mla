@@ -2,22 +2,52 @@
 
 This is a complete, local supervised learning project. A small neural network learns to classify points from two noisy concentric rings. It learns its weights from labeled examples using backpropagation and Adam. There are no external model APIs, credentials, dataset downloads, or services.
 
-## Install and run
+**## Install and run
 
-Use Python 3.11 or 3.12 on Linux, Windows, or Apple Silicon. A CPU is sufficient.
+Use Python 3.11 or 3.12. Python 3.12 is the recommended version for this project. The project uses uv to manage the Python version, virtual environment, dependencies, and lock file. A CPU is sufficient.
 
-```bash
-cd ml-core
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-python -m src.training.train
-python -m src.evaluation.evaluate
-python -m src.inference.predict --features 0.7 0.0
-pytest
-```
+1. Install uv
 
-On Windows, activate with `.venv\Scripts\activate` instead. All commands below run from `ml-core/` with the environment activated. The default `python -m src.inference.predict` also works: it predicts the example `[0.7, 0.0]`.
+If uv is not installed, follow the official uv installation instructions. Then verify:
+
+uv --version
+
+2. Pin Python 3.12
+
+From the project root:
+
+uv python install 3.12
+uv python pin 3.12
+
+This creates/updates .python-version. The project intentionally uses Python <3.13, so do not pin Python 3.13.
+
+3. Synchronize dependencies
+
+uv sync
+
+uv reads pyproject.toml, resolves the dependencies, creates or updates .venv, and writes uv.lock.
+
+If .venv was previously created with an incompatible Python version, remove it and run uv sync again.
+
+4. Verify the environment
+
+uv run python --version
+uv run python -c "import torch; print(torch.__version__)"
+uv run python -c "import numpy; print(numpy.__version__)"
+
+5. Run the project
+
+uv run python -m src.training.train
+
+uv run python -m src.evaluation.evaluate
+
+uv run python -m src.inference.predict --features 0.7 0.0
+
+uv run pytest
+
+Run commands from the project root. uv run automatically uses the project environment, so manually activating .venv is normally unnecessary.
+
+If you prefer to activate it manually, use .venv\Scripts\activate on Windows Command Prompt/PowerShell or source .venv/bin/activate in Git Bash/Linux/macOS.
 
 **Intel Mac compatibility:** official macOS x86 wheels stop at PyTorch 2.2.x ([PyTorch announcement](https://pytorch.org/blog/pytorch2-2/)). `requirements.txt` selects 2.2.2 and NumPy 1.26.4 on that platform. Use Python 3.9–3.12, rather than 3.13/3.14; for example, `/usr/bin/python3 -m venv .venv` if that interpreter is 3.9. This legacy version is for this local demo; load only checkpoints you created. Other platforms use PyTorch 2.6 or later. Package installation needs internet access; training and inference thereafter work offline.
 
@@ -58,8 +88,11 @@ ml-core/
 ├── notebooks/exploration.ipynb
 ├── tests/                       # Dataset, gradients, metrics, checkpoint tests
 ├── checkpoints/.gitkeep
+├── pyproject.toml                 # Project metadata and dependencies
+├── uv.lock                        # Locked dependency versions
+├── .python-version                # Pinned Python version
 ├── pytest.ini
-├── requirements.txt
+├── requirements.txt               # Legacy dependency list during uv migration
 ├── README.md
 └── .gitignore
 ```
