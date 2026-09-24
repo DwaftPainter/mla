@@ -2,7 +2,7 @@
 
 This is a complete, local supervised learning project. A small neural network learns to classify points from two noisy concentric rings. It learns its weights from labeled examples using backpropagation and Adam. There are no external model APIs, credentials, dataset downloads, or services.
 
-** Install and run
+**Install and run**
 
 Use Python 3.11 or 3.12. Python 3.12 is the recommended version for this project. The project uses uv to manage the Python version, virtual environment, dependencies, and lock file. A CPU is sufficient.
 
