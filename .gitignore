@@ -6,6 +6,7 @@ __pycache__/
 .DS_Store
 data/raw/*.csv
 data/raw/
+data/interim
 data/processed/*
 !data/processed/.gitkeep
 data/split/**/*.pt
