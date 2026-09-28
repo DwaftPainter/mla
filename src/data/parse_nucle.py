@@ -9,8 +9,8 @@ from .nucle_sgml import NucleDocument, NucleMistake, load_nucle
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_INPUT = PROJECT_ROOT / "data/raw/nucle3.2.sgml"
-DEFAULT_OUTPUT = PROJECT_ROOT / "data/interim/nucle_errors.csv"
+DEFAULT_INPUT = PROJECT_ROOT / "data_set/raw/nucle3.2.sgml"
+DEFAULT_OUTPUT = PROJECT_ROOT / "data_set/interim/nucle_errors.csv"
 
 TARGET_LABELS = {
     "ArtOrDet",
