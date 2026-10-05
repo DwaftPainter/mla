@@ -26,11 +26,11 @@ uv run python -B -m pytest -p no:cacheprovider tests/test_nucle_understanding.py
 
 Configs, models, training, evaluation, inference và checkpoints vẫn hoãn theo phạm vi trước; test demo model/training chưa được coi là chạy được.
 
-Dependency khai báo trong `pyproject.toml`, khóa bằng `uv.lock`; `requirements.txt` được sinh tự động:
+Dependency được quản lý bằng `pyproject.toml` và `uv.lock`. Khi thay đổi dependency, cập nhật lockfile rồi đồng bộ môi trường:
 
 ```powershell
 uv lock
-uv export --locked --no-hashes --no-emit-project --output-file requirements.txt
+uv sync --locked
 ```
 
 Git theo dõi code, test, notebook không chứa output và duy nhất `docs/proposal.md` trong docs. Corpus, artifact và các báo cáo dữ liệu được giữ hoặc tạo lại tại máy.
