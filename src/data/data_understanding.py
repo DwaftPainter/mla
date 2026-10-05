@@ -6,17 +6,13 @@ from pathlib import Path
 import pandas as pd
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_INPUT = PROJECT_ROOT / "data/interim/nucle_errors.csv"
-DEFAULT_REPORT = PROJECT_ROOT / "reports/nucle_data_understanding.md"
+from .constants import ANNOTATIONS_FILE, DOCS_DIR, SGML_FILE, TARGET_LABELS
+from .nucle_sgml import load_nucle
+from .parse_nucle import documents_to_dataframe
 
-TARGET_LABELS = [
-    "ArtOrDet",
-    "Prep",
-    "Nn",
-    "Vform",
-    "SVA",
-]
+DEFAULT_INPUT = SGML_FILE
+DEFAULT_OUTPUT = ANNOTATIONS_FILE
+DEFAULT_REPORT = DOCS_DIR / "nucle_data_understanding.md"
 
 
 def markdown_table(df: pd.DataFrame) -> str:
@@ -84,19 +80,6 @@ def build_report(df: pd.DataFrame) -> str:
 
     errors_per_essay = target_df.groupby("essay_id").size()
 
-    duplicate_mask = target_df.duplicated(
-        subset=[
-            "essay_id",
-            "start_par",
-            "start_off",
-            "end_par",
-            "end_off",
-            "error_type",
-            "correction",
-        ],
-        keep=False,
-    )
-
     reconstructed = target_df[
         target_df["valid_offset"] & ~target_df["cross_paragraph"]
         & target_df["error_span"].notna()
@@ -146,86 +129,34 @@ Empty strings are measured only when reconstruction succeeded:
 - Maximum: **{int(span_lengths.max()) if len(span_lengths) else 0}**
 - Empty spans: **{int((span_lengths == 0).sum()):,}**
 
-## 6. Duplicate diagnostics
+## 6. Scope
 
-Potential duplicate target annotations using:
-`essay_id + offsets + error_type + correction`
-
-- Rows participating in a duplicate group: **{int(duplicate_mask.sum()):,}**
-
-## 7. Required manual checks before Data Preparation
-
-1. Inspect examples from every target class.
-2. Confirm reconstructed `error_span` matches the original paragraph.
-3. Verify the exact NUCLE release being used.
-4. Confirm that `Prep` already exists in this release before attempting any historical Wcip/Rloc mapping.
-5. Review empty spans separately from failed reconstruction; zero-length spans can represent insertions.
-   Edit types describe span/replacement text, not a linguistic missing-word classification.
-6. Do not use `correction` as a prediction feature.
-7. Do not create train/validation/test rows yet; split later by `essay_id`.
-8. Do not normalize or sentence-tokenize paragraph text before offset validation.
+Each annotation is one observation with its own error label; counts are not independent sentences.
+This step preserves every annotation and original offsets, including rows requiring quality review.
+Run data_quality next to audit schema, missing data, overlaps and duplicate content.
+No sentence splitting, POS, feature extraction, cleaning or dataset splits are performed.
 """
 
     return report
 
 
-def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        description="Generate a Markdown Data Understanding report from parsed NUCLE annotations."
-    )
-    parser.add_argument(
-        "--input",
-        type=Path,
-        default=DEFAULT_INPUT,
-        help=f"Parsed CSV path (default: {DEFAULT_INPUT})",
-    )
-    parser.add_argument(
-        "--output",
-        type=Path,
-        default=DEFAULT_REPORT,
-        help=f"Markdown report path (default: {DEFAULT_REPORT})",
-    )
-    return parser
-
-
 def main() -> None:
-    args = build_parser().parse_args()
-
-    if not args.input.exists():
-        raise FileNotFoundError(
-            f"Parsed CSV not found: {args.input}\n"
-            "Run `uv run python -m src.data.parse_nucle` first."
-        )
-
-    df = pd.read_csv(
-        args.input,
-        keep_default_na=False,
-    )
-
-    # CSV round-trip can turn booleans into strings depending on tooling.
-    for col in [
-        "is_target_label",
-        "is_insertion",
-        "cross_paragraph",
-        "valid_offset",
-    ]:
-        if col in df.columns and df[col].dtype == object:
-            df[col] = (
-                df[col]
-                .astype(str)
-                .str.lower()
-                .map({"true": True, "false": False})
-                .fillna(False)
-                .astype(bool)
-            )
-
-    report = build_report(df)
-
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(report, encoding="utf-8")
-
+    parser = argparse.ArgumentParser(description="Step 1: inspect NUCLE and export all annotations.")
+    parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
+    parser.add_argument("--csv", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
+    args = parser.parse_args()
+    documents = load_nucle(args.input)
+    if not documents:
+        raise ValueError("No NUCLE documents parsed")
+    frame = documents_to_dataframe(documents)
+    args.csv.parent.mkdir(parents=True, exist_ok=True)
+    args.report.parent.mkdir(parents=True, exist_ok=True)
+    frame.to_csv(args.csv, index=False)
+    report = build_report(frame)
+    args.report.write_text(report, encoding="utf-8")
     print(report)
-    print(f"\nSaved report to: {args.output}")
+    print(f"Saved all {len(frame):,} annotations to {args.csv}")
 
 
 if __name__ == "__main__":

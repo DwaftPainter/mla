@@ -182,7 +182,7 @@ def load_nucle(path: str | Path) -> list[NucleDocument]:
     if not path.exists():
         raise FileNotFoundError(
             f"NUCLE SGML file not found: {path}\n"
-            "Expected location by default: data/raw/nucle3.2.sgml"
+            "Expected location by default: data_set/raw/nucle3.2.sgml"
         )
 
     raw = path.read_text(encoding="utf-8")

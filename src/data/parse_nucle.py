@@ -1,33 +1,26 @@
 from __future__ import annotations
 
-import argparse
-from pathlib import Path
-
 import pandas as pd
 
 from .nucle_sgml import NucleDocument, NucleMistake, load_nucle
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_INPUT = PROJECT_ROOT / "data_set/raw/nucle3.2.sgml"
-DEFAULT_OUTPUT = PROJECT_ROOT / "data_set/interim/nucle_errors.csv"
+from .constants import ANNOTATIONS_FILE, SGML_FILE, TARGET_LABELS
 
-TARGET_LABELS = {
-    "ArtOrDet",
-    "Prep",
-    "Nn",
-    "Vform",
-    "SVA",
-}
+DEFAULT_INPUT = SGML_FILE
+DEFAULT_OUTPUT = ANNOTATIONS_FILE
 
 def normalize_text(value):
     if pd.isna(value):
         return ""
     return str(value).strip()
 
-def classify_edit(error_span: str | None, correction: str) -> str:
+def classify_edit(error_span: str | None, correction: str, missing_correction: bool = False) -> str:
     if pd.isna(error_span):
         return "invalid_offset"
+
+    if missing_correction:
+        return "missing_correction"
 
     original = normalize_text(error_span)
     replacement = normalize_text(correction)
@@ -117,7 +110,7 @@ def documents_to_dataframe(
                     "edit_type": (
                         "invalid_offset" if not valid_offset else
                         "cross_paragraph" if cross_paragraph else
-                        classify_edit(error_span, mistake.correction)
+                        classify_edit(error_span, mistake.correction, mistake.missing_correction)
                     ),
 
                     "is_target_label": mistake.error_type in TARGET_LABELS,
@@ -140,61 +133,3 @@ def documents_to_dataframe(
                    "cross_paragraph", "valid_offset"]:
         df[column] = df[column].astype(bool)
     return df
-
-
-
-def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        description="Parse raw NUCLE SGML into an annotation-level CSV."
-    )
-    parser.add_argument(
-        "--input",
-        type=Path,
-        default=DEFAULT_INPUT,
-        help=f"Input SGML path (default: {DEFAULT_INPUT})",
-    )
-    parser.add_argument(
-        "--output",
-        type=Path,
-        default=DEFAULT_OUTPUT,
-        help=f"Output CSV path (default: {DEFAULT_OUTPUT})",
-    )
-    return parser
-
-
-def main() -> None:
-    args = build_parser().parse_args()
-
-    docs = load_nucle(args.input)
-    df = documents_to_dataframe(docs)
-
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    df.to_csv(args.output, index=False)
-
-    print("=" * 80)
-    print("NUCLE PARSING COMPLETE")
-    print("=" * 80)
-    print(f"Input                 : {args.input}")
-    print(f"Output                : {args.output}")
-    print(f"Essays                : {len(docs):,}")
-    print(f"Annotations           : {len(df):,}")
-    print(f"Unique labels         : {df['error_type'].nunique():,}")
-    print(f"Target annotations    : {int(df['is_target_label'].sum()):,}")
-    print(f"Insertions            : {int(df['is_insertion'].sum()):,}")
-    print(f"Cross-paragraph       : {int(df['cross_paragraph'].sum()):,}")
-    print(f"Invalid offsets       : {int((~df['valid_offset']).sum()):,}")
-
-    print("\nTARGET LABEL COUNTS")
-    print("-" * 80)
-    target_counts = (
-        df[df["is_target_label"]]["error_type"]
-        .value_counts()
-        .reindex(sorted(TARGET_LABELS))
-        .fillna(0)
-        .astype(int)
-    )
-    print(target_counts.to_string())
-
-
-if __name__ == "__main__":
-    main()

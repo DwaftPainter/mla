@@ -1,15 +1,21 @@
+# Local environments and caches
 .venv/
+.venv-intel/
 __pycache__/
 .pytest_cache/
 *.py[cod]
 .ipynb_checkpoints/
 .DS_Store
-data/raw/*.csv
-data/raw/
-data/interim
-data/processed/*
-!data/processed/.gitkeep
-data/split/**/*.pt
-checkpoints/*
-!checkpoints/.gitkeep
-.venv-intel/
+
+# Local corpus, derived data and generated reports
+/data/
+/data_set/
+/reports/
+
+# Publish only the proposal from docs
+/docs/*
+!/docs/proposal.md
+
+# Local model artifacts
+/checkpoints/*
+!/checkpoints/.gitkeep

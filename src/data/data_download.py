@@ -4,7 +4,7 @@ Download NUCLE (NUS Corpus of Learner English)
 
 Source (verified via web search, 2026-09-24):
     https://huggingface.co/datasets/nusnlp/NUCLE
-    -> data/nucle3.2.sgml  (single SGML file, ~12.6 MB, NUCLE release 3.3)
+    -> data/nucle3.2.sgml (source filename; release must be verified separately)
 
 Licensing:
     Distributed under the "standard NUS licensing agreement"
@@ -47,13 +47,9 @@ RETRY_BACKOFF_SECONDS = 3
 
 URL = "https://huggingface.co/datasets/nusnlp/NUCLE/resolve/main/data/nucle3.2.sgml?download=true"
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-RAW_DIR = PROJECT_ROOT / "data" / "raw"
+from .constants import SGML_FILE
 
-SGML_FILE = RAW_DIR / "nucle3.2.sgml"
-
-# The 5 classes this project actually classifies (see project README).
-TARGET_LABELS = {"ArtOrDet", "Prep", "Nn", "Vform", "SVA"}
+RAW_DIR = SGML_FILE.parent
 
 
 class DownloadData:
