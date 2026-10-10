@@ -47,7 +47,10 @@ RETRY_BACKOFF_SECONDS = 3
 
 URL = "https://huggingface.co/datasets/nusnlp/NUCLE/resolve/main/data/nucle3.2.sgml?download=true"
 
-from .constants import SGML_FILE
+if __package__:
+    from .constants import SGML_FILE
+else:
+    from constants import SGML_FILE
 
 RAW_DIR = SGML_FILE.parent
 

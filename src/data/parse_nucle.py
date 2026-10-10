@@ -2,10 +2,13 @@ from __future__ import annotations
 
 import pandas as pd
 
-from .nucle_sgml import NucleDocument, NucleMistake, load_nucle
-
-
-from .constants import ANNOTATIONS_FILE, SGML_FILE, TARGET_LABELS
+if __package__:
+    from .nucle_sgml import NucleDocument, NucleMistake, load_nucle
+    from .constants import ANNOTATIONS_FILE, SGML_FILE, TARGET_LABELS
+else:
+    # Direct execution: python src/data/parse_nucle.py.
+    from nucle_sgml import NucleDocument, NucleMistake, load_nucle
+    from constants import ANNOTATIONS_FILE, SGML_FILE, TARGET_LABELS
 
 DEFAULT_INPUT = SGML_FILE
 DEFAULT_OUTPUT = ANNOTATIONS_FILE
@@ -13,7 +16,7 @@ DEFAULT_OUTPUT = ANNOTATIONS_FILE
 def normalize_text(value):
     if pd.isna(value):
         return ""
-    return str(value).strip()
+    return str(value) # delete strip()
 
 def classify_edit(error_span: str | None, correction: str, missing_correction: bool = False) -> str:
     if pd.isna(error_span):

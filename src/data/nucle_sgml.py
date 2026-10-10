@@ -133,17 +133,17 @@ class NucleSGMLParser(HTMLParser):
                 self._inside_text = False
 
         elif tag == "type" and self._current_mistake is not None:
-            self._current_mistake.error_type = "".join(self._type_buffer).strip()
+            self._current_mistake.error_type = "".join(self._type_buffer)
             self._inside_type = False
             self._type_buffer = []
 
         elif tag == "correction" and self._current_mistake is not None:
-            self._current_mistake.correction = "".join(self._correction_buffer).strip()
+            self._current_mistake.correction = "".join(self._correction_buffer)
             self._inside_correction = False
             self._correction_buffer = []
 
         elif tag == "comment" and self._current_mistake is not None:
-            self._current_mistake.comment = "".join(self._comment_buffer).strip()
+            self._current_mistake.comment = "".join(self._comment_buffer)
             self._inside_comment = False
             self._comment_buffer = []
 

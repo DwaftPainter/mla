@@ -9,9 +9,14 @@ import unicodedata
 
 import pandas as pd
 
-from .constants import ANNOTATIONS_FILE, DEFAULT_RELEASE, DOCS_DIR, REPORTS_DIR, SGML_FILE, TARGET_LABELS
-from .nucle_sgml import load_nucle
-from .parse_nucle import documents_to_dataframe
+if __package__:
+    from .constants import ANNOTATIONS_FILE, DEFAULT_RELEASE, DOCS_DIR, REPORTS_DIR, SGML_FILE, TARGET_LABELS
+    from .nucle_sgml import load_nucle
+    from .parse_nucle import documents_to_dataframe
+else:
+    from constants import ANNOTATIONS_FILE, DEFAULT_RELEASE, DOCS_DIR, REPORTS_DIR, SGML_FILE, TARGET_LABELS
+    from nucle_sgml import load_nucle
+    from parse_nucle import documents_to_dataframe
 
 
 def annotation_review(frame):

@@ -6,9 +6,14 @@ from pathlib import Path
 import pandas as pd
 
 
-from .constants import ANNOTATIONS_FILE, DOCS_DIR, SGML_FILE, TARGET_LABELS
-from .nucle_sgml import load_nucle
-from .parse_nucle import documents_to_dataframe
+if __package__:
+    from .constants import ANNOTATIONS_FILE, DOCS_DIR, SGML_FILE, TARGET_LABELS
+    from .nucle_sgml import load_nucle
+    from .parse_nucle import documents_to_dataframe
+else:
+    from constants import ANNOTATIONS_FILE, DOCS_DIR, SGML_FILE, TARGET_LABELS
+    from nucle_sgml import load_nucle
+    from parse_nucle import documents_to_dataframe
 
 DEFAULT_INPUT = SGML_FILE
 DEFAULT_OUTPUT = ANNOTATIONS_FILE
