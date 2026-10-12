@@ -15,6 +15,12 @@ __pycache__/
 # Publish only the proposal from docs
 /docs/*
 !/docs/proposal.md
+!/docs/status.md
+!/docs/preparation.md
+!/docs/experiment_protocol.md
+
+# Keep all test files local and out of commits
+/tests/
 
 # Local model artifacts
 /checkpoints/*
