@@ -10,11 +10,11 @@ import unicodedata
 import pandas as pd
 
 if __package__:
-    from .constants import ANNOTATIONS_FILE, DEFAULT_RELEASE, DOCS_DIR, REPORTS_DIR, SGML_FILE, TARGET_LABELS
+    from .constants import ANNOTATIONS_FILE, DEFAULT_RELEASE, REPORTS_DIR, SGML_FILE, TARGET_LABELS
     from .nucle_sgml import load_nucle
     from .parse_nucle import documents_to_dataframe
 else:
-    from constants import ANNOTATIONS_FILE, DEFAULT_RELEASE, DOCS_DIR, REPORTS_DIR, SGML_FILE, TARGET_LABELS
+    from constants import ANNOTATIONS_FILE, DEFAULT_RELEASE, REPORTS_DIR, SGML_FILE, TARGET_LABELS
     from nucle_sgml import load_nucle
     from parse_nucle import documents_to_dataframe
 
@@ -179,7 +179,7 @@ def main():
     parser.add_argument("--input", type=Path, default=SGML_FILE)
     parser.add_argument("--csv", type=Path, default=ANNOTATIONS_FILE)
     parser.add_argument("--output-dir", type=Path, default=REPORTS_DIR)
-    parser.add_argument("--report", type=Path, default=DOCS_DIR / "nucle_data_quality.md")
+    parser.add_argument("--report", type=Path, default=REPORTS_DIR / "nucle_data_quality.md")
     parser.add_argument("--release", default=DEFAULT_RELEASE)
     args = parser.parse_args()
     documents = load_nucle(args.input)
