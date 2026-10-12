@@ -1,36 +1,50 @@
-# NUCLE — Data Understanding và Data Quality
+# NUCLE data pipeline
 
-Phạm vi hiện tại chỉ gồm hai bước dữ liệu. Mỗi annotation lỗi là một quan sát riêng; năm nhãn mục tiêu là ArtOrDet, Prep, Nn, Vform và SVA. Không tự gộp/xóa annotation vì chồng lấn, nghi trùng hoặc cùng span khác nhãn.
+Dự án hiện tập trung vào đọc corpus, kiểm tra chất lượng annotation và tạo dữ liệu câu/span cho năm nhãn `ArtOrDet`, `Prep`, `Nn`, `Vform`, `SVA`. Mỗi annotation được giữ như một quan sát riêng; pipeline không tự sửa nhãn, span hoặc correction, và chưa thực hiện train/validation/test split.
 
-Dùng Python 3.12, chạy `uv sync --locked` để cài dependency. Đặt nguồn được cấp quyền tại `data_set/raw/nucle3.2.sgml`; utility tải tùy chọn là `python -m src.data.data_download`.
+Tài liệu chính:
 
-```powershell
-uv run python -m src.data.data_understanding
-uv run python -m src.data.data_quality
-```
+| File | Nội dung |
+| --- | --- |
+| [docs/status.md](docs/status.md) | Trạng thái, kết quả kiểm chứng và bước tiếp theo |
+| [docs/proposal.md](docs/proposal.md) | Câu hỏi nghiên cứu và phạm vi |
+| [docs/preparation.md](docs/preparation.md) | Schema, segmentation, offset, alignment và artifact preparation |
+| [docs/experiment_protocol.md](docs/experiment_protocol.md) | Quy trình feature, split, tuning và đánh giá |
 
-| Bước | Chức năng | Đầu ra |
-| --- | --- | --- |
-| Data Understanding | Đọc SGML, bảo toàn offset, mô tả schema, thống kê nhãn/span/edit và xuất toàn bộ annotation. | `data_set/interim/nucle_errors.csv`, `docs/nucle_data_understanding.md` |
-| Data Quality | Đối chiếu CSV với SGML; kiểm tra missing, offset, no-op, nhãn khác cùng span, overlap, nghi trùng, chất lượng văn bản và mất cân bằng lớp. | `docs/nucle_data_quality.md`, `reports/nucle_data_quality.json`, `reports/nucle_annotation_audit.csv`, `reports/nucle_duplicate_content.json` |
+Corpus được cấp quyền đặt tại `data_set/raw/nucle3.2.sgml`. Môi trường dùng Python 3.12 hoặc 3.13.7; cài dependency bằng `uv sync --locked`.
 
-`src/data` gồm hai entrypoint `data_understanding.py` và `data_quality.py`; `nucle_sgml.py`, `parse_nucle.py`, `constants.py` và `data_download.py` là helper đọc dữ liệu/đường dẫn/thu thập nguồn. `parse_nucle` không còn là bước CLI riêng.
-
-Hai notebook tương ứng trong `notebooks/` sử dụng cùng code, mặc định chỉ đọc và hiển thị. Các cờ quality là ứng viên cần review theo annotation_id, chưa phải lỗi ngữ nghĩa đã xác nhận. Correction rỗng khác với thiếu thẻ correction. Hash văn bản trùng không chứng minh leakage và không phát hiện hết paraphrase.
-
-Pipeline này không làm sạch/xóa mẫu, tách câu, POS, feature engineering, tạo sample câu/span, nhóm chia tập hay train/validation/test. Tên file nucle3.2.sgml không xác định release; quality lưu SHA256 và mặc định `release=unverified`, có thể truyền `--release` sau khi xác minh.
+## Các bước dữ liệu
 
 ```powershell
-uv run python -B -m pytest -p no:cacheprovider tests/test_nucle_understanding.py tests/test_nucle_quality.py tests/test_datadownload.py -q
+uv run python -B -m src.data.data_understanding
+uv run python -B -m src.data.data_quality
+uv run python -B -m src.data.prepare_nucle
 ```
 
-Configs, models, training, evaluation, inference và checkpoints vẫn hoãn theo phạm vi trước; test demo model/training chưa được coi là chạy được.
+Data Understanding xuất toàn bộ annotation vào `data_set/interim/nucle_errors.csv` và báo cáo vào `reports/nucle_data_understanding.md`. Data Quality đối chiếu CSV với nguồn, tạo audit flags, báo cáo Markdown/JSON, annotation audit và duplicate candidates trong `reports/`. Các flag là ứng viên cần xem xét, không khẳng định annotation sai.
 
-Dependency được quản lý bằng `pyproject.toml` và `uv.lock`. Khi thay đổi dependency, cập nhật lockfile rồi đồng bộ môi trường:
+Preparation mặc định chạy policy v2 với spaCy 3.8.7 và tạo `data_set/processed/nucle_preparation_v2/`. Đầu vào gồm SGML, annotation CSV, audit CSV và review log `data_set/interim/nucle_overlap_review_log_all.csv`. Nếu chạy lại, chọn một thư mục output mới vì pipeline không ghi đè artifact có sẵn:
 
 ```powershell
-uv lock
-uv sync --locked
+uv run python -B -m src.data.prepare_nucle --output data_set/processed/nucle_preparation_v2_rerun
 ```
 
-Git theo dõi code, test, notebook không chứa output và duy nhất `docs/proposal.md` trong docs. Corpus, artifact và các báo cáo dữ liệu được giữ hoặc tạo lại tại máy.
+Dataset gồm `samples.jsonl`, `sentences.jsonl`, `provenance.jsonl`, `rejected.jsonl`, `boundary_challenges.jsonl`, `input_groups.jsonl`, `summary.json`, `manifest.json` và `manifest.sha256`. Manifest ghi checksum của nguồn và output. V2 hiện giữ 15.788/15.788 mẫu mục tiêu; hai boundary challenge vẫn nằm trong dữ liệu chính, được gắn cờ `unresolved` và kiểm tra hồi quy trong `tests/test_boundary_challenges.py`.
+
+Để kiểm tra checksum và so sánh v1/v2 trên toàn bộ mẫu:
+
+```powershell
+uv run python -B -m src.data.compare_preparation --output reports/nucle_preparation_v2_comparison_rerun
+```
+
+Lệnh so sánh cần thư mục output mới. Nó xác minh manifest/output checksums, metadata nguồn, span offsets, sentence/token alignment và ghi diff cùng regression evidence vào `reports/`.
+
+## Kiểm thử
+
+Chạy các test dữ liệu:
+
+```powershell
+uv run python -B -m pytest -p no:cacheprovider tests/test_nucle_understanding.py tests/test_nucle_quality.py tests/test_nucle_preparation.py tests/test_preparation_alignment.py tests/test_boundary_challenges.py tests/test_sentence_boundaries.py tests/test_datadownload.py -q
+```
+
+Các artifact trong `data_set/` và báo cáo trong `reports/` được tạo cục bộ; các file trong `tests/` cũng được giữ ngoài Git theo cấu hình repo. Git theo dõi code, notebook và tài liệu proposal/trạng thái/protocol đã công bố. Hai notebook trong `notebooks/` phân tích dữ liệu và hiển thị biểu đồ; notebook không thay đổi corpus.
