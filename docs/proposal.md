@@ -116,7 +116,7 @@ Năm nhóm lỗi mục tiêu là các nhóm đã được xác lập trong CoNLL
 
 Ưu tiên sử dụng release có annotation tương thích CoNLL-2013. Nếu dùng raw NUCLE, chúng tôi kiểm tra taxonomy và quy trình chuyển đổi chính thức, đặc biệt đối với Prep và các nhóm nguồn như Wcip hoặc Rloc. Không đổi toàn bộ một nhóm nguồn thành Prep bằng ánh xạ một-một tùy ý. Correction chỉ có thể phục vụ chuyển đổi annotation theo quy trình đã xác minh và kiểm tra chất lượng; không đi vào feature extractor hoặc đầu vào suy luận.
 
-Mỗi sample gồm essay_id, sentence_id, annotation_id, sentence, error_start, error_end, error_span, error_type và span_kind. Các cờ chất lượng, original_label và nguồn mapping nằm trong provenance riêng; correction tách biệt cho audit và qualitative analysis. Offset dùng ký tự Unicode, nửa mở [start, end), chuyển từ paragraph sang sentence và kiểm tra slice khớp nguồn. Cập nhật 12/10/2026: đã triển khai Understanding, Quality và Preparation v1; chưa có split, feature hoặc benchmark. Hướng dẫn chạy và điều hướng tài liệu hiện hành ở [README](../README.md).
+Mỗi sample gồm essay_id, sentence_id, annotation_id, sentence, error_start, error_end, error_span, error_type và span_kind. Các cờ chất lượng, original_label và nguồn mapping nằm trong provenance riêng; correction tách biệt cho audit và qualitative analysis. Offset dùng ký tự Unicode, nửa mở [start, end), chuyển từ paragraph sang sentence và kiểm tra slice khớp nguồn. Cập nhật 14/10/2026: đã triển khai Understanding, Quality, Preparation v1/v2, group-aware split, feature extraction S/L/P/M/D, POS baseline và LR/Tree benchmark trên validation. Ablation và test holdout chưa hoàn tất. Hướng dẫn chạy và điều hướng tài liệu hiện hành ở [README](../README.md).
 
 ### Lỗi thiếu từ và nhiều lỗi trong một câu
 
@@ -126,7 +126,7 @@ Một câu có nhiều annotation tạo nhiều mẫu; mỗi mẫu chỉ đánh 
 
 ### Quy trình kiểm tra dữ liệu
 
-Kiểm tra missing fields, offset bounds, tính đúng của chuỗi trích xuất, phân bố nhãn, độ dài câu và span, tỷ lệ insertion, số lỗi mỗi bài và parser failures. Audit thủ công tối thiểu 20 mẫu mỗi lớp nếu đủ dữ liệu, bao gồm insertion và span nhiều token. Kiểm tra duplicate bài luận và câu trước chia tập. Các bài có câu/đoạn trùng đáng kể được nối thành nhóm chia chung hoặc xử lý bằng quy tắc loại trùng đã ghi nhận. Data Quality hiện báo cáo ứng viên trùng essay/paragraph theo exact và NFC + casefold + gộp whitespace; Preparation kiểm tra thêm input trùng chính xác. Chưa nối bài thành nhóm hoặc chia fold; chính sách grouping, boilerplate và near-duplicate cần được chốt trước split.
+Data Quality báo cáo ứng viên trùng essay/paragraph theo exact và NFC + casefold + gộp whitespace; Preparation kiểm tra input trùng chính xác. Đã chốt chính sách grouping/boilerplate và tạo group-aware split tại `data_set/split/nucle_group_split/`; near-duplicate ngữ nghĩa chưa được dò tự động và là giới hạn cần báo cáo.
 
 Chỉ văn bản gốc được tokenization, POS tagging, morphology và dependency parsing bằng một NLP pipeline cố định. Giữ nguyên văn bản để bảo toàn offsets; lowercase chỉ áp dụng trong lexical representation. Không xóa stopwords vì article và preposition là tín hiệu cần nghiên cứu. Cache đầu ra parser và ghi nhận phiên bản để tái lập.
 
