@@ -1,6 +1,6 @@
 """Build known-span samples without correction features or dataset splitting.
 
-Run: python -m src.data.prepare_nucle
+Run: python src/data/prepare_nucle.py
 Policy: docs/preparation.md (v2 by default; --policy v1 reproduces old boundaries).
 """
 from __future__ import annotations
@@ -18,12 +18,20 @@ import tempfile
 import pandas as pd
 import spacy
 
-from .constants import ANNOTATIONS_FILE, DATA_ROOT, PROJECT_ROOT, REPORTS_DIR, SGML_FILE, TARGET_LABELS
-from .boundary_challenges import BOUNDARY_CHALLENGES
-from .data_quality import annotation_review, compare_csv
-from .nucle_sgml import load_nucle
-from .parse_nucle import documents_to_dataframe
-from .sentence_boundaries import repaired_starts, rule_metadata
+try:  # Support both `python src/data/prepare_nucle.py` and package execution.
+    from .constants import ANNOTATIONS_FILE, DATA_ROOT, PROJECT_ROOT, REPORTS_DIR, SGML_FILE, TARGET_LABELS
+    from .boundary_challenges import BOUNDARY_CHALLENGES
+    from .data_quality import annotation_review, compare_csv
+    from .nucle_sgml import load_nucle
+    from .parse_nucle import documents_to_dataframe
+    from .sentence_boundaries import repaired_starts, rule_metadata
+except ImportError:  # Direct-file execution sets sys.path to src/data.
+    from constants import ANNOTATIONS_FILE, DATA_ROOT, PROJECT_ROOT, REPORTS_DIR, SGML_FILE, TARGET_LABELS
+    from boundary_challenges import BOUNDARY_CHALLENGES
+    from data_quality import annotation_review, compare_csv
+    from nucle_sgml import load_nucle
+    from parse_nucle import documents_to_dataframe
+    from sentence_boundaries import repaired_starts, rule_metadata
 
 POLICY = "nucle-preparation-v2"
 SPACY_VERSION = "3.8.7"
