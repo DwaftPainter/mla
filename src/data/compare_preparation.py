@@ -6,11 +6,16 @@ from collections import Counter
 import json
 from pathlib import Path
 
-from .constants import DATA_ROOT, REPORTS_DIR, SGML_FILE, TARGET_LABELS
-from .nucle_sgml import load_nucle
-from .prepare_nucle import DEFAULT_OUTPUT, V1_OUTPUT, canonical, digest, file_hash, require, write_json
+try:  # Support direct-file execution as well as package execution.
+    from .constants import DATA_ROOT, REPORTS_DIR, SGML_FILE, TARGET_LABELS
+    from .nucle_sgml import load_nucle
+    from .prepare_nucle import DEFAULT_OUTPUT, V1_OUTPUT, canonical, digest, file_hash, require, write_json
+except ImportError:
+    from constants import DATA_ROOT, REPORTS_DIR, SGML_FILE, TARGET_LABELS
+    from nucle_sgml import load_nucle
+    from prepare_nucle import DEFAULT_OUTPUT, V1_OUTPUT, canonical, digest, file_hash, require, write_json
 
-DEFAULT_REPORT = REPORTS_DIR / "nucle_preparation_v2_comparison_rerun"
+DEFAULT_REPORT = REPORTS_DIR / "nucle_preparation_v2_comparison"
 FRESH_SEED = 2026101202
 
 
