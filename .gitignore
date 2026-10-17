@@ -3,6 +3,7 @@
 .venv-intel/
 __pycache__/
 .pytest_cache/
+.pytest-tmp/
 *.py[cod]
 .ipynb_checkpoints/
 .DS_Store
@@ -18,7 +19,3 @@ __pycache__/
 
 # Keep all test files local and out of commits
 /tests/
-
-# Local model artifacts
-/checkpoints/*
-!/checkpoints/.gitkeep
