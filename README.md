@@ -1,59 +1,43 @@
-# NUCLE data pipeline
+# NUCLE grammatical error-type classification
 
-Dự án xây pipeline dữ liệu NUCLE và benchmark phân loại năm nhãn `ArtOrDet`, `Prep`, `Nn`, `Vform`, `SVA`. Mỗi annotation được giữ như một quan sát riêng; pipeline không tự sửa nhãn, span hoặc correction. Group-aware split, feature extraction S/L/P/M/D, POS baseline và benchmark LR/Tree đã chạy trên train/validation; test chưa được chấm.
+Pipeline xây dựng dữ liệu và benchmark phân loại năm nhãn `ArtOrDet`, `Prep`, `Nn`, `Vform`, `SVA` trên annotation có span lỗi đã biết. Mỗi annotation là một mẫu riêng. Hiện đã có preparation v1/v2, group-aware split, feature S/L/P/M/D, POS baseline, LR/Tree benchmark và validation ablation/masking. Holdout test chưa được chấm.
 
-Tài liệu chính:
+## Tài liệu chính
 
-| File | Nội dung |
+| File | Vai trò |
 | --- | --- |
-| [docs/status.md](docs/status.md) | Trạng thái, kết quả kiểm chứng và bước tiếp theo |
 | [docs/proposal.md](docs/proposal.md) | Câu hỏi nghiên cứu và phạm vi |
-| [docs/preparation.md](docs/preparation.md) | Schema, segmentation, offset, alignment và artifact preparation |
-| [docs/experiment_protocol.md](docs/experiment_protocol.md) | Quy trình feature, split, tuning và đánh giá |
+| [docs/preparation.md](docs/preparation.md) | Schema, segmentation, offset và alignment |
+| [docs/experiment_protocol.md](docs/experiment_protocol.md) | Split, feature, tuning và đánh giá |
+| [docs/status.md](docs/status.md) | Kết quả hiện tại và việc tiếp theo |
+| [note_project_guide.md](note_project_guide.md) | Hướng dẫn chạy pipeline và train |
 
-Corpus được cấp quyền đặt tại `data_set/raw/nucle3.2.sgml`. Môi trường dùng Python 3.12 hoặc 3.13.7; cài dependency bằng `uv sync --locked`.
+Đặt corpus được cấp quyền tại `data_set/raw/nucle3.2.sgml`. Dùng Python 3.12 hoặc 3.13.7; cài môi trường bằng `uv sync --locked`. Các lệnh dưới đây chạy từ thư mục gốc project.
 
-## Các bước dữ liệu
+## Pipeline và entry points
 
 ```powershell
 py src/data/data_understanding.py
 py src/data/data_quality.py
 py src/data/prepare_nucle.py
-```
-
-Data Understanding xuất toàn bộ annotation vào `data_set/interim/nucle_errors.csv` và báo cáo vào `reports/nucle_data_understanding.md`. Data Quality đối chiếu CSV với nguồn, tạo audit flags, báo cáo Markdown/JSON, annotation audit và duplicate candidates trong `reports/`. Các flag là ứng viên cần xem xét, không khẳng định annotation sai.
-
-Preparation mặc định chạy policy v2 với spaCy 3.8.7 và tạo `data_set/processed/nucle_preparation_v2/`. Đầu vào gồm SGML, annotation CSV, audit CSV và review log `data_set/interim/nucle_overlap_review_log_all.csv`. Artifact chuẩn đã có trong môi trường làm việc này; không chạy lại nếu không cần rebuild. Script từ chối ghi đè. Nếu cần rebuild có chủ đích, chỉ định một output mới và cập nhật downstream manifests.
-
-Dataset gồm `samples.jsonl`, `sentences.jsonl`, `provenance.jsonl`, `rejected.jsonl`, `boundary_challenges.jsonl`, `input_groups.jsonl`, `summary.json`, `manifest.json` và `manifest.sha256`. Manifest ghi checksum của nguồn và output. V2 hiện giữ 15.788/15.788 mẫu mục tiêu; hai boundary challenge vẫn nằm trong dữ liệu chính, được gắn cờ `unresolved` và kiểm tra hồi quy trong `tests/test_boundary_challenges.py`.
-
-Group split cục bộ nằm tại `data_set/split/nucle_group_split/` với seed `20261013`: 11.052 train, 2.368 validation, 2.368 test. Grouping policy, decisions, per-essay groups, sample split manifest, summary và output hashes được lưu cùng thư mục; không chứa sentence text. Benchmark hiện tại fit trên train và chọn cấu hình bằng validation; test chưa được chấm.
-
-POS tagger và baseline diagnostic đã khóa ở spaCy `3.8.7` + `en_core_web_sm 3.8.0`. Report hiện có tại `reports/nucle_pos_baseline_v1/`; script chỉ đọc train/validation, không chấm test. Nếu cần tạo lại, chọn một output mới vì script không ghi đè:
-
-```powershell
-uv run --locked python src/features/nucle_pos.py
-```
-
-Kết quả hiện tại nằm ở `reports/nucle_pos_baseline_v1/`. Khi chạy lại, chọn `--output` là một thư mục mới vì script không ghi đè.
-
-Feature extraction và benchmark đã chạy. Khi dựng lại từ đầu trong môi trường có đủ input, các entry point là:
-
-```powershell
+py src/data/group_split_nucle.py
+py src/features/nucle_pos.py
 py src/features/nucle_features.py
-py src/training/nucle_benchmark.py
+py src/training/nucle_benchmark.py --output reports/nucle_feature_benchmark_my_run
+py src/training/nucle_ablation.py --output reports/nucle_feature_ablation_my_run
+py src/reporting/build_ablation_notebook.py
 ```
 
-Artifact feature chuẩn nằm tại `data_set/features/nucle_features_v1/`; benchmark mới nhất tại `reports/nucle_feature_benchmark_solver_v2/`. LR tốt nhất trên validation đạt Macro-F1 0.8067; Decision Tree đạt 0.7879. Báo cáo chi tiết và biểu đồ nằm trong `notebooks/03_data_visualization.ipynb`. Lệnh benchmark mặc định từ chối ghi đè output đã có.
+Preparation chuẩn v2 nằm ở `data_set/processed/nucle_preparation_v2/`; split chuẩn ở `data_set/split/nucle_group_split/`; feature chuẩn ở `data_set/features/nucle_features_v1/`. Những artifact này đã được dựng trong workspace. Script từ chối ghi đè output đã tồn tại; chỉ chạy lại bước tạo artifact khi có chủ đích và cung cấp đường dẫn output mới. Đầu ra data/report ở local và không được commit.
 
-Bằng chứng so sánh v1/v2 hiện có tại `reports/nucle_preparation_v2_comparison/`. Script xác minh manifest/output checksums, metadata nguồn, span offsets, sentence/token alignment và tạo diff cùng regression evidence. Chỉ chạy lại khi có thay đổi preparation; script từ chối ghi đè artifact hiện có.
+`src/models/nucle_logistic.py` và `src/models/nucle_tree.py` chứa implementation của classifier. `src/training/nucle_benchmark.py` và `nucle_ablation.py` điều phối fit, validation selection và lưu summary/predictions. `src/evaluation/metrics.py` định nghĩa metric NUCLE; `src/reporting/build_ablation_notebook.py` dựng notebook từ report cục bộ.
 
-## Kiểm thử
+## Kết quả và kiểm thử
 
-Chạy các test dữ liệu:
+Validation benchmark hiện tại: LR Macro-F1 0.8067, Tree 0.7879, POS rule 0.7048 và Majority 0.1184. Báo cáo benchmark ở `notebooks/03_data_visualization.ipynb`; ablation/masking ở `notebooks/04_feature_ablation_report.ipynb`. Không dùng holdout test để chọn model.
 
 ```powershell
-uv run python -B -m pytest -p no:cacheprovider tests/test_nucle_understanding.py tests/test_nucle_quality.py tests/test_nucle_preparation.py tests/test_preparation_alignment.py tests/test_boundary_challenges.py tests/test_sentence_boundaries.py tests/test_datadownload.py -q
+py -B -m pytest -p no:cacheprovider --basetemp=.pytest-tmp tests -q
 ```
 
-Các artifact trong `data_set/` và báo cáo trong `reports/` được tạo cục bộ; các file trong `tests/` cũng được giữ ngoài Git theo cấu hình repo. Git theo dõi code, notebook và proposal. Ba notebook trong `notebooks/` phân tích dữ liệu, chất lượng và kết quả benchmark; notebook không thay đổi corpus.
+`tests/`, `data_set/` và `reports/` bị ignore theo cấu hình repository. Notebook 01–04 lần lượt ghi nhận hiểu dữ liệu, chất lượng, phân tích benchmark và ablation; notebook là báo cáo, không phải entry point huấn luyện.
