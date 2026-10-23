@@ -1,0 +1,7 @@
+# Preserve exact bytes: experiment locks hash source, protocols and report artifacts.
+# In particular, historical source files contain mixed LF/CRLF line endings.
+* -text whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+*.docx binary
+*.png binary
+*.jpg binary
+*.pdf binary

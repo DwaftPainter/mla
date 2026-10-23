@@ -1,0 +1,1804 @@
+{
+  "feature_schema": "nucle-slpmd-v1",
+  "feature_manifest_sha256": "95bdd11bc82d59438c9b643868ec54d920ab14c59c00404cb7b92649a5a0b3b6",
+  "split_manifest_sha256": "c3a65115ad93c837372e1c72d186b244043b711ee41a6706b13ccacea8be5677",
+  "test_scored": false,
+  "logistic_solver": {
+    "optimizer": "PyTorch LBFGS",
+    "max_iter": 1000,
+    "max_eval": 1250,
+    "tolerance_grad": 1e-06,
+    "tolerance_change": 1e-09,
+    "accepts_gradient_or_change_tolerance_stop": true
+  },
+  "fit_partition": "train",
+  "selection_partition": "validation",
+  "train_samples": 11052,
+  "validation_samples": 2368,
+  "majority_label_train": "ArtOrDet",
+  "selected_by_validation": {
+    "LogisticRegression": {
+      "configuration": {
+        "C": 0.1,
+        "class_weight": null
+      },
+      "validation_macro_f1": 0.8066825148760056
+    },
+    "DecisionTree": {
+      "configuration": {
+        "max_depth": 8,
+        "min_samples_leaf": 5,
+        "class_weight": null
+      },
+      "validation_macro_f1": 0.7878706585346912
+    }
+  },
+  "results": [
+    {
+      "model": "Majority",
+      "configuration": {
+        "label": "ArtOrDet"
+      },
+      "train_accuracy": 0.42055736518277237,
+      "macro_f1": 0.11843043995243759,
+      "accuracy": 0.4206081081081081,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.4206081081081081,
+          "recall": 1.0,
+          "f1": 0.5921521997621879,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          996,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          362,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          565,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          216,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          229,
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "model": "LogisticRegression",
+      "configuration": {
+        "C": 0.01,
+        "class_weight": null
+      },
+      "convergence": {
+        "iterations": 175,
+        "iterations_max": 1000,
+        "closure_evaluations": 189,
+        "max_evaluations": 1250,
+        "final_objective": 0.5912388563156128,
+        "gradient_inf_norm": 0.00016583484830334783,
+        "tolerance_grad": 1e-06,
+        "tolerance_change": 1e-09,
+        "termination": "change_tolerance",
+        "converged": true
+      },
+      "train_accuracy": 0.8430148389431777,
+      "macro_f1": 0.7933490853335934,
+      "accuracy": 0.832347972972973,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.8536355051935789,
+          "recall": 0.9076305220883534,
+          "f1": 0.8798053527980535,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9387755102040817,
+          "recall": 0.8895027624309392,
+          "f1": 0.9134751773049645,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.8314606741573034,
+          "recall": 0.7858407079646018,
+          "f1": 0.808007279344859,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.635,
+          "recall": 0.5879629629629629,
+          "f1": 0.6105769230769229,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.75,
+          "recall": 0.759825327510917,
+          "f1": 0.7548806941431669,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          904,
+          18,
+          53,
+          15,
+          6
+        ],
+        [
+          11,
+          322,
+          3,
+          23,
+          3
+        ],
+        [
+          113,
+          0,
+          444,
+          3,
+          5
+        ],
+        [
+          25,
+          1,
+          19,
+          127,
+          44
+        ],
+        [
+          6,
+          2,
+          15,
+          32,
+          174
+        ]
+      ]
+    },
+    {
+      "model": "LogisticRegression",
+      "configuration": {
+        "C": 0.01,
+        "class_weight": "balanced"
+      },
+      "convergence": {
+        "iterations": 185,
+        "iterations_max": 1000,
+        "closure_evaluations": 197,
+        "max_evaluations": 1250,
+        "final_objective": 0.6677443385124207,
+        "gradient_inf_norm": 0.00013329257490113378,
+        "tolerance_grad": 1e-06,
+        "tolerance_change": 1e-09,
+        "termination": "change_tolerance",
+        "converged": true
+      },
+      "train_accuracy": 0.8326999638074557,
+      "macro_f1": 0.790083759260607,
+      "accuracy": 0.8201013513513513,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.8928571428571429,
+          "recall": 0.8283132530120482,
+          "f1": 0.859375,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9255014326647565,
+          "recall": 0.8922651933701657,
+          "f1": 0.9085794655414908,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.7664,
+          "recall": 0.8477876106194691,
+          "f1": 0.8050420168067227,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.5967078189300411,
+          "recall": 0.6712962962962963,
+          "f1": 0.6318082788671024,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.748898678414097,
+          "recall": 0.74235807860262,
+          "f1": 0.7456140350877193,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          825,
+          22,
+          111,
+          31,
+          7
+        ],
+        [
+          8,
+          323,
+          3,
+          25,
+          3
+        ],
+        [
+          75,
+          1,
+          479,
+          4,
+          6
+        ],
+        [
+          10,
+          1,
+          19,
+          145,
+          41
+        ],
+        [
+          6,
+          2,
+          13,
+          38,
+          170
+        ]
+      ]
+    },
+    {
+      "model": "LogisticRegression",
+      "configuration": {
+        "C": 0.1,
+        "class_weight": null
+      },
+      "convergence": {
+        "iterations": 369,
+        "iterations_max": 1000,
+        "closure_evaluations": 393,
+        "max_evaluations": 1250,
+        "final_objective": 0.41262567043304443,
+        "gradient_inf_norm": 0.00019336710101924837,
+        "tolerance_grad": 1e-06,
+        "tolerance_change": 1e-09,
+        "termination": "change_tolerance",
+        "converged": true
+      },
+      "train_accuracy": 0.8906080347448425,
+      "macro_f1": 0.8066825148760056,
+      "accuracy": 0.8462837837837838,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.8747591522157996,
+          "recall": 0.9116465863453815,
+          "f1": 0.8928220255653884,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9283667621776505,
+          "recall": 0.8950276243093923,
+          "f1": 0.9113924050632911,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.8560885608856088,
+          "recall": 0.8212389380530973,
+          "f1": 0.8383017163504968,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.6342592592592593,
+          "recall": 0.6342592592592593,
+          "f1": 0.6342592592592593,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.7668161434977578,
+          "recall": 0.7467248908296943,
+          "f1": 0.756637168141593,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          908,
+          20,
+          44,
+          19,
+          5
+        ],
+        [
+          10,
+          324,
+          3,
+          22,
+          3
+        ],
+        [
+          94,
+          0,
+          464,
+          3,
+          4
+        ],
+        [
+          20,
+          3,
+          16,
+          137,
+          40
+        ],
+        [
+          6,
+          2,
+          15,
+          35,
+          171
+        ]
+      ]
+    },
+    {
+      "model": "LogisticRegression",
+      "configuration": {
+        "C": 0.1,
+        "class_weight": "balanced"
+      },
+      "convergence": {
+        "iterations": 430,
+        "iterations_max": 1000,
+        "closure_evaluations": 455,
+        "max_evaluations": 1250,
+        "final_objective": 0.45360249280929565,
+        "gradient_inf_norm": 0.0005299616605043411,
+        "tolerance_grad": 1e-06,
+        "tolerance_change": 1e-09,
+        "termination": "change_tolerance",
+        "converged": true
+      },
+      "train_accuracy": 0.8901556279406442,
+      "macro_f1": 0.8014259614522331,
+      "accuracy": 0.8348817567567568,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.8918918918918919,
+          "recall": 0.8614457831325302,
+          "f1": 0.8764044943820225,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9103641456582633,
+          "recall": 0.8977900552486188,
+          "f1": 0.9040333796940195,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.8175559380378657,
+          "recall": 0.8407079646017699,
+          "f1": 0.8289703315881325,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.6058091286307054,
+          "recall": 0.6759259259259259,
+          "f1": 0.6389496717724289,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.762114537444934,
+          "recall": 0.7554585152838428,
+          "f1": 0.7587719298245613,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          858,
+          25,
+          79,
+          27,
+          7
+        ],
+        [
+          7,
+          325,
+          2,
+          25,
+          3
+        ],
+        [
+          78,
+          2,
+          475,
+          6,
+          4
+        ],
+        [
+          14,
+          3,
+          13,
+          146,
+          40
+        ],
+        [
+          5,
+          2,
+          12,
+          37,
+          173
+        ]
+      ]
+    },
+    {
+      "model": "LogisticRegression",
+      "configuration": {
+        "C": 1.0,
+        "class_weight": null
+      },
+      "convergence": {
+        "iterations": 736,
+        "iterations_max": 1000,
+        "closure_evaluations": 785,
+        "max_evaluations": 1250,
+        "final_objective": 0.21562424302101135,
+        "gradient_inf_norm": 0.00021426446619443595,
+        "tolerance_grad": 1e-06,
+        "tolerance_change": 1e-09,
+        "termination": "change_tolerance",
+        "converged": true
+      },
+      "train_accuracy": 0.9764748461816866,
+      "macro_f1": 0.8053151322702868,
+      "accuracy": 0.8441722972972973,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.8707810993249759,
+          "recall": 0.9066265060240963,
+          "f1": 0.8883423512051155,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9232954545454546,
+          "recall": 0.8977900552486188,
+          "f1": 0.9103641456582634,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.8605947955390335,
+          "recall": 0.8194690265486726,
+          "f1": 0.8395285584768813,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.6376146788990825,
+          "recall": 0.6435185185185185,
+          "f1": 0.640552995391705,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.757847533632287,
+          "recall": 0.7379912663755459,
+          "f1": 0.7477876106194691,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          903,
+          22,
+          50,
+          15,
+          6
+        ],
+        [
+          10,
+          325,
+          2,
+          22,
+          3
+        ],
+        [
+          96,
+          0,
+          463,
+          3,
+          3
+        ],
+        [
+          20,
+          2,
+          13,
+          139,
+          42
+        ],
+        [
+          8,
+          3,
+          10,
+          39,
+          169
+        ]
+      ]
+    },
+    {
+      "model": "LogisticRegression",
+      "configuration": {
+        "C": 1.0,
+        "class_weight": "balanced"
+      },
+      "convergence": {
+        "iterations": 653,
+        "iterations_max": 1000,
+        "closure_evaluations": 702,
+        "max_evaluations": 1250,
+        "final_objective": 0.22008350491523743,
+        "gradient_inf_norm": 0.00022642062685918063,
+        "tolerance_grad": 1e-06,
+        "tolerance_change": 1e-09,
+        "termination": "change_tolerance",
+        "converged": true
+      },
+      "train_accuracy": 0.9736699239956569,
+      "macro_f1": 0.7998487131208074,
+      "accuracy": 0.8361486486486487,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.8885480572597138,
+          "recall": 0.8724899598393574,
+          "f1": 0.8804457953394124,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9159663865546218,
+          "recall": 0.9033149171270718,
+          "f1": 0.909596662030598,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.8289241622574955,
+          "recall": 0.831858407079646,
+          "f1": 0.8303886925795052,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.6083333333333333,
+          "recall": 0.6759259259259259,
+          "f1": 0.6403508771929824,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.7433628318584071,
+          "recall": 0.7336244541484717,
+          "f1": 0.7384615384615385,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          869,
+          24,
+          73,
+          21,
+          9
+        ],
+        [
+          7,
+          327,
+          2,
+          23,
+          3
+        ],
+        [
+          81,
+          1,
+          470,
+          8,
+          5
+        ],
+        [
+          15,
+          2,
+          12,
+          146,
+          41
+        ],
+        [
+          6,
+          3,
+          10,
+          42,
+          168
+        ]
+      ]
+    },
+    {
+      "model": "LogisticRegression",
+      "configuration": {
+        "C": 10.0,
+        "class_weight": null
+      },
+      "convergence": {
+        "iterations": 1000,
+        "iterations_max": 1000,
+        "closure_evaluations": 1072,
+        "max_evaluations": 1250,
+        "final_objective": 0.06631924211978912,
+        "gradient_inf_norm": 0.0001164669738500379,
+        "tolerance_grad": 1e-06,
+        "tolerance_change": 1e-09,
+        "termination": "iteration_limit",
+        "converged": false
+      },
+      "train_accuracy": 0.999457111834962,
+      "macro_f1": 0.7967104747587673,
+      "accuracy": 0.8331925675675675,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.8667972575905974,
+          "recall": 0.8885542168674698,
+          "f1": 0.8775409023301934,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9129213483146067,
+          "recall": 0.8977900552486188,
+          "f1": 0.9052924791086351,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.8309090909090909,
+          "recall": 0.8088495575221238,
+          "f1": 0.8197309417040359,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.6222222222222222,
+          "recall": 0.6481481481481481,
+          "f1": 0.6349206349206349,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.7685185185185185,
+          "recall": 0.7248908296943232,
+          "f1": 0.7460674157303372,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          885,
+          23,
+          67,
+          18,
+          3
+        ],
+        [
+          11,
+          325,
+          3,
+          19,
+          4
+        ],
+        [
+          100,
+          1,
+          457,
+          4,
+          3
+        ],
+        [
+          18,
+          4,
+          14,
+          140,
+          40
+        ],
+        [
+          7,
+          3,
+          9,
+          44,
+          166
+        ]
+      ]
+    },
+    {
+      "model": "LogisticRegression",
+      "configuration": {
+        "C": 10.0,
+        "class_weight": "balanced"
+      },
+      "convergence": {
+        "iterations": 1000,
+        "iterations_max": 1000,
+        "closure_evaluations": 1072,
+        "max_evaluations": 1250,
+        "final_objective": 0.06598575413227081,
+        "gradient_inf_norm": 0.00021812164050061256,
+        "tolerance_grad": 1e-06,
+        "tolerance_change": 1e-09,
+        "termination": "iteration_limit",
+        "converged": false
+      },
+      "train_accuracy": 0.999185667752443,
+      "macro_f1": 0.7998928739531294,
+      "accuracy": 0.8361486486486487,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.880641925777332,
+          "recall": 0.8815261044176707,
+          "f1": 0.8810837932764677,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9159663865546218,
+          "recall": 0.9033149171270718,
+          "f1": 0.909596662030598,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.8300536672629696,
+          "recall": 0.8212389380530973,
+          "f1": 0.8256227758007118,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.6092436974789915,
+          "recall": 0.6712962962962963,
+          "f1": 0.6387665198237885,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.7649769585253456,
+          "recall": 0.7248908296943232,
+          "f1": 0.7443946188340808,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          878,
+          23,
+          70,
+          20,
+          5
+        ],
+        [
+          8,
+          327,
+          3,
+          20,
+          4
+        ],
+        [
+          88,
+          1,
+          464,
+          9,
+          3
+        ],
+        [
+          16,
+          3,
+          13,
+          145,
+          39
+        ],
+        [
+          7,
+          3,
+          9,
+          44,
+          166
+        ]
+      ]
+    },
+    {
+      "model": "DecisionTree",
+      "configuration": {
+        "max_depth": 4,
+        "min_samples_leaf": 5,
+        "class_weight": null
+      },
+      "train_accuracy": 0.7845638798407528,
+      "macro_f1": 0.7634393136591495,
+      "accuracy": 0.7892736486486487,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.7848101265822784,
+          "recall": 0.8714859437751004,
+          "f1": 0.8258801141769743,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9382352941176471,
+          "recall": 0.8812154696132597,
+          "f1": 0.9088319088319089,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.8241758241758241,
+          "recall": 0.6637168141592921,
+          "f1": 0.7352941176470588,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.5619834710743802,
+          "recall": 0.6296296296296297,
+          "f1": 0.5938864628820961,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.76,
+          "recall": 0.7467248908296943,
+          "f1": 0.7533039647577093,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          868,
+          18,
+          60,
+          44,
+          6
+        ],
+        [
+          15,
+          319,
+          1,
+          24,
+          3
+        ],
+        [
+          180,
+          0,
+          375,
+          4,
+          6
+        ],
+        [
+          28,
+          1,
+          12,
+          136,
+          39
+        ],
+        [
+          15,
+          2,
+          7,
+          34,
+          171
+        ]
+      ]
+    },
+    {
+      "model": "DecisionTree",
+      "configuration": {
+        "max_depth": 4,
+        "min_samples_leaf": 5,
+        "class_weight": "balanced"
+      },
+      "train_accuracy": 0.7843829171190735,
+      "macro_f1": 0.7638283633604447,
+      "accuracy": 0.7896959459459459,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.7855203619909502,
+          "recall": 0.8714859437751004,
+          "f1": 0.826273203236554,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9384164222873901,
+          "recall": 0.8839779005524862,
+          "f1": 0.9103840682788051,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.8241758241758241,
+          "recall": 0.6637168141592921,
+          "f1": 0.7352941176470588,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.5619834710743802,
+          "recall": 0.6296296296296297,
+          "f1": 0.5938864628820961,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.76,
+          "recall": 0.7467248908296943,
+          "f1": 0.7533039647577093,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          868,
+          18,
+          60,
+          44,
+          6
+        ],
+        [
+          14,
+          320,
+          1,
+          24,
+          3
+        ],
+        [
+          180,
+          0,
+          375,
+          4,
+          6
+        ],
+        [
+          28,
+          1,
+          12,
+          136,
+          39
+        ],
+        [
+          15,
+          2,
+          7,
+          34,
+          171
+        ]
+      ]
+    },
+    {
+      "model": "DecisionTree",
+      "configuration": {
+        "max_depth": 4,
+        "min_samples_leaf": 20,
+        "class_weight": null
+      },
+      "train_accuracy": 0.7841114730365545,
+      "macro_f1": 0.7642166060270699,
+      "accuracy": 0.7901182432432432,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.7862318840579711,
+          "recall": 0.8714859437751004,
+          "f1": 0.8266666666666668,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9385964912280702,
+          "recall": 0.8867403314917127,
+          "f1": 0.9119318181818181,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.8241758241758241,
+          "recall": 0.6637168141592921,
+          "f1": 0.7352941176470588,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.5619834710743802,
+          "recall": 0.6296296296296297,
+          "f1": 0.5938864628820961,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.76,
+          "recall": 0.7467248908296943,
+          "f1": 0.7533039647577093,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          868,
+          18,
+          60,
+          44,
+          6
+        ],
+        [
+          13,
+          321,
+          1,
+          24,
+          3
+        ],
+        [
+          180,
+          0,
+          375,
+          4,
+          6
+        ],
+        [
+          28,
+          1,
+          12,
+          136,
+          39
+        ],
+        [
+          15,
+          2,
+          7,
+          34,
+          171
+        ]
+      ]
+    },
+    {
+      "model": "DecisionTree",
+      "configuration": {
+        "max_depth": 4,
+        "min_samples_leaf": 20,
+        "class_weight": "balanced"
+      },
+      "train_accuracy": 0.7841114730365545,
+      "macro_f1": 0.7642166060270699,
+      "accuracy": 0.7901182432432432,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.7862318840579711,
+          "recall": 0.8714859437751004,
+          "f1": 0.8266666666666668,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9385964912280702,
+          "recall": 0.8867403314917127,
+          "f1": 0.9119318181818181,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.8241758241758241,
+          "recall": 0.6637168141592921,
+          "f1": 0.7352941176470588,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.5619834710743802,
+          "recall": 0.6296296296296297,
+          "f1": 0.5938864628820961,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.76,
+          "recall": 0.7467248908296943,
+          "f1": 0.7533039647577093,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          868,
+          18,
+          60,
+          44,
+          6
+        ],
+        [
+          13,
+          321,
+          1,
+          24,
+          3
+        ],
+        [
+          180,
+          0,
+          375,
+          4,
+          6
+        ],
+        [
+          28,
+          1,
+          12,
+          136,
+          39
+        ],
+        [
+          15,
+          2,
+          7,
+          34,
+          171
+        ]
+      ]
+    },
+    {
+      "model": "DecisionTree",
+      "configuration": {
+        "max_depth": 8,
+        "min_samples_leaf": 5,
+        "class_weight": null
+      },
+      "train_accuracy": 0.8349619978284474,
+      "macro_f1": 0.7878706585346912,
+      "accuracy": 0.8141891891891891,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.8522267206477733,
+          "recall": 0.8453815261044176,
+          "f1": 0.8487903225806451,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9298245614035088,
+          "recall": 0.8784530386740331,
+          "f1": 0.9034090909090909,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.7662771285475793,
+          "recall": 0.8123893805309734,
+          "f1": 0.7886597938144331,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.6167400881057269,
+          "recall": 0.6481481481481481,
+          "f1": 0.6320541760722347,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.7971698113207547,
+          "recall": 0.7379912663755459,
+          "f1": 0.7664399092970522,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          842,
+          19,
+          107,
+          24,
+          4
+        ],
+        [
+          16,
+          318,
+          3,
+          23,
+          2
+        ],
+        [
+          97,
+          1,
+          459,
+          4,
+          4
+        ],
+        [
+          23,
+          2,
+          18,
+          140,
+          33
+        ],
+        [
+          10,
+          2,
+          12,
+          36,
+          169
+        ]
+      ]
+    },
+    {
+      "model": "DecisionTree",
+      "configuration": {
+        "max_depth": 8,
+        "min_samples_leaf": 5,
+        "class_weight": "balanced"
+      },
+      "train_accuracy": 0.828266377126312,
+      "macro_f1": 0.7814330888793422,
+      "accuracy": 0.8086993243243243,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.8351431391905232,
+          "recall": 0.8493975903614458,
+          "f1": 0.8422100547536088,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9358600583090378,
+          "recall": 0.8867403314917127,
+          "f1": 0.9106382978723404,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.7723292469352014,
+          "recall": 0.7805309734513274,
+          "f1": 0.7764084507042254,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.6386138613861386,
+          "recall": 0.5972222222222222,
+          "f1": 0.6172248803827751,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.7447698744769874,
+          "recall": 0.777292576419214,
+          "f1": 0.7606837606837608,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          846,
+          19,
+          103,
+          22,
+          6
+        ],
+        [
+          15,
+          321,
+          2,
+          21,
+          3
+        ],
+        [
+          114,
+          0,
+          441,
+          4,
+          6
+        ],
+        [
+          24,
+          1,
+          16,
+          129,
+          46
+        ],
+        [
+          14,
+          2,
+          9,
+          26,
+          178
+        ]
+      ]
+    },
+    {
+      "model": "DecisionTree",
+      "configuration": {
+        "max_depth": 8,
+        "min_samples_leaf": 20,
+        "class_weight": null
+      },
+      "train_accuracy": 0.8256424176619617,
+      "macro_f1": 0.7768034681576554,
+      "accuracy": 0.8070101351351351,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.8518896833503575,
+          "recall": 0.8373493975903614,
+          "f1": 0.8445569620253165,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.930835734870317,
+          "recall": 0.8922651933701657,
+          "f1": 0.9111424541607898,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.757071547420965,
+          "recall": 0.8053097345132744,
+          "f1": 0.7804459691252145,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.5927601809954751,
+          "recall": 0.6064814814814815,
+          "f1": 0.5995423340961099,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.7636363636363637,
+          "recall": 0.7336244541484717,
+          "f1": 0.7483296213808464,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          834,
+          20,
+          113,
+          25,
+          4
+        ],
+        [
+          10,
+          323,
+          3,
+          24,
+          2
+        ],
+        [
+          102,
+          0,
+          455,
+          5,
+          3
+        ],
+        [
+          23,
+          1,
+          18,
+          131,
+          43
+        ],
+        [
+          10,
+          3,
+          12,
+          36,
+          168
+        ]
+      ]
+    },
+    {
+      "model": "DecisionTree",
+      "configuration": {
+        "max_depth": 8,
+        "min_samples_leaf": 20,
+        "class_weight": "balanced"
+      },
+      "train_accuracy": 0.8245566413318857,
+      "macro_f1": 0.7810603168473681,
+      "accuracy": 0.8108108108108109,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.8379174852652259,
+          "recall": 0.856425702811245,
+          "f1": 0.8470705064548163,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9385964912280702,
+          "recall": 0.8867403314917127,
+          "f1": 0.9119318181818181,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.7823008849557522,
+          "recall": 0.7823008849557522,
+          "f1": 0.7823008849557522,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.6132075471698113,
+          "recall": 0.6018518518518519,
+          "f1": 0.6074766355140186,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.7532467532467533,
+          "recall": 0.759825327510917,
+          "f1": 0.7565217391304349,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          853,
+          18,
+          96,
+          23,
+          6
+        ],
+        [
+          13,
+          321,
+          2,
+          23,
+          3
+        ],
+        [
+          114,
+          0,
+          442,
+          5,
+          4
+        ],
+        [
+          25,
+          1,
+          16,
+          130,
+          44
+        ],
+        [
+          13,
+          2,
+          9,
+          31,
+          174
+        ]
+      ]
+    },
+    {
+      "model": "DecisionTree",
+      "configuration": {
+        "max_depth": 12,
+        "min_samples_leaf": 5,
+        "class_weight": null
+      },
+      "train_accuracy": 0.8651827723488962,
+      "macro_f1": 0.7785525699236289,
+      "accuracy": 0.8146114864864865,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.8280669144981413,
+          "recall": 0.8945783132530121,
+          "f1": 0.86003861003861,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9083094555873925,
+          "recall": 0.8756906077348067,
+          "f1": 0.8917018284106891,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.8271844660194175,
+          "recall": 0.7539823008849558,
+          "f1": 0.7888888888888889,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.5990990990990991,
+          "recall": 0.6157407407407407,
+          "f1": 0.6073059360730593,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.7864077669902912,
+          "recall": 0.7074235807860262,
+          "f1": 0.7448275862068966,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          891,
+          23,
+          57,
+          22,
+          3
+        ],
+        [
+          17,
+          317,
+          4,
+          22,
+          2
+        ],
+        [
+          130,
+          1,
+          426,
+          3,
+          5
+        ],
+        [
+          29,
+          5,
+          15,
+          133,
+          34
+        ],
+        [
+          9,
+          3,
+          13,
+          42,
+          162
+        ]
+      ]
+    },
+    {
+      "model": "DecisionTree",
+      "configuration": {
+        "max_depth": 12,
+        "min_samples_leaf": 5,
+        "class_weight": "balanced"
+      },
+      "train_accuracy": 0.8558631921824105,
+      "macro_f1": 0.7871731551035306,
+      "accuracy": 0.8201013513513513,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.8361742424242424,
+          "recall": 0.8865461847389559,
+          "f1": 0.8606237816764133,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9250720461095101,
+          "recall": 0.8867403314917127,
+          "f1": 0.9055007052186178,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.8263358778625954,
+          "recall": 0.7663716814159292,
+          "f1": 0.7952249770431588,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.631336405529954,
+          "recall": 0.6342592592592593,
+          "f1": 0.6327944572748269,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.75,
+          "recall": 0.7336244541484717,
+          "f1": 0.7417218543046359,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          883,
+          21,
+          62,
+          22,
+          8
+        ],
+        [
+          20,
+          321,
+          1,
+          16,
+          4
+        ],
+        [
+          121,
+          0,
+          433,
+          5,
+          6
+        ],
+        [
+          23,
+          3,
+          15,
+          137,
+          38
+        ],
+        [
+          9,
+          2,
+          13,
+          37,
+          168
+        ]
+      ]
+    },
+    {
+      "model": "DecisionTree",
+      "configuration": {
+        "max_depth": 12,
+        "min_samples_leaf": 20,
+        "class_weight": null
+      },
+      "train_accuracy": 0.8430148389431777,
+      "macro_f1": 0.7824533748455597,
+      "accuracy": 0.815456081081081,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.845631067961165,
+          "recall": 0.8744979919678715,
+          "f1": 0.8598223099703851,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.930835734870317,
+          "recall": 0.8922651933701657,
+          "f1": 0.9111424541607898,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.7927272727272727,
+          "recall": 0.7716814159292036,
+          "f1": 0.7820627802690583,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.5921052631578947,
+          "recall": 0.625,
+          "f1": 0.6081081081081081,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.7793427230046949,
+          "recall": 0.7248908296943232,
+          "f1": 0.751131221719457,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          871,
+          20,
+          76,
+          25,
+          4
+        ],
+        [
+          9,
+          323,
+          4,
+          24,
+          2
+        ],
+        [
+          121,
+          0,
+          436,
+          6,
+          2
+        ],
+        [
+          23,
+          1,
+          18,
+          135,
+          39
+        ],
+        [
+          6,
+          3,
+          16,
+          38,
+          166
+        ]
+      ]
+    },
+    {
+      "model": "DecisionTree",
+      "configuration": {
+        "max_depth": 12,
+        "min_samples_leaf": 20,
+        "class_weight": "balanced"
+      },
+      "train_accuracy": 0.836409699601882,
+      "macro_f1": 0.7810222433596353,
+      "accuracy": 0.8171452702702703,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.821656050955414,
+          "recall": 0.9066265060240963,
+          "f1": 0.8620525059665871,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9385964912280702,
+          "recall": 0.8867403314917127,
+          "f1": 0.9119318181818181,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.8512396694214877,
+          "recall": 0.7292035398230089,
+          "f1": 0.7855100095328884,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.59375,
+          "recall": 0.6157407407407407,
+          "f1": 0.6045454545454545,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.7579908675799086,
+          "recall": 0.7248908296943232,
+          "f1": 0.7410714285714285,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          903,
+          18,
+          46,
+          24,
+          5
+        ],
+        [
+          13,
+          321,
+          2,
+          24,
+          2
+        ],
+        [
+          144,
+          0,
+          412,
+          4,
+          5
+        ],
+        [
+          28,
+          1,
+          13,
+          133,
+          41
+        ],
+        [
+          11,
+          2,
+          11,
+          39,
+          166
+        ]
+      ]
+    }
+  ]
+}

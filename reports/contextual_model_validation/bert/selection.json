@@ -1,0 +1,227 @@
+{
+  "selected_lr": 5e-05,
+  "selection_seed": 20261013,
+  "runs": [
+    {
+      "lr": 3e-05,
+      "seed": 20261013,
+      "epochs": 5,
+      "batch_size": 32,
+      "max_length": 128,
+      "selection": "validation macro-F1, earliest epoch on ties",
+      "optimizer": "AdamW",
+      "warmup_ratio": 0.1,
+      "weight_decay": 0.01,
+      "gradient_clip": 1.0,
+      "dropout": 0.1,
+      "best_epoch": 5,
+      "metrics": {
+        "support": 2368,
+        "macro_f1": 0.17064693941684572,
+        "accuracy": 0.4353885135135135,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.44105011933174226,
+            "recall": 0.927710843373494,
+            "f1": 0.597864768683274
+          },
+          "Prep": {
+            "support": 362,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "Nn": {
+            "support": 565,
+            "precision": 0.39194139194139194,
+            "recall": 0.18938053097345134,
+            "f1": 0.2553699284009546
+          },
+          "Vform": {
+            "support": 216,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        }
+      },
+      "seconds": 213.38744930003304,
+      "directory": "reports\\contextual_model_validation\\bert\\lr_3e-05_seed_20261013"
+    },
+    {
+      "lr": 5e-05,
+      "seed": 20261013,
+      "epochs": 5,
+      "batch_size": 32,
+      "max_length": 128,
+      "selection": "validation macro-F1, earliest epoch on ties",
+      "optimizer": "AdamW",
+      "warmup_ratio": 0.1,
+      "weight_decay": 0.01,
+      "gradient_clip": 1.0,
+      "dropout": 0.1,
+      "best_epoch": 5,
+      "metrics": {
+        "support": 2368,
+        "macro_f1": 0.20030357587727524,
+        "accuracy": 0.4535472972972973,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.4682713347921225,
+            "recall": 0.8594377510040161,
+            "f1": 0.6062322946175638
+          },
+          "Prep": {
+            "support": 362,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "Nn": {
+            "support": 565,
+            "precision": 0.4052044609665427,
+            "recall": 0.3858407079646018,
+            "f1": 0.3952855847688123
+          },
+          "Vform": {
+            "support": 216,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        }
+      },
+      "seconds": 205.4595527999918,
+      "directory": "reports\\contextual_model_validation\\bert\\lr_5e-05_seed_20261013"
+    },
+    {
+      "lr": 5e-05,
+      "seed": 20261014,
+      "epochs": 5,
+      "batch_size": 32,
+      "max_length": 128,
+      "selection": "validation macro-F1, earliest epoch on ties",
+      "optimizer": "AdamW",
+      "warmup_ratio": 0.1,
+      "weight_decay": 0.01,
+      "gradient_clip": 1.0,
+      "dropout": 0.1,
+      "best_epoch": 5,
+      "metrics": {
+        "support": 2368,
+        "macro_f1": 0.19986320172593525,
+        "accuracy": 0.4341216216216216,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.4617067833698031,
+            "recall": 0.8473895582329317,
+            "f1": 0.5977337110481586
+          },
+          "Prep": {
+            "support": 362,
+            "precision": 0.4090909090909091,
+            "recall": 0.049723756906077346,
+            "f1": 0.08866995073891626
+          },
+          "Nn": {
+            "support": 565,
+            "precision": 0.3346774193548387,
+            "recall": 0.2938053097345133,
+            "f1": 0.31291234684260133
+          },
+          "Vform": {
+            "support": 216,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        }
+      },
+      "seconds": 209.58132889994886,
+      "directory": "reports\\contextual_model_validation\\bert\\lr_5e-05_seed_20261014"
+    },
+    {
+      "lr": 5e-05,
+      "seed": 20261015,
+      "epochs": 5,
+      "batch_size": 32,
+      "max_length": 128,
+      "selection": "validation macro-F1, earliest epoch on ties",
+      "optimizer": "AdamW",
+      "warmup_ratio": 0.1,
+      "weight_decay": 0.01,
+      "gradient_clip": 1.0,
+      "dropout": 0.1,
+      "best_epoch": 4,
+      "metrics": {
+        "support": 2368,
+        "macro_f1": 0.19494675352579716,
+        "accuracy": 0.4282094594594595,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.4733876017532874,
+            "recall": 0.7590361445783133,
+            "f1": 0.5831083686849209
+          },
+          "Prep": {
+            "support": 362,
+            "precision": 0.2,
+            "recall": 0.0027624309392265192,
+            "f1": 0.005449591280653951
+          },
+          "Nn": {
+            "support": 565,
+            "precision": 0.33550913838120106,
+            "recall": 0.45486725663716815,
+            "f1": 0.386175807663411
+          },
+          "Vform": {
+            "support": 216,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        }
+      },
+      "seconds": 196.94051739998395,
+      "directory": "reports\\contextual_model_validation\\bert\\lr_5e-05_seed_20261015"
+    }
+  ],
+  "selected_lr_macro_f1_mean": 0.19837117704300256,
+  "selected_lr_macro_f1_sample_std": 0.002973800542602699,
+  "primary_seed": 20261013,
+  "primary_run": "reports\\contextual_model_validation\\bert\\lr_5e-05_seed_20261013",
+  "test_scored": false
+}

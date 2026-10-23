@@ -1,0 +1,190 @@
+{
+  "pos_contract": "nucle-pos-span-v1",
+  "spacy_version": "3.8.7",
+  "model": "en_core_web_sm",
+  "model_version": "3.8.0",
+  "model_components": [
+    "tok2vec",
+    "tagger",
+    "parser",
+    "attribute_ruler",
+    "lemmatizer"
+  ],
+  "model_meta_sha256": "4603aceb440dd7fe399cd150f2a484782f3f8698a13b61862c6f1c91cea2c883",
+  "python_version": "3.13.7",
+  "source": "original sentence and character offsets only",
+  "train_samples": 11052,
+  "validation_samples": 2368,
+  "pos_missing_or_na_validation": 0,
+  "validation_alignment_counts": {
+    "exact": 2085,
+    "whitespace_edge": 31,
+    "partial_token": 252
+  },
+  "preparation_alignment_counts_validation": {
+    "exact": 2085,
+    "whitespace_edge": 31,
+    "partial_token": 252
+  },
+  "pos_rule": {
+    "single_ADP": "Prep",
+    "single_DET": "ArtOrDet",
+    "other_observed_POS_signature": "training majority for the ordered signature",
+    "unseen_signature_or_missing_or_insertion": "training majority (ArtOrDet)",
+    "tie_break": "fixed label order: ArtOrDet, Prep, Nn, Vform, SVA",
+    "fit_source": "train partition only"
+  },
+  "majority_baseline_validation": {
+    "majority_label": "ArtOrDet",
+    "macro_f1": 0.11843043995243759,
+    "per_label": {
+      "ArtOrDet": {
+        "precision": 0.4206081081081081,
+        "recall": 1.0,
+        "f1": 0.5921521997621879,
+        "support": 996
+      },
+      "Prep": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 362
+      },
+      "Nn": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 565
+      },
+      "Vform": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 216
+      },
+      "SVA": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 229
+      }
+    },
+    "confusion_matrix_true_rows_predicted_columns": [
+      [
+        996,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        362,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        565,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        216,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        229,
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "pos_rule_validation": {
+    "macro_f1": 0.7048153331595242,
+    "per_label": {
+      "ArtOrDet": {
+        "precision": 0.8628571428571429,
+        "recall": 0.7580321285140562,
+        "f1": 0.8070550507749866,
+        "support": 996
+      },
+      "Prep": {
+        "precision": 0.9080779944289693,
+        "recall": 0.9005524861878453,
+        "f1": 0.9042995839112343,
+        "support": 362
+      },
+      "Nn": {
+        "precision": 0.7022222222222222,
+        "recall": 0.8389380530973451,
+        "f1": 0.7645161290322581,
+        "support": 565
+      },
+      "Vform": {
+        "precision": 0.4375,
+        "recall": 0.7129629629629629,
+        "f1": 0.5422535211267606,
+        "support": 216
+      },
+      "SVA": {
+        "precision": 0.794392523364486,
+        "recall": 0.37117903930131,
+        "f1": 0.5059523809523809,
+        "support": 229
+      }
+    },
+    "confusion_matrix_true_rows_predicted_columns": [
+      [
+        755,
+        23,
+        163,
+        51,
+        4
+      ],
+      [
+        11,
+        326,
+        1,
+        22,
+        2
+      ],
+      [
+        81,
+        2,
+        474,
+        7,
+        1
+      ],
+      [
+        18,
+        6,
+        23,
+        154,
+        15
+      ],
+      [
+        10,
+        2,
+        14,
+        118,
+        85
+      ]
+    ]
+  },
+  "input_hashes": {
+    "prepared_manifest_sha256": "9f9fc5405492d03133bab2a89759af3504028d05568829d27a6cdc47838256a0",
+    "split_manifest_sha256": "c3a65115ad93c837372e1c72d186b244043b711ee41a6706b13ccacea8be5677"
+  },
+  "model_wheel_sha256": "1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85",
+  "test_partition_parsed_or_scored": false,
+  "train_pos_signature_count": 316,
+  "train_pos_signatures_support_lt_5": 262
+}

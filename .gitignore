@@ -9,18 +9,61 @@ __pycache__/
 .ipynb_checkpoints/
 .DS_Store
 
-# Local corpus, derived data and generated reports
+# Licensed corpus and derived data stay local.
 /data/
 /data_set/
-/reports/
 
-# Publish only the proposal from docs
-/docs/*
-!/docs/proposal.md
+# This regression fixture contains licensed source paragraphs.
+/tests/fixtures/nucle_boundary_challenges.jsonl
 
-# Keep all test files local and out of commits
-/tests/
+# Publish documentation and explicitly reviewed result summaries.
+# Checkpoints, encoders, per-sample inputs/predictions and private packets stay local.
+/reports/**
+!/reports/**/
+!/reports/**/*.md
+!/reports/summaries/**/*.docx
+!/reports/*/*.png
+!/reports/nucle_pos_baseline_v1/summary.json
+!/reports/nucle_pos_baseline_v1/pos_by_label_train.csv
+!/reports/nucle_feature_benchmark_solver_v2/summary.json
+!/reports/nucle_feature_ablation_v1/summary.json
+!/reports/nucle_preparation_v2_comparison/comparison_summary.json
+!/reports/nucle_preparation_v2_comparison/fresh_selection.json
+!/reports/nucle_span_diagnostics_v*/summary.json
+!/reports/nucle_span_diagnostics_v*/metrics.csv
+!/reports/contextual_model_validation/comparison.csv
+!/reports/contextual_model_validation/comparison.json
+!/reports/contextual_model_validation/per_class_metrics.csv
+!/reports/contextual_model_validation/verification.json
+!/reports/contextual_model_validation/bert/selection.json
+!/reports/contextual_model_validation/audit/summary.json
+!/reports/bert_learning_diagnostics/summary.json
+!/reports/bert_learning_diagnostics/gradient_checks.json
+!/reports/bert_learning_diagnostics/input_audit.json
+!/reports/bert_learning_diagnostics/same_sentence_pairs.json
+!/reports/bert_learning_diagnostics/marker_sensitivity.json
+!/reports/bert_learning_diagnostics/manifest.json
+!/reports/final_evaluation/lock.json
+!/reports/final_evaluation/lock.sha256
+!/reports/final_evaluation/selection_summary.json
+!/reports/final_evaluation/test_metrics.json
+!/reports/final_evaluation/bootstrap.json
+!/reports/final_evaluation/overall_results.csv
+!/reports/final_evaluation/paired_differences.csv
+!/reports/final_evaluation/per_class_results.csv
+!/reports/final_evaluation/per_class_deltas.csv
+!/reports/evaluation_followup/*.json
+!/reports/evaluation_followup/*.csv
+!/reports/evaluation_followup/tests.xml
+!/reports/organization/*.json
 
-/note.md
-/note_project_guide.md
-/reference.md
+# Historical backups and bundles are local, including duplicate documents.
+/reports/**/documentation_archive/
+/reports/**/before_layout/
+
+# Local credentials and editor settings.
+.env
+.env.*
+!.env.example
+*.pem
+*.key

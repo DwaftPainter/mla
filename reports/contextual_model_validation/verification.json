@@ -1,0 +1,12 @@
+{
+  "new_tests": {
+    "command": "python -m pytest tests/test_bert_span_classifier.py -q -p no:cacheprovider",
+    "passed": 6
+  },
+  "existing_tests": {
+    "command": "python -m pytest tests/test_nucle_features.py tests/test_nucle_benchmark.py tests/test_preparation_alignment.py tests/test_boundary_challenges.py -q -p no:cacheprovider",
+    "passed": 12
+  },
+  "test_partition_scored": false,
+  "scope": "functional checks in current environment, not clean-environment reproducibility"
+}

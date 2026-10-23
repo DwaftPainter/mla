@@ -1,0 +1,6 @@
+{
+  "relocated_report_reader_passes": true,
+  "docx_markdown_tables_identical": 16,
+  "numeric_tables_match": 11,
+  "output_isolated_from_original_reports": true
+}

@@ -1,0 +1,963 @@
+{
+  "scope": "train only, diagnostic; existing failed CLS checkpoint; no model selection",
+  "candidate_sentence_count": 1594,
+  "selected_pairs": 50,
+  "predictions_differ": 7,
+  "both_correct": 2,
+  "mean_cls_cosine": 0.9387299633026123,
+  "mean_span_mean_cosine": 0.6889576625823974,
+  "rows": [
+    {
+      "sentence_sha256": "54a762439f94726f1ca3e728760d16112080b2a13e46c986318bbe5eff6fdeb2",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:36252",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:36254"
+      ],
+      "gold": [
+        "Prep",
+        "Vform"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9004883170127869,
+      "span_mean_cosine": 0.7278220653533936
+    },
+    {
+      "sentence_sha256": "9f93ce21745fad0294c60c0e27fa0fd7c194df96698a6a52886fcbcc5856d0f9",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:14304",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:14305"
+      ],
+      "gold": [
+        "SVA",
+        "ArtOrDet"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9650225639343262,
+      "span_mean_cosine": 0.7336735725402832
+    },
+    {
+      "sentence_sha256": "af1c58119cb19e078ec152476471bddfafc065ce16803e3f4c26f4bc4b4f543f",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:8648",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:8649"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "Nn"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9977384805679321,
+      "span_mean_cosine": 0.7428456544876099
+    },
+    {
+      "sentence_sha256": "ec2572af7a7d7e69f2a9edef46c34fd216ad6fde1930b54f117a52c6980513dc",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:36408",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:36410"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "SVA"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9865554571151733,
+      "span_mean_cosine": 0.7522671818733215
+    },
+    {
+      "sentence_sha256": "ba8672b47ada420559c298922246bb5ce673507e6d3a5bb0c4fdfc295c4df64b",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:16629",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:16630"
+      ],
+      "gold": [
+        "SVA",
+        "ArtOrDet"
+      ],
+      "prediction": [
+        "Nn",
+        "Nn"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.895722508430481,
+      "span_mean_cosine": 0.7065551280975342
+    },
+    {
+      "sentence_sha256": "8c5274f1acaa800e9a6241c32fa5b9d3787ca02c42c679aab65e1c91ba6f8ca4",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:33239",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:33243"
+      ],
+      "gold": [
+        "Prep",
+        "Vform"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9875110387802124,
+      "span_mean_cosine": 0.6907163858413696
+    },
+    {
+      "sentence_sha256": "2d0c6388385b8b00b4098fff814037eec5d07d492f4d36454ae2ce4317e1d1bc",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:5112",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:5113"
+      ],
+      "gold": [
+        "SVA",
+        "Nn"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9896886944770813,
+      "span_mean_cosine": 0.7909638285636902
+    },
+    {
+      "sentence_sha256": "ff643452a2b40b96428ecefe07843e1ec955485594c40b2c089cb8d1b15e7f3e",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:7441",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:7442"
+      ],
+      "gold": [
+        "Nn",
+        "SVA"
+      ],
+      "prediction": [
+        "Nn",
+        "Nn"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9799960851669312,
+      "span_mean_cosine": 0.7816178798675537
+    },
+    {
+      "sentence_sha256": "f1ca1d7f5d2327d023baa08a7dc7aff7d595cb72b3c3b8c9d2e5cafdf6d2e5a1",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:7146",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:7147"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "Prep"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9971378445625305,
+      "span_mean_cosine": 0.5588276386260986
+    },
+    {
+      "sentence_sha256": "3a5edb2552e3ecbb845bcf30944f90bf7b82ba84e39a9316c71741d96bd6e7f7",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:24097",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:24098"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "SVA"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9340606927871704,
+      "span_mean_cosine": 0.7715031504631042
+    },
+    {
+      "sentence_sha256": "f3fed3b227b232fe4d8c46e7e0726af5f9e3672eaab4946c8d3f4d5d52063da8",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:9207",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:9208"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "Prep"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.8690462112426758,
+      "span_mean_cosine": 0.7597919702529907
+    },
+    {
+      "sentence_sha256": "9410c31d441623865f829cb01c0f3605ba11573be4104c63da0cab5aaf4c0c18",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:27379",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:27380"
+      ],
+      "gold": [
+        "Nn",
+        "SVA"
+      ],
+      "prediction": [
+        "Nn",
+        "Nn"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9979838728904724,
+      "span_mean_cosine": 0.7456388473510742
+    },
+    {
+      "sentence_sha256": "e76cf3b514c6d9ca0ff676159b509971f1742362c412f2d00dc1e983de6dd4a7",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:43792",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:43793"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "Prep"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.8930143117904663,
+      "span_mean_cosine": 0.6684847474098206
+    },
+    {
+      "sentence_sha256": "fe969bc61c4fcb8c82598c54976e9e84ed2ad32f508deb83dbcdc40b6b9a2cea",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:31206",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:31207"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "Nn"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9940155148506165,
+      "span_mean_cosine": 0.6611534357070923
+    },
+    {
+      "sentence_sha256": "2b328bbe2543aa7f23b6a1b71dccf19679b6b78c5482eb6021e2b9eb7a8f8720",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:17393",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:17395"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "Nn"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "Nn"
+      ],
+      "predictions_differ": true,
+      "both_correct": true,
+      "cls_cosine": 0.612946093082428,
+      "span_mean_cosine": 0.5035176277160645
+    },
+    {
+      "sentence_sha256": "93329b912087aa09126279cf9bfef62499b989203543f248624fafbcdd41c02d",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:15",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:16"
+      ],
+      "gold": [
+        "Prep",
+        "ArtOrDet"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9866339564323425,
+      "span_mean_cosine": 0.6995285749435425
+    },
+    {
+      "sentence_sha256": "0ea47b820c4268c073e70f317eb31470c1bed8d06d0fc4d121eeb59f26426ad1",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:21783",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:21784"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "Nn"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9940423965454102,
+      "span_mean_cosine": 0.7211064696311951
+    },
+    {
+      "sentence_sha256": "ca23d0deaa0cd540e2069f01ad23dc9717346fdbc59ed8777389b3d9de5c86b6",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:7946",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:7947"
+      ],
+      "gold": [
+        "Vform",
+        "ArtOrDet"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9964132905006409,
+      "span_mean_cosine": 0.7127578258514404
+    },
+    {
+      "sentence_sha256": "fac7d2a1518855cf686d5ac64714ad36799b2a09da695d77273bb6f36f7d8a3d",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:3799",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:3805"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "Vform"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "Nn"
+      ],
+      "predictions_differ": true,
+      "both_correct": false,
+      "cls_cosine": 0.8318319320678711,
+      "span_mean_cosine": 0.562510073184967
+    },
+    {
+      "sentence_sha256": "0a5e2891eec948132dd34b6ca756e21ccaf9d6cdd1eb21a3d9eb11f8e750c4e4",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:33785",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:33787"
+      ],
+      "gold": [
+        "Prep",
+        "Nn"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "Nn"
+      ],
+      "predictions_differ": true,
+      "both_correct": false,
+      "cls_cosine": 0.6478327512741089,
+      "span_mean_cosine": 0.41733866930007935
+    },
+    {
+      "sentence_sha256": "1ceff5a6d563d10de31400168dff1c8c20ab3be594297a4a3b2c356710fc46be",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:11357",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:11358"
+      ],
+      "gold": [
+        "Nn",
+        "SVA"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9979739785194397,
+      "span_mean_cosine": 0.7791492938995361
+    },
+    {
+      "sentence_sha256": "049d37843e1390b99946ec2e09cfdda835c35f2b07dd7a279462b2cd8d563a25",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:6407",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:6409"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "Prep"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9618258476257324,
+      "span_mean_cosine": 0.7096835374832153
+    },
+    {
+      "sentence_sha256": "b72d127c9278757bf8b008289398dc9c39986562886cff698499d6edc878108b",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:41599",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:41600"
+      ],
+      "gold": [
+        "Nn",
+        "SVA"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9116157293319702,
+      "span_mean_cosine": 0.6794121265411377
+    },
+    {
+      "sentence_sha256": "23827724e4eef8480e2b1876fa5b1b49b736a4c8d903178549ea9a2e59c6dfd8",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:21011",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:21013"
+      ],
+      "gold": [
+        "Vform",
+        "SVA"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.8663445711135864,
+      "span_mean_cosine": 0.5860559344291687
+    },
+    {
+      "sentence_sha256": "41b6f21f16c45d069f511de9e7f02484d6d6c40342f1c5c00f58ac0c290a3872",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:6327",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:6330"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "Prep"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9126883149147034,
+      "span_mean_cosine": 0.687150776386261
+    },
+    {
+      "sentence_sha256": "5293b1fd8a715d52e7b1f38be4e9c80f3fd91c1510c9f18a3be7928e7f286988",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:31473",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:31474"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "SVA"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.8925051689147949,
+      "span_mean_cosine": 0.6863291263580322
+    },
+    {
+      "sentence_sha256": "d01b3f44beb75cc80d5e5a8cebbf0d14514ad178d18462be88050ad413efe6ae",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:2495",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:2496"
+      ],
+      "gold": [
+        "Prep",
+        "ArtOrDet"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9918780326843262,
+      "span_mean_cosine": 0.6434352397918701
+    },
+    {
+      "sentence_sha256": "42b5f8c64aa9a995a264ec66ec8b369cea091d1498d8d50256ad884de5d0f0de",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:28794",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:28795"
+      ],
+      "gold": [
+        "Vform",
+        "ArtOrDet"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9954412579536438,
+      "span_mean_cosine": 0.7363297343254089
+    },
+    {
+      "sentence_sha256": "b611ffb84f7a1269ef1b0b9fd769e07ed1412e9d03b5a09339fdd4bb00d5189c",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:28637",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:28639"
+      ],
+      "gold": [
+        "Prep",
+        "ArtOrDet"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9803839325904846,
+      "span_mean_cosine": 0.7363088726997375
+    },
+    {
+      "sentence_sha256": "958ab2b1bd884319ab630be4a51f4b2d67db1dcd2c0036f60e43760f3d5f98c8",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:44768",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:44771"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "Nn"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9865950345993042,
+      "span_mean_cosine": 0.7010793685913086
+    },
+    {
+      "sentence_sha256": "cae9898e2348e278f7cd2b221aa3c5f953903f40be50406b61a392620ee4149e",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:42152",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:42153"
+      ],
+      "gold": [
+        "Prep",
+        "Vform"
+      ],
+      "prediction": [
+        "Nn",
+        "Nn"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9888773560523987,
+      "span_mean_cosine": 0.697953999042511
+    },
+    {
+      "sentence_sha256": "a2a42a5fa5614c41f3a411cc2006d2ca465531fc72e9feeec8b0d15246ac5125",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:13911",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:13914"
+      ],
+      "gold": [
+        "Nn",
+        "Vform"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "Nn"
+      ],
+      "predictions_differ": true,
+      "both_correct": false,
+      "cls_cosine": 0.7741690278053284,
+      "span_mean_cosine": 0.581280529499054
+    },
+    {
+      "sentence_sha256": "273c808487e4e468217e070b5fee91f562c2cb1a7bc43c56189a9e75f788232f",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:29533",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:29534"
+      ],
+      "gold": [
+        "Prep",
+        "Vform"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9311447143554688,
+      "span_mean_cosine": 0.6793131828308105
+    },
+    {
+      "sentence_sha256": "e2f2465d09358b5aa9dde24839a8acc62123579e4950d62cb5f486487bf8e22b",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:24275",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:24276"
+      ],
+      "gold": [
+        "Nn",
+        "Prep"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "Nn"
+      ],
+      "predictions_differ": true,
+      "both_correct": false,
+      "cls_cosine": 0.997460126876831,
+      "span_mean_cosine": 0.6797815561294556
+    },
+    {
+      "sentence_sha256": "000dd5daa0765e9c554455c5ef25534a216cad4001217aaeeb07c31b2f2b3e45",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:4938",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:4939"
+      ],
+      "gold": [
+        "SVA",
+        "Vform"
+      ],
+      "prediction": [
+        "Nn",
+        "Nn"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9312455058097839,
+      "span_mean_cosine": 0.6917559504508972
+    },
+    {
+      "sentence_sha256": "123f5512a3cc912dd848adea3b58f68fba03897d4119e7154533daa0b0ab0c61",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:42845",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:42846"
+      ],
+      "gold": [
+        "Nn",
+        "Vform"
+      ],
+      "prediction": [
+        "Nn",
+        "Nn"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9978600740432739,
+      "span_mean_cosine": 0.6890475749969482
+    },
+    {
+      "sentence_sha256": "2aa6c6ae690aaf8e8001c2f152622ae430cdc867b29c68b461d48ecec04a1758",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:32464",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:32467"
+      ],
+      "gold": [
+        "Nn",
+        "Prep"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9961904287338257,
+      "span_mean_cosine": 0.6143116354942322
+    },
+    {
+      "sentence_sha256": "96992de866be6c3e50ba28fec7a7e3b49650586144cdea5055e9d5097d5bb75e",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:12231",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:12233"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "Nn"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.7953922152519226,
+      "span_mean_cosine": 0.7228233218193054
+    },
+    {
+      "sentence_sha256": "1f8093a56c85d80cfe3d741f6819064a7ac9b0e4ab43950d3022fa1e6ca67336",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:28997",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:28998"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "Prep"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9930530786514282,
+      "span_mean_cosine": 0.7662619352340698
+    },
+    {
+      "sentence_sha256": "879cdac21c212fc67e48567d2c3ac74201f236339727c670a07b875997c8e4f1",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:30050",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:30052"
+      ],
+      "gold": [
+        "Nn",
+        "Vform"
+      ],
+      "prediction": [
+        "Nn",
+        "ArtOrDet"
+      ],
+      "predictions_differ": true,
+      "both_correct": false,
+      "cls_cosine": 0.8265389204025269,
+      "span_mean_cosine": 0.7418136596679688
+    },
+    {
+      "sentence_sha256": "bf6a576344c043dea5196c1110acf905eadaeccd137b3cb15736d6615900beb4",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:1707",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:1708"
+      ],
+      "gold": [
+        "Prep",
+        "Nn"
+      ],
+      "prediction": [
+        "Nn",
+        "Nn"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9983548521995544,
+      "span_mean_cosine": 0.7325682640075684
+    },
+    {
+      "sentence_sha256": "9bb52837c9c9ddc8ead14e569061a71b0a3688c479a138774bd33dc62d15c68b",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:24304",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:24305"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "Nn"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "Nn"
+      ],
+      "predictions_differ": true,
+      "both_correct": true,
+      "cls_cosine": 0.9490126371383667,
+      "span_mean_cosine": 0.6084879040718079
+    },
+    {
+      "sentence_sha256": "36cd6e534de591c18dea8214e31526bddf9f9912bf468e13d928a89467d2e1eb",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:43970",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:43971"
+      ],
+      "gold": [
+        "Prep",
+        "Nn"
+      ],
+      "prediction": [
+        "Nn",
+        "Nn"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9987682700157166,
+      "span_mean_cosine": 0.7048646807670593
+    },
+    {
+      "sentence_sha256": "be5d94b0cf51ca3022247f2664e530ebb4cb580a0acbecdda5e8b006508b0610",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:22838",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:22839"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "Nn"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.993114173412323,
+      "span_mean_cosine": 0.665985643863678
+    },
+    {
+      "sentence_sha256": "d76a3de71c8f2936750cb7824ae5242a3a4e38a06b833f1c3690bf7224ae36a0",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:25621",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:25624"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "Nn"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.8379732370376587,
+      "span_mean_cosine": 0.6277342438697815
+    },
+    {
+      "sentence_sha256": "260f7dd954ed26dd933dab5f5015d68f333f65836c12e0b67f1ab41bd1598624",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:7740",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:7741"
+      ],
+      "gold": [
+        "Vform",
+        "ArtOrDet"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9878077507019043,
+      "span_mean_cosine": 0.8093680739402771
+    },
+    {
+      "sentence_sha256": "615b76222bbcb37dd51e95ac55818be0d4ab6326fa26929ab06e5266f5755fd3",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:2617",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:2618"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "Nn"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.998909056186676,
+      "span_mean_cosine": 0.6689921617507935
+    },
+    {
+      "sentence_sha256": "8bf015ef2ce4766a7617390cbf5f5a68e608fd100866b9b9cd29ae337465bf3f",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:39365",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:39366"
+      ],
+      "gold": [
+        "ArtOrDet",
+        "Nn"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.996513843536377,
+      "span_mean_cosine": 0.6445522308349609
+    },
+    {
+      "sentence_sha256": "5caf604c15c9efb6da10246c5c6823f63dd24f4d606d914a8419b422381d4846",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:11178",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:11179"
+      ],
+      "gold": [
+        "Prep",
+        "ArtOrDet"
+      ],
+      "prediction": [
+        "ArtOrDet",
+        "ArtOrDet"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9961850047111511,
+      "span_mean_cosine": 0.7465523481369019
+    },
+    {
+      "sentence_sha256": "a32db9a1563a1a003ace089945f90f9239dbdf8404fb00f3aa3d8ab94bfd52df",
+      "sample_ids": [
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:36036",
+        "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:36037"
+      ],
+      "gold": [
+        "SVA",
+        "Nn"
+      ],
+      "prediction": [
+        "Nn",
+        "Nn"
+      ],
+      "predictions_differ": false,
+      "both_correct": false,
+      "cls_cosine": 0.9929940104484558,
+      "span_mean_cosine": 0.7208794951438904
+    }
+  ],
+  "validation_scored": false,
+  "test_scored": false
+}

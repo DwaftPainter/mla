@@ -1,0 +1,52 @@
+{
+  "test_rows": 2368,
+  "pipelines": 20,
+  "slices": 14,
+  "model_slice_metric_checks": 280,
+  "model_slice_ci_checks": 40,
+  "paired_contrast_ci_checks": 30,
+  "bootstrap_draws": 1000,
+  "all_metric_and_ci_checks_pass": true,
+  "groups_and_essays_disjoint": true,
+  "aggregate_csv_rows_checked": {
+    "overall": 20,
+    "per_class": 100,
+    "per_class_deltas": 90,
+    "paired_differences": 30
+  },
+  "report_docx_markdown_tables_identical": 16,
+  "report_numeric_tables_match_artifacts": 11,
+  "audit_membership": {
+    "LR_error": 25,
+    "Tree_error_LR_correct": 5,
+    "LR_correct_control": 10
+  },
+  "findings": [
+    {
+      "type": "baseline_precision_only",
+      "pipeline": "Majority",
+      "stored": 0.11843044470868014,
+      "verified": 0.11843043995243759,
+      "absolute_difference": 4.756242552583778e-09,
+      "four_decimal_report_unchanged": true
+    },
+    {
+      "type": "baseline_precision_only",
+      "pipeline": "POS",
+      "stored": 0.7048153,
+      "verified": 0.7048153331595242,
+      "absolute_difference": 3.3159524126524786e-08,
+      "four_decimal_report_unchanged": true
+    }
+  ],
+  "original_artifacts_unchanged": {
+    "lock.json": "2f2f9fd1ff19805255f300d4eaf646aa964e3e643ce692027f528ba5b9c198ee",
+    "lock.sha256": "30af503e7ddec3750a31ba9cb1aafe1dad87042ead797c91e1af490285f5eb5c",
+    "selection_summary.json": "707b6a055717158d66729a89b26e441b222a599b1545c879a404caa6f801bce7",
+    "test_predictions.csv": "2fda1fc3551fc101d16fc189c907367f81b277f28cdb29e28804c9638b481800",
+    "test_metrics.json": "71b73fa90e54e47d973a2fa2342ffcfd24960279352439387d8f3ffcf7b78c55",
+    "bootstrap.json": "6eb68a4ea755a3d288d519301e8d0acfc3bbebf0340eb2fd6ced456752639589",
+    "manual_error_review.json": "79785245cb3ba59cc468ec0c19b31c42449393c74b07b818c31302db0d2792e0",
+    "verification.json": "6297ed2f13455e538f19acced842a2fafbd1a22ea75e932a1a81b9375cf05ba4"
+  }
+}

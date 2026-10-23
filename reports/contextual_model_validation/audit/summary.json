@@ -1,0 +1,385 @@
+{
+  "v1": {
+    "macro": {
+      "support": 2368,
+      "macro_f1": 0.8069429200665897,
+      "accuracy": 0.846706081081081,
+      "outside_label_predictions": 0,
+      "per_label": {
+        "ArtOrDet": {
+          "support": 996,
+          "precision": 0.8748796920115496,
+          "recall": 0.9126506024096386,
+          "f1": 0.8933660933660934
+        },
+        "Prep": {
+          "support": 362,
+          "precision": 0.9283667621776505,
+          "recall": 0.8950276243093923,
+          "f1": 0.9113924050632911
+        },
+        "Nn": {
+          "support": 565,
+          "precision": 0.8576709796672828,
+          "recall": 0.8212389380530973,
+          "f1": 0.8390596745027125
+        },
+        "Vform": {
+          "support": 216,
+          "precision": 0.6342592592592593,
+          "recall": 0.6342592592592593,
+          "f1": 0.6342592592592593
+        },
+        "SVA": {
+          "support": 229,
+          "precision": 0.7668161434977578,
+          "recall": 0.7467248908296943,
+          "f1": 0.7566371681415929
+        }
+      }
+    },
+    "pos_macro": {
+      "support": 2368,
+      "macro_f1": 0.7048153331595242,
+      "accuracy": 0.7576013513513513,
+      "outside_label_predictions": 0,
+      "per_label": {
+        "ArtOrDet": {
+          "support": 996,
+          "precision": 0.8628571428571429,
+          "recall": 0.7580321285140562,
+          "f1": 0.8070550507749866
+        },
+        "Prep": {
+          "support": 362,
+          "precision": 0.9080779944289693,
+          "recall": 0.9005524861878453,
+          "f1": 0.9042995839112344
+        },
+        "Nn": {
+          "support": 565,
+          "precision": 0.7022222222222222,
+          "recall": 0.8389380530973451,
+          "f1": 0.7645161290322581
+        },
+        "Vform": {
+          "support": 216,
+          "precision": 0.4375,
+          "recall": 0.7129629629629629,
+          "f1": 0.5422535211267606
+        },
+        "SVA": {
+          "support": 229,
+          "precision": 0.794392523364486,
+          "recall": 0.37117903930131,
+          "f1": 0.5059523809523809
+        }
+      }
+    },
+    "dimension": 16196,
+    "convergence": {
+      "iterations": 417,
+      "iterations_max": 1000,
+      "closure_evaluations": 439,
+      "max_evaluations": 1250,
+      "final_objective": 0.412628710269928,
+      "gradient_inf_norm": 0.00013578134530689567,
+      "tolerance_grad": 1e-06,
+      "tolerance_change": 1e-09,
+      "termination": "change_tolerance",
+      "converged": true
+    },
+    "alignment_counts_validation": {
+      "exact": 2084,
+      "whitespace_edge": 31,
+      "partial_token": 253
+    },
+    "token_count_mismatch_ids": [],
+    "offset_failures": [],
+    "test_scored": false,
+    "changed": {
+      "support": 96,
+      "macro_f1": 0.8266512434933487,
+      "accuracy": 0.8541666666666666,
+      "outside_label_predictions": 0,
+      "per_label": {
+        "ArtOrDet": {
+          "support": 35,
+          "precision": 0.8048780487804879,
+          "recall": 0.9428571428571428,
+          "f1": 0.868421052631579
+        },
+        "Prep": {
+          "support": 16,
+          "precision": 1.0,
+          "recall": 0.875,
+          "f1": 0.9333333333333333
+        },
+        "Nn": {
+          "support": 27,
+          "precision": 0.84,
+          "recall": 0.7777777777777778,
+          "f1": 0.8076923076923077
+        },
+        "Vform": {
+          "support": 3,
+          "precision": 0.6666666666666666,
+          "recall": 0.6666666666666666,
+          "f1": 0.6666666666666666
+        },
+        "SVA": {
+          "support": 15,
+          "precision": 0.9230769230769231,
+          "recall": 0.8,
+          "f1": 0.8571428571428571
+        }
+      }
+    },
+    "unchanged": {
+      "support": 2272,
+      "macro_f1": 0.8058339431343999,
+      "accuracy": 0.8463908450704225,
+      "outside_label_predictions": 0,
+      "per_label": {
+        "ArtOrDet": {
+          "support": 961,
+          "precision": 0.8777555110220441,
+          "recall": 0.9115504682622269,
+          "f1": 0.8943338437978561
+        },
+        "Prep": {
+          "support": 346,
+          "precision": 0.9253731343283582,
+          "recall": 0.8959537572254336,
+          "f1": 0.9104258443465492
+        },
+        "Nn": {
+          "support": 538,
+          "precision": 0.8585271317829457,
+          "recall": 0.8234200743494424,
+          "f1": 0.8406072106261859
+        },
+        "Vform": {
+          "support": 213,
+          "precision": 0.6338028169014085,
+          "recall": 0.6338028169014085,
+          "f1": 0.6338028169014085
+        },
+        "SVA": {
+          "support": 214,
+          "precision": 0.7571428571428571,
+          "recall": 0.7429906542056075,
+          "f1": 0.75
+        }
+      }
+    },
+    "exact_input_signatures_cross_train_validation": 0
+  },
+  "v2": {
+    "macro": {
+      "support": 2368,
+      "macro_f1": 0.8078178631733636,
+      "accuracy": 0.846706081081081,
+      "outside_label_predictions": 0,
+      "per_label": {
+        "ArtOrDet": {
+          "support": 996,
+          "precision": 0.8739172281039461,
+          "recall": 0.9116465863453815,
+          "f1": 0.8923832923832924
+        },
+        "Prep": {
+          "support": 362,
+          "precision": 0.9310344827586207,
+          "recall": 0.8950276243093923,
+          "f1": 0.9126760563380282
+        },
+        "Nn": {
+          "support": 565,
+          "precision": 0.8560885608856088,
+          "recall": 0.8212389380530973,
+          "f1": 0.8383017163504969
+        },
+        "Vform": {
+          "support": 216,
+          "precision": 0.6359447004608295,
+          "recall": 0.6388888888888888,
+          "f1": 0.6374133949191686
+        },
+        "SVA": {
+          "support": 229,
+          "precision": 0.7702702702702703,
+          "recall": 0.7467248908296943,
+          "f1": 0.7583148558758315
+        }
+      }
+    },
+    "pos_macro": {
+      "support": 2368,
+      "macro_f1": 0.7048153331595242,
+      "accuracy": 0.7576013513513513,
+      "outside_label_predictions": 0,
+      "per_label": {
+        "ArtOrDet": {
+          "support": 996,
+          "precision": 0.8628571428571429,
+          "recall": 0.7580321285140562,
+          "f1": 0.8070550507749866
+        },
+        "Prep": {
+          "support": 362,
+          "precision": 0.9080779944289693,
+          "recall": 0.9005524861878453,
+          "f1": 0.9042995839112344
+        },
+        "Nn": {
+          "support": 565,
+          "precision": 0.7022222222222222,
+          "recall": 0.8389380530973451,
+          "f1": 0.7645161290322581
+        },
+        "Vform": {
+          "support": 216,
+          "precision": 0.4375,
+          "recall": 0.7129629629629629,
+          "f1": 0.5422535211267606
+        },
+        "SVA": {
+          "support": 229,
+          "precision": 0.794392523364486,
+          "recall": 0.37117903930131,
+          "f1": 0.5059523809523809
+        }
+      }
+    },
+    "dimension": 16180,
+    "convergence": {
+      "iterations": 244,
+      "iterations_max": 1000,
+      "closure_evaluations": 261,
+      "max_evaluations": 1250,
+      "final_objective": 0.4127122163772583,
+      "gradient_inf_norm": 0.00015044849715195596,
+      "tolerance_grad": 1e-06,
+      "tolerance_change": 1e-09,
+      "termination": "change_tolerance",
+      "converged": true
+    },
+    "alignment_counts_validation": {
+      "exact": 2085,
+      "whitespace_edge": 31,
+      "partial_token": 252
+    },
+    "token_count_mismatch_ids": [],
+    "offset_failures": [],
+    "test_scored": false,
+    "changed": {
+      "support": 96,
+      "macro_f1": 0.8266512434933487,
+      "accuracy": 0.8541666666666666,
+      "outside_label_predictions": 0,
+      "per_label": {
+        "ArtOrDet": {
+          "support": 35,
+          "precision": 0.8048780487804879,
+          "recall": 0.9428571428571428,
+          "f1": 0.868421052631579
+        },
+        "Prep": {
+          "support": 16,
+          "precision": 1.0,
+          "recall": 0.875,
+          "f1": 0.9333333333333333
+        },
+        "Nn": {
+          "support": 27,
+          "precision": 0.84,
+          "recall": 0.7777777777777778,
+          "f1": 0.8076923076923077
+        },
+        "Vform": {
+          "support": 3,
+          "precision": 0.6666666666666666,
+          "recall": 0.6666666666666666,
+          "f1": 0.6666666666666666
+        },
+        "SVA": {
+          "support": 15,
+          "precision": 0.9230769230769231,
+          "recall": 0.8,
+          "f1": 0.8571428571428571
+        }
+      }
+    },
+    "unchanged": {
+      "support": 2272,
+      "macro_f1": 0.8067326877481653,
+      "accuracy": 0.8463908450704225,
+      "outside_label_predictions": 0,
+      "per_label": {
+        "ArtOrDet": {
+          "support": 961,
+          "precision": 0.8767535070140281,
+          "recall": 0.9105098855359001,
+          "f1": 0.8933129147524247
+        },
+        "Prep": {
+          "support": 346,
+          "precision": 0.9281437125748503,
+          "recall": 0.8959537572254336,
+          "f1": 0.9117647058823529
+        },
+        "Nn": {
+          "support": 538,
+          "precision": 0.8568665377176016,
+          "recall": 0.8234200743494424,
+          "f1": 0.8398104265402844
+        },
+        "Vform": {
+          "support": 213,
+          "precision": 0.6355140186915887,
+          "recall": 0.6384976525821596,
+          "f1": 0.6370023419203747
+        },
+        "SVA": {
+          "support": 214,
+          "precision": 0.7607655502392344,
+          "recall": 0.7429906542056075,
+          "f1": 0.75177304964539
+        }
+      }
+    },
+    "exact_input_signatures_cross_train_validation": 0
+  },
+  "changed_counts": {
+    "train": 381,
+    "validation": 96
+  },
+  "method": "Fixed LR C=0.1, class_weight=None; refit train-only encoder per preparation; same locked IDs/split; no retuning.",
+  "v2_reproduction_prediction_disagreements": 2,
+  "audit_sample_ids": [
+    "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:12314",
+    "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:14761",
+    "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:14764",
+    "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:12019",
+    "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:14939",
+    "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:15390",
+    "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:10824",
+    "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:11696",
+    "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:12352",
+    "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:11501",
+    "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:12050",
+    "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:12301",
+    "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:1269",
+    "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:18774",
+    "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:19065",
+    "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:19068",
+    "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:19069",
+    "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac:19185"
+  ],
+  "input_sha256": {
+    "data_set\\split\\nucle_group_split\\split_manifest.csv": "c3a65115ad93c837372e1c72d186b244043b711ee41a6706b13ccacea8be5677",
+    "data_set\\processed\\nucle_preparation_v1\\samples.jsonl": "7c8bba25ad28dbf847917722a9c196be5792c77908431e816cdd244e9584f4ce",
+    "data_set\\processed\\nucle_preparation_v2\\samples.jsonl": "34dfe5375601a671e8312c04e1142899a9c1a25ccf9bd73ec052d77ac8cf9587"
+  }
+}
