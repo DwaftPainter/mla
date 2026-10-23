@@ -14,6 +14,8 @@ Ngày 23/10/2026. Không thay baseline, nhãn, split hoặc test. Đối chiếu
 | Refit v2 | Chẩn đoán trên chính feature matrix lưu: 4 threads tái tạo toàn bộ prediction sensitivity, 10 threads tái tạo toàn bộ prediction baseline cũ. LBFGS dừng theo change tolerance ở số iteration khác nhau; khác biệt 2/2.368 prediction liên quan cấu hình số học/threads. Giữ điểm gốc trong bảng BERT, ghi threads trong lần tái lập; không dùng chênh lệch nhỏ làm bằng chứng v2 tốt hơn. Bằng chứng: audit/thread_diagnostic.json. |
 | BERT | Là BERT nhỏ 2-layer trên CPU, không phải BERT-base của bài Nagata. Protocol riêng ghi trước fine-tuning; nguồn checkpoint/revision và tokenizer đã lưu. |
 
+Đây là audit của mốc validation. Test và đợt tái lập raw → 52 fit đã làm sau đó; xem [status](../status.md). Ghi nhận khác biệt code–thiết kế không làm thay đổi prediction hoặc đánh dấu thiết kế đó là đã đăng ký trước.
+
 ## Diễn giải audit ngôn ngữ
 
 Đã đọc 18 lỗi validation chọn có chủ đích (không ngẫu nhiên), đối chiếu câu gốc, span, parse và correction sau khi có prediction. Ghi chú bằng annotation ID ở `reports/contextual_model_validation/audit/manual_review.json`; câu gốc và parse chỉ nằm trong packet local bị Git ignore.

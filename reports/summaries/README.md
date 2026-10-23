@@ -8,3 +8,13 @@
 | 4 | [Đánh giá và rà soát](evaluation/README.md) | Test, CI, audit và kiểm tái lập mới nhất |
 
 Đọc nhanh trạng thái: [docs/status.md](../../docs/status.md). Đọc số liệu mới nhất: [review_report.md](../evaluation_followup/review_report.md). Các báo cáo cũ giữ mốc thí nghiệm của chúng, không đọc câu “test chưa chấm” trong snapshot như trạng thái hiện tại. Không có final report dự án đã chốt trong danh mục này.
+
+## Thứ tự mốc và cách đọc bổ sung
+
+1. Dữ liệu/preprocessing và LR/Tree validation: báo cáo phương pháp cùng kết quả trước test.
+2. Contextual validation: BERT-small chưa thành công và sensitivity v1/v2.
+3. BERT diagnostics: chứng minh học được train nhỏ; khuyến nghị thử tiếp trong DOCX đã được quyết định dừng sau đó thay thế.
+4. Evaluation tasks: đã có test/CI/audit, tại mốc mới kiểm checkpoint replay.
+5. Evaluation followup: bổ sung tái lập raw → 52 fit → test và kiểm độc lập bằng chứng.
+
+Năm DOCX giữ nguyên byte. README từng nhóm là phần bổ sung hiện hành về scope, đường dẫn và trạng thái; không thay điểm hay bảng lịch sử. Các tên file cũ trong DOCX được đối chiếu bằng [organization](../organization/README.md). Report task và review không phải final report nộp của dự án.

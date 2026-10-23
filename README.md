@@ -1,45 +1,64 @@
 # NUCLE grammatical error-type classification
 
-Pipeline xây dựng dữ liệu và benchmark phân loại năm nhãn `ArtOrDet`, `Prep`, `Nn`, `Vform`, `SVA` trên annotation có span lỗi đã biết. Mỗi annotation là một mẫu riêng. Hiện đã có preparation v1/v2, group-aware split, feature S/L/P/M/D, POS baseline, LR/Tree benchmark và validation ablation/masking. Test đã chấm sau khóa cấu hình; đã kiểm tái lập đợt đánh giá từ dữ liệu nguồn. Final report và slide tổng kết để sau.
+Phân loại **một lỗi tại vị trí đã biết trong câu tiếng Anh gốc** thành `ArtOrDet`, `Prep`, `Nn`, `Vform` hoặc `SVA`. Mỗi annotation là một sample, nên một câu có thể tạo nhiều sample. Project không tự tìm vị trí lỗi hoặc sinh câu sửa.
 
-Mục lục: [tài liệu phương pháp](docs/README.md) · [báo cáo và artifact](reports/README.md).
+Đầu vào gồm `sentence`, `error_start`, `error_end`, `error_span`. Offsets là chỉ số ký tự Python, đầu có tính/cuối không tính: `sentence[start:end] == error_span`. LR/Tree nhận vector đặc trưng S/L/P/M/D; BERT-small nhận câu có marker span. Correction, nhãn và IDs không vào predictors. Thuật toán và công thức: [project guide](docs/note_project_guide.md).
 
-## Tài liệu chính
+## Trạng thái và kết quả
 
-| File | Vai trò |
-| --- | --- |
-| [docs/proposal.md](docs/proposal.md) | Câu hỏi nghiên cứu và phạm vi |
-| [docs/methodology/preparation.md](docs/methodology/preparation.md) | Schema, segmentation, offset và alignment |
-| [docs/methodology/experiment_protocol.md](docs/methodology/experiment_protocol.md) | Split, feature, tuning và đánh giá |
-| [docs/status.md](docs/status.md) | Kết quả hiện tại và việc tiếp theo |
-| [note_project_guide.md](docs/note_project_guide.md) | Hướng dẫn chạy pipeline và train |
+Đã hoàn thành preparation v1/v2, grouped split, baseline/ablation validation, khóa cấu hình, chấm test, bootstrap và tái lập **52 fit của đợt đánh giá** từ dữ liệu nguồn. BERT-small đã thử trên validation và chẩn đoán trên train; dừng thử thêm, chưa có điểm test BERT. Final report dự án và slide tổng kết chưa chốt.
 
-Đặt corpus được cấp quyền tại `data_set/raw/nucle3.2.sgml`. Dùng Python 3.12 hoặc 3.13.7; cài môi trường bằng `uv sync --locked`. Các lệnh dưới đây chạy từ thư mục gốc project.
+| Model | Macro-F1 validation | Macro-F1 test | CI95% test |
+|---|---:|---:|---|
+| Majority | 0.1184 | 0.1184 | [0.1104; 0.1279] |
+| POS rule | 0.7048 | 0.7106 | [0.6766; 0.7365] |
+| LR Full | 0.8067 | 0.8163 | [0.7876; 0.8382] |
+| Tree Full | 0.7879 | 0.7996 | [0.7693; 0.8246] |
 
-## Pipeline và entry points
+Cấu hình chọn trên validation; giữ model fit train, không refit train+validation. Test có 2.368 samples thuộc 144 essays/97 connected groups; CI dùng 1.000 paired group-bootstrap, không đo biến thiên do seed huấn luyện. Bảng đủ chữ số: [reviewed_overall_results.csv](reports/evaluation_followup/reviewed_overall_results.csv). Kiểm chứng và giới hạn: [report rà soát](reports/evaluation_followup/review_report.md).
 
-```powershell
-py src/data/data_understanding.py
-py src/data/data_quality.py
-py src/data/prepare_nucle.py
-py src/data/group_split_nucle.py
-py src/features/nucle_pos.py
-py src/features/nucle_features.py
-py src/training/nucle_benchmark.py --output reports/nucle_feature_benchmark_my_run
-py src/training/nucle_ablation.py --output reports/nucle_feature_ablation_my_run
-py src/reporting/build_ablation_notebook.py
-```
+LR vốn có thông tin dependency từ parse toàn câu. Kết quả BERT chưa thành công không chứng minh ngữ cảnh vô ích. Audit có hỗ trợ AI; 17 ca vẫn chờ chuyên gia, chưa sửa gold.
 
-Preparation chuẩn v2 nằm ở `data_set/processed/nucle_preparation_v2/`; split chuẩn ở `data_set/split/nucle_group_split/`; feature chuẩn ở `data_set/features/nucle_features_v1/`. Những artifact này đã được dựng trong workspace. Script từ chối ghi đè output đã tồn tại; chỉ chạy lại bước tạo artifact khi có chủ đích và cung cấp đường dẫn output mới. Corpus, dữ liệu dẫn xuất và artifact riêng tư giữ local. Code, tests, tài liệu, báo cáo để đọc và các bảng kết quả được chọn có trong Git; xem phạm vi ở reports/README.md.
+## Đọc tài liệu theo nhu cầu
 
-`src/models/nucle_logistic.py` và `src/models/nucle_tree.py` chứa implementation của classifier. `src/training/nucle_benchmark.py` và `nucle_ablation.py` điều phối fit, validation selection và lưu summary/predictions. `src/evaluation/metrics.py` định nghĩa metric NUCLE; `src/reporting/build_ablation_notebook.py` dựng notebook từ report cục bộ.
+| Cần làm gì | Điểm bắt đầu |
+|---|---|
+| Xem đã làm gì và còn gì | [Trạng thái](docs/status.md), [kế hoạch](note.md) |
+| Cài môi trường, chạy test, hiểu điều kiện tái lập | [Hướng dẫn chạy và tái lập](docs/reproduction.md) |
+| Hiểu code, preparation v1/v2, feature và công thức | [Project guide](docs/note_project_guide.md) |
+| Tra thiết kế, protocol và related work | [Mục lục docs](docs/README.md), [reference.md](reference.md) |
+| Đọc báo cáo DOCX/Markdown và các mốc kết quả | [Mục lục reports](reports/README.md) |
+| Xem code thừa và phạm vi dọn | [Code review](reports/maintenance/code_redundancy_review.md) |
 
-## Kết quả và kiểm thử
+## Cài và kiểm thử trong checkout mới
 
-Validation benchmark hiện tại: LR Macro-F1 0.8067, Tree 0.7879, POS rule 0.7048 và Majority 0.1184. Báo cáo benchmark ở `notebooks/03_data_visualization.ipynb`; ablation/masking ở `notebooks/04_feature_ablation_report.ipynb`. Không dùng holdout test để chọn model.
+Các lệnh sau dành cho PowerShell tại thư mục gốc. Môi trường thực nghiệm dùng Python 3.13.7; `.python-version` chỉ ghi 3.13 nên chỉ định patch version khi cần đối chiếu.
 
 ```powershell
-py -B -m pytest -p no:cacheprovider --basetemp=.pytest-tmp tests -q
+uv sync --locked --python 3.13.7
+.venv/Scripts/python.exe -m pytest tests -q
 ```
 
-`tests/` được quản lý bằng Git; xem tests/README.md về dependency BERT và fixture NUCLE chỉ có local. `data_set/`, checkpoint, encoder, private audit packet và backup lịch sử bị ignore. `.gitattributes` giữ nguyên byte của các file để checksum đã khóa không bị thay đổi bởi chuyển đổi xuống dòng. Notebook 01–04 lần lượt ghi nhận hiểu dữ liệu, chất lượng, phân tích benchmark và ablation; notebook là báo cáo, không phải entry point huấn luyện.
+Để chạy test BERT hoặc tạo DOCX, cài phần bổ sung vào môi trường đó:
+
+```powershell
+uv pip install --python .venv/Scripts/python.exe -r requirements-bert.txt
+```
+
+`uv.lock` khóa môi trường nền; `requirements-bert.txt` là phần bổ sung, không được lock nền khóa toàn bộ dependencies bắc cầu. Xem [tests/README.md](tests/README.md) về fixture riêng và các trường hợp skip. Các test BERT dùng vocabulary/model nhỏ tự tạo, không tải checkpoint pretrained.
+
+## Luồng xử lý và phạm vi repository
+
+```text
+SGML có quyền sử dụng + review logs
+  → Understanding / quality audit
+  → preparation v2 → connected-group split
+  → POS baseline / train-only features
+  → LR và Tree: validation benchmark + ablation
+  → selection và freeze → test → bootstrap / audit
+  → kiểm chứng độc lập, tái lập và report task
+```
+
+Git chứa source, tests, notebooks, tài liệu, 5 báo cáo DOCX và các bảng/hình tổng hợp đã rà soát. Corpus `data_set/`, review inputs chứa nguồn, encoder/vocabulary, checkpoint, predictions từng sample và private audit packet giữ local. Clone repo đủ để đọc kết quả và chạy phần lớn unit tests, **chưa đủ để chạy lại toàn bộ nghiên cứu**.
+
+Điều kiện đầu vào và cách ghi output của từng script ở [hướng dẫn tái lập](docs/reproduction.md). Có 40 file source đã khóa checksum; `.gitattributes` giữ nguyên byte để bảo toàn kiểm chứng. Notebook 01–04 là báo cáo các mốc dữ liệu/validation, không phải pipeline huấn luyện hay bảng test mới nhất.
