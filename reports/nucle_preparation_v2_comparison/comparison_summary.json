@@ -1,0 +1,26 @@
+{
+    "changed_per_label": {
+        "ArtOrDet": 237,
+        "Nn": 120,
+        "Prep": 88,
+        "SVA": 61,
+        "Vform": 38
+    },
+    "context_changed": 30,
+    "fresh_review_count": 50,
+    "input_changed": 544,
+    "input_unchanged": 15244,
+    "mechanical_checked": 15788,
+    "new_samples": 15788,
+    "new_sentences": 11272,
+    "old_samples": 15788,
+    "old_sentences": 11262,
+    "retention_changed_ids": [],
+    "sentence_id_changed": 533,
+    "source_metadata_unchanged": true,
+    "source_sha256": "8441a60060730bdc6af1e79a064c68441ecb24a66da91ea2aab0061a64a130ac",
+    "span_source_offsets_unchanged": true,
+    "span_tokenization_changed": 2,
+    "v1_version": "f9597cd007aef5614f208c5db76889f8b867f5265478707e93b24711fac67f59",
+    "v2_version": "9f9fc5405492d03133bab2a89759af3504028d05568829d27a6cdc47838256a0"
+}

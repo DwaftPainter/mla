@@ -1,5 +1,8 @@
 # Phân loại các dạng lỗi ngữ pháp trong bài viết tiếng Anh bằng Machine Learning
 
+> Đề cương ban đầu. Trạng thái hiện hành xem [status.md](status.md); thay đổi thiết kế xem [experiment_protocol.md](methodology/experiment_protocol.md); lịch hai tuần xem [note.md](../note.md). Các mục dự kiến trong đề cương không phải kết quả đã hoàn thành.
+
+
 FINAL PROJECT PROPOSAL  •  Machine Learning Applications  •  Bản cập nhật ngày 04 tháng 10 năm 2026
 
 ## Tóm tắt đề xuất

@@ -63,8 +63,8 @@ def test_missing_correction_is_not_deletion():
 
 
 def test_canonical_nucle_paths():
-    from src.data.constants import ANNOTATIONS_FILE, DOCS_DIR, SGML_FILE
+    from src.data.constants import ANNOTATIONS_FILE, REPORTS_DIR, SGML_FILE
     from src.data import parse_nucle, data_understanding
     assert parse_nucle.DEFAULT_INPUT == data_understanding.DEFAULT_INPUT == SGML_FILE
     assert parse_nucle.DEFAULT_OUTPUT == data_understanding.DEFAULT_OUTPUT == ANNOTATIONS_FILE
-    assert data_understanding.DEFAULT_REPORT.parent == DOCS_DIR
+    assert data_understanding.DEFAULT_REPORT.parent == REPORTS_DIR
