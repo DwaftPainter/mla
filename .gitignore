@@ -4,6 +4,7 @@
 __pycache__/
 .pytest_cache/
 .pytest-tmp/
+.cache/
 *.py[cod]
 .ipynb_checkpoints/
 .DS_Store
@@ -19,3 +20,7 @@ __pycache__/
 
 # Keep all test files local and out of commits
 /tests/
+
+/note.md
+/note_project_guide.md
+/reference.md
