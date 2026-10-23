@@ -61,7 +61,7 @@ Fei, Y., Cui, L., Yang, S., Lam, W., Lan, Z., & Shi, S. (2023). **Enhancing Gram
 Yang, L., Li, H., Li, L., Xu, C., Xia, S., & Yuan, C. (2023). **LET: Leveraging Error Type Information for Grammatical Error Correction.** Findings of the Association for Computational Linguistics: ACL 2023, 5986–5998.
 
 - Nguồn: [ACL Anthology](https://aclanthology.org/2023.findings-acl.371/).
-- Trạng thái: đã trích trong proposal, có trong sáu bài Excel; ưu tiên trong kế hoạch mới.
+- Trạng thái: đã trích trong proposal và tổng hợp contextual; từng nằm trong sáu bài được chọn từ Excel.
 - Mục đích: related work về thông tin loại lỗi hỗ trợ GEC. Không triển khai LET; không so F0.5 sửa lỗi với macro-F1 phân loại.
 
 ### REF08 — MoECE
@@ -88,14 +88,14 @@ Coyne et al. (2025). **Annotating Errors in English Learners’ Written Language
 - Trạng thái: đã dùng trong note.md, mã cũ R3.
 - Mục đích: ứng dụng nhãn/vị trí lỗi vào feedback; không coi thí nghiệm dùng oracle annotation là bằng chứng tự phân loại năm nhãn.
 
-## B. Dự kiến ưu tiên dùng trong kế hoạch hai tuần
+## B. Nhóm ưu tiên tại thời điểm lập kế hoạch
 
 ### REF11 — Mô hình ngữ cảnh nhận biết lỗi ngữ pháp
 
 Nagata, R., Kimura, M., & Hanawa, K. (2022). **Exploring the Capacity of a Large-scale Masked Language Model to Recognize Grammatical Errors.** Findings of the Association for Computational Linguistics: ACL 2022, 4107–4118.
 
 - Nguồn: [ACL Anthology](https://aclanthology.org/2022.findings-acl.324/).
-- Trạng thái: đã review trong Excel; dự kiến dùng ở tuần 1 và phần methodology/discussion tuần 2.
+- Trạng thái: đã review ở giai đoạn đọc bài và được vận dụng trong tổng hợp contextual/methodology; không còn là task thử nghiệm mới. Phần discussion của final report chưa chốt.
 - Mục đích: cơ sở thử BERT. Dữ liệu thật trong bài dùng phát hiện đúng/sai; phần giả lập đa loại không trùng năm nhãn NUCLE. Span-marked five-class classifier là điều chỉnh của nhóm.
 
 ### REF12 — Đánh giá theo hiện tượng cú pháp
@@ -103,7 +103,7 @@ Nagata, R., Kimura, M., & Hanawa, K. (2022). **Exploring the Capacity of a Large
 Koyama, A., Mita, M., Yoon, S.-Y., Takama, Y., & Komachi, M. (2025). **Targeted Syntactic Evaluation for Grammatical Error Correction.** Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), 21108–21125.
 
 - Nguồn: [ACL Anthology](https://aclanthology.org/2025.acl-long.1026/).
-- Trạng thái: đã review trong Excel; dự kiến dùng cho evaluation và discussion.
+- Trạng thái: đã vận dụng trong tổng hợp contextual và lập luận đánh giá theo hiện tượng; phần discussion của final report chưa chốt.
 - Mục đích: lập luận đánh giá theo hiện tượng, bên cạnh điểm tổng. Các tập con Vform/SVA, Nn/ArtOrDet của nhóm không phải tái lập CTSEG. Rà lại tính phù hợp với tiêu chí dữ liệu người học thực của review.
 
 ### REF13 — SERCL và phân loại lỗi cú pháp
@@ -111,7 +111,7 @@ Koyama, A., Mita, M., Yoon, S.-Y., Takama, Y., & Komachi, M. (2025). **Targeted 
 Choshen, L., Nikolaev, D., Berzak, Y., & Abend, O. (2020). **Classifying Syntactic Errors in Learner Language.** Proceedings of the 24th Conference on Computational Natural Language Learning, 97–107.
 
 - Nguồn: [ACL Anthology](https://aclanthology.org/2020.conll-1.7/).
-- Trạng thái: đã review trong Excel; dự kiến dùng cho cơ sở đặc trưng và error analysis.
+- Trạng thái: đã vận dụng trong tổng hợp contextual, cơ sở đặc trưng và giới hạn error analysis.
 - Mục đích: thảo luận POS/morphology/dependency. Phương pháp gốc cần nguồn và bản sửa; không đưa correction vào feature của nhóm.
 
 ### REF14 — BERT gốc
@@ -119,7 +119,7 @@ Choshen, L., Nikolaev, D., Berzak, Y., & Abend, O. (2020). **Classifying Syntact
 Devlin, J., Chang, M.-W., Lee, K., & Toutanova, K. (2019). **BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding.** Proceedings of NAACL-HLT 2019 (Volume 1: Long and Short Papers), 4171–4186.
 
 - Nguồn: [ACL Anthology](https://aclanthology.org/N19-1423/).
-- Trạng thái: bổ sung làm tài liệu phương pháp cho bước thử BERT trong kế hoạch.
+- Trạng thái: đã dùng làm tài liệu phương pháp cho thí nghiệm BERT-small đã chạy.
 - Mục đích: encoder hai chiều, pretraining và fine-tuning. Phải ghi riêng checkpoint/revision thực tế sử dụng. Bài gốc không xác nhận BERT sẽ hơn LR trên dữ liệu của nhóm.
 
 ### REF15 — Độ bền của parser trên câu sai ngữ pháp
@@ -127,7 +127,7 @@ Devlin, J., Chang, M.-W., Lee, K., & Toutanova, K. (2019). **BERT: Pre-training 
 Hashemi, H. B., & Hwa, R. (2016). **An Evaluation of Parser Robustness for Ungrammatical Sentences.** Proceedings of EMNLP 2016.
 
 - Nguồn: [ACL Anthology](https://aclanthology.org/D16-1182/).
-- Trạng thái: được đề xuất trong review; dự kiến dùng làm background ở phần limitations.
+- Trạng thái: đã vận dụng trong tổng hợp contextual và giải thích giới hạn parser; không tái lập thí nghiệm của bài.
 - Mục đích: giải thích vì sao cần audit parser trên learner text. Không suy ra tỷ lệ lỗi spaCy hiện tại từ kết quả parser khác.
 
 ## C. Dùng có điều kiện hoặc ưu tiên thấp
@@ -156,15 +156,15 @@ Liu, Y. (2026). **Interpretable Artificial Intelligence Used to Diagnose Common 
 - Trạng thái: bài ngoài sáu bài được chọn, đã kiểm tra bổ sung; chỉ cân nhắc cho hướng diễn giải đặc trưng.
 - Giới hạn: phân loại câu bảy lớp, có augmentation, nguồn dataset chưa đủ rõ để tái lập. Không chuyển nguyên bước bỏ stopwords/lemmatization vào pipeline cần giữ mạo từ, giới từ, hình thái và offset. Không thêm yêu cầu triển khai SHAP vào kế hoạch.
 
-## D. Bài chỉ phục vụ sửa thông tin screening
+## D. Ghi chú screening lịch sử, chưa chọn vào phương pháp
 
 ### REF19 — Bài augmentation có URL bị ghi nhầm tiêu đề
 
 Wan, Z., Wan, X., & Wang, W. (2020). **Improving Grammatical Error Correction with Data Augmentation by Editing Latent Representation.** Proceedings of the 28th International Conference on Computational Linguistics.
 
 - Nguồn: [ACL Anthology](https://aclanthology.org/2020.coling-main.200/).
-- Trạng thái: đối chiếu để sửa Eligibility dòng 30; chưa chọn làm tài liệu phương pháp hoặc triển khai augmentation.
-- Cần làm: xác nhận bài nhóm định chọn, sửa cặp tiêu đề–URL, rồi đánh giá lại tiêu chí. Không coi việc sửa năm 2020 là tự động đủ điều kiện đưa bài vào review.
+- Trạng thái: ghi chú đối chiếu Eligibility dòng 30 từ lần review cũ; nhiệm vụ sửa Excel đã bỏ. Chưa chọn làm tài liệu phương pháp hoặc triển khai augmentation.
+- Nếu sau này trích bài này: xác nhận cặp tiêu đề–URL và tiêu chí đưa vào bibliography trước khi dùng. Đây không phải nhiệm vụ sửa workbook; thay năm thành 2020 không tự làm bài đủ điều kiện đưa vào review.
 
 ## E. Nguồn mô hình bổ sung khi thực hiện tuần 1
 
@@ -176,6 +176,8 @@ Turc, I., Chang, M.-W., Lee, K., & Toutanova, K. (2019). **Well-Read Students Le
 - Trạng thái: dùng làm nguồn cho checkpoint pretrained BERT nhỏ của tuần 1, 2 layer/hidden 128/2 heads; không gọi là BERT-base. Fine-tune trực tiếp, không thực hiện distillation của bài.
 - Revision và cấu hình thực tế: `docs/bert_experiment_protocol.md`; kết quả theo artifact `reports/contextual_model_validation/bert/`.
 
+Việc vận dụng một bài trong related work không có nghĩa đã chạy phương pháp của bài. Lượt rà tài liệu này chỉ đồng bộ trạng thái/path với artifact hiện có, không bổ sung bài mới hoặc xác nhận lại metadata/URL trực tuyến.
+
 ## F. Cách sử dụng danh mục
 
 | Phần report/công việc | Tài liệu phù hợp |
@@ -185,7 +187,7 @@ Turc, I., Chang, M.-W., Lee, K., & Toutanova, K. (2019). **Well-Read Students Le
 | Loại lỗi và đặc trưng ngôn ngữ | REF07, REF13; REF16 có điều kiện |
 | Thử BERT và thảo luận SVA | REF04, REF11, REF14 |
 | Đánh giá nhóm khó, phân tích lỗi, hạn chế parser | REF12, REF13, REF15 |
-| Rà soát lựa chọn bài trong Excel | REF17–REF19 và ghi chú tiêu chí ở REF11–REF13 |
+| Lịch sử rà soát lựa chọn bài, không còn task sửa Excel | REF17–REF19 và ghi chú tiêu chí ở REF11–REF13 |
 
 - Chỉ đưa vào bibliography bản nộp các bài thực sự được trích trong nội dung. Danh mục làm việc này có thể rộng hơn bibliography cuối.
 - Tài liệu nền tảng ngoài cửa sổ năm vẫn có thể được trích; không tự tính chúng vào số included studies của PRISMA.

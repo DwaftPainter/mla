@@ -1,4 +1,8 @@
-# Tái lập các task đánh giá NUCLE
+# Tái lập các task đánh giá NUCLE — hướng dẫn gói lịch sử
+
+> Phần hướng dẫn bên dưới giữ phạm vi lúc đóng gói, trước lượt raw reproduction. Hướng dẫn vận hành mới ở [docs/reproduction.md](../../../docs/reproduction.md); [followup](../../evaluation_followup/review_report.md) đã xác minh raw → preparation/NLP → 52 fit → test replay. Chưa rerun toàn grid lịch sử/BERT. Lệnh selection bên dưới chỉ áp dụng workspace riêng đủ input, không chạy lên thư mục kết quả hiện có.
+
+README ngoài zip có thêm chỉ dẫn này; zip và bundle_manifest lịch sử vẫn giữ nguyên. Không dùng hash trong manifest cũ để kết luận README hiện hành đã bị hỏng.
 
 Gói này gồm source, protocol, configs/lock metadata, bảng tổng hợp và báo cáo. Không chứa corpus, sentences/correction, encoder vocabulary, checkpoint hay private audit packet. Không phải bộ dữ liệu phân phối lại. Không tự upload.
 

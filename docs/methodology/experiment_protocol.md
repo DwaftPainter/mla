@@ -1,8 +1,10 @@
 # Protocol thực nghiệm
 
-Cập nhật tổ chức: 23/10/2026. Đây là nguồn quy tắc thực nghiệm. Baseline/ablation/masking validation đã chạy; BERT-small đã chạy trong tuần 1; test đã chấm sau khóa ngày 23/10/2026. Kết quả task ở evaluation_tasks_report.md; các mục lịch sử giữ thời điểm cũ. Tiến độ: [status.md](../status.md); lịch: [note.md](../../note.md); schema/offset: [preparation.md](preparation.md).
+Cập nhật tổ chức: 23/10/2026. Đây là nguồn quy tắc thực nghiệm. Baseline/ablation/masking validation đã chạy; BERT-small đã chạy trong tuần 1; test đã chấm sau khóa ngày 23/10/2026. Kết quả task ở [nhóm báo cáo đánh giá](../../reports/summaries/evaluation/README.md); các mục lịch sử giữ thời điểm cũ. Tiến độ: [status.md](../status.md); lịch: [note.md](../../note.md); schema/offset: [preparation.md](preparation.md).
 
-## 1. Nguyên tắc và các quyết định còn thiếu
+Tài liệu này tổng hợp quy tắc và lịch sử thay đổi. Protocol đã ghi trước đợt final và được băm trong lock là [final_evaluation_protocol.md](../final_evaluation_protocol.md); các bổ sung giải thích ở đây không thay protocol đó. Cách chạy và input local: [reproduction.md](../reproduction.md).
+
+## 1. Nguyên tắc và các quyết định đã chốt
 
 - Mỗi annotation là một sample, một nhãn; giữ nguyên unresolved, overlap và input trùng khác nhãn. Không majority-vote hoặc sửa ground truth theo dự đoán model. Chỉ sửa/loại theo bằng chứng nguồn và nhật ký trước khóa dataset.
 - Không đưa correction, corrected sentence, comment, nhãn hoặc IDs vào predictors. Parse câu gốc; fit mọi transformation học từ dữ liệu chỉ trên train.
@@ -29,6 +31,8 @@ Cập nhật tổ chức: 23/10/2026. Đây là nguồn quy tắc thực nghiệ
 | M — Morphology | Number, Person, Tense, VerbForm của span; biểu diễn tập giá trị/hiện diện và missing indicators, không dùng correction. |
 | D — Dependency | Nhãn quan hệ, POS của head/dependent, khoảng cách, hiện diện chủ ngữ và thuộc tính ngữ pháp của chủ ngữ. Không chứa surface word hoặc lemma của governor/dependent. |
 
+**Implementation đã chạy:** TrainOnlyEncoder dùng numeric nguyên giá trị, one-hot cho categorical và multi-hot kênh pooled n-gram. Giới hạn 500 áp dụng kênh n-gram; categorical lexical slots học vocabulary riêng. Full có 16.180 chiều, không có z-score. Parse lại câu gốc ở bước features; preparation token list không trực tiếp thay parse feature. Xem [implementation audit](implementation_data_audit.md).
+
 Đặc tả L dự kiến ban đầu (lịch sử; các khác biệt triển khai đã xác minh ở mục 9 thay thế mô tả tương ứng khi diễn giải kết quả hiện có):
 
 - Một vocabulary chung tối đa 500 lexical item cho toàn bộ vai trò span và context, không phải 500 mục mỗi vị trí.
@@ -49,10 +53,10 @@ Cách chính: tune riêng từng feature set trong cùng grid và cùng ngân s�
 
 - Bắt buộc: S+L → S+L+P → S+L+P+M → S+L+P+M+D; thực hiện cho cả LR và Tree.
 - Bắt buộc: full, full che lexical span, S+P+M+D bỏ toàn bộ lexical.
-- Bổ sung nếu còn thời gian: full trừ P, full trừ M, full trừ D.
+- Đã bổ sung trước final test: Full−P và Full−M cho cả LR/Tree; Full−D trùng S+L+P+M nên reuse. Đây là phạm vi đã chốt ở final protocol, thay kế hoạch tùy ngân sách trước đó.
 - Chuỗi tăng dần đo đóng góp theo thứ tự đã chọn. Morphology thêm sau POS không đo tác dụng khi morphology đứng riêng. Bỏ từng nhóm bổ sung góc nhìn có điều kiện; các nhóm vẫn có thể chứa thông tin trùng nhau.
 - S+P+M+D gọi là non-lexical, không gọi là structural-only; structural-only đúng nghĩa chỉ gồm S.
-- Việc chuyển ablation bỏ từng nhóm thành hạng mục bổ sung là điều chỉnh so với phạm vi dự kiến trong proposal. Nếu không chạy, ghi rõ phần còn thiếu và giới hạn trả lời RQ2 trong báo cáo/proposal khi cập nhật; không trình bày E2–E4 là hoàn thành toàn bộ.
+- Lịch sử từng coi ablation bỏ nhóm là tùy ngân sách; trước final test đã chốt và hoàn thành ba đối chiếu P/M/D. Không tính Full−D như một lượt fit hoặc bằng chứng độc lập thứ hai.
 
 ## 4. Kiểm tra masking
 
@@ -73,7 +77,7 @@ POS, morphology và dependency vẫn có thể tương quan với danh tính tok
 - Với span không rỗng, lấy mọi token spaCy giao ký tự với span. Span khớp biên token là `exact`; cắt ít nhất một token là `partial_token` và giữ POS của mọi token giao span theo thứ tự; span chỉ thêm whitespace đầu/cuối là `whitespace_edge`, bỏ whitespace khỏi token selection nhưng giữ cờ. POS signature nhiều token là chuỗi UPOS theo thứ tự, nối bằng `+`; không dùng chính tả token, lemma, correction hoặc POS ngoài span trong baseline POS-only. Lưu `left_upos`/`right_upos` để feature sau này, nhưng không đưa chúng vào baseline này.
 - Insertion có POS `NOT_APPLICABLE`: ở biên token lưu POS token trái/phải làm context; nằm giữa ký tự token gắn `insertion_inside_token`, lưu enclosing POS để audit nhưng không coi là POS mục tiêu. Cả hai trường hợp dùng lớp phổ biến nhất train trong baseline POS-only. Span whitespace-only hoặc token thiếu POS dùng `POS_MISSING` và cùng fallback. Mọi span ngoài bounds hoặc không khớp `error_span` làm pipeline dừng với lỗi, không âm thầm fallback.
 - **POS rule đã khóa:** UPOS đơn `ADP → Prep`, `DET → ArtOrDet`; mọi POS signature khác đã thấy trong train dự đoán lớp đa số của signature đó; signature chưa thấy, missing, insertion dùng lớp đa số toàn train. Ties theo thứ tự `ArtOrDet, Prep, Nn, Vform, SVA`. Thống kê signature × nhãn chỉ fit từ train. Báo support riêng, nhất là signature ít mẫu và POS missing.
-- Baseline này là chẩn đoán dùng POS của toàn span (chuỗi UPOS với span nhiều token), không phải POS của ngữ cảnh. Kết quả validation hiện có chưa xác nhận giả thuyết cuối: cần Majority/POS rule/LR/Tree trên cùng test sau khi khóa protocol.
+- Baseline này là chẩn đoán dùng POS của toàn span (chuỗi UPOS với span nhiều token), không phải POS của ngữ cảnh. Đối chiếu Majority/POS rule/LR/Tree trên test đã thực hiện sau khóa; kết quả và giới hạn được báo riêng, không thay số validation.
 - LR: C ∈ {0.01, 0.1, 1, 10}, class_weight ∈ {None, balanced}; kiểm tra convergence.
 - Tree: max_depth ∈ {4, 8, 12}, min_samples_leaf ∈ {5, 20}, class_weight ∈ {None, balanced}; seed cố định.
 - Trong runner `src/training/nucle_benchmark.py`, LR dùng PyTorch LBFGS, tối đa 1.000 iteration/1.250 evaluations, `tolerance_grad=1e-6`, `tolerance_change=1e-9`; bias không regularize và hệ số L2 là `0.5 * ||W||² / (C * n_train)`. LR đủ điều kiện chọn khi dừng theo gradient tolerance hoặc theo change tolerance trước giới hạn iteration/evaluation; báo cáo termination reason và gradient infinity norm. Cấu hình chạm giới hạn vẫn được đánh dấu chưa hội tụ. Tree là CART Gini xác định trên sparse one-hot/numeric vectors; seed không ảnh hưởng phép chia nhưng được giữ cố định cho tính nhất quán.
@@ -93,13 +97,13 @@ POS, morphology và dependency vẫn có thể tương quan với danh tính tok
 - Trước khi khóa split, chọn một nơi sao lưu riêng có kiểm soát truy cập, như ổ sao lưu thứ hai hoặc kho riêng phù hợp quyền sử dụng. Đồng bộ gói metadata tại mỗi milestone và thử khôi phục từ bản sao vào thư mục khác; so checksum, manifest và quyết định review.
 - Kế hoạch không tự cấp quyền upload dữ liệu sang dịch vụ bên ngoài. Khi triển khai, dùng nơi lưu đã được người dùng cho phép; nếu chưa có, ghi trạng thái chưa hoàn thành lưu trữ bền vững, không tuyên bố đã tái lập đầy đủ.
 
-## 7. Ngân sách và đầu ra bắt buộc
+## 7. Ngân sách đã chạy và phạm vi bàn giao
 
-Sáu feature set chính, mỗi set 8 cấu hình LR và 12 cấu hình Tree: khoảng 120 lần fit một seed. Ba ablation bỏ P/M/D bổ sung khoảng 60 lần fit. Đo runtime trước khi cam kết phần bổ sung; ghi thay đổi ngân sách trước test và áp dụng nhất quán.
+Đợt sáu feature set lịch sử gồm 8 cấu hình LR và 12 Tree mỗi set: 120 fit. Đợt final có 40 grid fit Full−P/M và 12 refit cấu hình cũ để lưu checkpoint, tổng 52 fit. Full−D reuse nên không thêm 20 fit. Hai đợt này có mục đích khác nhau; không gộp thành 52 lần tìm kiếm toàn bộ lịch sử.
 
-Error analysis sau test: tối đa 50 mẫu sai và 10 mẫu đúng, phân bổ theo nhãn/cặp nhầm; ghi số thực tế khi không đủ mẫu. Lưu parser evidence, ambiguity, mức chắc chắn và annotation_id. Correction chỉ được dùng ở bước phân tích sau dự đoán. Báo cả lỗi kỹ thuật parser và chất lượng ngữ nghĩa quan sát, không coi có cây parse là parse đúng.
+Ngân sách error analysis ban đầu tối đa 50 mẫu sai và 10 mẫu đúng. Thực chạy: 25 lỗi LR, 5 lỗi Tree khi LR đúng và 10 controls, tổng 40 ca, chọn theo quy tắc trong final protocol. Lưu parser evidence, ambiguity, mức chắc chắn và annotation_id. Correction chỉ được dùng ở bước phân tích sau dự đoán. Báo cả lỗi kỹ thuật parser và chất lượng ngữ nghĩa quan sát, không coi có cây parse là parse đúng.
 
-Đầu ra bắt buộc: benchmark Majority/LR/Tree, ablation tăng dần và masking, bảng metric/test uncertainty, error analysis, báo cáo trả lời RQ1–RQ3, sáu slide và gói tái lập. TF-IDF, random baseline, prototype và ablation bổ sung được giảm trước; bảo đảm ngân sách test/báo cáo. Không âm thầm bỏ morphology/dependency khỏi full benchmark.
+Đã có benchmark, ablation/masking, test uncertainty, error analysis và report task có bằng chứng cho RQ1–RQ3. Theo phạm vi người dùng chốt, final report dự án và sáu slide để sau; không coi việc hoàn tất thí nghiệm là đã hoàn tất bản nộp. Không thêm TF-IDF/random baseline/prototype hoặc tuning BERT sau test.
 
 
 ## 8. Bổ sung phạm vi BERT — ghi trước chạy ngày 23/10/2026 (lịch sử)
@@ -116,9 +120,9 @@ Marker mới phải được thêm vào tokenizer và cập nhật embedding tư
 The executed baseline uses a pooled 500-item n-gram channel plus separate train-fit categorical lexical slots, with raw numeric values and reparsing of original sentences. The original shared-vocabulary proposal is not the implemented model. Masking removes span lexical features before fitting its encoder while retaining the original parse. Detailed findings: [implementation_data_audit.md](implementation_data_audit.md). Week-1 BERT configuration: [bert_experiment_protocol.md](../bert_experiment_protocol.md). This records an implementation deviation; it does not claim prior registration or change existing predictions.
 
 
-## 10. Hoàn tất tuần 1
+## 10. Hoàn tất validation/BERT — mốc lịch sử trước final test
 
-BERT-small đã thực hiện theo bert_experiment_protocol.md, không sửa cấu hình đăng ký sau kết quả. Report: contextual_model_validation_report.md. Số liệu và trạng thái trong mục 8 là mốc trước chạy; test, bootstrap và khóa mô hình cuối chưa làm. Sensitivity LR dùng 4 threads; chạy lại baseline đã lưu với 10 threads tái tạo prediction cũ. Ghi rõ threads khi tái lập LBFGS.
+BERT-small đã thực hiện theo bert_experiment_protocol.md, không sửa cấu hình đăng ký sau kết quả. Report có trong workspace: [contextual_model_validation_report.docx](../../reports/summaries/contextual/contextual_model_validation_report.docx); không có bản Markdown tương ứng. Số liệu và trạng thái trong mục 8 là mốc trước chạy. Ở cuối giai đoạn validation/BERT, test/bootstrap/freeze chưa làm; mục 11 và status.md ghi những bước đã thực hiện sau đó. Sensitivity LR dùng 4 threads; chạy lại baseline đã lưu với 10 threads tái tạo prediction cũ. Ghi rõ threads khi tái lập LBFGS.
 
 ## 11. Đánh giá cuối — thực hiện 23/10/2026
 

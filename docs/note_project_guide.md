@@ -2,6 +2,8 @@
 
 Cập nhật sau rà soát/tái lập 23/10/2026. [Report task rà soát](../reports/evaluation_followup/review_report.md) bổ sung kiểm raw → features → 52 fit → test replay và giới hạn audit; không xuất DOCX mới. Report task hiện hành: [evaluation_tasks_report.docx](../reports/summaries/evaluation/evaluation_tasks_report.docx). Các bảng validation bên dưới giữ số lịch sử, không phải test. File này giải thích pipeline, preparation v1/v2 và quan hệ giữa các file. Lịch thực hiện chỉ quản lý tại [note.md](../note.md). Các ví dụ câu dưới đây là tự tạo, không trích corpus. Tài liệu này thay hướng dẫn cũ có lịch sáu tuần và code sklearn minh họa không phản ánh implementation hiện hành.
 
+Hướng dẫn cài môi trường, điều kiện input và cách chạy từng entry point: [reproduction.md](reproduction.md). Các code path trong sơ đồ/bảng tính từ root repository; Markdown links tính từ thư mục docs. Tài liệu này giải thích implementation, không thay runbook hoặc kế hoạch.
+
 ## 1. Bài toán, RQ và trạng thái
 
 Một sample là một annotation: **câu gốc + vị trí lỗi đã biết → một trong năm nhãn**. Nhãn gồm ArtOrDet (mạo từ/từ hạn định), Prep (giới từ), Nn (số danh từ), Vform (dạng động từ), SVA (hòa hợp chủ ngữ–động từ). Một câu có thể tạo nhiều sample. Không tự tìm vị trí lỗi, sinh câu sửa hay chấm điểm người học.
@@ -354,7 +356,7 @@ src/data/group_split_nucle.py dùng source/preparation nối essay thành connec
 
 Boilerplate được miễn nối khi có ở ít nhất 10 essay, tối đa 10 từ/80 ký tự và không có target annotation trong mọi occurrence. Trong 62 nhóm paragraph normalized, 7 được miễn và 55 tạo edges. Exact/normalized duplicate counts chồng lấp. Kết quả 1.280 groups trên 1.397 essay, group lớn nhất 34 essay/338 sample.
 
-data_set/split/nucle_group_split chứa essay_groups.csv (essay→group), split_manifest.csv (sample→partition/group), grouping_policy.json, split_summary.json và manifest. Seed 20261013: train 11.052, validation 2.368, test 2.368. Không chia lại theo annotation hoặc đổi split khi so BERT/v1/v2. Chưa phát hiện tự động paraphrase/near-duplicate là một giới hạn.
+data_set/split/nucle_group_split chứa essay_groups.csv (essay→group), split_manifest.csv (sample→partition/group), grouping_policy.json, split_summary.json và manifest. Seed 20261013: train 11.052 samples / 1.069 essays / 1.045 groups; validation 2.368 / 142 / 99; test 2.368 / 144 / 97. Các số essay/group theo split này chỉ tính nhóm có target sample; tổng nguồn 1.397 essays / 1.280 groups còn gồm các bài không có nhãn mục tiêu. Không chia lại theo annotation hoặc đổi split khi so BERT/v1/v2. Chưa phát hiện tự động paraphrase/near-duplicate là một giới hạn.
 
 ### 8.2 Preparation NLP khác feature NLP
 
@@ -368,7 +370,7 @@ Preparation dùng blank English + sentencizer. Feature/POS dùng spaCy 3.8.7 + e
 | M | Number, Person, Tense, VerbForm và missing indicators |
 | D | Dependency relation, head/dependent POS, khoảng cách và thông tin chủ ngữ |
 
-src/features/nucle_features.py: extract_features tạo dictionary, FeatureEncoder fit trên train rồi transform validation. Full có 16.180 chiều, artifact data_set/features/nucle_features_v1. **v1 ở tên feature artifact không có nghĩa preparation v1**; pipeline chính dùng preparation v2.
+src/features/nucle_features.py: extract_features tạo dictionary, TrainOnlyEncoder fit trên train rồi transform các partition bằng vocabulary đã khóa. Full có 16.180 chiều, artifact data_set/features/nucle_features_v1. **v1 ở tên feature artifact không có nghĩa preparation v1**; pipeline chính dùng preparation v2.
 
 Giới hạn 500 là kênh pooled n-gram, không phải mọi lexical feature: slot trái/phải có vocabulary riêng. Key L|span_ngrams chứa candidates của cả span và context. Numeric giữ giá trị gốc, không z-score. LR có dependency từ sentence, không chỉ nhìn ±2 từ.
 
@@ -439,7 +441,7 @@ Kết luận hiện tại: BERT-small có thể học tập nhỏ, benchmark hi�
 |---|---|
 | docs/proposal.md | RQ1–RQ3, thiết kế gốc; phần dự kiến không phải kết quả |
 | docs/methodology/preparation.md | Đặc tả có v1 lịch sử và bổ sung v2; đối chiếu implementation/manifest |
-| docs/methodology/experiment_protocol.md | Quy tắc train-only, tuning, metrics, audit sai khác; cần đồng bộ phạm vi mới khi khóa |
+| docs/methodology/experiment_protocol.md | Quy tắc train-only, tuning, metrics và các thay đổi triển khai; final protocol trước test được lưu riêng |
 | docs/methodology/implementation_data_audit.md | Vocabulary, scaling, reparse, masking, threads, 18 ca review |
 | docs/bert_experiment_protocol.md | Protocol benchmark BERT đã chạy, giữ nguyên lịch sử |
 | docs/bert_learning_diagnostics_protocol.md | Thiết kế gradient/học thuộc train-only |
@@ -451,7 +453,7 @@ Kết luận hiện tại: BERT-small có thể học tập nhỏ, benchmark hi�
 | src/reporting/build_ablation_notebook.py | Dựng notebook từ artifact |
 | src/reporting/build_contextual_validation_report.py | Bảng/hình/report validation |
 | src/reporting/build_bert_diagnostics_report.py | Bảng/hình/report diagnostics |
-| src/reporting/update_validation_documentation.py | Script cập nhật tại mốc cũ; không chạy lại mù quáng vì có nội dung trạng thái lịch sử |
+| src/reporting/update_validation_documentation.py | Updater một lần đã lỗi thời; ngừng dùng cho trạng thái hiện hành, giữ bản code đã khóa |
 | notebooks/03_data_visualization.ipynb, notebooks/04_feature_ablation_report.ipynb | Trình bày dữ liệu/kết quả, không thay entry point train |
 | docs/literature/related_work.md, docs/literature/contextual_models_related_work.md, reference.md | Nguồn và tổng hợp học thuật; không có task sửa Excel/PRISMA |
 | docs/README.md, docs/status.md | Chỉ mục và snapshot tiến độ; đề xuất thử tiếp BERT cũ được thay bằng note hiện hành |
@@ -461,6 +463,8 @@ Kết luận hiện tại: BERT-small có thể học tập nhỏ, benchmark hi�
 | reports/contextual_model_validation/environment.txt | Freeze môi trường thực tế của lượt chạy |
 
 Các báo cáo để đọc được gom tại [reports/summaries](../reports/summaries/README.md). Hai báo cáo contextual validation và BERT diagnostics hiện chỉ có DOCX; bản Markdown tương ứng không có trong workspace. Dùng DOCX và JSON/CSV artifacts hiện có. Bản đồ toàn bộ artifact xem [reports/README.md](../reports/README.md).
+
+Sáu module bổ sung sau final lock gồm reproduce_evaluation_pipeline.py, review_audit_evidence.py, review_saved_evidence.py, verify_final_results.py, build_evaluation_tasks_report.py và package_final_reproducibility.py. Phạm vi từng script và tác động ghi output xem [runbook](reproduction.md). [Code review](../reports/maintenance/code_redundancy_review.md) phân biệt dead code với các công cụ lịch sử vẫn cần giữ.
 
 ## 12. Đánh giá cuối đã thực hiện và quy tắc sử dụng
 
@@ -472,7 +476,7 @@ Theo [note.md](../note.md), các bước thí nghiệm đã thực hiện; hạn
 4. Phân tích lỗi test và tổng hợp BERT đã có.
 5. Báo cáo task và kiểm tái lập; final report/slide tổng kết để lại bước sau.
 
-Module mới: src/training/nucle_final_selection.py; src/evaluation/nucle_final_evaluation.py, nucle_final_error_audit.py, verify_final_results.py; src/reporting/build_evaluation_tasks_report.py. Artifact: reports/final_evaluation/. Test/CI/audit đã có; BERT không chạy thêm. Fresh venv chỉ kiểm inference từ encoded test/metric, chưa tái chạy từ raw.
+Module đánh giá: src/training/nucle_final_selection.py; src/evaluation/nucle_final_evaluation.py, nucle_final_error_audit.py, verify_final_results.py; src/reporting/build_evaluation_tasks_report.py. Artifact: reports/final_evaluation/. Test/CI/audit đã có; BERT không chạy thêm. Đợt replay ban đầu chỉ kiểm inference từ encoded input; đợt followup đã tái lập raw → preparation/grouping/NLP/features → 52 fit → test replay trong môi trường riêng. Chưa rerun toàn grid lịch sử hoặc BERT.
 
 Quy tắc xuyên suốt:
 
