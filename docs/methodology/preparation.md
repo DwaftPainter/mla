@@ -1,8 +1,8 @@
 # Đặc tả NUCLE Data Preparation v2
 
-Cập nhật: 12/10/2026. Policy hiện hành: `nucle-preparation-v2`. Đã chạy trên nguồn có quyền sử dụng được xác nhận và giữ đủ **15.788/15.788 mẫu mục tiêu**; xem [trạng thái dự án](../status.md) và [báo cáo tổng quát](../../notebooks/03_data_visualization.ipynb).
+Đặc tả gốc: 12/10/2026; rà soát diễn giải và điều hướng: 23/10/2026. Policy hiện hành: `nucle-preparation-v2`. Đã chạy trên nguồn có quyền sử dụng được xác nhận và giữ đủ **15.788/15.788 mẫu mục tiêu**; xem [trạng thái dự án](../status.md) và [báo cáo tổng quát](../../notebooks/03_data_visualization.ipynb).
 
-Tài liệu này chốt schema, offset, căn chỉnh token và cách ghi mẫu không dựng được. Các nguyên tắc nguồn và schema bên dưới vẫn áp dụng cho v2; quy tắc tách câu v1 ở mục 2 là lịch sử. Quy tắc v2 dưới đây thay thế phần segmentation cũ. Duplicate grouping và split đã được tạo sau thời điểm lập đặc tả; quy tắc và trạng thái hiện hành xem experiment_protocol.md và status.md. Tài liệu này chỉ quản lý preparation.
+Tài liệu này chốt schema, offset, căn chỉnh token và cách ghi mẫu không dựng được. Các nguyên tắc nguồn và schema bên dưới vẫn áp dụng cho v2; quy tắc tách câu v1 ở mục 2 là lịch sử. Quy tắc v2 dưới đây thay thế phần segmentation cũ. Duplicate grouping và split đã được tạo sau thời điểm lập đặc tả; quy tắc và trạng thái hiện hành xem [experiment_protocol.md](experiment_protocol.md) và [status.md](../status.md). Tài liệu này chỉ quản lý preparation.
 
 ## Quy tắc segmentation hiện hành v2
 
@@ -13,7 +13,7 @@ Tài liệu này chốt schema, offset, căn chỉnh token và cách ghi mẫu k
 - Boundary có thể rơi giữa các ký tự của token spaCy khi nguồn dính dấu câu với chữ. Artifact lưu các mảnh token theo đúng lát cắt nguồn. Hai span mục tiêu nằm tại kiểu boundary này có biểu diễn token khác v1; offset ký tự và error span vẫn nguyên vẹn.
 - Không điều chỉnh label, error span, correction hoặc source offset. Annotation qua sentence boundary vẫn theo reason/status priority đã định ở mục 6.
 
-V2 giữ 15.788 mẫu, đổi input câu cho 544 mẫu và sentence ID cho 533 mẫu so với v1; offset span tuyệt đối và metadata nguồn giữ nguyên. Schema v2 thêm `boundary_flags` và `boundary_review_status` cho sample/provenance. Hai trường hợp mơ hồ (31297, 39538) vẫn retained, được gắn cờ unresolved và xuất ra `boundary_challenges.jsonl`; regression fixtures nằm trong `tests/fixtures/nucle_boundary_challenges.jsonl`. Packet 50 mẫu mới đã được rà soát hỗ trợ bằng AI; 57 boundary/preparation tests pass. Xem [comparison report](../../reports/nucle_preparation_v2_comparison).
+V2 giữ 15.788 mẫu, đổi input câu cho 544 mẫu và sentence ID cho 533 mẫu so với v1; offset span tuyệt đối và metadata nguồn giữ nguyên. Schema v2 thêm `boundary_flags` và `boundary_review_status` cho sample/provenance. Hai trường hợp mơ hồ (31297, 39538) vẫn retained, được gắn cờ unresolved và xuất ra `boundary_challenges.jsonl`; regression fixtures nằm trong `tests/fixtures/nucle_boundary_challenges.jsonl`. Packet 50 mẫu mới đã được rà soát hỗ trợ bằng AI; 57 boundary/preparation tests pass. Số 57 tests là phạm vi kiểm tại mốc triển khai preparation, không phải tổng suite hiện tại. Fixture NUCLE chỉ local; xem [tests](../../tests/README.md). Xem [comparison report](../../reports/nucle_preparation_v2_comparison/README.md).
 
 ## 1. Đầu vào và nguyên tắc bất biến
 
@@ -216,9 +216,11 @@ Các phép kiểm chứng bắt buộc:
 2. Fixtures tách câu: `Dr. Smith arrived. He left.`, `The value is 3.14. Fine!`, contraction, dấu nháy/ngoặc, `...`, `…`, câu thiếu dấu chấm, newline trong paragraph, TITLE và paragraph chỉ whitespace. Snapshot theo pipeline đã khóa, review boundary trước khi chấp nhận; không khẳng định đúng ngôn ngữ chỉ vì snapshot pass.
 3. Offset tại đầu/cuối câu, cuối paragraph, token boundary; nhiều token, punctuation, partial token, insertion trong whitespace và trong token; invalid/cross-paragraph/cross-sentence theo đúng reason priority.
 4. Nhiều annotation cùng câu/cùng span/overlap giữ từng ID; unresolved không tự loại; thay correction/comment/nhãn không đổi sentence intervals, tokens hoặc input của một annotation vẫn thuộc taxonomy mục tiêu.
-5. `N_all = N_out_of_scope + N_target`, `N_target = N_retained + N_not_constructible`; mỗi input annotation xuất hiện đúng một lần trong provenance. Snapshot hiện có N_all=44.912, N_target=15.788; chưa giả định N_retained=15.788.
+5. `N_all = N_out_of_scope + N_target`, `N_target = N_retained + N_not_constructible`; mỗi input annotation xuất hiện đúng một lần trong provenance. Dữ liệu đã kiểm có N_all=44.912, N_target=15.788 và N_retained=15.788. Khi rebuild vẫn phải tính và kiểm đẳng thức, không hardcode số retained để bỏ qua trường hợp không dựng được.
 6. Mỗi retained có đúng một sample và câu tương ứng; IDs/tokens tham chiếu tồn tại, label thuộc taxonomy, indices tăng dần và không trùng giữa span/context. Chạy lại cùng source/policy/environment tạo cùng dữ liệu, IDs, counts và output checksums (manifest có thời gian chạy có thể khác).
 
-## 9. Bàn giao tiếp theo
+## 9. Quan hệ với các bước sau preparation
 
-Đã triển khai preparation v2, đối chiếu cơ học cả 15.788 mẫu với v1 và rà soát packet mới 50 mẫu. Bước tiếp theo là chốt duplicate/boilerplate grouping rồi thiết kế split theo essay/nhóm; chưa có split benchmark được khóa. Hai boundary case vẫn unresolved và cần adjudication thủ công nếu ảnh hưởng quyết định tiếp theo.
+Đã triển khai preparation v2, đối chiếu cơ học cả 15.788 mẫu với v1 và rà soát packet mới 50 mẫu. Grouping/split sau preparation đã khóa với seed 20261013; feature, validation và test cũng đã hoàn thành ở các bước riêng. Hai boundary case vẫn unresolved; chưa thay nhãn hay sửa dữ liệu sau test.
+
+Preparation chỉ dùng blank English + sentencizer; feature/POS parse lại câu bằng en_core_web_sm. Không coi hai bước có cùng nhiệm vụ hoặc coi tests cơ học là xác nhận mọi boundary/POS đúng ngữ nghĩa. Chi tiết v1/v2 ở [project guide](../note_project_guide.md), lệnh rebuild và input review cần có ở [runbook](../reproduction.md).

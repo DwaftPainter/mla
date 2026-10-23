@@ -8,3 +8,11 @@
 Các JSONL còn lại chứa trường hợp regression/review và có thể có câu nguồn; giữ local. Đây là so sánh dữ liệu, không phải kết quả test classifier.
 
 [Trở về mục lục reports](../README.md).
+
+## Cách đọc và điều kiện chạy
+
+So sánh cùng 15.788 annotations: 544 input câu đổi, 533 sentence IDs đổi, 30 context đổi và 2 token span đổi; các tập này chồng lấp. Giữ source offsets/nhãn.
+
+Đây là đối chiếu dữ liệu/cơ học. Sensitivity classifier v1/v2 ở contextual_model_validation là bước khác. Packet có text nguồn giữ local.
+
+Entry point: [src/data/compare_preparation.py](../../src/data/compare_preparation.py). Các output/inputs còn lại có thể chỉ local; xem [hướng dẫn tái lập](../../docs/reproduction.md) trước khi chạy. Trạng thái chung: [status](../../docs/status.md).
