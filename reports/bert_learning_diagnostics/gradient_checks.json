@@ -1,0 +1,194 @@
+{
+  "pretrained_cls": {
+    "mode": "cls",
+    "loss": 1.6034282445907593,
+    "manual_ce_abs_difference": 0.0,
+    "original_cls_logits_max_difference": 0.0,
+    "optimizer_covers_all_trainable_parameters": true,
+    "missing_gradients": [],
+    "nonfinite_gradients": [],
+    "gradient_norms": {
+      "embeddings": 0.6545932763876937,
+      "encoder.layer.0": 0.3074455741664874,
+      "encoder.layer.1": 0.23502735790353999,
+      "pooler": 0.1979000145677352,
+      "classifier": 0.5127857602181611
+    },
+    "marker_embedding_gradients": {
+      "30522": 0.06593670696020126,
+      "30523": 0.059066690504550934
+    },
+    "target_embedding_gradient_norm": 0.07075884193181992,
+    "hidden_gradients": [
+      {
+        "layer_output": 0,
+        "cls_gradient_norm": 0.009183835238218307,
+        "target_gradient_norm": 0.0027311407029628754,
+        "marker_gradient_norm": 0.00479305861517787
+      },
+      {
+        "layer_output": 1,
+        "cls_gradient_norm": 0.025611404329538345,
+        "target_gradient_norm": 0.002451011911034584,
+        "marker_gradient_norm": 0.0014508848544210196
+      },
+      {
+        "layer_output": 2,
+        "cls_gradient_norm": 0.017070576548576355,
+        "target_gradient_norm": 0.0,
+        "marker_gradient_norm": 0.0
+      }
+    ],
+    "global_gradient_norm_before_clip": 0.9382783770561218,
+    "parameter_update_norms": {
+      "start_marker": 0.0005656825378537178,
+      "end_marker": 0.0005656793364323676,
+      "encoder_query": 0.006397559307515621,
+      "classifier": 0.0012649130076169968
+    }
+  },
+  "pretrained_span_mean": {
+    "mode": "span_mean",
+    "loss": 1.6193526983261108,
+    "manual_ce_abs_difference": 0.0,
+    "original_cls_logits_max_difference": null,
+    "optimizer_covers_all_trainable_parameters": true,
+    "missing_gradients": [],
+    "nonfinite_gradients": [],
+    "gradient_norms": {
+      "embeddings": 0.865755927213604,
+      "encoder.layer.0": 0.5758596963427353,
+      "encoder.layer.1": 0.35203489938904986,
+      "pooler": 0.25744278468489706,
+      "classifier": 0.8412099268801184
+    },
+    "marker_embedding_gradients": {
+      "30522": 0.2430158257484436,
+      "30523": 0.17339520156383514
+    },
+    "target_embedding_gradient_norm": 0.15635406970977783,
+    "hidden_gradients": [
+      {
+        "layer_output": 0,
+        "cls_gradient_norm": 0.0053740330040454865,
+        "target_gradient_norm": 0.010319296270608902,
+        "marker_gradient_norm": 0.0111443642526865
+      },
+      {
+        "layer_output": 1,
+        "cls_gradient_norm": 0.015945760533213615,
+        "target_gradient_norm": 0.01891058310866356,
+        "marker_gradient_norm": 0.016368968412280083
+      },
+      {
+        "layer_output": 2,
+        "cls_gradient_norm": 0.0,
+        "target_gradient_norm": 0.019268622621893883,
+        "marker_gradient_norm": 0.0
+      }
+    ],
+    "global_gradient_norm_before_clip": 1.4067645072937012,
+    "parameter_update_norms": {
+      "start_marker": 0.0005656866123899817,
+      "end_marker": 0.0005656850407831371,
+      "encoder_query": 0.006398494821041822,
+      "classifier": 0.001264910213649273
+    }
+  },
+  "saved_failed_run_cls": {
+    "mode": "cls",
+    "loss": 1.7079604864120483,
+    "manual_ce_abs_difference": 0.0,
+    "original_cls_logits_max_difference": 0.0,
+    "optimizer_covers_all_trainable_parameters": true,
+    "missing_gradients": [],
+    "nonfinite_gradients": [],
+    "gradient_norms": {
+      "embeddings": 6.074695538307979,
+      "encoder.layer.0": 2.479422947795898,
+      "encoder.layer.1": 1.6808081411371714,
+      "pooler": 0.47559883897397354,
+      "classifier": 2.1827174813954016
+    },
+    "marker_embedding_gradients": {
+      "30522": 1.2230103015899658,
+      "30523": 0.8118429780006409
+    },
+    "target_embedding_gradient_norm": 0.03880567476153374,
+    "hidden_gradients": [
+      {
+        "layer_output": 0,
+        "cls_gradient_norm": 0.019436564296483994,
+        "target_gradient_norm": 0.012514784932136536,
+        "marker_gradient_norm": 0.029529402032494545
+      },
+      {
+        "layer_output": 1,
+        "cls_gradient_norm": 0.05248091369867325,
+        "target_gradient_norm": 0.011642045341432095,
+        "marker_gradient_norm": 0.012084413319826126
+      },
+      {
+        "layer_output": 2,
+        "cls_gradient_norm": 0.03341555967926979,
+        "target_gradient_norm": 0.0,
+        "marker_gradient_norm": 0.0
+      }
+    ],
+    "global_gradient_norm_before_clip": 7.1319708824157715,
+    "parameter_update_norms": {
+      "start_marker": 0.0005656867870129645,
+      "end_marker": 0.0005656853900291026,
+      "encoder_query": 0.006398157682269812,
+      "classifier": 0.0012648976407945156
+    }
+  },
+  "saved_failed_run_span_mean": {
+    "mode": "span_mean",
+    "loss": 1.6799633502960205,
+    "manual_ce_abs_difference": 0.0,
+    "original_cls_logits_max_difference": null,
+    "optimizer_covers_all_trainable_parameters": true,
+    "missing_gradients": [],
+    "nonfinite_gradients": [],
+    "gradient_norms": {
+      "embeddings": 3.9370569499139387,
+      "encoder.layer.0": 1.6333371973074486,
+      "encoder.layer.1": 1.1071485845390798,
+      "pooler": 0.47019240503310344,
+      "classifier": 1.9355656037303008
+    },
+    "marker_embedding_gradients": {
+      "30522": 1.085040807723999,
+      "30523": 0.6919618248939514
+    },
+    "target_embedding_gradient_norm": 0.07914961129426956,
+    "hidden_gradients": [
+      {
+        "layer_output": 0,
+        "cls_gradient_norm": 0.010015989653766155,
+        "target_gradient_norm": 0.018160181120038033,
+        "marker_gradient_norm": 0.02760464698076248
+      },
+      {
+        "layer_output": 1,
+        "cls_gradient_norm": 0.024791914969682693,
+        "target_gradient_norm": 0.0338967889547348,
+        "marker_gradient_norm": 0.025528455153107643
+      },
+      {
+        "layer_output": 2,
+        "cls_gradient_norm": 0.0,
+        "target_gradient_norm": 0.02918754145503044,
+        "marker_gradient_norm": 0.0
+      }
+    ],
+    "global_gradient_norm_before_clip": 4.833370685577393,
+    "parameter_update_norms": {
+      "start_marker": 0.0005656878347508609,
+      "end_marker": 0.0005656814319081604,
+      "encoder_query": 0.006397880148142576,
+      "classifier": 0.0012648983392864466
+    }
+  }
+}

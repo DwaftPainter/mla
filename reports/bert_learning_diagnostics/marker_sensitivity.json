@@ -1,0 +1,17 @@
+{
+  "cls": {
+    "examples": 100,
+    "mean_probability_L1": 0.34806087613105774,
+    "mean_logit_L2": 0.7321091294288635,
+    "prediction_changes": 28,
+    "mean_representation_cosine": 0.795876145362854
+  },
+  "span_mean": {
+    "examples": 100,
+    "mean_probability_L1": 0.34974154829978943,
+    "mean_logit_L2": 0.7237680554389954,
+    "prediction_changes": 11,
+    "mean_representation_cosine": 0.5967090725898743
+  },
+  "padding_max_logit_difference": 3.5762786865234375e-07
+}

@@ -1,0 +1,327 @@
+{
+  "scope": "train-only diagnostic; not validation performance",
+  "runs": [
+    {
+      "name": "cls_lr_5e-05",
+      "config": {
+        "mode": "cls",
+        "learning_rate": 5e-05,
+        "seed": 20261023,
+        "sample_count": 100,
+        "batch_size": 20,
+        "max_updates": 400,
+        "evaluate_every": 25,
+        "dropout": 0.0,
+        "weight_decay": 0.0,
+        "scheduler": null,
+        "clip_norm": 1.0,
+        "criterion": "accuracy=1 and CE<=0.05 at two consecutive checks",
+        "initial_state_sha256": "1ed2ca81503f3d86c54d55c37e071bd218f7ca7e5d10f6e87b91d7439657fefe",
+        "partition": "train"
+      },
+      "metrics": {
+        "macro_f1": 1.0,
+        "accuracy": 1.0,
+        "per_label": {
+          "ArtOrDet": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 20
+          },
+          "Prep": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 20
+          },
+          "Nn": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 20
+          },
+          "Vform": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 20
+          },
+          "SVA": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 20
+          }
+        },
+        "confusion_matrix_true_rows_predicted_columns": [
+          [
+            20,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            20,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            20,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            20,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            20
+          ]
+        ],
+        "cross_entropy": 0.15146760046482086,
+        "prediction_counts": {
+          "ArtOrDet": 20,
+          "Prep": 20,
+          "Nn": 20,
+          "Vform": 20,
+          "SVA": 20
+        }
+      },
+      "updates": 400,
+      "memorization_passed": false,
+      "seconds": 26.025145899970084,
+      "checkpoint_readout": "cls",
+      "validation_scored": false,
+      "test_scored": false
+    },
+    {
+      "name": "cls_lr_0.001",
+      "config": {
+        "mode": "cls",
+        "learning_rate": 0.001,
+        "seed": 20261023,
+        "sample_count": 100,
+        "batch_size": 20,
+        "max_updates": 400,
+        "evaluate_every": 25,
+        "dropout": 0.0,
+        "weight_decay": 0.0,
+        "scheduler": null,
+        "clip_norm": 1.0,
+        "criterion": "accuracy=1 and CE<=0.05 at two consecutive checks",
+        "initial_state_sha256": "1ed2ca81503f3d86c54d55c37e071bd218f7ca7e5d10f6e87b91d7439657fefe",
+        "partition": "train"
+      },
+      "metrics": {
+        "macro_f1": 1.0,
+        "accuracy": 1.0,
+        "per_label": {
+          "ArtOrDet": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 20
+          },
+          "Prep": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 20
+          },
+          "Nn": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 20
+          },
+          "Vform": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 20
+          },
+          "SVA": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 20
+          }
+        },
+        "confusion_matrix_true_rows_predicted_columns": [
+          [
+            20,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            20,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            20,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            20,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            20
+          ]
+        ],
+        "cross_entropy": 0.007332748360931873,
+        "prediction_counts": {
+          "ArtOrDet": 20,
+          "Prep": 20,
+          "Nn": 20,
+          "Vform": 20,
+          "SVA": 20
+        }
+      },
+      "updates": 100,
+      "memorization_passed": true,
+      "seconds": 6.863626100006513,
+      "checkpoint_readout": "cls",
+      "validation_scored": false,
+      "test_scored": false
+    },
+    {
+      "name": "span_mean_lr_0.001",
+      "config": {
+        "mode": "span_mean",
+        "learning_rate": 0.001,
+        "seed": 20261023,
+        "sample_count": 100,
+        "batch_size": 20,
+        "max_updates": 400,
+        "evaluate_every": 25,
+        "dropout": 0.0,
+        "weight_decay": 0.0,
+        "scheduler": null,
+        "clip_norm": 1.0,
+        "criterion": "accuracy=1 and CE<=0.05 at two consecutive checks",
+        "initial_state_sha256": "1ed2ca81503f3d86c54d55c37e071bd218f7ca7e5d10f6e87b91d7439657fefe",
+        "partition": "train"
+      },
+      "metrics": {
+        "macro_f1": 1.0,
+        "accuracy": 1.0,
+        "per_label": {
+          "ArtOrDet": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 20
+          },
+          "Prep": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 20
+          },
+          "Nn": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 20
+          },
+          "Vform": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 20
+          },
+          "SVA": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 20
+          }
+        },
+        "confusion_matrix_true_rows_predicted_columns": [
+          [
+            20,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            20,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            20,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            20,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            20
+          ]
+        ],
+        "cross_entropy": 0.010448670759797097,
+        "prediction_counts": {
+          "ArtOrDet": 20,
+          "Prep": 20,
+          "Nn": 20,
+          "Vform": 20,
+          "SVA": 20
+        }
+      },
+      "updates": 75,
+      "memorization_passed": true,
+      "seconds": 5.136903800012078,
+      "checkpoint_readout": "span_mean",
+      "validation_scored": false,
+      "test_scored": false
+    }
+  ],
+  "validation_scored": false,
+  "test_scored": false,
+  "old_results_preserved": true,
+  "all_saved_predictions_replayed": true
+}

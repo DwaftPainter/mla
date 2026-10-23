@@ -1,0 +1,32 @@
+{
+  "counts": {
+    "checked": 11052,
+    "truncated": 5,
+    "empty_target_subwords": 0,
+    "unknown_target_subwords": 0
+  },
+  "train_label_counts": {
+    "Vform": 1011,
+    "SVA": 1066,
+    "Nn": 2638,
+    "Prep": 1689,
+    "ArtOrDet": 4648
+  },
+  "marker_ids": [
+    30522,
+    30523
+  ],
+  "marker_special": true,
+  "duplicate_tokenized_groups": 0,
+  "conflicting_label_groups": 0,
+  "selected_counts": {
+    "ArtOrDet": 20,
+    "Prep": 20,
+    "Nn": 20,
+    "Vform": 20,
+    "SVA": 20
+  },
+  "selection_seed": 20261023,
+  "validation_loaded": false,
+  "test_loaded": false
+}
