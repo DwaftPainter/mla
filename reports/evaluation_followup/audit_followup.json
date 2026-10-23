@@ -1,0 +1,855 @@
+{
+  "review_type": "Second AI-assisted evidence review, not independent linguistic adjudication",
+  "selection_reproduced": true,
+  "cases_checked": 40,
+  "all_source_offsets_parser_and_PMD_checks_pass": true,
+  "insertion_only_annotations_on_nonempty_spans": [
+    "38087",
+    "34539",
+    "24526",
+    "24747",
+    "17826",
+    "348",
+    "19434",
+    "44388",
+    "34548",
+    "23239",
+    "11916",
+    "44353",
+    "6079",
+    "36485",
+    "34533",
+    "201"
+  ],
+  "empty_correction_ids": [
+    "26635",
+    "37909"
+  ],
+  "missing_correction_ids": [],
+  "subject_scope_checks": [
+    {
+      "annotation_id": "36821",
+      "direct_subjects": [],
+      "subjects_attached_to_target_head": [
+        30
+      ],
+      "interpretation": "Extractor records only direct subject children; head/conj propagation is absent. Parser links are not expert gold."
+    },
+    {
+      "annotation_id": "17311",
+      "direct_subjects": [],
+      "subjects_attached_to_target_head": [
+        12
+      ],
+      "interpretation": "Extractor records only direct subject children; head/conj propagation is absent. Parser links are not expert gold."
+    },
+    {
+      "annotation_id": "18531",
+      "direct_subjects": [],
+      "subjects_attached_to_target_head": [],
+      "interpretation": "Extractor records only direct subject children; head/conj propagation is absent. Parser links are not expert gold."
+    }
+  ],
+  "lr_margin_decompositions": [
+    {
+      "annotation_id": "11916",
+      "gold": "ArtOrDet",
+      "LR": "ArtOrDet",
+      "POS": "Nn",
+      "contrast": "logit(ArtOrDet) - logit(Nn)",
+      "contributions_by_group": {
+        "S": -0.05251075846135174,
+        "L": 0.5895413840189576,
+        "P": 0.07634681090712547,
+        "M": 0.31554869562387466,
+        "D": -0.08182696532458067
+      },
+      "intercept": 0.10697239637374878,
+      "margin": 0.9540715631377741,
+      "scope": "Post-hoc algebraic explanation of saved logits; not causal feature importance or new evaluation"
+    },
+    {
+      "annotation_id": "44353",
+      "gold": "ArtOrDet",
+      "LR": "ArtOrDet",
+      "POS": "Nn",
+      "contrast": "logit(ArtOrDet) - logit(Nn)",
+      "contributions_by_group": {
+        "S": -0.17827695689577322,
+        "L": 0.5031649166485295,
+        "P": 0.8216986451297998,
+        "M": 0.31554869562387466,
+        "D": -0.8177401898428798
+      },
+      "intercept": 0.10697239637374878,
+      "margin": 0.7513675070372998,
+      "scope": "Post-hoc algebraic explanation of saved logits; not causal feature importance or new evaluation"
+    },
+    {
+      "annotation_id": "6079",
+      "gold": "ArtOrDet",
+      "LR": "ArtOrDet",
+      "POS": "Nn",
+      "contrast": "logit(ArtOrDet) - logit(Nn)",
+      "contributions_by_group": {
+        "S": -0.042175667155911596,
+        "L": 1.6727710412815213,
+        "P": -0.8140936512500048,
+        "M": 0.31554869562387466,
+        "D": -0.19205508287996054
+      },
+      "intercept": 0.10697239637374878,
+      "margin": 1.0469677319932678,
+      "scope": "Post-hoc algebraic explanation of saved logits; not causal feature importance or new evaluation"
+    },
+    {
+      "annotation_id": "44388",
+      "gold": "ArtOrDet",
+      "LR": "Nn",
+      "POS": "Nn",
+      "contrast": "logit(ArtOrDet) - logit(Nn)",
+      "contributions_by_group": {
+        "S": -0.08647977401297482,
+        "L": 0.28846531361341476,
+        "P": 0.112479068338871,
+        "M": 0.31554869562387466,
+        "D": -0.8177401898428798
+      },
+      "intercept": 0.10697239637374878,
+      "margin": -0.08075448990594539,
+      "scope": "Post-hoc algebraic explanation of saved logits; not causal feature importance or new evaluation"
+    }
+  ],
+  "expert_review_pending": 17,
+  "interpretation_limits": [
+    "Insertion edits in annotations are not proof the addition is grammatically obligatory.",
+    "Parser discrepancies remain suspected until expert confirmation.",
+    "Same target word in two sentences is not a controlled intervention on context length.",
+    "Do not estimate corpus error prevalence from these purposively selected cases.",
+    "Gold labels, splits and model parameters remain unchanged."
+  ],
+  "cases": [
+    {
+      "annotation_id": "19312",
+      "gold": "ArtOrDet",
+      "LR": "Nn",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "DET+NOUN",
+      "token_edit_operations_casefold_whitespace": [
+        "delete"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "multi_token_semantics"
+    },
+    {
+      "annotation_id": "38087",
+      "gold": "ArtOrDet",
+      "LR": "Prep",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "ADP",
+      "token_edit_operations_casefold_whitespace": [
+        "insert"
+      ],
+      "annotation_adds_words_to_nonempty_span": true,
+      "original_review_category": "missing_word_nonempty"
+    },
+    {
+      "annotation_id": "34539",
+      "gold": "ArtOrDet",
+      "LR": "SVA",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "VERB",
+      "token_edit_operations_casefold_whitespace": [
+        "insert"
+      ],
+      "annotation_adds_words_to_nonempty_span": true,
+      "original_review_category": "annotation_ambiguity"
+    },
+    {
+      "annotation_id": "24526",
+      "gold": "ArtOrDet",
+      "LR": "Vform",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "NOUN+VERB",
+      "token_edit_operations_casefold_whitespace": [
+        "insert"
+      ],
+      "annotation_adds_words_to_nonempty_span": true,
+      "original_review_category": "parser_suspected"
+    },
+    {
+      "annotation_id": "34483",
+      "gold": "Nn",
+      "LR": "ArtOrDet",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "DET+NOUN",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "multiple_edits"
+    },
+    {
+      "annotation_id": "17814",
+      "gold": "Nn",
+      "LR": "Prep",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "partial_token",
+      "span_pos": "ADP",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "partial_token_parser"
+    },
+    {
+      "annotation_id": "9351",
+      "gold": "Nn",
+      "LR": "SVA",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "VERB",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "parser_suspected"
+    },
+    {
+      "annotation_id": "41235",
+      "gold": "Nn",
+      "LR": "Vform",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "VERB",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "parser_suspected"
+    },
+    {
+      "annotation_id": "24747",
+      "gold": "Prep",
+      "LR": "ArtOrDet",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "DET",
+      "token_edit_operations_casefold_whitespace": [
+        "insert"
+      ],
+      "annotation_adds_words_to_nonempty_span": true,
+      "original_review_category": "missing_word_nonempty"
+    },
+    {
+      "annotation_id": "17826",
+      "gold": "Prep",
+      "LR": "Nn",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "NOUN",
+      "token_edit_operations_casefold_whitespace": [
+        "insert"
+      ],
+      "annotation_adds_words_to_nonempty_span": true,
+      "original_review_category": "missing_word_nonempty"
+    },
+    {
+      "annotation_id": "348",
+      "gold": "Prep",
+      "LR": "SVA",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "VERB",
+      "token_edit_operations_casefold_whitespace": [
+        "insert"
+      ],
+      "annotation_adds_words_to_nonempty_span": true,
+      "original_review_category": "missing_word_nonempty"
+    },
+    {
+      "annotation_id": "19434",
+      "gold": "Prep",
+      "LR": "Vform",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "PART+VERB",
+      "token_edit_operations_casefold_whitespace": [
+        "insert"
+      ],
+      "annotation_adds_words_to_nonempty_span": true,
+      "original_review_category": "missing_word_nonempty"
+    },
+    {
+      "annotation_id": "12324",
+      "gold": "SVA",
+      "LR": "ArtOrDet",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "ADJ",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "annotation_ambiguity"
+    },
+    {
+      "annotation_id": "35455",
+      "gold": "SVA",
+      "LR": "Nn",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "NOUN",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "parser_suspected"
+    },
+    {
+      "annotation_id": "26635",
+      "gold": "SVA",
+      "LR": "Prep",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": true,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "ADP",
+      "token_edit_operations_casefold_whitespace": [
+        "delete"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "annotation_ambiguity"
+    },
+    {
+      "annotation_id": "18531",
+      "gold": "SVA",
+      "LR": "Vform",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "VERB",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "coordination_scope"
+    },
+    {
+      "annotation_id": "211",
+      "gold": "Vform",
+      "LR": "ArtOrDet",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "ADJ",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "parser_suspected"
+    },
+    {
+      "annotation_id": "37631",
+      "gold": "Vform",
+      "LR": "Nn",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "NOUN",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "long_context_ambiguity"
+    },
+    {
+      "annotation_id": "37624",
+      "gold": "Vform",
+      "LR": "Prep",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "VERB",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "parser_suspected"
+    },
+    {
+      "annotation_id": "32904",
+      "gold": "Vform",
+      "LR": "SVA",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "SCONJ+PRON+AUX",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "multi_token_semantics"
+    },
+    {
+      "annotation_id": "44388",
+      "gold": "ArtOrDet",
+      "LR": "Nn",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "NOUN",
+      "token_edit_operations_casefold_whitespace": [
+        "insert"
+      ],
+      "annotation_adds_words_to_nonempty_span": true,
+      "original_review_category": "missing_word_nonempty"
+    },
+    {
+      "annotation_id": "32705",
+      "gold": "ArtOrDet",
+      "LR": "Prep",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "ADP",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "annotation_ambiguity"
+    },
+    {
+      "annotation_id": "34548",
+      "gold": "ArtOrDet",
+      "LR": "SVA",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "VERB",
+      "token_edit_operations_casefold_whitespace": [
+        "insert"
+      ],
+      "annotation_adds_words_to_nonempty_span": true,
+      "original_review_category": "missing_word_nonempty"
+    },
+    {
+      "annotation_id": "23239",
+      "gold": "ArtOrDet",
+      "LR": "Vform",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "VERB+ADJ",
+      "token_edit_operations_casefold_whitespace": [
+        "insert"
+      ],
+      "annotation_adds_words_to_nonempty_span": true,
+      "original_review_category": "missing_word_nonempty"
+    },
+    {
+      "annotation_id": "37909",
+      "gold": "Nn",
+      "LR": "ArtOrDet",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": true,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "DET",
+      "token_edit_operations_casefold_whitespace": [
+        "delete"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "annotation_ambiguity"
+    },
+    {
+      "annotation_id": "18501",
+      "gold": "ArtOrDet",
+      "LR": "ArtOrDet",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "DET+NOUN+AUX+VERB",
+      "token_edit_operations_casefold_whitespace": [
+        "insert",
+        "delete"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "annotation_ambiguity"
+    },
+    {
+      "annotation_id": "11916",
+      "gold": "ArtOrDet",
+      "LR": "ArtOrDet",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "NOUN",
+      "token_edit_operations_casefold_whitespace": [
+        "insert"
+      ],
+      "annotation_adds_words_to_nonempty_span": true,
+      "original_review_category": "missing_word_recovered"
+    },
+    {
+      "annotation_id": "29485",
+      "gold": "Nn",
+      "LR": "Nn",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "NOUN+PART",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "possessive_number"
+    },
+    {
+      "annotation_id": "44353",
+      "gold": "ArtOrDet",
+      "LR": "ArtOrDet",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "NOUN",
+      "token_edit_operations_casefold_whitespace": [
+        "insert"
+      ],
+      "annotation_adds_words_to_nonempty_span": true,
+      "original_review_category": "missing_word_recovered"
+    },
+    {
+      "annotation_id": "6079",
+      "gold": "ArtOrDet",
+      "LR": "ArtOrDet",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "NOUN",
+      "token_edit_operations_casefold_whitespace": [
+        "insert"
+      ],
+      "annotation_adds_words_to_nonempty_span": true,
+      "original_review_category": "missing_word_recovered"
+    },
+    {
+      "annotation_id": "36485",
+      "gold": "ArtOrDet",
+      "LR": "ArtOrDet",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "PROPN",
+      "token_edit_operations_casefold_whitespace": [
+        "insert"
+      ],
+      "annotation_adds_words_to_nonempty_span": true,
+      "original_review_category": "correct_control"
+    },
+    {
+      "annotation_id": "34533",
+      "gold": "ArtOrDet",
+      "LR": "ArtOrDet",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "ADJ",
+      "token_edit_operations_casefold_whitespace": [
+        "insert"
+      ],
+      "annotation_adds_words_to_nonempty_span": true,
+      "original_review_category": "correct_control"
+    },
+    {
+      "annotation_id": "19466",
+      "gold": "Prep",
+      "LR": "Prep",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "NOUN+ADP",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "correct_control"
+    },
+    {
+      "annotation_id": "17862",
+      "gold": "Prep",
+      "LR": "Prep",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "ADP",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "correct_control"
+    },
+    {
+      "annotation_id": "42947",
+      "gold": "Nn",
+      "LR": "Nn",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "NOUN",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "correct_control"
+    },
+    {
+      "annotation_id": "26421",
+      "gold": "Nn",
+      "LR": "Nn",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "NOUN",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "correct_control"
+    },
+    {
+      "annotation_id": "201",
+      "gold": "Vform",
+      "LR": "Vform",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "VERB",
+      "token_edit_operations_casefold_whitespace": [
+        "insert"
+      ],
+      "annotation_adds_words_to_nonempty_span": true,
+      "original_review_category": "correct_gold_ambiguity"
+    },
+    {
+      "annotation_id": "34128",
+      "gold": "Vform",
+      "LR": "Vform",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "AUX+VERB",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "correct_control"
+    },
+    {
+      "annotation_id": "36821",
+      "gold": "SVA",
+      "LR": "SVA",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "AUX",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "correct_control"
+    },
+    {
+      "annotation_id": "17311",
+      "gold": "SVA",
+      "LR": "SVA",
+      "source_label_span_correction_exact": true,
+      "offset_reconstruction_exact": true,
+      "parser_and_PMD_features_exact": true,
+      "missing_correction": false,
+      "empty_correction": false,
+      "nonempty_span": true,
+      "alignment": "exact",
+      "span_pos": "AUX",
+      "token_edit_operations_casefold_whitespace": [
+        "replace"
+      ],
+      "annotation_adds_words_to_nonempty_span": false,
+      "original_review_category": "correct_control"
+    }
+  ],
+  "source_packet_sha256": "237f9043b99e11f2cbbbd86d8ddc0c36453420c8eae840cee75d3b12c4fd451c"
+}

@@ -1,0 +1,3203 @@
+{
+  "test_scored": false,
+  "primary_bert": "BERT-small seed 20261013",
+  "models": {
+    "Majority": {
+      "all": {
+        "support": 2368,
+        "macro_f1": 0.11843043995243759,
+        "accuracy": 0.4206081081081081,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.4206081081081081,
+            "recall": 1.0,
+            "f1": 0.5921521997621879
+          },
+          "Prep": {
+            "support": 362,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "Nn": {
+            "support": 565,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "Vform": {
+            "support": 216,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.08412162162162162,
+        "macro_recall": 0.2
+      },
+      "empty": {
+        "support": 0,
+        "macro_f1": null,
+        "accuracy": null,
+        "outside_label_predictions": 0,
+        "per_label": {}
+      },
+      "single_token": {
+        "support": 2114,
+        "macro_f1": 0.11316146540027136,
+        "accuracy": 0.3945127719962157,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 834,
+            "precision": 0.3945127719962157,
+            "recall": 1.0,
+            "f1": 0.5658073270013568
+          },
+          "Prep": {
+            "support": 352,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "Nn": {
+            "support": 530,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "Vform": {
+            "support": 176,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 222,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.07890255439924314,
+        "macro_recall": 0.2
+      },
+      "multi_token": {
+        "support": 254,
+        "macro_f1": 0.15576923076923077,
+        "accuracy": 0.6377952755905512,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 162,
+            "precision": 0.6377952755905512,
+            "recall": 1.0,
+            "f1": 0.7788461538461539
+          },
+          "Prep": {
+            "support": 10,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "Nn": {
+            "support": 35,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "Vform": {
+            "support": 40,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 7,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.12755905511811022,
+        "macro_recall": 0.2
+      },
+      "Vform/SVA": {
+        "support": 445,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 445,
+        "per_label": {
+          "Vform": {
+            "support": 216,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Vform/SVA POS=VERB": {
+        "support": 243,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 243,
+        "per_label": {
+          "Vform": {
+            "support": 129,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 114,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Vform/SVA POS=AUX": {
+        "support": 98,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 98,
+        "per_label": {
+          "Vform": {
+            "support": 14,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 84,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Vform/SVA POS=NOUN": {
+        "support": 36,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 36,
+        "per_label": {
+          "Vform": {
+            "support": 22,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 14,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Vform/SVA POS=DET": {
+        "support": 2,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 2,
+        "per_label": {
+          "Vform": {
+            "support": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Nn/ArtOrDet": {
+        "support": 1561,
+        "macro_f1": 0.389518967540086,
+        "accuracy": 0.6380525304292121,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Nn": {
+            "support": 565,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.6380525304292121,
+            "recall": 1.0,
+            "f1": 0.779037935080172
+          }
+        },
+        "macro_precision": 0.31902626521460603,
+        "macro_recall": 0.5
+      },
+      "Nn/ArtOrDet POS=VERB": {
+        "support": 55,
+        "macro_f1": 0.46601941747572817,
+        "accuracy": 0.8727272727272727,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Nn": {
+            "support": 7,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "ArtOrDet": {
+            "support": 48,
+            "precision": 0.8727272727272727,
+            "recall": 1.0,
+            "f1": 0.9320388349514563
+          }
+        },
+        "macro_precision": 0.43636363636363634,
+        "macro_recall": 0.5
+      },
+      "Nn/ArtOrDet POS=AUX": {
+        "support": 3,
+        "macro_f1": 0.5,
+        "accuracy": 1.0,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Nn": {
+            "support": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "ArtOrDet": {
+            "support": 3,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          }
+        },
+        "macro_precision": 0.5,
+        "macro_recall": 0.5
+      },
+      "Nn/ArtOrDet POS=NOUN": {
+        "support": 631,
+        "macro_f1": 0.2032828282828283,
+        "accuracy": 0.2551505546751189,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Nn": {
+            "support": 470,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "ArtOrDet": {
+            "support": 161,
+            "precision": 0.2551505546751189,
+            "recall": 1.0,
+            "f1": 0.4065656565656566
+          }
+        },
+        "macro_precision": 0.12757527733755944,
+        "macro_recall": 0.5
+      },
+      "Nn/ArtOrDet POS=DET": {
+        "support": 353,
+        "macro_f1": 0.48914616497829233,
+        "accuracy": 0.9575070821529745,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Nn": {
+            "support": 15,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "ArtOrDet": {
+            "support": 338,
+            "precision": 0.9575070821529745,
+            "recall": 1.0,
+            "f1": 0.9782923299565847
+          }
+        },
+        "macro_precision": 0.47875354107648727,
+        "macro_recall": 0.5
+      },
+      "confusion_matrix": [
+        [
+          996,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          362,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          565,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          216,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          229,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "prediction_counts": {
+        "ArtOrDet": 2368
+      }
+    },
+    "LR Full (saved)": {
+      "all": {
+        "support": 2368,
+        "macro_f1": 0.8066825148760056,
+        "accuracy": 0.8462837837837838,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.8747591522157996,
+            "recall": 0.9116465863453815,
+            "f1": 0.8928220255653884
+          },
+          "Prep": {
+            "support": 362,
+            "precision": 0.9283667621776505,
+            "recall": 0.8950276243093923,
+            "f1": 0.9113924050632911
+          },
+          "Nn": {
+            "support": 565,
+            "precision": 0.8560885608856088,
+            "recall": 0.8212389380530973,
+            "f1": 0.8383017163504969
+          },
+          "Vform": {
+            "support": 216,
+            "precision": 0.6342592592592593,
+            "recall": 0.6342592592592593,
+            "f1": 0.6342592592592593
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.7668161434977578,
+            "recall": 0.7467248908296943,
+            "f1": 0.7566371681415929
+          }
+        },
+        "macro_precision": 0.8120579756072152,
+        "macro_recall": 0.8017794597593649
+      },
+      "empty": {
+        "support": 0,
+        "macro_f1": null,
+        "accuracy": null,
+        "outside_label_predictions": 0,
+        "per_label": {}
+      },
+      "single_token": {
+        "support": 2114,
+        "macro_f1": 0.8154053751512216,
+        "accuracy": 0.8557237464522233,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 834,
+            "precision": 0.8768699654775605,
+            "recall": 0.9136690647482014,
+            "f1": 0.8948913681738109
+          },
+          "Prep": {
+            "support": 352,
+            "precision": 0.9416909620991254,
+            "recall": 0.9176136363636364,
+            "f1": 0.9294964028776979
+          },
+          "Nn": {
+            "support": 530,
+            "precision": 0.8693957115009746,
+            "recall": 0.8415094339622642,
+            "f1": 0.8552253116011506
+          },
+          "Vform": {
+            "support": 176,
+            "precision": 0.625,
+            "recall": 0.625,
+            "f1": 0.625
+          },
+          "SVA": {
+            "support": 222,
+            "precision": 0.7887323943661971,
+            "recall": 0.7567567567567568,
+            "f1": 0.7724137931034483
+          }
+        },
+        "macro_precision": 0.8203378066887715,
+        "macro_recall": 0.8109097783661717
+      },
+      "multi_token": {
+        "support": 254,
+        "macro_f1": 0.5195232806113382,
+        "accuracy": 0.7677165354330708,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 162,
+            "precision": 0.863905325443787,
+            "recall": 0.9012345679012346,
+            "f1": 0.8821752265861027
+          },
+          "Prep": {
+            "support": 10,
+            "precision": 0.16666666666666666,
+            "recall": 0.1,
+            "f1": 0.125
+          },
+          "Nn": {
+            "support": 35,
+            "precision": 0.6206896551724138,
+            "recall": 0.5142857142857142,
+            "f1": 0.5625
+          },
+          "Vform": {
+            "support": 40,
+            "precision": 0.675,
+            "recall": 0.675,
+            "f1": 0.675
+          },
+          "SVA": {
+            "support": 7,
+            "precision": 0.3,
+            "recall": 0.42857142857142855,
+            "f1": 0.35294117647058826
+          }
+        },
+        "macro_precision": 0.5252523294565734,
+        "macro_recall": 0.5238183421516756
+      },
+      "Vform/SVA": {
+        "support": 445,
+        "macro_f1": 0.7417291471415183,
+        "accuracy": 0.6921348314606741,
+        "outside_label_predictions": 62,
+        "per_label": {
+          "Vform": {
+            "support": 216,
+            "precision": 0.7965116279069767,
+            "recall": 0.6342592592592593,
+            "f1": 0.7061855670103093
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.8104265402843602,
+            "recall": 0.7467248908296943,
+            "f1": 0.7772727272727272
+          }
+        },
+        "macro_precision": 0.8034690840956684,
+        "macro_recall": 0.6904920750444767
+      },
+      "Vform/SVA POS=VERB": {
+        "support": 243,
+        "macro_f1": 0.7594337194337195,
+        "accuracy": 0.757201646090535,
+        "outside_label_predictions": 2,
+        "per_label": {
+          "Vform": {
+            "support": 129,
+            "precision": 0.7692307692307693,
+            "recall": 0.7751937984496124,
+            "f1": 0.7722007722007722
+          },
+          "SVA": {
+            "support": 114,
+            "precision": 0.7567567567567568,
+            "recall": 0.7368421052631579,
+            "f1": 0.7466666666666667
+          }
+        },
+        "macro_precision": 0.7629937629937631,
+        "macro_recall": 0.7560179518563852
+      },
+      "Vform/SVA POS=AUX": {
+        "support": 98,
+        "macro_f1": 0.7215909090909092,
+        "accuracy": 0.8979591836734694,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Vform": {
+            "support": 14,
+            "precision": 0.8333333333333334,
+            "recall": 0.35714285714285715,
+            "f1": 0.5
+          },
+          "SVA": {
+            "support": 84,
+            "precision": 0.9021739130434783,
+            "recall": 0.9880952380952381,
+            "f1": 0.9431818181818182
+          }
+        },
+        "macro_precision": 0.8677536231884058,
+        "macro_recall": 0.6726190476190477
+      },
+      "Vform/SVA POS=NOUN": {
+        "support": 36,
+        "macro_f1": 0.12,
+        "accuracy": 0.08333333333333333,
+        "outside_label_predictions": 33,
+        "per_label": {
+          "Vform": {
+            "support": 22,
+            "precision": 1.0,
+            "recall": 0.13636363636363635,
+            "f1": 0.24
+          },
+          "SVA": {
+            "support": 14,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.5,
+        "macro_recall": 0.06818181818181818
+      },
+      "Vform/SVA POS=DET": {
+        "support": 2,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 2,
+        "per_label": {
+          "Vform": {
+            "support": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Nn/ArtOrDet": {
+        "support": 1561,
+        "macro_f1": 0.8868868868868869,
+        "accuracy": 0.8789237668161435,
+        "outside_label_predictions": 51,
+        "per_label": {
+          "Nn": {
+            "support": 565,
+            "precision": 0.9133858267716536,
+            "recall": 0.8212389380530973,
+            "f1": 0.8648648648648649
+          },
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.906187624750499,
+            "recall": 0.9116465863453815,
+            "f1": 0.908908908908909
+          }
+        },
+        "macro_precision": 0.9097867257610763,
+        "macro_recall": 0.8664427621992394
+      },
+      "Nn/ArtOrDet POS=VERB": {
+        "support": 55,
+        "macro_f1": 0.5535714285714286,
+        "accuracy": 0.6727272727272727,
+        "outside_label_predictions": 18,
+        "per_label": {
+          "Nn": {
+            "support": 7,
+            "precision": 1.0,
+            "recall": 0.14285714285714285,
+            "f1": 0.25
+          },
+          "ArtOrDet": {
+            "support": 48,
+            "precision": 1.0,
+            "recall": 0.75,
+            "f1": 0.8571428571428571
+          }
+        },
+        "macro_precision": 1.0,
+        "macro_recall": 0.4464285714285714
+      },
+      "Nn/ArtOrDet POS=AUX": {
+        "support": 3,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 3,
+        "per_label": {
+          "Nn": {
+            "support": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "ArtOrDet": {
+            "support": 3,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Nn/ArtOrDet POS=NOUN": {
+        "support": 631,
+        "macro_f1": 0.8444552997947019,
+        "accuracy": 0.8811410459587956,
+        "outside_label_predictions": 1,
+        "per_label": {
+          "Nn": {
+            "support": 470,
+            "precision": 0.9230769230769231,
+            "recall": 0.9191489361702128,
+            "f1": 0.9211087420042644
+          },
+          "ArtOrDet": {
+            "support": 161,
+            "precision": 0.7654320987654321,
+            "recall": 0.7701863354037267,
+            "f1": 0.7678018575851393
+          }
+        },
+        "macro_precision": 0.8442545109211776,
+        "macro_recall": 0.8446676357869698
+      },
+      "Nn/ArtOrDet POS=DET": {
+        "support": 353,
+        "macro_f1": 0.5523550724637681,
+        "accuracy": 0.9603399433427762,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Nn": {
+            "support": 15,
+            "precision": 1.0,
+            "recall": 0.06666666666666667,
+            "f1": 0.125
+          },
+          "ArtOrDet": {
+            "support": 338,
+            "precision": 0.9602272727272727,
+            "recall": 1.0,
+            "f1": 0.9797101449275363
+          }
+        },
+        "macro_precision": 0.9801136363636364,
+        "macro_recall": 0.5333333333333333
+      },
+      "confusion_matrix": [
+        [
+          908,
+          20,
+          44,
+          19,
+          5
+        ],
+        [
+          10,
+          324,
+          3,
+          22,
+          3
+        ],
+        [
+          94,
+          0,
+          464,
+          3,
+          4
+        ],
+        [
+          20,
+          3,
+          16,
+          137,
+          40
+        ],
+        [
+          6,
+          2,
+          15,
+          35,
+          171
+        ]
+      ],
+      "prediction_counts": {
+        "SVA": 223,
+        "Prep": 349,
+        "ArtOrDet": 1038,
+        "Vform": 216,
+        "Nn": 542
+      }
+    },
+    "Tree Full": {
+      "all": {
+        "support": 2368,
+        "macro_f1": 0.7878706585346912,
+        "accuracy": 0.8141891891891891,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.8522267206477733,
+            "recall": 0.8453815261044176,
+            "f1": 0.8487903225806451
+          },
+          "Prep": {
+            "support": 362,
+            "precision": 0.9298245614035088,
+            "recall": 0.8784530386740331,
+            "f1": 0.9034090909090909
+          },
+          "Nn": {
+            "support": 565,
+            "precision": 0.7662771285475793,
+            "recall": 0.8123893805309734,
+            "f1": 0.788659793814433
+          },
+          "Vform": {
+            "support": 216,
+            "precision": 0.6167400881057269,
+            "recall": 0.6481481481481481,
+            "f1": 0.6320541760722348
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.7971698113207547,
+            "recall": 0.7379912663755459,
+            "f1": 0.7664399092970522
+          }
+        },
+        "macro_precision": 0.7924476620050686,
+        "macro_recall": 0.7844726719666236
+      },
+      "empty": {
+        "support": 0,
+        "macro_f1": null,
+        "accuracy": null,
+        "outside_label_predictions": 0,
+        "per_label": {}
+      },
+      "single_token": {
+        "support": 2114,
+        "macro_f1": 0.7943861698589882,
+        "accuracy": 0.8226111636707664,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 834,
+            "precision": 0.8639200998751561,
+            "recall": 0.829736211031175,
+            "f1": 0.8464831804281345
+          },
+          "Prep": {
+            "support": 352,
+            "precision": 0.9352941176470588,
+            "recall": 0.9034090909090909,
+            "f1": 0.9190751445086706
+          },
+          "Nn": {
+            "support": 530,
+            "precision": 0.7749140893470791,
+            "recall": 0.8509433962264151,
+            "f1": 0.8111510791366906
+          },
+          "Vform": {
+            "support": 176,
+            "precision": 0.6032608695652174,
+            "recall": 0.6306818181818182,
+            "f1": 0.6166666666666667
+          },
+          "SVA": {
+            "support": 222,
+            "precision": 0.8067632850241546,
+            "recall": 0.7522522522522522,
+            "f1": 0.7785547785547785
+          }
+        },
+        "macro_precision": 0.7968304922917332,
+        "macro_recall": 0.7934045537201503
+      },
+      "multi_token": {
+        "support": 254,
+        "macro_f1": 0.43988393512334545,
+        "accuracy": 0.7440944881889764,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 162,
+            "precision": 0.8021390374331551,
+            "recall": 0.9259259259259259,
+            "f1": 0.8595988538681948
+          },
+          "Prep": {
+            "support": 10,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "Nn": {
+            "support": 35,
+            "precision": 0.47058823529411764,
+            "recall": 0.22857142857142856,
+            "f1": 0.3076923076923077
+          },
+          "Vform": {
+            "support": 40,
+            "precision": 0.6744186046511628,
+            "recall": 0.725,
+            "f1": 0.6987951807228916
+          },
+          "SVA": {
+            "support": 7,
+            "precision": 0.4,
+            "recall": 0.2857142857142857,
+            "f1": 0.3333333333333333
+          }
+        },
+        "macro_precision": 0.4694291754756871,
+        "macro_recall": 0.43304232804232806
+      },
+      "Vform/SVA": {
+        "support": 445,
+        "macro_f1": 0.7492542260523699,
+        "accuracy": 0.6943820224719102,
+        "outside_label_predictions": 67,
+        "per_label": {
+          "Vform": {
+            "support": 216,
+            "precision": 0.7954545454545454,
+            "recall": 0.6481481481481481,
+            "f1": 0.7142857142857143
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.8366336633663366,
+            "recall": 0.7379912663755459,
+            "f1": 0.7842227378190255
+          }
+        },
+        "macro_precision": 0.816044104410441,
+        "macro_recall": 0.693069707261847
+      },
+      "Vform/SVA POS=VERB": {
+        "support": 243,
+        "macro_f1": 0.7657342657342657,
+        "accuracy": 0.757201646090535,
+        "outside_label_predictions": 6,
+        "per_label": {
+          "Vform": {
+            "support": 129,
+            "precision": 0.7709923664122137,
+            "recall": 0.7829457364341085,
+            "f1": 0.7769230769230769
+          },
+          "SVA": {
+            "support": 114,
+            "precision": 0.7830188679245284,
+            "recall": 0.7280701754385965,
+            "f1": 0.7545454545454545
+          }
+        },
+        "macro_precision": 0.777005617168371,
+        "macro_recall": 0.7555079559363524
+      },
+      "Vform/SVA POS=AUX": {
+        "support": 98,
+        "macro_f1": 0.7772727272727273,
+        "accuracy": 0.9183673469387755,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Vform": {
+            "support": 14,
+            "precision": 1.0,
+            "recall": 0.42857142857142855,
+            "f1": 0.6
+          },
+          "SVA": {
+            "support": 84,
+            "precision": 0.9130434782608695,
+            "recall": 1.0,
+            "f1": 0.9545454545454546
+          }
+        },
+        "macro_precision": 0.9565217391304348,
+        "macro_recall": 0.7142857142857143
+      },
+      "Vform/SVA POS=NOUN": {
+        "support": 36,
+        "macro_f1": 0.14285714285714285,
+        "accuracy": 0.1111111111111111,
+        "outside_label_predictions": 30,
+        "per_label": {
+          "Vform": {
+            "support": 22,
+            "precision": 0.6666666666666666,
+            "recall": 0.18181818181818182,
+            "f1": 0.2857142857142857
+          },
+          "SVA": {
+            "support": 14,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.3333333333333333,
+        "macro_recall": 0.09090909090909091
+      },
+      "Vform/SVA POS=DET": {
+        "support": 2,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 2,
+        "per_label": {
+          "Vform": {
+            "support": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Nn/ArtOrDet": {
+        "support": 1561,
+        "macro_f1": 0.8409776626296274,
+        "accuracy": 0.8334401024983985,
+        "outside_label_predictions": 56,
+        "per_label": {
+          "Nn": {
+            "support": 565,
+            "precision": 0.8109540636042403,
+            "recall": 0.8123893805309734,
+            "f1": 0.8116710875331565
+          },
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.8966986155484558,
+            "recall": 0.8453815261044176,
+            "f1": 0.8702842377260982
+          }
+        },
+        "macro_precision": 0.853826339576348,
+        "macro_recall": 0.8288854533176955
+      },
+      "Nn/ArtOrDet POS=VERB": {
+        "support": 55,
+        "macro_f1": 0.525,
+        "accuracy": 0.6,
+        "outside_label_predictions": 22,
+        "per_label": {
+          "Nn": {
+            "support": 7,
+            "precision": 1.0,
+            "recall": 0.14285714285714285,
+            "f1": 0.25
+          },
+          "ArtOrDet": {
+            "support": 48,
+            "precision": 1.0,
+            "recall": 0.6666666666666666,
+            "f1": 0.8
+          }
+        },
+        "macro_precision": 1.0,
+        "macro_recall": 0.40476190476190477
+      },
+      "Nn/ArtOrDet POS=AUX": {
+        "support": 3,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 3,
+        "per_label": {
+          "Nn": {
+            "support": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "ArtOrDet": {
+            "support": 3,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Nn/ArtOrDet POS=NOUN": {
+        "support": 631,
+        "macro_f1": 0.6751798810158849,
+        "accuracy": 0.7987321711568938,
+        "outside_label_predictions": 2,
+        "per_label": {
+          "Nn": {
+            "support": 470,
+            "precision": 0.8142076502732241,
+            "recall": 0.951063829787234,
+            "f1": 0.8773307163886163
+          },
+          "ArtOrDet": {
+            "support": 161,
+            "precision": 0.7125,
+            "recall": 0.35403726708074534,
+            "f1": 0.4730290456431535
+          }
+        },
+        "macro_precision": 0.7633538251366121,
+        "macro_recall": 0.6525505484339897
+      },
+      "Nn/ArtOrDet POS=DET": {
+        "support": 353,
+        "macro_f1": 0.48914616497829233,
+        "accuracy": 0.9575070821529745,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Nn": {
+            "support": 15,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "ArtOrDet": {
+            "support": 338,
+            "precision": 0.9575070821529745,
+            "recall": 1.0,
+            "f1": 0.9782923299565847
+          }
+        },
+        "macro_precision": 0.47875354107648727,
+        "macro_recall": 0.5
+      },
+      "confusion_matrix": [
+        [
+          842,
+          19,
+          107,
+          24,
+          4
+        ],
+        [
+          16,
+          318,
+          3,
+          23,
+          2
+        ],
+        [
+          97,
+          1,
+          459,
+          4,
+          4
+        ],
+        [
+          23,
+          2,
+          18,
+          140,
+          33
+        ],
+        [
+          10,
+          2,
+          12,
+          36,
+          169
+        ]
+      ],
+      "prediction_counts": {
+        "SVA": 212,
+        "Prep": 342,
+        "ArtOrDet": 988,
+        "Vform": 227,
+        "Nn": 599
+      }
+    },
+    "POS rule": {
+      "all": {
+        "support": 2368,
+        "macro_f1": 0.7048153331595242,
+        "accuracy": 0.7576013513513513,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.8628571428571429,
+            "recall": 0.7580321285140562,
+            "f1": 0.8070550507749866
+          },
+          "Prep": {
+            "support": 362,
+            "precision": 0.9080779944289693,
+            "recall": 0.9005524861878453,
+            "f1": 0.9042995839112344
+          },
+          "Nn": {
+            "support": 565,
+            "precision": 0.7022222222222222,
+            "recall": 0.8389380530973451,
+            "f1": 0.7645161290322581
+          },
+          "Vform": {
+            "support": 216,
+            "precision": 0.4375,
+            "recall": 0.7129629629629629,
+            "f1": 0.5422535211267606
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.794392523364486,
+            "recall": 0.37117903930131,
+            "f1": 0.5059523809523809
+          }
+        },
+        "macro_precision": 0.7410099765745641,
+        "macro_recall": 0.7163329340127039
+      },
+      "empty": {
+        "support": 0,
+        "macro_f1": null,
+        "accuracy": null,
+        "outside_label_predictions": 0,
+        "per_label": {}
+      },
+      "single_token": {
+        "support": 2114,
+        "macro_f1": 0.7086613843496917,
+        "accuracy": 0.760643330179754,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 834,
+            "precision": 0.8893805309734514,
+            "recall": 0.7230215827338129,
+            "f1": 0.7976190476190477
+          },
+          "Prep": {
+            "support": 352,
+            "precision": 0.9279538904899135,
+            "recall": 0.9147727272727273,
+            "f1": 0.9213161659513591
+          },
+          "Nn": {
+            "support": 530,
+            "precision": 0.7035928143712575,
+            "recall": 0.8867924528301887,
+            "f1": 0.7846410684474123
+          },
+          "Vform": {
+            "support": 176,
+            "precision": 0.4043887147335423,
+            "recall": 0.7329545454545454,
+            "f1": 0.5212121212121212
+          },
+          "SVA": {
+            "support": 222,
+            "precision": 0.8235294117647058,
+            "recall": 0.3783783783783784,
+            "f1": 0.5185185185185185
+          }
+        },
+        "macro_precision": 0.7497690724665741,
+        "macro_recall": 0.7271839373339305
+      },
+      "multi_token": {
+        "support": 254,
+        "macro_f1": 0.45050147700203025,
+        "accuracy": 0.7322834645669292,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 162,
+            "precision": 0.7715736040609137,
+            "recall": 0.9382716049382716,
+            "f1": 0.8467966573816156
+          },
+          "Prep": {
+            "support": 10,
+            "precision": 0.3333333333333333,
+            "recall": 0.4,
+            "f1": 0.36363636363636365
+          },
+          "Nn": {
+            "support": 35,
+            "precision": 0.5714285714285714,
+            "recall": 0.11428571428571428,
+            "f1": 0.19047619047619047
+          },
+          "Vform": {
+            "support": 40,
+            "precision": 0.7575757575757576,
+            "recall": 0.625,
+            "f1": 0.684931506849315
+          },
+          "SVA": {
+            "support": 7,
+            "precision": 0.2,
+            "recall": 0.14285714285714285,
+            "f1": 0.16666666666666666
+          }
+        },
+        "macro_precision": 0.5267822532797152,
+        "macro_recall": 0.4440828924162258
+      },
+      "Vform/SVA": {
+        "support": 445,
+        "macro_f1": 0.5739324331057851,
+        "accuracy": 0.5370786516853933,
+        "outside_label_predictions": 73,
+        "per_label": {
+          "Vform": {
+            "support": 216,
+            "precision": 0.5661764705882353,
+            "recall": 0.7129629629629629,
+            "f1": 0.6311475409836066
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.85,
+            "recall": 0.37117903930131,
+            "f1": 0.5167173252279635
+          }
+        },
+        "macro_precision": 0.7080882352941176,
+        "macro_recall": 0.5420710011321365
+      },
+      "Vform/SVA POS=VERB": {
+        "support": 243,
+        "macro_f1": 0.3467741935483871,
+        "accuracy": 0.5308641975308642,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Vform": {
+            "support": 129,
+            "precision": 0.5308641975308642,
+            "recall": 1.0,
+            "f1": 0.6935483870967742
+          },
+          "SVA": {
+            "support": 114,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.2654320987654321,
+        "macro_recall": 0.5
+      },
+      "Vform/SVA POS=AUX": {
+        "support": 98,
+        "macro_f1": 0.46153846153846156,
+        "accuracy": 0.8571428571428571,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Vform": {
+            "support": 14,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 84,
+            "precision": 0.8571428571428571,
+            "recall": 1.0,
+            "f1": 0.9230769230769231
+          }
+        },
+        "macro_precision": 0.42857142857142855,
+        "macro_recall": 0.5
+      },
+      "Vform/SVA POS=NOUN": {
+        "support": 36,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 36,
+        "per_label": {
+          "Vform": {
+            "support": 22,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 14,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Vform/SVA POS=DET": {
+        "support": 2,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 2,
+        "per_label": {
+          "Vform": {
+            "support": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Nn/ArtOrDet": {
+        "support": 1561,
+        "macro_f1": 0.8064606659933589,
+        "accuracy": 0.7873158231902626,
+        "outside_label_predictions": 88,
+        "per_label": {
+          "Nn": {
+            "support": 565,
+            "precision": 0.7441130298273155,
+            "recall": 0.8389380530973451,
+            "f1": 0.7886855241264559
+          },
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.90311004784689,
+            "recall": 0.7580321285140562,
+            "f1": 0.824235807860262
+          }
+        },
+        "macro_precision": 0.8236115388371028,
+        "macro_recall": 0.7984850908057006
+      },
+      "Nn/ArtOrDet POS=VERB": {
+        "support": 55,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 55,
+        "per_label": {
+          "Nn": {
+            "support": 7,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "ArtOrDet": {
+            "support": 48,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Nn/ArtOrDet POS=AUX": {
+        "support": 3,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 3,
+        "per_label": {
+          "Nn": {
+            "support": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "ArtOrDet": {
+            "support": 3,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Nn/ArtOrDet POS=NOUN": {
+        "support": 631,
+        "macro_f1": 0.4268846503178928,
+        "accuracy": 0.7448494453248812,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Nn": {
+            "support": 470,
+            "precision": 0.7448494453248812,
+            "recall": 1.0,
+            "f1": 0.8537693006357856
+          },
+          "ArtOrDet": {
+            "support": 161,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.3724247226624406,
+        "macro_recall": 0.5
+      },
+      "Nn/ArtOrDet POS=DET": {
+        "support": 353,
+        "macro_f1": 0.48914616497829233,
+        "accuracy": 0.9575070821529745,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Nn": {
+            "support": 15,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "ArtOrDet": {
+            "support": 338,
+            "precision": 0.9575070821529745,
+            "recall": 1.0,
+            "f1": 0.9782923299565847
+          }
+        },
+        "macro_precision": 0.47875354107648727,
+        "macro_recall": 0.5
+      },
+      "confusion_matrix": [
+        [
+          755,
+          23,
+          163,
+          51,
+          4
+        ],
+        [
+          11,
+          326,
+          1,
+          22,
+          2
+        ],
+        [
+          81,
+          2,
+          474,
+          7,
+          1
+        ],
+        [
+          18,
+          6,
+          23,
+          154,
+          15
+        ],
+        [
+          10,
+          2,
+          14,
+          118,
+          85
+        ]
+      ],
+      "prediction_counts": {
+        "Vform": 352,
+        "Prep": 359,
+        "ArtOrDet": 875,
+        "Nn": 675,
+        "SVA": 107
+      }
+    },
+    "Tree S+L+P+M": {
+      "all": {
+        "support": 2368,
+        "macro_f1": 0.7929483279100042,
+        "accuracy": 0.8264358108108109,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.8378378378378378,
+            "recall": 0.9026104417670683,
+            "f1": 0.8690188496858385
+          },
+          "Prep": {
+            "support": 362,
+            "precision": 0.9147727272727273,
+            "recall": 0.8895027624309392,
+            "f1": 0.9019607843137255
+          },
+          "Nn": {
+            "support": 565,
+            "precision": 0.852882703777336,
+            "recall": 0.7592920353982301,
+            "f1": 0.8033707865168539
+          },
+          "Vform": {
+            "support": 216,
+            "precision": 0.6075949367088608,
+            "recall": 0.6666666666666666,
+            "f1": 0.6357615894039735
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.8029556650246306,
+            "recall": 0.7117903930131004,
+            "f1": 0.7546296296296297
+          }
+        },
+        "macro_precision": 0.8032087741242785,
+        "macro_recall": 0.7859724598552009
+      },
+      "empty": {
+        "support": 0,
+        "macro_f1": null,
+        "accuracy": null,
+        "outside_label_predictions": 0,
+        "per_label": {}
+      },
+      "single_token": {
+        "support": 2114,
+        "macro_f1": 0.8000210538218125,
+        "accuracy": 0.8353831598864712,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 834,
+            "precision": 0.8390677025527192,
+            "recall": 0.9064748201438849,
+            "f1": 0.8714697406340057
+          },
+          "Prep": {
+            "support": 352,
+            "precision": 0.9171428571428571,
+            "recall": 0.9119318181818182,
+            "f1": 0.9145299145299145
+          },
+          "Nn": {
+            "support": 530,
+            "precision": 0.8787234042553191,
+            "recall": 0.779245283018868,
+            "f1": 0.826
+          },
+          "Vform": {
+            "support": 176,
+            "precision": 0.58,
+            "recall": 0.6590909090909091,
+            "f1": 0.6170212765957447
+          },
+          "SVA": {
+            "support": 222,
+            "precision": 0.8290155440414507,
+            "recall": 0.7207207207207207,
+            "f1": 0.7710843373493976
+          }
+        },
+        "macro_precision": 0.8087899015984693,
+        "macro_recall": 0.7954927102312401
+      },
+      "multi_token": {
+        "support": 254,
+        "macro_f1": 0.5147512461707601,
+        "accuracy": 0.7519685039370079,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 162,
+            "precision": 0.8313953488372093,
+            "recall": 0.8827160493827161,
+            "f1": 0.8562874251497006
+          },
+          "Prep": {
+            "support": 10,
+            "precision": 0.5,
+            "recall": 0.1,
+            "f1": 0.16666666666666666
+          },
+          "Nn": {
+            "support": 35,
+            "precision": 0.48484848484848486,
+            "recall": 0.45714285714285713,
+            "f1": 0.47058823529411764
+          },
+          "Vform": {
+            "support": 40,
+            "precision": 0.7567567567567568,
+            "recall": 0.7,
+            "f1": 0.7272727272727273
+          },
+          "SVA": {
+            "support": 7,
+            "precision": 0.3,
+            "recall": 0.42857142857142855,
+            "f1": 0.35294117647058826
+          }
+        },
+        "macro_precision": 0.5746001180884902,
+        "macro_recall": 0.5136860670194003
+      },
+      "Vform/SVA": {
+        "support": 445,
+        "macro_f1": 0.7472304349374844,
+        "accuracy": 0.6898876404494382,
+        "outside_label_predictions": 69,
+        "per_label": {
+          "Vform": {
+            "support": 216,
+            "precision": 0.7741935483870968,
+            "recall": 0.6666666666666666,
+            "f1": 0.7164179104477612
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.8578947368421053,
+            "recall": 0.7117903930131004,
+            "f1": 0.7780429594272077
+          }
+        },
+        "macro_precision": 0.816044142614601,
+        "macro_recall": 0.6892285298398835
+      },
+      "Vform/SVA POS=VERB": {
+        "support": 243,
+        "macro_f1": 0.7582591007925931,
+        "accuracy": 0.7530864197530864,
+        "outside_label_predictions": 5,
+        "per_label": {
+          "Vform": {
+            "support": 129,
+            "precision": 0.75,
+            "recall": 0.813953488372093,
+            "f1": 0.7806691449814126
+          },
+          "SVA": {
+            "support": 114,
+            "precision": 0.7959183673469388,
+            "recall": 0.6842105263157895,
+            "f1": 0.7358490566037735
+          }
+        },
+        "macro_precision": 0.7729591836734694,
+        "macro_recall": 0.7490820073439413
+      },
+      "Vform/SVA POS=AUX": {
+        "support": 98,
+        "macro_f1": 0.83953216374269,
+        "accuracy": 0.9285714285714286,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Vform": {
+            "support": 14,
+            "precision": 0.8181818181818182,
+            "recall": 0.6428571428571429,
+            "f1": 0.72
+          },
+          "SVA": {
+            "support": 84,
+            "precision": 0.9425287356321839,
+            "recall": 0.9761904761904762,
+            "f1": 0.9590643274853801
+          }
+        },
+        "macro_precision": 0.8803552769070011,
+        "macro_recall": 0.8095238095238095
+      },
+      "Vform/SVA POS=NOUN": {
+        "support": 36,
+        "macro_f1": 0.07692307692307693,
+        "accuracy": 0.05555555555555555,
+        "outside_label_predictions": 32,
+        "per_label": {
+          "Vform": {
+            "support": 22,
+            "precision": 0.5,
+            "recall": 0.09090909090909091,
+            "f1": 0.15384615384615385
+          },
+          "SVA": {
+            "support": 14,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.25,
+        "macro_recall": 0.045454545454545456
+      },
+      "Vform/SVA POS=DET": {
+        "support": 2,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 2,
+        "per_label": {
+          "Vform": {
+            "support": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Nn/ArtOrDet": {
+        "support": 1561,
+        "macro_f1": 0.8589219565221544,
+        "accuracy": 0.8507367072389493,
+        "outside_label_predictions": 65,
+        "per_label": {
+          "Nn": {
+            "support": 565,
+            "precision": 0.910828025477707,
+            "recall": 0.7592920353982301,
+            "f1": 0.8281853281853282
+          },
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.8770731707317073,
+            "recall": 0.9026104417670683,
+            "f1": 0.8896585848589807
+          }
+        },
+        "macro_precision": 0.8939505981047071,
+        "macro_recall": 0.8309512385826492
+      },
+      "Nn/ArtOrDet POS=VERB": {
+        "support": 55,
+        "macro_f1": 0.3466666666666667,
+        "accuracy": 0.4727272727272727,
+        "outside_label_predictions": 28,
+        "per_label": {
+          "Nn": {
+            "support": 7,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "ArtOrDet": {
+            "support": 48,
+            "precision": 0.9629629629629629,
+            "recall": 0.5416666666666666,
+            "f1": 0.6933333333333334
+          }
+        },
+        "macro_precision": 0.48148148148148145,
+        "macro_recall": 0.2708333333333333
+      },
+      "Nn/ArtOrDet POS=AUX": {
+        "support": 3,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 3,
+        "per_label": {
+          "Nn": {
+            "support": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "ArtOrDet": {
+            "support": 3,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Nn/ArtOrDet POS=NOUN": {
+        "support": 631,
+        "macro_f1": 0.8229922206772144,
+        "accuracy": 0.8526148969889065,
+        "outside_label_predictions": 6,
+        "per_label": {
+          "Nn": {
+            "support": 470,
+            "precision": 0.9398148148148148,
+            "recall": 0.8638297872340426,
+            "f1": 0.9002217294900222
+          },
+          "ArtOrDet": {
+            "support": 161,
+            "precision": 0.6839378238341969,
+            "recall": 0.8198757763975155,
+            "f1": 0.7457627118644068
+          }
+        },
+        "macro_precision": 0.8118763193245058,
+        "macro_recall": 0.841852781815779
+      },
+      "Nn/ArtOrDet POS=DET": {
+        "support": 353,
+        "macro_f1": 0.5516146589259796,
+        "accuracy": 0.9575070821529745,
+        "outside_label_predictions": 1,
+        "per_label": {
+          "Nn": {
+            "support": 15,
+            "precision": 1.0,
+            "recall": 0.06666666666666667,
+            "f1": 0.125
+          },
+          "ArtOrDet": {
+            "support": 338,
+            "precision": 0.9601139601139601,
+            "recall": 0.9970414201183432,
+            "f1": 0.9782293178519593
+          }
+        },
+        "macro_precision": 0.98005698005698,
+        "macro_recall": 0.531854043392505
+      },
+      "confusion_matrix": [
+        [
+          899,
+          24,
+          42,
+          25,
+          6
+        ],
+        [
+          14,
+          322,
+          3,
+          20,
+          3
+        ],
+        [
+          126,
+          0,
+          429,
+          6,
+          4
+        ],
+        [
+          24,
+          4,
+          17,
+          144,
+          27
+        ],
+        [
+          10,
+          2,
+          12,
+          42,
+          163
+        ]
+      ],
+      "prediction_counts": {
+        "SVA": 203,
+        "Prep": 352,
+        "ArtOrDet": 1073,
+        "Vform": 237,
+        "Nn": 503
+      }
+    },
+    "BERT-small seed 20261013": {
+      "all": {
+        "support": 2368,
+        "macro_f1": 0.20030357587727524,
+        "accuracy": 0.4535472972972973,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.4682713347921225,
+            "recall": 0.8594377510040161,
+            "f1": 0.6062322946175638
+          },
+          "Prep": {
+            "support": 362,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "Nn": {
+            "support": 565,
+            "precision": 0.4052044609665427,
+            "recall": 0.3858407079646018,
+            "f1": 0.3952855847688123
+          },
+          "Vform": {
+            "support": 216,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.17469515915173303,
+        "macro_recall": 0.24905569179372358
+      },
+      "empty": {
+        "support": 0,
+        "macro_f1": null,
+        "accuracy": null,
+        "outside_label_predictions": 0,
+        "per_label": {}
+      },
+      "single_token": {
+        "support": 2114,
+        "macro_f1": 0.19798710534485622,
+        "accuracy": 0.4385052034058657,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 834,
+            "precision": 0.4430147058823529,
+            "recall": 0.8669064748201439,
+            "f1": 0.5863746958637469
+          },
+          "Prep": {
+            "support": 352,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "Nn": {
+            "support": 530,
+            "precision": 0.42411642411642414,
+            "recall": 0.3849056603773585,
+            "f1": 0.4035608308605341
+          },
+          "Vform": {
+            "support": 176,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 222,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.1734262259997554,
+        "macro_recall": 0.2503624270395005
+      },
+      "multi_token": {
+        "support": 254,
+        "macro_f1": 0.20947291717269856,
+        "accuracy": 0.5787401574803149,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 162,
+            "precision": 0.6785714285714286,
+            "recall": 0.8209876543209876,
+            "f1": 0.7430167597765364
+          },
+          "Prep": {
+            "support": 10,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "Nn": {
+            "support": 35,
+            "precision": 0.24561403508771928,
+            "recall": 0.4,
+            "f1": 0.30434782608695654
+          },
+          "Vform": {
+            "support": 40,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 7,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.18483709273182958,
+        "macro_recall": 0.24419753086419754
+      },
+      "Vform/SVA": {
+        "support": 445,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 445,
+        "per_label": {
+          "Vform": {
+            "support": 216,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Vform/SVA POS=VERB": {
+        "support": 243,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 243,
+        "per_label": {
+          "Vform": {
+            "support": 129,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 114,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Vform/SVA POS=AUX": {
+        "support": 98,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 98,
+        "per_label": {
+          "Vform": {
+            "support": 14,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 84,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Vform/SVA POS=NOUN": {
+        "support": 36,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 36,
+        "per_label": {
+          "Vform": {
+            "support": 22,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 14,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Vform/SVA POS=DET": {
+        "support": 2,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 2,
+        "per_label": {
+          "Vform": {
+            "support": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Nn/ArtOrDet": {
+        "support": 1561,
+        "macro_f1": 0.6256312988169093,
+        "accuracy": 0.6880204996796925,
+        "outside_label_predictions": 1,
+        "per_label": {
+          "Nn": {
+            "support": 565,
+            "precision": 0.6089385474860335,
+            "recall": 0.3858407079646018,
+            "f1": 0.4723726977248104
+          },
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.7121464226289518,
+            "recall": 0.8594377510040161,
+            "f1": 0.7788898999090081
+          }
+        },
+        "macro_precision": 0.6605424850574926,
+        "macro_recall": 0.6226392294843089
+      },
+      "Nn/ArtOrDet POS=VERB": {
+        "support": 55,
+        "macro_f1": 0.8007246376811594,
+        "accuracy": 0.8909090909090909,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Nn": {
+            "support": 7,
+            "precision": 0.5454545454545454,
+            "recall": 0.8571428571428571,
+            "f1": 0.6666666666666666
+          },
+          "ArtOrDet": {
+            "support": 48,
+            "precision": 0.9772727272727273,
+            "recall": 0.8958333333333334,
+            "f1": 0.9347826086956522
+          }
+        },
+        "macro_precision": 0.7613636363636364,
+        "macro_recall": 0.8764880952380952
+      },
+      "Nn/ArtOrDet POS=AUX": {
+        "support": 3,
+        "macro_f1": 0.5,
+        "accuracy": 1.0,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Nn": {
+            "support": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "ArtOrDet": {
+            "support": 3,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          }
+        },
+        "macro_precision": 0.5,
+        "macro_recall": 0.5
+      },
+      "Nn/ArtOrDet POS=NOUN": {
+        "support": 631,
+        "macro_f1": 0.4992373336576566,
+        "accuracy": 0.5023771790808241,
+        "outside_label_predictions": 1,
+        "per_label": {
+          "Nn": {
+            "support": 470,
+            "precision": 0.8644859813084113,
+            "recall": 0.39361702127659576,
+            "f1": 0.5409356725146199
+          },
+          "ArtOrDet": {
+            "support": 161,
+            "precision": 0.3173076923076923,
+            "recall": 0.8198757763975155,
+            "f1": 0.45753899480069327
+          }
+        },
+        "macro_precision": 0.5908968368080518,
+        "macro_recall": 0.6067463988370556
+      },
+      "Nn/ArtOrDet POS=DET": {
+        "support": 353,
+        "macro_f1": 0.5345054945054944,
+        "accuracy": 0.8640226628895185,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Nn": {
+            "support": 15,
+            "precision": 0.0975609756097561,
+            "recall": 0.26666666666666666,
+            "f1": 0.14285714285714285
+          },
+          "ArtOrDet": {
+            "support": 338,
+            "precision": 0.9647435897435898,
+            "recall": 0.8905325443786982,
+            "f1": 0.9261538461538461
+          }
+        },
+        "macro_precision": 0.5311522826766729,
+        "macro_recall": 0.5785996055226824
+      },
+      "confusion_matrix": [
+        [
+          856,
+          0,
+          140,
+          0,
+          0
+        ],
+        [
+          297,
+          0,
+          65,
+          0,
+          0
+        ],
+        [
+          346,
+          1,
+          218,
+          0,
+          0
+        ],
+        [
+          161,
+          1,
+          54,
+          0,
+          0
+        ],
+        [
+          168,
+          0,
+          61,
+          0,
+          0
+        ]
+      ],
+      "prediction_counts": {
+        "Nn": 538,
+        "ArtOrDet": 1828,
+        "Prep": 2
+      }
+    },
+    "BERT-small seed 20261014": {
+      "all": {
+        "support": 2368,
+        "macro_f1": 0.19986320172593525,
+        "accuracy": 0.4341216216216216,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.4617067833698031,
+            "recall": 0.8473895582329317,
+            "f1": 0.5977337110481586
+          },
+          "Prep": {
+            "support": 362,
+            "precision": 0.4090909090909091,
+            "recall": 0.049723756906077346,
+            "f1": 0.08866995073891626
+          },
+          "Nn": {
+            "support": 565,
+            "precision": 0.3346774193548387,
+            "recall": 0.2938053097345133,
+            "f1": 0.31291234684260133
+          },
+          "Vform": {
+            "support": 216,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.24109502236311017,
+        "macro_recall": 0.23818372497470447
+      },
+      "empty": {
+        "support": 0,
+        "macro_f1": null,
+        "accuracy": null,
+        "outside_label_predictions": 0,
+        "per_label": {}
+      },
+      "single_token": {
+        "support": 2114,
+        "macro_f1": 0.19513205064623612,
+        "accuracy": 0.41579943235572375,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 834,
+            "precision": 0.43454210202827287,
+            "recall": 0.8477218225419664,
+            "f1": 0.5745631856968711
+          },
+          "Prep": {
+            "support": 352,
+            "precision": 0.3902439024390244,
+            "recall": 0.045454545454545456,
+            "f1": 0.08142493638676845
+          },
+          "Nn": {
+            "support": 530,
+            "precision": 0.34977578475336324,
+            "recall": 0.2943396226415094,
+            "f1": 0.319672131147541
+          },
+          "Vform": {
+            "support": 176,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 222,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.2349123578441321,
+        "macro_recall": 0.23750319812760426
+      },
+      "multi_token": {
+        "support": 254,
+        "macro_f1": 0.259561472395697,
+        "accuracy": 0.5866141732283464,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 162,
+            "precision": 0.681592039800995,
+            "recall": 0.845679012345679,
+            "f1": 0.7548209366391184
+          },
+          "Prep": {
+            "support": 10,
+            "precision": 0.6666666666666666,
+            "recall": 0.2,
+            "f1": 0.3076923076923077
+          },
+          "Nn": {
+            "support": 35,
+            "precision": 0.2,
+            "recall": 0.2857142857142857,
+            "f1": 0.23529411764705882
+          },
+          "Vform": {
+            "support": 40,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 7,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.30965174129353235,
+        "macro_recall": 0.26627865961199293
+      },
+      "Vform/SVA": {
+        "support": 445,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 445,
+        "per_label": {
+          "Vform": {
+            "support": 216,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Vform/SVA POS=VERB": {
+        "support": 243,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 243,
+        "per_label": {
+          "Vform": {
+            "support": 129,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 114,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Vform/SVA POS=AUX": {
+        "support": 98,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 98,
+        "per_label": {
+          "Vform": {
+            "support": 14,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 84,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Vform/SVA POS=NOUN": {
+        "support": 36,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 36,
+        "per_label": {
+          "Vform": {
+            "support": 22,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 14,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Vform/SVA POS=DET": {
+        "support": 2,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 2,
+        "per_label": {
+          "Vform": {
+            "support": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Nn/ArtOrDet": {
+        "support": 1561,
+        "macro_f1": 0.5690867858736258,
+        "accuracy": 0.6470211402946829,
+        "outside_label_predictions": 22,
+        "per_label": {
+          "Nn": {
+            "support": 565,
+            "precision": 0.5372168284789643,
+            "recall": 0.2938053097345133,
+            "f1": 0.37986270022883295
+          },
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.6861788617886179,
+            "recall": 0.8473895582329317,
+            "f1": 0.7583108715184187
+          }
+        },
+        "macro_precision": 0.6116978451337911,
+        "macro_recall": 0.5705974339837225
+      },
+      "Nn/ArtOrDet POS=VERB": {
+        "support": 55,
+        "macro_f1": 0.6468085106382979,
+        "accuracy": 0.8181818181818182,
+        "outside_label_predictions": 1,
+        "per_label": {
+          "Nn": {
+            "support": 7,
+            "precision": 0.375,
+            "recall": 0.42857142857142855,
+            "f1": 0.4
+          },
+          "ArtOrDet": {
+            "support": 48,
+            "precision": 0.9130434782608695,
+            "recall": 0.875,
+            "f1": 0.8936170212765957
+          }
+        },
+        "macro_precision": 0.6440217391304348,
+        "macro_recall": 0.6517857142857143
+      },
+      "Nn/ArtOrDet POS=AUX": {
+        "support": 3,
+        "macro_f1": 0.5,
+        "accuracy": 1.0,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Nn": {
+            "support": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "ArtOrDet": {
+            "support": 3,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          }
+        },
+        "macro_precision": 0.5,
+        "macro_recall": 0.5
+      },
+      "Nn/ArtOrDet POS=NOUN": {
+        "support": 631,
+        "macro_f1": 0.43477860627819204,
+        "accuracy": 0.43106180665610144,
+        "outside_label_predictions": 11,
+        "per_label": {
+          "Nn": {
+            "support": 470,
+            "precision": 0.8284023668639053,
+            "recall": 0.2978723404255319,
+            "f1": 0.4381846635367762
+          },
+          "ArtOrDet": {
+            "support": 161,
+            "precision": 0.2926829268292683,
+            "recall": 0.8198757763975155,
+            "f1": 0.43137254901960786
+          }
+        },
+        "macro_precision": 0.5605426468465868,
+        "macro_recall": 0.5588740584115237
+      },
+      "Nn/ArtOrDet POS=DET": {
+        "support": 353,
+        "macro_f1": 0.5611787162968265,
+        "accuracy": 0.8385269121813032,
+        "outside_label_predictions": 5,
+        "per_label": {
+          "Nn": {
+            "support": 15,
+            "precision": 0.13725490196078433,
+            "recall": 0.4666666666666667,
+            "f1": 0.21212121212121213
+          },
+          "ArtOrDet": {
+            "support": 338,
+            "precision": 0.9730639730639731,
+            "recall": 0.8550295857988166,
+            "f1": 0.9102362204724409
+          }
+        },
+        "macro_precision": 0.5551594375123787,
+        "macro_recall": 0.6608481262327417
+      },
+      "confusion_matrix": [
+        [
+          844,
+          9,
+          143,
+          0,
+          0
+        ],
+        [
+          280,
+          18,
+          64,
+          0,
+          0
+        ],
+        [
+          386,
+          13,
+          166,
+          0,
+          0
+        ],
+        [
+          151,
+          3,
+          62,
+          0,
+          0
+        ],
+        [
+          167,
+          1,
+          61,
+          0,
+          0
+        ]
+      ],
+      "prediction_counts": {
+        "Nn": 496,
+        "ArtOrDet": 1828,
+        "Prep": 44
+      }
+    },
+    "BERT-small seed 20261015": {
+      "all": {
+        "support": 2368,
+        "macro_f1": 0.19494675352579716,
+        "accuracy": 0.4282094594594595,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.4733876017532874,
+            "recall": 0.7590361445783133,
+            "f1": 0.5831083686849209
+          },
+          "Prep": {
+            "support": 362,
+            "precision": 0.2,
+            "recall": 0.0027624309392265192,
+            "f1": 0.005449591280653951
+          },
+          "Nn": {
+            "support": 565,
+            "precision": 0.33550913838120106,
+            "recall": 0.45486725663716815,
+            "f1": 0.386175807663411
+          },
+          "Vform": {
+            "support": 216,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.20177934802689768,
+        "macro_recall": 0.24333316643094158
+      },
+      "empty": {
+        "support": 0,
+        "macro_f1": null,
+        "accuracy": null,
+        "outside_label_predictions": 0,
+        "per_label": {}
+      },
+      "single_token": {
+        "support": 2114,
+        "macro_f1": 0.19296290017083315,
+        "accuracy": 0.41438032166508987,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 834,
+            "precision": 0.44593639575971733,
+            "recall": 0.7565947242206235,
+            "f1": 0.5611382836816363
+          },
+          "Prep": {
+            "support": 352,
+            "precision": 0.3333333333333333,
+            "recall": 0.002840909090909091,
+            "f1": 0.005633802816901409
+          },
+          "Nn": {
+            "support": 530,
+            "precision": 0.3505747126436782,
+            "recall": 0.46037735849056605,
+            "f1": 0.39804241435562804
+          },
+          "Vform": {
+            "support": 176,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 222,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.22596888834734577,
+        "macro_recall": 0.24396259836041972
+      },
+      "multi_token": {
+        "support": 254,
+        "macro_f1": 0.19487264673311183,
+        "accuracy": 0.5433070866141733,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "ArtOrDet": {
+            "support": 162,
+            "precision": 0.6868131868131868,
+            "recall": 0.7716049382716049,
+            "f1": 0.7267441860465116
+          },
+          "Prep": {
+            "support": 10,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "Nn": {
+            "support": 35,
+            "precision": 0.18571428571428572,
+            "recall": 0.37142857142857144,
+            "f1": 0.24761904761904763
+          },
+          "Vform": {
+            "support": 40,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 7,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.17450549450549452,
+        "macro_recall": 0.22860670194003524
+      },
+      "Vform/SVA": {
+        "support": 445,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 445,
+        "per_label": {
+          "Vform": {
+            "support": 216,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 229,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Vform/SVA POS=VERB": {
+        "support": 243,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 243,
+        "per_label": {
+          "Vform": {
+            "support": 129,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 114,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Vform/SVA POS=AUX": {
+        "support": 98,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 98,
+        "per_label": {
+          "Vform": {
+            "support": 14,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 84,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Vform/SVA POS=NOUN": {
+        "support": 36,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 36,
+        "per_label": {
+          "Vform": {
+            "support": 22,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 14,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Vform/SVA POS=DET": {
+        "support": 2,
+        "macro_f1": 0.0,
+        "accuracy": 0.0,
+        "outside_label_predictions": 2,
+        "per_label": {
+          "Vform": {
+            "support": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "SVA": {
+            "support": 1,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          }
+        },
+        "macro_precision": 0.0,
+        "macro_recall": 0.0
+      },
+      "Nn/ArtOrDet": {
+        "support": 1561,
+        "macro_f1": 0.6091647619335077,
+        "accuracy": 0.6489429852658553,
+        "outside_label_predictions": 1,
+        "per_label": {
+          "Nn": {
+            "support": 565,
+            "precision": 0.5171026156941649,
+            "recall": 0.45486725663716815,
+            "f1": 0.4839924670433145
+          },
+          "ArtOrDet": {
+            "support": 996,
+            "precision": 0.7111947318908749,
+            "recall": 0.7590361445783133,
+            "f1": 0.7343370568237009
+          }
+        },
+        "macro_precision": 0.6141486737925199,
+        "macro_recall": 0.6069517006077407
+      },
+      "Nn/ArtOrDet POS=VERB": {
+        "support": 55,
+        "macro_f1": 0.7805851063829787,
+        "accuracy": 0.8909090909090909,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Nn": {
+            "support": 7,
+            "precision": 0.5555555555555556,
+            "recall": 0.7142857142857143,
+            "f1": 0.625
+          },
+          "ArtOrDet": {
+            "support": 48,
+            "precision": 0.9565217391304348,
+            "recall": 0.9166666666666666,
+            "f1": 0.9361702127659575
+          }
+        },
+        "macro_precision": 0.7560386473429952,
+        "macro_recall": 0.8154761904761905
+      },
+      "Nn/ArtOrDet POS=AUX": {
+        "support": 3,
+        "macro_f1": 0.5,
+        "accuracy": 1.0,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Nn": {
+            "support": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0
+          },
+          "ArtOrDet": {
+            "support": 3,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0
+          }
+        },
+        "macro_precision": 0.5,
+        "macro_recall": 0.5
+      },
+      "Nn/ArtOrDet POS=NOUN": {
+        "support": 631,
+        "macro_f1": 0.5153265557609366,
+        "accuracy": 0.5245641838351822,
+        "outside_label_predictions": 1,
+        "per_label": {
+          "Nn": {
+            "support": 470,
+            "precision": 0.84,
+            "recall": 0.44680851063829785,
+            "f1": 0.5833333333333334
+          },
+          "ArtOrDet": {
+            "support": 161,
+            "precision": 0.31842105263157894,
+            "recall": 0.7515527950310559,
+            "f1": 0.44731977818853974
+          }
+        },
+        "macro_precision": 0.5792105263157894,
+        "macro_recall": 0.5991806528346768
+      },
+      "Nn/ArtOrDet POS=DET": {
+        "support": 353,
+        "macro_f1": 0.46491129575567036,
+        "accuracy": 0.6940509915014165,
+        "outside_label_predictions": 0,
+        "per_label": {
+          "Nn": {
+            "support": 15,
+            "precision": 0.06542056074766354,
+            "recall": 0.4666666666666667,
+            "f1": 0.11475409836065574
+          },
+          "ArtOrDet": {
+            "support": 338,
+            "precision": 0.967479674796748,
+            "recall": 0.7041420118343196,
+            "f1": 0.815068493150685
+          }
+        },
+        "macro_precision": 0.5164501177722057,
+        "macro_recall": 0.5854043392504931
+      },
+      "confusion_matrix": [
+        [
+          756,
+          0,
+          240,
+          0,
+          0
+        ],
+        [
+          252,
+          1,
+          109,
+          0,
+          0
+        ],
+        [
+          307,
+          1,
+          257,
+          0,
+          0
+        ],
+        [
+          129,
+          3,
+          84,
+          0,
+          0
+        ],
+        [
+          153,
+          0,
+          76,
+          0,
+          0
+        ]
+      ],
+      "prediction_counts": {
+        "Nn": 766,
+        "ArtOrDet": 1597,
+        "Prep": 5
+      }
+    }
+  },
+  "bert_seed_aggregate": {
+    "all": {
+      "mean": 0.19837117704300256,
+      "sample_std": 0.002973800542602699
+    },
+    "empty": {
+      "mean": null,
+      "sample_std": null
+    },
+    "single_token": {
+      "mean": 0.1953606853873085,
+      "sample_std": 0.002519893805557883
+    },
+    "multi_token": {
+      "mean": 0.22130234543383578,
+      "sample_std": 0.03392804991655324
+    },
+    "Vform/SVA": {
+      "mean": 0.0,
+      "sample_std": 0.0
+    },
+    "Vform/SVA POS=VERB": {
+      "mean": 0.0,
+      "sample_std": 0.0
+    },
+    "Vform/SVA POS=AUX": {
+      "mean": 0.0,
+      "sample_std": 0.0
+    },
+    "Vform/SVA POS=NOUN": {
+      "mean": 0.0,
+      "sample_std": 0.0
+    },
+    "Vform/SVA POS=DET": {
+      "mean": 0.0,
+      "sample_std": 0.0
+    },
+    "Nn/ArtOrDet": {
+      "mean": 0.6012942822080143,
+      "sample_std": 0.02908227680788317
+    },
+    "Nn/ArtOrDet POS=VERB": {
+      "mean": 0.742706084900812,
+      "sample_std": 0.08365798672155221
+    },
+    "Nn/ArtOrDet POS=AUX": {
+      "mean": 0.5,
+      "sample_std": 0.0
+    },
+    "Nn/ArtOrDet POS=NOUN": {
+      "mean": 0.48311416523226175,
+      "sample_std": 0.04262581918888983
+    },
+    "Nn/ArtOrDet POS=DET": {
+      "mean": 0.5201985021859971,
+      "sample_std": 0.04970283277977794
+    }
+  },
+  "input_sha256": {
+    "reports\\contextual_model_validation\\bert\\selection.json": "9c35ec65edc55e79be8ae04e27ac9be30b31cfd54845a50ddcdd045514bc7d3e",
+    "reports\\contextual_model_validation\\audit\\summary.json": "7d53feb1556d71949d5c30018707b92f9b4f0bf73519e7c6395e9e218fd986d5",
+    "reports\\nucle_feature_benchmark_solver_v2\\validation_predictions.csv": "1cfccfa3b7321df6a95a7833ebfc472795fd64ccc9a5dbe5f95a17e9373bcd31"
+  }
+}

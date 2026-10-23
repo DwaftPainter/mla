@@ -1,0 +1,43 @@
+{
+  "checked_at": "2026-10-23T15:15:30.121407+00:00",
+  "moved_files": 13,
+  "local_links_checked": 177,
+  "broken_links": [],
+  "docx_integrity": [
+    {
+      "path": "reports/summaries/data/data_preprocessing_report.docx",
+      "byte_identical": true,
+      "tables": 11,
+      "images": 0
+    },
+    {
+      "path": "reports/summaries/classical/modeling_ablation_results_report.docx",
+      "byte_identical": true,
+      "tables": 30,
+      "images": 2
+    },
+    {
+      "path": "reports/summaries/contextual/contextual_model_validation_report.docx",
+      "byte_identical": true,
+      "tables": 9,
+      "images": 2
+    },
+    {
+      "path": "reports/summaries/contextual/bert_learning_diagnostics_report.docx",
+      "byte_identical": true,
+      "tables": 4,
+      "images": 1
+    },
+    {
+      "path": "reports/summaries/evaluation/evaluation_tasks_report.docx",
+      "byte_identical": true,
+      "tables": 16,
+      "images": 2
+    }
+  ],
+  "frozen_protocols_preserved": 4,
+  "frozen_code_preserved": 40,
+  "preexisting_report_files_preserved_or_relocated": 203,
+  "original_lock_valid": true,
+  "no_training_or_scoring_run": true
+}

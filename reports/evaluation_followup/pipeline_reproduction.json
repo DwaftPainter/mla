@@ -1,0 +1,318 @@
+{
+  "started_at": "2026-10-23T14:44:36.480825+00:00",
+  "original_lock_sha256": "2f2f9fd1ff19805255f300d4eaf646aa964e3e643ce692027f528ba5b9c198ee",
+  "python": "3.13.7",
+  "python_executable": "C:\\Hanu\\year4\\semester1\\MLA\\Final_project\\.cache\\final_replay_env\\Scripts\\python.exe",
+  "scope": "Raw SGML -> Understanding/audit -> preparation v2 -> grouping/split -> train-only features -> 52 evaluation-batch fits -> test prediction replay",
+  "not_reproduced": [
+    "Independent human annotation adjudication",
+    "Historical six-variant grid search",
+    "BERT experiments"
+  ],
+  "fixed_historical_inputs": [
+    "Annotation overlap review log",
+    "Historical selected configs and validation predictions"
+  ],
+  "versions": {
+    "annotated-doc": "0.0.5",
+    "annotated-types": "0.8.0",
+    "beautifulsoup4": "4.15.0",
+    "blis": "1.3.3",
+    "catalogue": "2.0.10",
+    "certifi": "2026.7.22",
+    "charset-normalizer": "3.5.1",
+    "click": "8.5.0",
+    "cloudpathlib": "0.26.0",
+    "colorama": "0.4.6",
+    "confection": "0.1.5",
+    "cymem": "2.0.13",
+    "en_core_web_sm": "3.8.0",
+    "filelock": "3.32.3",
+    "fsspec": "2026.7.0",
+    "idna": "3.20",
+    "iniconfig": "2.3.0",
+    "Jinja2": "3.1.6",
+    "langcodes": "3.5.1",
+    "lxml": "6.1.3",
+    "markdown-it-py": "4.2.0",
+    "MarkupSafe": "3.0.3",
+    "mdurl": "0.1.2",
+    "mpmath": "1.3.0",
+    "murmurhash": "1.0.15",
+    "networkx": "3.6.1",
+    "numpy": "2.5.3",
+    "packaging": "26.3",
+    "pandas": "3.0.6",
+    "pluggy": "1.6.0",
+    "preshed": "3.0.13",
+    "pydantic": "2.14.1",
+    "pydantic_core": "2.50.1",
+    "Pygments": "2.21.0",
+    "pytest": "8.4.2",
+    "python-dateutil": "2.9.0.post0",
+    "requests": "2.34.2",
+    "rich": "15.0.0",
+    "setuptools": "84.0.0",
+    "shellingham": "1.5.4",
+    "six": "1.17.0",
+    "smart_open": "7.7.1",
+    "soupsieve": "2.10",
+    "spacy": "3.8.7",
+    "spacy-legacy": "3.0.12",
+    "spacy-loggers": "1.0.5",
+    "srsly": "2.5.4",
+    "sympy": "1.14.0",
+    "thinc": "8.3.11",
+    "torch": "2.14.0+cpu",
+    "tqdm": "4.70.1",
+    "typer": "0.19.2",
+    "typer-slim": "0.21.2",
+    "typing_extensions": "4.16.0",
+    "typing-inspection": "0.4.4",
+    "tzdata": "2026.4",
+    "urllib3": "2.8.0",
+    "wasabi": "1.1.3",
+    "weasel": "0.4.3",
+    "wrapt": "2.5.0"
+  },
+  "stages": {
+    "source_and_audit": {
+      "annotations": 44912,
+      "essays": 1397,
+      "csv_comparison": {
+        "status": "match",
+        "expected_rows": 44912,
+        "actual_rows": 44912,
+        "missing_columns": [],
+        "extra_columns": [],
+        "column_order_matches": true,
+        "different_cells": 0
+      },
+      "audit": {
+        "sha256": "72c80329d5e176905090cb13fc32d702e7e7fd3e2f44c528b420048602276a05",
+        "byte_identical": true
+      },
+      "duplicate_report_semantically_identical": true,
+      "review_log_sha256": "407dcd6657b369f97adb96436cb2dd0b31f3f8c698fb4e012ce4c6002cfefc78"
+    },
+    "preparation_v2": {
+      "data_outputs": {
+        "boundary_challenges.jsonl": {
+          "sha256": "33231698c307daa27b9b33c6aa91d662588803e66b462adee3456d9556a077f0",
+          "byte_identical": true
+        },
+        "input_groups.jsonl": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "byte_identical": true
+        },
+        "provenance.jsonl": {
+          "sha256": "d0d2a599ba28b70dcf9ecb80308e2efbb30c0c1cbc089fd9db9a6bf8ab7f63f8",
+          "byte_identical": true
+        },
+        "rejected.jsonl": {
+          "sha256": "e690574b29d6b90ce1034527799bbdf8db6dc63c7cab4a171d297ceb16e6bc42",
+          "byte_identical": true
+        },
+        "samples.jsonl": {
+          "sha256": "34dfe5375601a671e8312c04e1142899a9c1a25ccf9bd73ec052d77ac8cf9587",
+          "byte_identical": true
+        },
+        "sentences.jsonl": {
+          "sha256": "d3fddfa40bdba6e6de74325954429a5586929c6f45a2440a4e8877a8d20aa32e",
+          "byte_identical": true
+        },
+        "summary.json": {
+          "sha256": "48260e9f46e1f56c18d73ed33be560d195d12fbeaff5dc69f110f9945828b1be",
+          "byte_identical": true
+        }
+      },
+      "manifest_differs_as_expected": "New time, code inventory and local input paths; source/data outputs compared directly"
+    },
+    "group_split": {
+      "samples": 15788,
+      "split_manifest": {
+        "sha256": "c3a65115ad93c837372e1c72d186b244043b711ee41a6706b13ccacea8be5677",
+        "byte_identical": true
+      },
+      "essay_groups": {
+        "sha256": "4c623961cefe0eb6cadc37f5a5399b71d2dbb9ef90573b434827b0d60a4efcb2",
+        "byte_identical": true
+      },
+      "partitions": {
+        "train": {
+          "samples": 11052,
+          "fraction": 0.7000253356979985,
+          "essays": 1069,
+          "groups": 1045,
+          "label_counts": {
+            "ArtOrDet": 4648,
+            "Prep": 1689,
+            "Nn": 2638,
+            "Vform": 1011,
+            "SVA": 1066
+          }
+        },
+        "validation": {
+          "samples": 2368,
+          "fraction": 0.14998733215100077,
+          "essays": 142,
+          "groups": 99,
+          "label_counts": {
+            "ArtOrDet": 996,
+            "Prep": 362,
+            "Nn": 565,
+            "Vform": 216,
+            "SVA": 229
+          }
+        },
+        "test": {
+          "samples": 2368,
+          "fraction": 0.14998733215100077,
+          "essays": 144,
+          "groups": 97,
+          "label_counts": {
+            "ArtOrDet": 996,
+            "Prep": 362,
+            "Nn": 565,
+            "Vform": 216,
+            "SVA": 229
+          }
+        }
+      }
+    },
+    "features": {
+      "samples": 15788,
+      "dimensions": 16180,
+      "sentences_parsed": 11272,
+      "files": {
+        "features.jsonl": {
+          "sha256": "f9a94270b161a7e8ee29da23e2ebd4f4e20a5313005f59b2c4e36ccb6e74ba8b",
+          "byte_identical": true
+        },
+        "targets.jsonl": {
+          "sha256": "427bb842b2c99ab0c576e46ca5a807da0647346d2529cd9d28a60a1b4857882b",
+          "byte_identical": true
+        },
+        "encoder.json": {
+          "sha256": "d8987f6964ffcd428f7ae3d9ce6c8912dbd12ac4daeff24422e0899967350c27",
+          "byte_identical": true
+        }
+      }
+    },
+    "training": {
+      "fits": 52,
+      "new_grid": 40,
+      "historical_refits": 12,
+      "validation_predictions": {
+        "sha256": "ffbed512738c30cd328c59a02dae778944df410b8e82f1d82d054b669861bd81",
+        "byte_identical": true
+      },
+      "all_fit_metrics_and_termination_identical": true,
+      "selected": {
+        "LR_00": {
+          "selected_config_and_validation_identical": true,
+          "checkpoint_content_identical": true
+        },
+        "Tree_00": {
+          "selected_config_and_validation_identical": true,
+          "checkpoint_content_identical": true
+        },
+        "LR_01": {
+          "selected_config_and_validation_identical": true,
+          "checkpoint_content_identical": true
+        },
+        "Tree_01": {
+          "selected_config_and_validation_identical": true,
+          "checkpoint_content_identical": true
+        },
+        "LR_02": {
+          "selected_config_and_validation_identical": true,
+          "checkpoint_content_identical": true
+        },
+        "Tree_02": {
+          "selected_config_and_validation_identical": true,
+          "checkpoint_content_identical": true
+        },
+        "LR_03": {
+          "selected_config_and_validation_identical": true,
+          "checkpoint_content_identical": true
+        },
+        "Tree_03": {
+          "selected_config_and_validation_identical": true,
+          "checkpoint_content_identical": true
+        },
+        "LR_04": {
+          "selected_config_and_validation_identical": true,
+          "checkpoint_content_identical": true
+        },
+        "Tree_04": {
+          "selected_config_and_validation_identical": true,
+          "checkpoint_content_identical": true
+        },
+        "LR_05": {
+          "selected_config_and_validation_identical": true,
+          "checkpoint_content_identical": true
+        },
+        "Tree_05": {
+          "selected_config_and_validation_identical": true,
+          "checkpoint_content_identical": true
+        },
+        "LR_06": {
+          "selected_config_and_validation_identical": true,
+          "checkpoint_content_identical": true
+        },
+        "Tree_06": {
+          "selected_config_and_validation_identical": true,
+          "checkpoint_content_identical": true
+        },
+        "LR_07": {
+          "selected_config_and_validation_identical": true,
+          "checkpoint_content_identical": true
+        },
+        "Tree_07": {
+          "selected_config_and_validation_identical": true,
+          "checkpoint_content_identical": true
+        },
+        "LR_08": {
+          "selected_config_and_validation_identical": true,
+          "checkpoint_content_identical": true
+        },
+        "Tree_08": {
+          "selected_config_and_validation_identical": true,
+          "checkpoint_content_identical": true
+        }
+      }
+    },
+    "test_replay": {
+      "samples": 2368,
+      "pipeline_names": 20,
+      "disagreements": {
+        "Majority": 0,
+        "POS": 0,
+        "LR_00": 0,
+        "Tree_00": 0,
+        "LR_01": 0,
+        "Tree_01": 0,
+        "LR_02": 0,
+        "Tree_02": 0,
+        "LR_03": 0,
+        "Tree_03": 0,
+        "LR_04": 0,
+        "Tree_04": 0,
+        "LR_05": 0,
+        "Tree_05": 0,
+        "LR_06": 0,
+        "Tree_06": 0,
+        "LR_07": 0,
+        "Tree_07": 0,
+        "LR_08": 0,
+        "Tree_08": 0
+      },
+      "all_saved_slice_metrics_identical": true,
+      "interpretation": "Reproduction only; not a new independent test or model selection"
+    }
+  },
+  "elapsed_seconds": 833.3836815999821,
+  "complete": true,
+  "finished_at": "2026-10-23T14:58:29.864472+00:00"
+}
