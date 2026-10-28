@@ -1,0 +1,22 @@
+{
+  "samples": "data_set/processed/nucle_preparation_v2/samples.jsonl",
+  "split": "data_set/split/nucle_group_split/split_manifest.csv",
+  "model_source": "reports/contextual_model_validation/model_source.json",
+  "expected_counts": {"train": 11052, "validation": 2368, "test": 2368},
+  "readouts": ["cls", "span_mean"],
+  "encoder_learning_rates": [0.00005],
+  "head_learning_rates": [0.0001, 0.001],
+  "seeds": [20261013, 20261014, 20261015],
+  "max_epochs": 20,
+  "patience": 4,
+  "min_delta": 0.0001,
+  "batch_size": 32,
+  "max_length": 128,
+  "dropout": 0.1,
+  "weight_decay": 0.01,
+  "warmup_ratio": 0.1,
+  "gradient_clip": 1.0,
+  "class_weight": "none",
+  "device": "cpu",
+  "threads": 4
+}

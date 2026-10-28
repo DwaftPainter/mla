@@ -1,5 +1,7 @@
 # Majority và luật POS — validation
 
+Majority và POS rule là hai đối chứng ban đầu của dự án. Majority luôn chọn lớp phổ biến nhất trong train; POS rule kết hợp các ánh xạ từ loại cố định với bảng tra nhãn học từ train. Thư mục này lưu kết quả validation và các tệp cần để kiểm tra lại hai đối chứng đó.
+
 | File | Vai trò |
 |---|---|
 | [summary.json](summary.json) | Contract POS, phiên bản tagger và metric |
