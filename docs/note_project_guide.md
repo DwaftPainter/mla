@@ -4,6 +4,8 @@ Cập nhật sau rà soát/tái lập 23/10/2026. [Report task rà soát](../rep
 
 Hướng dẫn cài môi trường, điều kiện input và cách chạy từng entry point: [reproduction.md](reproduction.md). Các code path trong sơ đồ/bảng tính từ root repository; Markdown links tính từ thư mục docs. Tài liệu này giải thích implementation, không thay runbook hoặc kế hoạch.
 
+Bổ sung28/10/2026: BERT mở rộng đã train12 run, chọn span mean/head1e−4 và test ba seed; primary F1 0,8146, mean0,8182 ±0,0038. [Báo cáo mới](../reports/bert_final_analysis/analysis_report.md), [pipeline/hướng dẫn](bert_small_training_guide.md) và [PDF/slide](../reports/summaries/final/handover_checklist.md) bổ sung các phần BERT lịch sử bên dưới; không thay số hoặc protocol đợt ban đầu.
+
 ## 1. Bài toán, RQ và trạng thái
 
 Một sample là một annotation: **câu gốc + vị trí lỗi đã biết → một trong năm nhãn**. Nhãn gồm ArtOrDet (mạo từ/từ hạn định), Prep (giới từ), Nn (số danh từ), Vform (dạng động từ), SVA (hòa hợp chủ ngữ–động từ). Một câu có thể tạo nhiều sample. Không tự tìm vị trí lỗi, sinh câu sửa hay chấm điểm người học.
@@ -14,7 +16,7 @@ Một sample là một annotation: **câu gốc + vị trí lỗi đã biết �
 | RQ2: Lexical/POS/morphology/dependency ảnh hưởng thế nào? | Sáu biến thể tăng dần/masking/non-lexical cho LR và Tree | Full−P/M đã chạy, Full−D reuse, test đã chấm |
 | RQ3: Nhóm nào khó phân biệt và đặc điểm nào liên quan? | Confusion, span/cặp nhãn/POS slices, audit 18 lỗi validation có hỗ trợ AI | Đã audit 40 ca test, có nhận xét và giới hạn |
 
-Đã hoàn thành preparation, split theo nhóm, features, benchmark/ablation/masking validation, sensitivity v1/v2, thử BERT-small và chẩn đoán BERT. **Đã khóa, chấm test và bootstrap: LR Full test F1=0,8163; Tree Full=0,7996; POS=0,7106.** Dừng thử thêm BERT; giữ kết quả như thử nghiệm chưa thành công trong cấu hình/ngân sách đã dùng. Không suy ra ngữ cảnh vô ích.
+Đã hoàn thành preparation, grouped split, features, benchmark/ablation/masking, sensitivity và BERT hai giai đoạn. **Test: LR Full0,8163; Tree0,7996; POS0,7106; BERT primary0,8146.** BERT mean ba seed0,8182 ±0,0038; CI BERT−LR chứa0. Giữ kết quả BERT ban đầu như snapshot, không suy ngữ cảnh vô ích.
 
 | Kết quả validation | Macro-F1 | Diễn giải |
 |---|---:|---|
@@ -23,7 +25,8 @@ Một sample là một annotation: **câu gốc + vị trí lỗi đã biết �
 | LR Full | 0,8067 | Ứng viên chính hiện tại |
 | Tree Full | 0,7879 | Cùng biểu diễn Full với LR |
 | Tree S+L+P+M | 0,7929 | Biến thể tốt hơn Tree Full trên validation, báo riêng |
-| BERT-small, LR chọn, ba seed | 0,1984 ± 0,0030 | Trung bình và độ lệch chuẩn mẫu; không chọn riêng seed tốt nhất |
+| BERT-small đợt ban đầu, ba seed | 0,1984 ± 0,0030 | Snapshot validation cũ |
+| BERT-small span mean mở rộng, ba seed | 0,8183 ± 0,0011 | Mean/std validation; primary test0,8146, mean test0,8182 ±0,0038 |
 
 ## 2. Sơ đồ mapping toàn dự án
 
@@ -107,7 +110,7 @@ flowchart TB
   P2 --> SENS
   MAN --> SENS
   FX --> THREAD
-  subgraph BERT["F. BERT-small — đã thử; dừng mở rộng"]
+  subgraph BERT["F. BERT-small — nhánh lịch sử; mở rộng28/10 xem mục10"]
     CACHE[".cache/huggingface<br/>google/bert_uncased_L-2_H-128_A-2"]
     BT["bert_span_classifier.py<br/>WordPiece + markers<br/>CLS fine-tune; chọn bằng validation"]
     BR["contextual_model_validation/bert<br/>config / history / checkpoint / predictions"]
@@ -419,6 +422,8 @@ Input BERT là WordPiece, không phải vector S/L/P/M/D. encode_span tách sent
 Max length 128; context budget = 128−4−số subword span. Giữ toàn span, lấy cuối phần trái và đầu phần phải; span vượt budget thì báo lỗi. Thêm marker vào tokenizer và resize embeddings. Có 5 train/6 validation bị cắt context, không cắt target. BERT tokenizer khác tokenizer preparation và feature parser.
 
 Benchmark CLS: batch32, tối đa5 epoch, LR 3e−5/5e−5, dropout0,1, weight decay0,01 với ngoại lệ bias/LayerNorm, warmup10%, linear decay, clip1, CPU4 threads. Hai LR ở seed đầu; LR chọn 5e−5 thêm hai seed, tổng bốn run. Không dùng test.
+
+Đoạn benchmark trên là đợt cũ. Nhánh mới `src/training/bert_small_experiment.py` chạy CLI check/train/select/test; so CLS/span_mean và LR head riêng, tối đa20 epochs/patience4, metric toàn train/validation mỗi epoch. Đã khóa/test ba seed28/10. `src/evaluation/bert_final_analysis.py` kiểm predictions/hashes, paired bootstrap và chọn audit mới; `src/reporting/build_bert_delivery.py` cập nhật báo cáo; `build_nucle_slides.py` xuất slide. Không thay source đã khóa trong nhánh cũ.
 
 | Code / artifact | Vai trò |
 |---|---|

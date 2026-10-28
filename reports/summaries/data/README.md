@@ -1,5 +1,7 @@
 # Dữ liệu và preprocessing
 
+Nhóm báo cáo dữ liệu mô tả cách đọc NUCLE, kiểm tra chất lượng annotation, giữ đúng offset và chia train/validation/test theo nhóm bài viết. Các tệp thống kê giúp đối chiếu quy mô và các cờ cần xem lại; chúng chưa phải kết quả phân loại của mô hình.
+
 | Tài liệu | Vai trò |
 |---|---|
 | [data_preprocessing_report.docx](data_preprocessing_report.docx) | Nguồn, schema, offsets, preparation v1/v2, grouping/split, code và công thức; có phần bổ sung theo mốc. |

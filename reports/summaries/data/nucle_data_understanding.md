@@ -1,15 +1,15 @@
-# NUCLE Data Understanding Report
+# Tổng quan dữ liệu NUCLE
 
-## 1. Dataset overview
+## 1. Quy mô dữ liệu
 
-- Total annotation rows: **44,912**
-- Unique essays represented in annotations: **1,397**
-- Unique error types: **28**
-- Target-label rows: **15,788**
-- Invalid offsets: **0**
-- Cross-paragraph annotations: **4**
+- Tổng số annotation: **44,912**
+- Số bài viết có annotation: **1,397**
+- Số loại lỗi trong nguồn: **28**
+- Số annotation thuộc năm nhãn nghiên cứu: **15,788**
+- Offset không hợp lệ: **0**
+- Annotation đi qua nhiều đoạn văn: **4**
 
-## 2. Five target classes
+## 2. Phân bố năm loại lỗi được nghiên cứu
 
 | error_type | count | percentage | essays_with_class |
 | --- | --- | --- | --- |
@@ -19,36 +19,33 @@
 | Vform | 1443 | 9.14 | 690 |
 | SVA | 1524 | 9.65 | 746 |
 
-## 3. Edit-type distribution inside the five-class subset
+## 3. Các dạng chỉnh sửa trong tập năm nhãn
 
 | edit_type | count |
 | --- | --- |
 | replacement | 12821 |
 | deletion | 2967 |
 
-## 4. Target errors per essay
+## 4. Số lỗi mục tiêu trong mỗi bài viết
 
-- Essays containing at least one target error: **1,355**
-- Mean errors per essay: **11.65**
-- Median errors per essay: **9.00**
-- Minimum: **1**
-- Maximum: **62**
+- Số bài có ít nhất một lỗi mục tiêu: **1,355**
+- Số lỗi trung bình mỗi bài: **11.65**
+- Trung vị số lỗi mỗi bài: **9.00**
+- Nhỏ nhất: **1**
+- Lớn nhất: **62**
 
-## 5. Span-length diagnostics
+## 5. Độ dài đoạn lỗi
 
-Character-length statistics for valid, single-paragraph target spans only.
-Excluded target rows: **0**.
-Empty strings are measured only when reconstruction succeeded:
+Độ dài dưới đây được tính theo ký tự, chỉ trên những span hợp lệ nằm trong một đoạn văn.
+Số mẫu mục tiêu không nằm trong phép tính: **0**.
+Span rỗng chỉ được tính khi việc dựng lại đoạn văn bản từ offset đã thành công:
 
-- Mean: **5.86**
-- Median: **5.00**
-- Minimum: **1**
-- Maximum: **156**
-- Empty spans: **0**
+- Trung bình: **5.86**
+- Trung vị: **5.00**
+- Nhỏ nhất: **1**
+- Lớn nhất: **156**
+- Span rỗng: **0**
 
-## 6. Scope
+## 6. Cách hiểu các thống kê
 
-Each annotation is one observation with its own error label; counts are not independent sentences.
-This step preserves every annotation and original offsets, including rows requiring quality review.
-Run data_quality next to audit schema, missing data, overlaps and duplicate content.
-No sentence splitting, POS, feature extraction, cleaning or dataset splits are performed.
+Mỗi annotation được tính là một mẫu có nhãn riêng, nên số mẫu không bằng số câu độc lập. Bước thống kê giữ lại toàn bộ annotation và offset nguồn, kể cả những trường hợp cần rà soát chất lượng. Các cờ về dữ liệu thiếu, span chồng lấp và nội dung trùng được kiểm tra ở bước data_quality tiếp theo. Phần này chưa tách câu, gán POS, trích đặc trưng, lọc mẫu hoặc chia train/validation/test.

@@ -1,0 +1,53 @@
+{
+  "cases": 40,
+  "strata": {
+    "BERT_wrong_LR_correct": 12,
+    "BERT_correct_LR_wrong": 12,
+    "both_wrong": 10,
+    "both_correct_control": 6
+  },
+  "source_gold_span_exact": true,
+  "review_scope": "Purposeful post-prediction sample; source correction only for audit; no gold changes; no causal attribution",
+  "human_review_status": "pending",
+  "corpus_text_location": "private/ (local only)",
+  "ai_review_completed": true,
+  "ai_review_scope": "40 purposefully selected cases; original sentence, span and correction inspected after predictions; no gold or model changes; no model-feature causal attribution",
+  "categories": {
+    "agreement_context": 3,
+    "coordinated_agreement": 1,
+    "clausal_subject_agreement": 1,
+    "partial_token_agreement": 1,
+    "missing_determiner_nonempty": 5,
+    "partial_token_determiner": 2,
+    "multi_edit_span": 2,
+    "noun_number_context": 2,
+    "partial_token_number": 2,
+    "extra_determiner": 1,
+    "insertion_anchored_to_verb": 2,
+    "insertion_anchored_to_adjective": 1,
+    "source_span_correction_ambiguity": 1,
+    "countability_number": 2,
+    "label_boundary_infinitive": 1,
+    "missing_preposition_nonempty": 1,
+    "preposition_multi_token": 1,
+    "modal_coordination_agreement": 1,
+    "insertion_anchored_to_preposition": 1,
+    "gold_edit_ambiguity": 2,
+    "abbreviation_number": 1,
+    "correct_determiner_control": 2,
+    "correct_number_control": 1,
+    "correction_context_ambiguity": 1,
+    "correct_partial_token_agreement": 1,
+    "correct_verb_form_control": 1
+  },
+  "notes_sha256": "2e5cb9990a43039419c8d5ab7a940e50583045b30cc9dcd62e7dc5b69a491b45",
+  "expert_priority_ids": [
+    "23037",
+    "34539",
+    "16809",
+    "30366",
+    "32801",
+    "32874"
+  ],
+  "selection_limit": "Round-robin over sorted gold/pred buckets; both-wrong subset contains 9 ArtOrDet and 1 Nn; not a representative prevalence sample"
+}

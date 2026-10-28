@@ -1,6 +1,6 @@
 # Tổ chức tài liệu — 23/10/2026
 
-[layout_manifest.json](layout_manifest.json) lưu ánh xạ 13 file trước/sau, checksum và các file điều hướng/code đã cập nhật. `before_layout/` giữ bản sao trước sửa để phục hồi; đây là bản lưu lịch sử, không phải tài liệu hiện hành. [layout_verification.json](layout_verification.json) ghi kết quả kiểm tra sau sắp xếp.
+Đợt tổ chức ngày 23/10/2026 chuyển tài liệu về các nhóm dễ tìm hơn và ghi lại đường dẫn trước, sau trong [layout_manifest.json](layout_manifest.json). Các bản sao trước khi sửa nằm trong before_layout/. Chúng là bằng chứng lịch sử, không phải bản báo cáo đang được bảo trì.
 
 - Chuyển phương pháp vào docs/methodology, literature vào docs/literature.
 - Chuyển các báo cáo DOCX/Markdown để đọc vào reports/summaries theo chủ đề; bỏ hậu tố `.updated` của báo cáo LR/Tree.

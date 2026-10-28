@@ -1,5 +1,7 @@
 # Span diagnostics v1 — lịch sử
 
+Đây là phần phân tích span ở giai đoạn đầu. Các nhận xét được giữ để theo dõi quá trình phát triển, nhưng không dùng thay cho kết quả bổ sung ở v2 hoặc kết quả test cuối cùng. Khi đọc, cần phân biệt thống kê đầu vào với điểm đánh giá mô hình.
+
 | File | Vai trò |
 |---|---|
 | [summary.json](summary.json) | Tổng hợp tập con ban đầu |

@@ -1,5 +1,7 @@
 # Benchmark Full LR/Tree — validation
 
+Đây là kết quả chọn tham số cho LR và Tree với cùng bộ đặc trưng Full trên validation. Các bảng và dự đoán trong thư mục được dùng làm mốc đối chiếu cho những thí nghiệm sau; chúng chưa phải điểm test cuối cùng.
+
 | File | Vai trò |
 |---|---|
 | [summary.json](summary.json) | Grid, solver, thời gian và cấu hình chọn |

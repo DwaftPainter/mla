@@ -1,12 +1,12 @@
 
 ## BỔ SUNG THEO NHẬN XÉT TUẦN 9 — ngày 20/10/2026
 
-Đã tính lại các lát cắt từ prediction validation có sẵn, không huấn luyện lại và không chấm test. Nguồn: reports/nucle_span_diagnostics_v2/summary.json và metrics.csv. Script tái lập: src/evaluation/nucle_span_analysis.py. Các nhận xét dưới đây thay thế việc suy luận chỉ từ điểm trung bình toàn tập.
+Phần bổ sung ngày 20/10/2026 xem xét kết quả validation theo từng nhóm span và cặp nhãn, thay vì chỉ dựa vào điểm trung bình toàn tập. Các phép tính dùng dự đoán đã lưu, không huấn luyện lại hoặc chấm test. Kết quả nằm trong reports/nucle_span_diagnostics_v2/summary.json và metrics.csv; mã thực hiện là src/evaluation/nucle_span_analysis.py.
 
 
 ## 1. Tiếp thu nhận xét và điều chỉnh kết luận
 
-Đồng ý chuyển trọng tâm sang câu hỏi: khi POS của span không đủ, thông tin nào giúp phân biệt nhãn? Tuy nhiên, POS rule đạt 0,705 và nonlexical LR đạt 0,796 chưa đủ để kết luận phần lớn nhãn được quyết định hoàn toàn bởi POS. Nonlexical vẫn có S/P/M/D và parser nhìn toàn câu. Nn/ArtOrDet là cặp nhãn có thể liên quan cùng cụm danh từ, không có nghĩa chúng luôn cùng POS hoặc đều là noun phrase đã được parser xác nhận.
+Câu hỏi cần làm rõ là: khi POS của span chưa đủ để phân biệt nhãn, mô hình có thêm thông tin gì? POS rule đạt 0,705 và LR không dùng từ vựng đạt 0,796, nhưng hai con số chưa cho thấy nhãn chỉ phụ thuộc POS. LR không từ vựng vẫn có S/P/M/D, còn parser đọc cả câu. Tương tự, Nn và ArtOrDet có thể liên quan cùng một danh ngữ, nhưng không phải mọi span trong cặp đều cùng POS hoặc đã được parser xác nhận là một cụm danh từ.
 
 Cần phân biệt hai loại khó: (a) cặp nhãn thật Vform/SVA hoặc Nn/ArtOrDet; (b) các mẫu trong cặp còn có cùng POS signature. Phân tích chính dưới đây dùng (a), và mục 5 bổ sung (b) để kiểm tra sát giả thuyết POS không đủ. Không thay đổi taxonomy hoặc huấn luyện lại classifier nhị phân.
 
@@ -117,14 +117,14 @@ Seed split: 20261013; 128 restarts; group policy nucle-grouping-v1. spaCy 3.8.7,
 
 Với một lỗi thiếu mạo từ có span rỗng: span POS=NOT_APPLICABLE, M của span không có giá trị và các D dựa trên token span không có chủ ngữ/head. S báo span_kind=insertion, span_tokens=0, span_chars=0 và vị trí; L/P của token lân cận có thể gợi ý trước một danh từ cần determiner. POS baseline hiện fallback ArtOrDet vì đó là Majority train, không phải vì nó nhận diện được cấu trúc thiếu mạo từ. Dữ liệu hiện có 0 span rỗng nên chưa có bằng chứng model đã học xử lý tình huống này; encoder có thể xem insertion là giá trị chưa thấy. Không tuyên bố hỗ trợ thực nghiệm cho insertion chỉ vì code có nhánh xử lý.
 
-Để phân biệt SVA và Vform, người chấm cần nhìn chủ ngữ và đặc điểm số/ngôi, động từ hữu hạn, các trợ động từ/modal, dạng infinitive/participle và cấu trúc chi phối động từ trong câu. LR hiện đã có M và D từ parse toàn câu, nên có thể lấy thông tin chủ ngữ ngoài cửa sổ lexical ±2. Hạn chế là parser có thể sai và các đặc trưng tổng hợp không biểu diễn đầy đủ mọi quan hệ. Vì vậy luận điểm cần kiểm tra là contextual representation có bổ sung cho cả L/P/M/D không, không phải LR hoàn toàn không nhìn được chủ ngữ xa.
+Để phân biệt SVA và Vform, người chấm cần nhìn chủ ngữ và đặc điểm số/ngôi, động từ hữu hạn, các trợ động từ/modal, dạng infinitive/participle và cấu trúc chi phối động từ trong câu. LR hiện đã có M và D từ parse toàn câu, nên có thể lấy thông tin chủ ngữ ngoài cửa sổ lexical ± 2. Hạn chế là parser có thể sai và các đặc trưng tổng hợp không biểu diễn đầy đủ mọi quan hệ. Vì vậy luận điểm cần kiểm tra là contextual representation có bổ sung cho cả L/P/M/D không, không phải LR hoàn toàn không nhìn được chủ ngữ xa.
 
 
 ## 9. Thử mô hình ngữ cảnh — kế hoạch mở rộng, chưa chạy
 
-Giữ BERT fine-tune như đề xuất thử nghiệm của giảng viên; không có điểm BERT trong tài liệu này. Trước khi chạy, chốt budget, checkpoint/version, seeds, số epoch, optimizer, learning rate, max_length, early stopping và quy tắc chọn checkpoint; chỉ dùng train/validation hiện có. Việc bổ sung model sau phản hồi là thay đổi protocol cần ghi ngày, không trình bày là đã đăng ký từ đầu.
+Giữ BERT fine-tune như đề xuất thử nghiệm của giảng viên; không có điểm BERT trong tài liệu này. Trước khi chạy, chốt budget, checkpoint/version, seeds, số epoch, optimizer, learning rate, max_length, dừng sớm và quy tắc chọn checkpoint; chỉ dùng train/validation hiện có. Việc bổ sung model sau phản hồi là thay đổi protocol cần ghi ngày, không trình bày là đã đăng ký từ đầu.
 
-Thiết kế so sánh ưu tiên classifier năm lớp trên cùng train để giữ nhiệm vụ: câu gốc có marker mở/đóng span, không correction hoặc gold label trong input; offsets dùng chèn marker. Chốt cách subword tokenize, xử lý partial-token và truncation bảo đảm không mất span; báo số câu bị cắt. Thêm marker vào tokenizer thì phải cập nhật embedding tương ứng. Không cần giả dữ liệu span rỗng để tạo điểm insertion.
+Thiết kế so sánh ưu tiên classifier năm lớp trên cùng train để giữ nhiệm vụ: câu gốc có marker mở/đóng span, không correction hoặc nhãn gốc trong input; offsets dùng chèn marker. Chốt cách subword tokenize, xử lý partial-token và truncation bảo đảm không mất span; báo số câu bị cắt. Thêm marker vào tokenizer thì phải cập nhật embedding tương ứng. Không cần giả dữ liệu span rỗng để tạo điểm insertion.
 
 Chọn checkpoint bằng Macro-F1 toàn validation như LR, rồi báo cùng bảng toàn tập, span bins, hai cặp và các POS slices; không chỉ báo nơi BERT thắng. Nếu train riêng binary classifier cho mỗi cặp, cần định nghĩa đó là thí nghiệm khác và huấn luyện LR/POS đối chứng phù hợp; không so trực tiếp với bảng five-class-slice này như cùng nhiệm vụ.
 

@@ -1,19 +1,19 @@
 # Kế hoạch và nhật ký công việc
 
-Cập nhật 23/10/2026. **Các task thực nghiệm của hai tuần đã hoàn thành trong các phiên ngày 23/10; các ngày 23/10–05/11 bên dưới là lịch dự kiến ban đầu, không phải ngày chạy thực tế.** Hiện tập trung bàn giao tài liệu; final report dự án và slide tổng kết để sau. Trạng thái chi tiết quản lý tại [docs/status.md](docs/status.md).
+Cập nhật28/10/2026. **Lịch23/10–05/11 bên dưới là kế hoạch ban đầu, không phải ngày chạy thực tế; các task cổ điển/chẩn đoán ban đầu thuộc23/10.** BERT mở rộng đã được người dùng train/test ngày28/10; [báo cáo BERT](reports/bert_final_analysis/analysis_report.md) và [bộ PDF/slide bàn giao](reports/summaries/final/handover_checklist.md) đã có. Trạng thái chi tiết tại [docs/status.md](docs/status.md).
 
 ## 1. Việc còn lại và quyết định hiện hành
 
 | Việc | Trạng thái / điều kiện |
 |---|---|
-| Review chuyên gia | 17 ca trong [expert_review_queue.csv](reports/evaluation_followup/expert_review_queue.csv) chờ người chuyên môn. Chưa đổi gold; nếu chưa có review, giữ giới hạn trong báo cáo. |
+| Review chuyên gia | 17 ca cũ và sáu ID ưu tiên BERT hợp nhất thành22 IDs không trùng; CSV mới giữ local dưới reports/bert_final_analysis/private/. Chưa đổi gold; giữ giới hạn khi chưa có người review. |
 | Tài liệu và Git | Đã công bố code/docs ở 52349bd; lượt này làm rõ README, đường chạy, mốc báo cáo và tài liệu còn thiếu rồi push bản cập nhật. Không đưa corpus/private artifacts lên Git. |
-| Code cleanup | Đã có [danh mục rà soát](reports/maintenance/code_redundancy_review.md); chưa xóa hoặc sửa code. Ưu tiên phần ngoài lock, bảo toàn snapshot đã chạy. |
+| Code cleanup | Sáu generator reporting đã bị xóa từ trước lượt kiểm; bốn thuộc lock có bản đúng hash trong zip. [Kiểm reports](reports/maintenance/reports_check.md) ghi rõ giới hạn verify hiện tại. |
 | Sao lưu riêng | Chưa xác nhận nơi lưu độc lập cho corpus/private artifacts; không coi Git công khai hoặc bản restore cùng máy là thay thế. |
-| Final report và slide | Chưa viết/chưa chốt theo yêu cầu hiện hành; không tự mở rộng task tài liệu thành báo cáo nộp cuối. |
-| BERT / Excel | Dừng thử thêm BERT; không chạy BERT test/BERT-base. Không có task sửa workbook hoặc PRISMA. |
+| Final report và slide | Đã cập nhật Markdown/DOCX/PDF và12 slide PPTX/PDF; nhóm còn xác nhận tên/đóng góp/AI, rubric và tự nộp bài. |
+| BERT / Excel | Hoàn tất12 run và test ba seed; primary F1 0,8146, mean0,8182 ±0,0038; không tune theo test đã xem. Không sửa workbook/PRISMA. |
 
-Sau khi xem test, ý tưởng mới chỉ ghi future work; không tune lại cấu hình hoặc sửa nhãn theo lỗi test. LR vẫn là mô hình chính đã chọn trên validation; BERT-small được báo như thử nghiệm chưa thành công, không kết luận ngữ cảnh vô ích.
+Sau khi xem BERT test, ý tưởng mới chỉ ghi future work; không tune lại cấu hình hoặc sửa nhãn theo lỗi test. LR giữ vai trò tham chiếu; BERT primary gần LR, CI BERT−LR chứa0. Giữ cả kết quả âm BERT ban đầu và kết quả mở rộng, không chọn seed test cao nhất đại diện.
 
 ## 2. Lịch hai tuần ban đầu và kết quả thực tế
 
@@ -30,6 +30,23 @@ Sau khi xem test, ý tưởng mới chỉ ghi future work; không tune lại c�
 Các task trên thực hiện trong phiên 23/10, không giả định đã trôi qua bảy ngày. BERT dùng google/bert_uncased_L-2_H-128_A-2 (2 layers, hidden 128, 2 heads), không phải BERT-base.
 
 Sau benchmark đã bổ sung diagnostics theo yêu cầu: ba cấu hình đều nhớ nhãn 100 mẫu train; hai cấu hình đạt ngưỡng cross-entropy chặt. Không thấy gradient bị đứt trong probes; checkpoint CLS cũ chỉ đúng cả hai target ở 2/50 cặp cùng câu có chủ đích. Đề xuất thử tiếp trong DOCX diagnostics thuộc mốc cũ; quyết định sau đó là dừng BERT trong phạm vi này.
+
+
+### Kết quả thực hiện tuần 1 — 23/10/2026
+
+Tại mốc tuần 1 ngày23/10, đã hoàn tất nhóm việc validation/chẩn đoán trước đợt test cổ điển. Kết quả lịch sử ở [report DOCX](reports/summaries/contextual/contextual_model_validation_report.docx); kết quả hiện hành gồm BERT mở rộng xem [báo cáo tổng kết](reports/summaries/final/bao_cao_tong_ket_NUCLE.md).
+
+| Task | Trạng thái và bằng chứng |
+|---|---|
+| Related work | Hoàn thành bảng và tổng hợp: docs/contextual_models_related_work.md |
+| Audit validation và code–protocol | Kiểm offset/token alignment, review hỗ trợ bằng AI 18 lỗi theo ID; ghi nhận khác biệt vocabulary/masking và hạn chế: docs/implementation_data_audit.md |
+| Sensitivity v1/v2 | Đã chạy LR/POS trên cùng split; chẩn đoán refit LR theo số threads: reports/contextual_model_validation/audit/ |
+| Protocol và pilot BERT | Đã chốt trước fine-tuning: docs/bert_experiment_protocol.md |
+| BERT | Hoàn thành bốn lượt fine-tune BERT nhỏ trên CPU: hai learning rate ở seed đầu, thêm hai seed cho learning rate chọn; có checkpoint/history/predictions |
+| So sánh validation | Có toàn tập, từng lớp, span, cặp nhãn và POS slices: reports/contextual_model_validation/comparison.csv |
+| Report tuần 1 | Hoàn thành report mới, có hạn chế, công thức, code và kết quả âm; không ghi đè báo cáo lịch sử |
+
+18 kiểm tra chức năng đã qua; ba checkpoint ở learning rate chọn tái tạo đúng prediction validation. Không đồng nghĩa đã tái lập môi trường sạch hoặc adjudication ngôn ngữ độc lập. Chỉ thử BERT-small, chưa thử BERT-base. Test/CI và khóa mô hình cuối thuộc tuần 2, chưa làm.
 
 ### Tuần 2 — dự kiến 30/10–05/11/2026
 

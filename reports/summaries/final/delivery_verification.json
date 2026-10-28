@@ -1,0 +1,280 @@
+{
+  "date": "2026-10-28",
+  "protected_inputs_unchanged": true,
+  "protected_input_count": 45,
+  "docx": {
+    "bao_cao_tong_ket_NUCLE": {
+      "markdown_tables": 34,
+      "docx_tables": 34,
+      "tables_exact": true,
+      "images": 13
+    },
+    "BERT_comparison_report": {
+      "markdown_tables": 2,
+      "docx_tables": 2,
+      "tables_exact": true,
+      "images": 2
+    }
+  },
+  "pdf": {
+    "bao_cao_tong_ket_NUCLE": {
+      "pages": 25,
+      "page_info": [
+        {
+          "page": 1,
+          "text_chars": 3873,
+          "images": 0
+        },
+        {
+          "page": 2,
+          "text_chars": 2730,
+          "images": 0
+        },
+        {
+          "page": 3,
+          "text_chars": 2691,
+          "images": 0
+        },
+        {
+          "page": 4,
+          "text_chars": 1382,
+          "images": 1
+        },
+        {
+          "page": 5,
+          "text_chars": 2667,
+          "images": 0
+        },
+        {
+          "page": 6,
+          "text_chars": 2833,
+          "images": 0
+        },
+        {
+          "page": 7,
+          "text_chars": 2855,
+          "images": 0
+        },
+        {
+          "page": 8,
+          "text_chars": 1508,
+          "images": 1
+        },
+        {
+          "page": 9,
+          "text_chars": 1264,
+          "images": 1
+        },
+        {
+          "page": 10,
+          "text_chars": 1454,
+          "images": 1
+        },
+        {
+          "page": 11,
+          "text_chars": 1614,
+          "images": 1
+        },
+        {
+          "page": 12,
+          "text_chars": 1110,
+          "images": 1
+        },
+        {
+          "page": 13,
+          "text_chars": 2609,
+          "images": 0
+        },
+        {
+          "page": 14,
+          "text_chars": 3153,
+          "images": 0
+        },
+        {
+          "page": 15,
+          "text_chars": 1404,
+          "images": 1
+        },
+        {
+          "page": 16,
+          "text_chars": 1972,
+          "images": 1
+        },
+        {
+          "page": 17,
+          "text_chars": 2447,
+          "images": 1
+        },
+        {
+          "page": 18,
+          "text_chars": 819,
+          "images": 2
+        },
+        {
+          "page": 19,
+          "text_chars": 1421,
+          "images": 2
+        },
+        {
+          "page": 20,
+          "text_chars": 3670,
+          "images": 0
+        },
+        {
+          "page": 21,
+          "text_chars": 3404,
+          "images": 0
+        },
+        {
+          "page": 22,
+          "text_chars": 1952,
+          "images": 0
+        },
+        {
+          "page": 23,
+          "text_chars": 2115,
+          "images": 0
+        },
+        {
+          "page": 24,
+          "text_chars": 3813,
+          "images": 0
+        },
+        {
+          "page": 25,
+          "text_chars": 2010,
+          "images": 0
+        }
+      ],
+      "out_of_page_text": [],
+      "replacement_glyphs": 0,
+      "contains_primary_f1": true,
+      "contains_seed_mean": true
+    },
+    "BERT_comparison_report": {
+      "pages": 3,
+      "page_info": [
+        {
+          "page": 1,
+          "text_chars": 2530,
+          "images": 0
+        },
+        {
+          "page": 2,
+          "text_chars": 1444,
+          "images": 2
+        },
+        {
+          "page": 3,
+          "text_chars": 1493,
+          "images": 0
+        }
+      ],
+      "out_of_page_text": [],
+      "replacement_glyphs": 0,
+      "contains_primary_f1": true,
+      "contains_seed_mean": true
+    },
+    "NUCLE_presentation": {
+      "pages": 12,
+      "page_info": [
+        {
+          "page": 1,
+          "text_chars": 297,
+          "images": 0
+        },
+        {
+          "page": 2,
+          "text_chars": 381,
+          "images": 0
+        },
+        {
+          "page": 3,
+          "text_chars": 386,
+          "images": 0
+        },
+        {
+          "page": 4,
+          "text_chars": 387,
+          "images": 0
+        },
+        {
+          "page": 5,
+          "text_chars": 381,
+          "images": 0
+        },
+        {
+          "page": 6,
+          "text_chars": 451,
+          "images": 0
+        },
+        {
+          "page": 7,
+          "text_chars": 413,
+          "images": 0
+        },
+        {
+          "page": 8,
+          "text_chars": 225,
+          "images": 1
+        },
+        {
+          "page": 9,
+          "text_chars": 239,
+          "images": 1
+        },
+        {
+          "page": 10,
+          "text_chars": 199,
+          "images": 1
+        },
+        {
+          "page": 11,
+          "text_chars": 475,
+          "images": 0
+        },
+        {
+          "page": 12,
+          "text_chars": 447,
+          "images": 0
+        }
+      ],
+      "out_of_page_text": [],
+      "replacement_glyphs": 0,
+      "contains_primary_f1": true,
+      "contains_seed_mean": true
+    }
+  },
+  "slides": {
+    "slides": 12,
+    "expected_slides": 12,
+    "titles_present": true,
+    "notes_present": true
+  },
+  "links": {
+    "checked": 418,
+    "missing": []
+  },
+  "tests": [
+    {
+      "tests": "23",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0"
+    }
+  ],
+  "manual_pending": [
+    "Names/MSSV and actual contribution confirmation",
+    "AI declaration sign-off",
+    "22 independent expert reviews",
+    "Course rubric/submission confirmation"
+  ],
+  "rendering_scope": "Every PDF page rendered; DOCX/PPTX structure checked. PDF report from same Markdown, slide PDF from same layout spec; native Word/PowerPoint may paginate differently.",
+  "editorial_review": {
+    "all_passed": true,
+    "protected_evidence_files": 354,
+    "edited_markdown_files": 32,
+    "edited_word_files": 7
+  },
+  "all_automated_checks_pass": true
+}

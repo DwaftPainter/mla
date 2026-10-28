@@ -6,6 +6,8 @@
 |---|---|
 | Trạng thái hiện tại | [status.md](status.md) |
 | Cài môi trường, CLI, input local và phạm vi tái lập | [reproduction.md](reproduction.md) |
+| Tự chạy đợt BERT-small mới: train, validation, khóa lựa chọn và test | [bert_small_training_guide.md](bert_small_training_guide.md) |
+| Kết quả BERT đã khóa/test và bộ bàn giao 28/10 | [Phân tích BERT](../reports/bert_final_analysis/analysis_report.md), [PDF/slide/checklist](../reports/summaries/final/handover_checklist.md) |
 | Kế hoạch còn lại | [note.md](../note.md) |
 | Mapping toàn dự án, preparation v1/v2 | [note_project_guide.md](note_project_guide.md) |
 | Đề cương và câu hỏi nghiên cứu ban đầu | [proposal.md](proposal.md) |
@@ -45,3 +47,10 @@ Các con số tests 13, 99 và 96/1 skip thuộc những tập kiểm khác nhau
 - Final report dự án và slide tổng kết chưa chốt. Các bản nháp đã bỏ được giữ riêng trong documentation_archive.
 
 Ánh xạ trước/sau và bản sao phục hồi: [reports/organization](../reports/organization/README.md). Theo yêu cầu công bố code và docs, toàn bộ tài liệu hiện hành, note/reference và báo cáo để đọc được quản lý bằng Git. Corpus và artifact riêng tư vẫn giữ local; phạm vi cụ thể ở reports/README.md. Quy tắc chỉ push proposal trong ghi chép cũ đã được thay thế bởi yêu cầu này; các protocol lịch sử giữ nguyên nội dung.
+
+## Tài liệu phát sinh tuần 1
+
+- contextual_models_related_work.md: bảng literature và tổng hợp.
+- implementation_data_audit.md: audit implementation và ngôn ngữ.
+- bert_experiment_protocol.md: cấu hình đóng dấu trước fine-tuning; không sửa ngược theo kết quả.
+- contextual_model_validation_report.md/.docx: kết quả mới; thay các mô tả tiến độ trước khi chạy tuần 1.

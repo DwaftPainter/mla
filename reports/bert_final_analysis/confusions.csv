@@ -1,0 +1,101 @@
+﻿model,gold,prediction,count
+Majority,ArtOrDet,Prep,0
+Majority,ArtOrDet,Nn,0
+Majority,ArtOrDet,Vform,0
+Majority,ArtOrDet,SVA,0
+Majority,Prep,ArtOrDet,362
+Majority,Prep,Nn,0
+Majority,Prep,Vform,0
+Majority,Prep,SVA,0
+Majority,Nn,ArtOrDet,565
+Majority,Nn,Prep,0
+Majority,Nn,Vform,0
+Majority,Nn,SVA,0
+Majority,Vform,ArtOrDet,216
+Majority,Vform,Prep,0
+Majority,Vform,Nn,0
+Majority,Vform,SVA,0
+Majority,SVA,ArtOrDet,229
+Majority,SVA,Prep,0
+Majority,SVA,Nn,0
+Majority,SVA,Vform,0
+POS rule,ArtOrDet,Prep,19
+POS rule,ArtOrDet,Nn,228
+POS rule,ArtOrDet,Vform,28
+POS rule,ArtOrDet,SVA,7
+POS rule,Prep,ArtOrDet,14
+POS rule,Prep,Nn,1
+POS rule,Prep,Vform,12
+POS rule,Prep,SVA,2
+POS rule,Nn,ArtOrDet,90
+POS rule,Nn,Prep,1
+POS rule,Nn,Vform,6
+POS rule,Nn,SVA,3
+POS rule,Vform,ArtOrDet,20
+POS rule,Vform,Prep,3
+POS rule,Vform,Nn,25
+POS rule,Vform,SVA,14
+POS rule,SVA,ArtOrDet,13
+POS rule,SVA,Prep,5
+POS rule,SVA,Nn,13
+POS rule,SVA,Vform,102
+LR Full,ArtOrDet,Prep,19
+LR Full,ArtOrDet,Nn,59
+LR Full,ArtOrDet,Vform,13
+LR Full,ArtOrDet,SVA,4
+LR Full,Prep,ArtOrDet,15
+LR Full,Prep,Nn,1
+LR Full,Prep,Vform,15
+LR Full,Prep,SVA,3
+LR Full,Nn,ArtOrDet,134
+LR Full,Nn,Prep,1
+LR Full,Nn,Vform,6
+LR Full,Nn,SVA,5
+LR Full,Vform,ArtOrDet,18
+LR Full,Vform,Prep,2
+LR Full,Vform,Nn,20
+LR Full,Vform,SVA,29
+LR Full,SVA,ArtOrDet,9
+LR Full,SVA,Prep,5
+LR Full,SVA,Nn,13
+LR Full,SVA,Vform,18
+Tree Full,ArtOrDet,Prep,18
+Tree Full,ArtOrDet,Nn,127
+Tree Full,ArtOrDet,Vform,19
+Tree Full,ArtOrDet,SVA,2
+Tree Full,Prep,ArtOrDet,23
+Tree Full,Prep,Nn,2
+Tree Full,Prep,Vform,15
+Tree Full,Prep,SVA,2
+Tree Full,Nn,ArtOrDet,117
+Tree Full,Nn,Prep,1
+Tree Full,Nn,Vform,4
+Tree Full,Nn,SVA,5
+Tree Full,Vform,ArtOrDet,18
+Tree Full,Vform,Prep,1
+Tree Full,Vform,Nn,21
+Tree Full,Vform,SVA,27
+Tree Full,SVA,ArtOrDet,9
+Tree Full,SVA,Prep,4
+Tree Full,SVA,Nn,12
+Tree Full,SVA,Vform,24
+BERT-small primary,ArtOrDet,Prep,19
+BERT-small primary,ArtOrDet,Nn,46
+BERT-small primary,ArtOrDet,Vform,15
+BERT-small primary,ArtOrDet,SVA,5
+BERT-small primary,Prep,ArtOrDet,14
+BERT-small primary,Prep,Nn,2
+BERT-small primary,Prep,Vform,9
+BERT-small primary,Prep,SVA,1
+BERT-small primary,Nn,ArtOrDet,120
+BERT-small primary,Nn,Prep,0
+BERT-small primary,Nn,Vform,6
+BERT-small primary,Nn,SVA,9
+BERT-small primary,Vform,ArtOrDet,8
+BERT-small primary,Vform,Prep,7
+BERT-small primary,Vform,Nn,9
+BERT-small primary,Vform,SVA,34
+BERT-small primary,SVA,ArtOrDet,16
+BERT-small primary,SVA,Prep,5
+BERT-small primary,SVA,Nn,10
+BERT-small primary,SVA,Vform,35

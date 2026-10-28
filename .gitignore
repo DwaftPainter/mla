@@ -57,6 +57,20 @@ __pycache__/
 !/reports/evaluation_followup/tests.xml
 !/reports/organization/*.json
 
+# Reviewed BERT extension aggregates and delivery artifacts; no private corpus.
+!/reports/bert_final_analysis/*.json
+!/reports/bert_final_analysis/*.csv
+!/reports/bert_final_analysis/figures/*.png
+!/reports/bert_final_analysis/tests.xml
+!/reports/maintenance/editorial_verification.json
+!/reports/summaries/final/*.pdf
+!/reports/summaries/final/*.pptx
+!/reports/summaries/final/presentation_content.json
+!/reports/summaries/final/delivery_manifest.json
+!/reports/summaries/final/delivery_verification.json
+!/reports/summaries/final/NUCLE_delivery_20261028.zip
+!/reports/summaries/final/NUCLE_delivery_20261028.sha256
+
 # Historical backups and bundles are local, including duplicate documents.
 /reports/**/documentation_archive/
 /reports/**/before_layout/

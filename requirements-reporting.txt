@@ -1,0 +1,4 @@
+# Optional, isolated document-export environment; do not alter the training env.
+reportlab==4.4.3
+python-pptx==1.0.2
+pymupdf==1.26.4

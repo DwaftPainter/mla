@@ -1,30 +1,34 @@
-# BÁO CÁO TỔNG KẾT DỰ ÁN
+# Báo cáo tổng kết dự án
 
-PHÂN LOẠI NĂM LOẠI LỖI NGỮ PHÁP TIẾNG ANH TRÊN NUCLE
+Phân loại năm loại lỗi ngữ pháp tiếng Anh trên NUCLE
 
 Câu gốc và vị trí lỗi đã biết • Đặc trưng ngôn ngữ • Logistic Regression • Decision Tree • BERT-small
 
-Cập nhật ngày 26/10/2026. Báo cáo sử dụng kết quả thực nghiệm và kiểm chứng đã lưu đến ngày 23/10/2026. Lượt cập nhật này tổng hợp tài liệu, không huấn luyện lại hoặc chấm test mới. Ngôn ngữ: tiếng Việt.
+Báo cáo cập nhật ngày 28/10/2026, tổng hợp kết quả các mô hình cổ điển và đợt BERT-small mở rộng. Các thí nghiệm cổ điển và chẩn đoán ban đầu được thực hiện ngày 23/10; BERT được huấn luyện, chọn cấu hình và đánh giá test ngày 28/10. Phần tổng hợp dưới đây sử dụng kết quả đã lưu, không thực hiện thêm lượt huấn luyện hoặc dự đoán test nào.
 
 ## Tóm tắt
 
-Dự án nghiên cứu phân loại một lỗi đã được định vị trong câu tiếng Anh gốc thành năm nhãn ArtOrDet, Prep, Nn, Vform và SVA. Từ 44.912 annotation của 1.397 bài viết, pipeline giữ đủ 15.788 annotation mục tiêu, tương ứng 11.272 câu đầu vào. Dữ liệu được chia theo nhóm bài viết có quan hệ trùng lặp, với 11.052 mẫu train, 2.368 validation và 2.368 test. Encoder đặc trưng chỉ fit trên train; cấu hình được chọn trên validation và khóa trước khi chấm test.
+Dự án xem xét khả năng phân loại lỗi ngữ pháp tiếng Anh khi vị trí lỗi trong câu đã được xác định. Mỗi lỗi được gán vào một trong năm nhóm: ArtOrDet, Prep, Nn, Vform và SVA. Từ 44.912 annotation trong 1.397 bài viết của NUCLE, quy trình giữ lại 15.788 mẫu thuộc năm nhóm này, tương ứng 11.272 câu. Dữ liệu được chia theo nhóm bài viết để hạn chế rò rỉ, gồm 11.052 mẫu train, 2.368 validation và 2.368 test.
 
-Trên test, LR Full đạt macro-F1 0,8163 và accuracy 0,8357; Tree Full đạt 0,7996; POS rule đạt 0,7106; Majority đạt 0,1184. Chênh lệch LR−Tree là 0,0166, CI95% [0,0018; 0,0301]; LR−POS là 0,1057, CI95% [0,0829; 0,1288]. Ablation cho thấy POS và lexical mang thông tin hữu ích, trong khi bằng chứng cải thiện do morphology/dependency phụ thuộc mô hình và thiết kế phép so sánh. BERT-small đạt validation macro-F1 trung bình 0,1984 ± 0,0030 trên ba seed và chưa được chấm test. Các phép chẩn đoán cho thấy mô hình có gradient và có thể học thuộc tập nhỏ, nhưng chưa chứng minh khả năng tổng quát hóa tốt.
+Trên tập test, LR Full đạt macro-F1 0,8163; Tree Full đạt 0,7996; POS rule đạt 0,7106; Majority đạt 0,1184. LR cao hơn Tree 0,0166, với CI95% [0,0018; 0,0301], và cao hơn POS 0,1057, với CI95% [0,0829; 0,1288]. Các thí nghiệm loại bỏ đặc trưng cho thấy thông tin từ vựng và POS có ích trong thiết kế đã thử. Vai trò bổ sung của hình thái và dependency thay đổi theo mô hình và cách so sánh.
 
-Phân tích lỗi tập trung vào Nn/ArtOrDet, Vform/SVA, span nhiều token, lỗi thiếu từ được neo vào span không rỗng và giới hạn parser. Kiểm chứng đã tái lập chuỗi từ SGML đến 52 lượt fit của đợt đánh giá, không có khác biệt prediction test. Audit ngôn ngữ có hỗ trợ AI; 17 ca còn chờ chuyên gia. Báo cáo phân biệt kết quả đo được, diễn giải và giả thuyết cho nghiên cứu tiếp theo.
+BERT-small ở đợt ban đầu chỉ đạt validation macro-F1 0,1984 ± 0,0030. Đợt mở rộng thử hai cách lấy biểu diễn và learning rate riêng cho encoder và classifier, đồng thời theo dõi validation để dừng sớm. Cấu hình span mean được chọn có validation macro-F1 trung bình 0,8183 ± 0,0011 và test 0,8182 ± 0,0038 qua ba seed. Với seed chính đã xác định trước test, BERT đạt macro-F1 0,8146 và accuracy 0,8438. Chênh lệch BERT−LR là −0,0017, CI95% [−0,0184; 0,0182], nên chưa đủ bằng chứng để kết luận mô hình nào tốt hơn.
+
+Phân tích lỗi cho thấy hai cặp Nn/ArtOrDet và Vform/SVA vẫn khó phân biệt. Một số ca có span rộng, nhiều chỉnh sửa cùng lúc hoặc lỗi thiếu từ được neo vào một đoạn văn bản không rỗng. Phần kiểm chứng đã tái lập 52 lượt huấn luyện của đợt đánh giá cổ điển và tái tạo đúng dự đoán test đã lưu. Các nhận xét ngôn ngữ có hỗ trợ AI; 22 ID trong hàng đợi hợp nhất vẫn cần chuyên gia xem lại. Vì vậy, báo cáo phân biệt kết quả đo được với những cách giải thích còn cần kiểm tra.
 
 ## Hướng dẫn đọc và quy ước
 
-Các chỉ số P/R/F1 và accuracy nằm trên thang 0–1; 0,01 tương đương 1 điểm phần trăm trên thang 0–100. Bảng định lượng được sinh trực tiếp từ CSV/JSON; dấu chấm được giữ trong các bảng số để dễ đối chiếu artifact. CI là khoảng tin cậy bootstrap theo connected group, còn ± của BERT là độ lệch chuẩn mẫu giữa seed. N/A nghĩa là không có dữ liệu hoặc phép ước lượng không đủ điều kiện, không phải 0.
+Trong báo cáo, **span** là đoạn văn bản được đánh dấu là vị trí lỗi. **Validation** dùng để chọn cấu hình, còn **test** dùng để đánh giá sau khi đã chốt lựa chọn. **Seed** xác định các yếu tố ngẫu nhiên của một lượt huấn luyện; **checkpoint** là trạng thái mô hình được lưu để đánh giá hoặc tiếp tục chạy. Các tên này được giữ trong bảng để dễ đối chiếu với mã nguồn.
 
-Ưu tiên bằng chứng: reviewed_overall_results.csv và review_report.md → artifact final_evaluation → báo cáo validation/chẩn đoán → proposal và tài liệu tiến độ lịch sử. Các dòng “test chưa chấm” trong tài liệu tuần 1 là trạng thái lịch sử. selection_summary.json có test_scored=false vì được ghi trước chấm test; test_metrics.json và các kiểm chứng sau đó xác nhận test đã hoàn tất. Lượt tạo báo cáo này không huấn luyện lại hoặc thay đổi gold.
+Các chỉ số precision, recall, F1 và accuracy được báo cáo trên thang 0–1; chênh lệch 0,01 tương đương một điểm phần trăm. CI là khoảng tin cậy bootstrap theo nhóm bài viết. Dấu ± ở kết quả BERT biểu thị độ lệch chuẩn mẫu giữa các seed, không phải CI. N/A nghĩa là chưa có dữ liệu hoặc chưa đủ điều kiện ước lượng, thay vì điểm số bằng 0. Các bảng giữ dấu chấm thập phân như trong tệp kết quả để thuận tiện đối chiếu.
+
+Kết quả BERT mở rộng được đối chiếu với các bảng và tệp kiểm chứng trong reports/bert_final_analysis; delivery_manifest.json ghi nguồn của bản báo cáo cập nhật. Với các mô hình cổ điển, bảng reviewed_overall_results.csv và báo cáo rà soát là nguồn ưu tiên. Khi đọc tài liệu cũ, cần chú ý mốc thực nghiệm: chẳng hạn, test_scored=false trong selection_summary.json chỉ cho biết tệp được tạo trước lúc chấm test. Các tệp test_metrics.json và kiểm chứng sau đó ghi nhận kết quả đã hoàn tất.
 
 Mục lục nội dung: 1. Bài toán; 2. Nghiên cứu liên quan; 3. Dữ liệu; 4. Phương pháp; 5. Thiết kế thực nghiệm; 6. Kết quả test; 7. Ablation; 8. Phân tích lỗi; 9. BERT; 10. Tái lập; 11. Thảo luận và kết luận; Phụ lục và tài liệu tham khảo.
 
 # 1. Bài toán và câu hỏi nghiên cứu
 
-Đơn vị quan sát là một annotation, không phải một câu độc lập. Đầu vào x=(sentence, error_start, error_end, error_span); đầu ra là một nhãn trong tập năm lớp. Hai annotation trong cùng câu có thể có nhãn khác nhau. Đây là bài toán phân loại tại gold span, không đánh giá tự phát hiện vị trí lỗi, sinh câu sửa hay chất lượng phản hồi học tập. Correction chỉ phục vụ kiểm tra dữ liệu và đọc lỗi sau prediction; không đi vào predictor.
+Mỗi mẫu tương ứng với một annotation, nên hai lỗi trong cùng một câu có thể tạo hai mẫu với nhãn khác nhau. Đầu vào gồm câu gốc, vị trí bắt đầu và kết thúc lỗi, cùng đoạn văn bản tại vị trí đó: x=(sentence, error_start, error_end, error_span). Mô hình cần chọn một trong năm nhãn. Vị trí lỗi đã được cung cấp; nghiên cứu chưa đánh giá khả năng tự tìm lỗi, viết lại câu hoặc đưa phản hồi cho người học. Bản sửa chỉ được dùng khi rà soát dữ liệu và đọc lỗi sau dự đoán.
 
 Bảng 1. Năm nhãn và nội dung phân loại
 
@@ -48,11 +52,11 @@ Bảng 2. Câu hỏi nghiên cứu
 
 Nguồn: docs/note_project_guide.md; docs/final_evaluation_protocol.md
 
-Đóng góp thực tế gồm pipeline giữ offset và provenance, split chống rò rỉ theo nhóm, triển khai LR/Tree và các đối chứng có thể truy vết, thí nghiệm BERT nhỏ có kết quả âm được báo cáo đầy đủ, cùng phân tích định lượng và audit không tự sửa nhãn sau test.
+Dự án xây dựng một quy trình có thể truy vết từ annotation nguồn đến dự đoán, giữ nguyên offset và chia tập theo nhóm bài viết. Trên cùng thiết lập, LR, Tree và các đối chứng được so sánh qua nhiều nhóm đặc trưng. Phần BERT giữ cả kết quả chưa thành công ban đầu và kết quả mở rộng sau chẩn đoán. Phân tích định lượng được bổ sung bằng rà soát từng ca, trong khi nhãn gốc vẫn giữ nguyên sau khi xem test.
 
 # 2. Cơ sở nghiên cứu và tài liệu liên quan
 
-NUCLE [REF01] cung cấp nguồn annotation; CoNLL-2013 [REF02] và tổng quan GEC [REF03] đặt bài toán trong bối cảnh xử lý lỗi người học. Dự án thu hẹp phạm vi để đo trực tiếp khả năng phân loại loại lỗi từ câu gốc tại vị trí đã biết. Điểm F0.5 của hệ sửa câu hay điểm chất lượng giải thích không thể so trực tiếp với macro-F1 năm lớp ở đây.
+NUCLE [REF01] là nguồn annotation của nghiên cứu. CoNLL-2013 [REF02] và tổng quan GEC [REF03] giúp đặt bài toán trong bối cảnh xử lý lỗi của người học. Thay vì xây dựng một hệ sửa câu hoàn chỉnh, dự án tập trung vào câu hỏi hẹp hơn: từ câu gốc và vị trí lỗi đã biết, có thể nhận ra loại lỗi tốt đến đâu? Vì mục tiêu và thước đo khác nhau, macro-F1 năm lớp ở đây không được so trực tiếp với F0.5 của hệ sửa câu hoặc điểm chất lượng giải thích.
 
 Bảng 3. Nghiên cứu liên quan được vận dụng và giới hạn so sánh
 
@@ -74,7 +78,7 @@ Nguồn: docs/literature/contextual_models_related_work.md; reference.md
 
 LET [REF07] và MoECE [REF08] củng cố động cơ nghiên cứu thông tin loại lỗi và ablation. GEE! [REF09] dùng cặp câu sai–sửa, còn Coyne et al. [REF10] nghiên cứu feedback với annotation upstream đã biết. Các thiết lập đó không phải đối chứng cùng đầu vào với dự án. Nagata et al. [REF11] cùng BERT [REF14] tạo cơ sở thử biểu diễn ngữ cảnh; checkpoint compact gắn với [REF20]. Koyama et al. [REF12] hỗ trợ đánh giá theo hiện tượng. SERCL [REF13] và nghiên cứu độ bền parser [REF15] giúp xác định giới hạn của đặc trưng tự động.
 
-Báo cáo kế thừa tổng hợp literature có trong repository, không tuyên bố systematic review/PRISMA hoàn chỉnh hoặc khoảng trống tuyệt đối của toàn lĩnh vực. Không triển khai LET, MoE, XGEC hay SHAP. Các nguồn chỉ dành cho screening hoặc chưa được dùng trong lập luận không được đưa vào danh mục trích dẫn chính.
+Phần tài liệu liên quan dựa trên các nguồn đã được tổng hợp trong repository. Nó giúp giải thích lựa chọn phương pháp và giới hạn so sánh, chưa phải một tổng quan hệ thống hoặc quy trình PRISMA hoàn chỉnh. Dự án không triển khai LET, MoE, XGEC hay SHAP. Các nguồn mới ở bước sàng lọc và chưa được dùng trong lập luận được giữ ngoài danh mục trích dẫn chính.
 
 # 3. Dữ liệu, chất lượng và tiền xử lý
 
@@ -128,11 +132,11 @@ Bảng 6. Cờ chất lượng dữ liệu, không đồng nghĩa lỗi annotati
 
 Nguồn: reports/summaries/data/nucle_data_quality.md
 
-Có 455 cặp span chồng lấp trên toàn nguồn; số cặp khác số annotation được gắn cờ. Các cờ có thể đồng thời xuất hiện nên không cộng để suy số mẫu lỗi. Không có offset sai hoặc correction bị thiếu trong audit; 4 annotation qua paragraph đều nằm ngoài năm lớp. Tập mục tiêu giữ cả 6 no-op, 170 annotation overlap, 11 same-span-different-label và 2 long-span. Các quyết định không tự xóa hoặc sửa nhãn giúp tránh làm đẹp dữ liệu bằng phán đoán sau thực nghiệm.
+Có 455 cặp span chồng lấp trên toàn nguồn; số cặp khác số annotation được gắn cờ. Các cờ có thể đồng thời xuất hiện nên không cộng để suy số mẫu lỗi. Không có offset sai hoặc bản sửa bị thiếu trong audit; 4 annotation qua paragraph đều nằm ngoài năm lớp. Tập mục tiêu giữ cả 6 no-op, 170 annotation overlap, 11 same-span-different-label và 2 long-span. Các quyết định không tự xóa hoặc sửa nhãn giúp tránh làm đẹp dữ liệu bằng phán đoán sau thực nghiệm.
 
 ## 3.1. Bảo toàn offset và thay đổi preparation v1 → v2
 
-Parser đọc paragraph từ SGML; offset dùng chỉ số Python str theo khoảng nửa mở [start,end). Không phải byte offset SGML. Invariant bắt buộc: sentence[error_start:error_end] = error_span. Không bỏ stopword, dấu câu, mạo từ hoặc chuẩn hóa lại source text. Một token giao span khi token_start < error_end và error_start < token_end. Partial-token được giữ nguyên span ký tự nhưng dùng token bao phủ làm biểu diễn.
+Parser đọc paragraph từ SGML; offset dùng chỉ số Python str theo khoảng nửa mở [start, end). Không phải byte offset SGML. Invariant bắt buộc: sentence[error_start: error_end] = error_span. Không bỏ stopword, dấu câu, mạo từ hoặc chuẩn hóa lại source text. Một token giao span khi token_start < error_end và error_start < token_end. Partial-token được giữ nguyên span ký tự nhưng dùng token bao phủ làm biểu diễn.
 
 Bảng 7. Alignment trong preparation v2
 
@@ -144,9 +148,9 @@ Bảng 7. Alignment trong preparation v2
 
 Nguồn: data_set/processed/nucle_preparation_v2/summary.json
 
-Preparation v2 bổ sung luật text-only cho citation, abbreviation, ellipsis và dấu câu dính từ, không đọc gold/correction để quyết định biên câu. So v1, 544/15.788 mẫu đổi input (3,45%), 533 đổi sentence ID, 30 đổi context và 2 đổi tokenization span; số câu tăng từ 11.262 lên 11.272. Offset nguồn và metadata nguồn không đổi; không mất mẫu mục tiêu. Hai ca boundary 31297/39538 vẫn unresolved, khác với 96 annotation unresolved trong quality review.
+Preparation v2 bổ sung luật text-only cho citation, abbreviation, ellipsis và dấu câu dính từ, không đọc gold/correction để quyết định biên câu. So v1, 544/15.788 mẫu đổi đầu vào (3,45%), 533 đổi sentence ID, 30 đổi context và 2 đổi tokenization span; số câu tăng từ 11.262 lên 11.272. Offset nguồn và thông tin mô tả nguồn không đổi; không mất mẫu mục tiêu. Hai ca boundary 31297/39538 vẫn unresolved, khác với 96 annotation unresolved trong quality review.
 
-Không có span rỗng trong tập mục tiêu. Thống kê edit cơ học ban đầu ghi 12.821 replacement và 2.967 deletion; replacement dựa trên span/correction không rỗng vẫn có thể là thêm từ bên trong hoặc quanh span. Audit sau này xác minh 16/40 ca có correction chỉ thêm từ theo phép đối chiếu token đã quy định. Do đó không diễn giải “0 empty span” thành “0 lỗi thiếu từ”.
+Không có span rỗng trong tập mục tiêu. Thống kê edit cơ học ban đầu ghi 12.821 replacement và 2.967 deletion; replacement dựa trên span/correction không rỗng vẫn có thể là thêm từ bên trong hoặc quanh span. Audit sau này xác minh 16/40 ca có bản sửa chỉ thêm từ theo phép đối chiếu token đã quy định. Do đó không diễn giải “0 empty span” thành “0 lỗi thiếu từ”.
 
 ## 3.2. Grouped split và kiểm soát trùng lặp
 
@@ -160,7 +164,7 @@ Bảng 8. Phân chia dữ liệu theo nhóm
 
 Nguồn: data_set/split/nucle_group_split/split_summary.json
 
-Những bài liên kết qua nội dung trùng được gom vào connected components rồi chia nhóm với seed 20261013, mục tiêu 70/15/15. Trên toàn 1.397 bài có 1.280 connected groups; nhóm lớn nhất gồm 34 bài/338 mẫu. Các partition có annotation mục tiêu gồm 1.241 groups và 1.355 bài, nên không cộng số nhóm partition để suy số nhóm toàn corpus. Có 7 nhóm boilerplate được miễn theo policy và không chứa annotation mục tiêu. Không có essay/group vượt qua nhiều split trong kiểm chứng. Điều này giảm rò rỉ do trùng lặp chính xác/chuẩn hóa đã kiểm, chưa bảo đảm loại mọi near-duplicate ngữ nghĩa.
+Các bài có nội dung trùng được nối thành những nhóm liên thông, sau đó chia tập với seed 20261013 theo mục tiêu 70/15/15. Toàn bộ 1.397 bài tạo thành 1.280 nhóm; nhóm lớn nhất có 34 bài và 338 mẫu. Tập có nhãn mục tiêu gồm 1.355 bài thuộc 1.241 nhóm, nên tổng số nhóm ở các partition không đại diện cho toàn corpus. Bảy nhóm boilerplate được miễn theo quy tắc đã định và không chứa mẫu mục tiêu. Không có bài hoặc nhóm đi qua nhiều tập. Cách chia này giảm rò rỉ do những dạng trùng đã kiểm tra, nhưng chưa loại trừ mọi trường hợp gần trùng về nghĩa.
 
 # 4. Đặc trưng và mô hình triển khai
 
@@ -176,11 +180,11 @@ Bảng 9. Năm nhóm đặc trưng
 
 Nguồn: src/features/nucle_features.py; số chiều suy từ các subset selection_summary.json
 
-Tổng Full là 16.180 chiều. Cửa sổ lexical cục bộ gồm tối đa hai token mỗi phía; parser đọc câu gốc để trích thông tin cú pháp. Numeric giữ thang gốc, không z-score. Giới hạn 500 chỉ áp dụng pooled n-gram vocabulary; các lexical slot có categorical vocabulary riêng. Encoder fit trên train và có xử lý unknown/missing. Nhãn, correction, IDs và review metadata không đi vào predictors. LR vì vậy đã sử dụng một phần thông tin ngữ cảnh toàn câu thông qua dependency, không thể gọi là mô hình hoàn toàn không có ngữ cảnh.
+Biểu diễn Full có 16.180 chiều. Thông tin từ vựng lấy trong span và tối đa hai token ở mỗi phía; thông tin cú pháp được trích từ bản phân tích cả câu. Các giá trị số giữ thang gốc, không chuẩn hóa z-score. Giới hạn 500 chỉ áp dụng cho kênh n-gram dùng chung, còn các vị trí từ vựng trái/phải có từ vựng riêng. Encoder chỉ học từ train và có cách xử lý giá trị chưa gặp hoặc bị thiếu. Nhãn, bản sửa, ID và quyết định review không được đưa vào đầu vào dự đoán. Vì có dependency từ cả câu, LR vẫn sử dụng một phần thông tin ngữ cảnh ngoài cửa sổ từ vựng cục bộ.
 
 ## 4.1. Majority và POS rule
 
-Majority lấy nhãn phổ biến nhất trên train. POS rule có hai ánh xạ cố định ADP→Prep, DET→ArtOrDet; các POS signature khác dùng nhãn đa số học từ train, signature chưa gặp quay về majority toàn train. Đây là đối chứng có học thống kê train, không phải bộ quy tắc ngữ pháp hoàn toàn thủ công. Signature nhiều token và primary_upos cho lát cắt được phân biệt rõ trong code.
+Majority luôn dự đoán nhãn phổ biến nhất trong train. POS rule dùng hai ánh xạ cố định ADP→Prep và DET→ArtOrDet. Với các POS signature khác, nó chọn nhãn phổ biến nhất đã học từ train; nếu chưa gặp signature đó, nó quay về Majority. Vì vậy, đây là đối chứng kết hợp quy tắc với thống kê train. POS signature của cả span và primary_upos dùng cho các lát cắt được xử lý riêng trong mã.
 
 ## 4.2. Multinomial Logistic Regression
 
@@ -188,7 +192,7 @@ p(y=k|x) = exp(xᵀwₖ+bₖ) / Σⱼ exp(xᵀwⱼ+bⱼ); prediction = argmaxₖ
 
 J(W,b) = [Σᵢ α(yᵢ)·(−log p(yᵢ|xᵢ)) / Σᵢ α(yᵢ)] + ||W||²/(2Cn). Với balanced, α(k)=n/(5nₖ); nếu không, α=1. Intercept không bị L2. Code dùng sparse COO PyTorch và LBFGS strong_wolfe, không phải gọi sklearn LogisticRegression.
 
-max_iter=1000, max_eval=1250, tolerance_grad=10⁻⁶, tolerance_change=10⁻⁹. Run cuối dùng 10 CPU threads và seed 20261013. “Converged” theo contract có thể là dừng change_tolerance, không đồng nghĩa gradient đạt ngưỡng. Các cấu hình chạm giới hạn không eligible cho lựa chọn.
+max_iter=1000, max_eval=1250, tolerance_grad=10⁻⁶, tolerance_change=10⁻⁹. Run cuối dùng 10 CPU threads và seed 20261013. “Converged” theo quy tắc đã định có thể là dừng change_tolerance, không đồng nghĩa gradient đạt ngưỡng. Các cấu hình chạm giới hạn không đủ điều kiện lựa chọn cho lựa chọn.
 
 ## 4.3. Decision Tree
 
@@ -210,17 +214,17 @@ Bảng 10. Grid và ngân sách lựa chọn
 
 Nguồn: docs/final_evaluation_protocol.md; selection_summary.json
 
-Mask span lexical xóa danh tính lexical của token giao span trước khi fit masked encoder riêng trên train; không nối n-gram qua vùng che, nhưng giữ parse/POS/morph và context. Nonlexical loại toàn bộ L. Bỏ P/M/D là bỏ nhóm feature theo tên; D vẫn chứa POS/morph của head/subject. Vì mỗi variant được tune riêng, ablation phản ánh hiệu quả pipeline dưới cùng ngân sách lựa chọn, không cô lập nhân quả của một nhóm feature khi giữ mọi hyperparameter bất biến.
+Thí nghiệm che từ vựng bỏ danh tính các từ giao với span trước khi xây dựng encoder riêng từ train, nhưng vẫn giữ ngữ cảnh và phân tích POS, hình thái, dependency của câu gốc. Hai phía không được nối thành n-gram giả qua vùng bị che. Biến thể nonlexical bỏ toàn bộ nhóm L. Các phép bỏ P, M hoặc D chỉ loại nhóm đặc trưng mang tên đó; thông tin tương tự vẫn có thể còn trong nhóm khác. Hơn nữa, mỗi biến thể được chọn tham số riêng. Chênh lệch vì thế phản ánh hiệu quả của cả quy trình dưới ngân sách đã định, chưa cô lập tác động nhân quả của một nhóm đặc trưng.
 
 Precisionₖ=TPₖ/(TPₖ+FPₖ); Recallₖ=TPₖ/(TPₖ+FNₖ); F1ₖ=2TPₖ/(2TPₖ+FPₖ+FNₖ); Macro-F1=(1/K)ΣₖF1ₖ. Accuracy là tỷ lệ dự đoán đúng. Mẫu số 0 được gán 0; subset rỗng ghi N/A. Toàn tập và span bins dùng K=5. Cặp gold và POS slices dùng hai nhãn gold cố định; prediction vẫn năm lớp, prediction ngoài cặp vẫn tạo false negative.
 
-Lock lúc 2026-10-23 08:39:33 UTC, test bắt đầu 08:39:42 UTC. Hash lock: 2f2f9fd1ff19805255f300d4eaf646aa964e3e643ce692027f528ba5b9c198ee. Cấu hình, encoder, code và input được ghi hash trước scoring. Không chọn lại mô hình theo điểm test hoặc sửa annotation sau khi xem lỗi.
+Lock lúc 2026-10-23 08:39:33 UTC, test bắt đầu 08:39:42 UTC. Hash lock: 2f2f9fd1ff19805255f300d4eaf646aa964e3e643ce692027f528ba5b9c198ee. Cấu hình, encoder, code và đầu vào được ghi hash trước scoring. Không chọn lại mô hình theo điểm test hoặc sửa annotation sau khi xem lỗi.
 
 ## 5.1. Khoảng tin cậy theo nhóm
 
-Bootstrap B=1.000, seed 20261023, resample có hoàn lại G=97 connected groups của test; giữ toàn bộ annotation trong group. Cùng trọng số group được áp dụng cho mọi model và subset để tính paired differences. Với confusion Cg,m của group g/model m: Cᵇm=Σg wᵇg Cg,m; Δᵇ=F1(CᵇA)−F1(CᵇB). CI95% lấy percentile 2,5% và 97,5%.
+Các mẫu trong cùng bài viết có liên hệ với nhau, nên khoảng tin cậy được tính bằng bootstrap theo nhóm thay vì lấy lại từng dòng độc lập. Với B=1.000, seed 20261023 và G=97 nhóm test, mỗi lần lấy mẫu giữ toàn bộ annotation trong nhóm được chọn. Cùng trọng số nhóm được dùng cho mọi mô hình để tính chênh lệch paired. Nếu Cg,m là ma trận nhầm lẫn của nhóm g và mô hình m, thì Cᵇm=Σg wᵇg Cg,m và Δᵇ=F1(CᵇA)−F1(CᵇB). CI95% lấy hai percentile 2,5% và 97,5%.
 
-CI subset yêu cầu ít nhất 20 samples, 10 groups và đủ hai nhãn gold theo phép so sánh; cần ít nhất 950/1.000 replicate hợp lệ. Thiếu lớp vẫn giữ label set cố định; subset rỗng được loại replicate và đếm. Các CI là pointwise, chưa hiệu chỉnh nhiều so sánh. Bootstrap không đo biến thiên do seed huấn luyện hoặc thay split; CI không phải bảo đảm hiệu quả trên corpus mới.
+CI subset yêu cầu ít nhất 20 các mẫu, 10 groups và đủ hai nhãn gold theo phép so sánh; cần ít nhất 950/1.000 replicate hợp lệ. Thiếu lớp vẫn giữ label set cố định; subset rỗng được loại replicate và đếm. Các CI là pointwise, chưa hiệu chỉnh nhiều so sánh. Bootstrap không đo biến thiên do seed huấn luyện hoặc thay split; CI không phải bảo đảm hiệu quả trên corpus mới.
 
 # 6. Kết quả đánh giá test
 
@@ -232,10 +236,11 @@ Bảng 11. Benchmark chính trên test và validation
 | POS rule | 0.7048 | 0.7106 | [0.6766; 0.7365] | 0.7441 | 0.7387 | 0.7184 |
 | LR Full | 0.8067 | 0.8163 | [0.7876; 0.8382] | 0.8357 | 0.8271 | 0.8073 |
 | Tree Full | 0.7879 | 0.7996 | [0.7693; 0.8246] | 0.8095 | 0.8064 | 0.7937 |
+| BERT-small primary | 0.8173 | 0.8146 | [0.7919; 0.8350] | 0.8438 | 0.8221 | 0.8094 |
 
-Nguồn: reports/evaluation_followup/reviewed_overall_results.csv
+Nguồn: reports/bert_final_analysis/overall_results.csv. BERT dùng seed chính 20261013 đã khóa; mean test ba seed là 0,8182 ± 0,0038, không dùng seed tốt nhất để thay đại diện.
 
-![Hình 2. Kết quả test và khoảng tin cậy từ 1.000 paired group-bootstrap.](figures/02_benchmark_ci.png)
+![Hình 2. Các mô hình cổ điển và CI từ 1.000 paired group-bootstrap; hình10 bổ sung BERT.](figures/02_benchmark_ci.png)
 
 Nguồn: reviewed_overall_results.csv
 
@@ -247,10 +252,14 @@ Bảng 12. Chênh lệch paired giữa các mô hình chính
 | Tree Full - Majority | 0.6812 | [0.6470; 0.7073] |
 | LR Full - Tree Full | 0.0166 | [0.0018; 0.0301] |
 | LR Full - POS | 0.1057 | [0.0829; 0.1288] |
+| BERT primary - LR Full | -0.0017 | [-0.0184; 0.0182] |
+| BERT primary - Tree Full | 0.0149 | [-0.0049; 0.0378] |
+| BERT primary - POS rule | 0.1040 | [0.0785; 0.1343] |
+| BERT primary - Majority | 0.6962 | [0.6702; 0.7175] |
 
 Nguồn: reports/final_evaluation/paired_differences.csv
 
-LR Full dẫn đầu benchmark chính, hơn Tree 1,66 điểm phần trăm và POS 10,57 điểm phần trăm macro-F1; CI paired của cả hai chênh lệch nằm trên 0. Khoảng tin cậy riêng của hai mô hình có thể chồng lấp nhưng CI paired vẫn dương vì phép so sử dụng cùng group resamples. Không suy kết luận từ việc nhìn CI riêng rời rạc. Mức chênh validation→test của LR là +0,0096; đây là khác biệt giữa hai partition, không phải mô hình được cải thiện sau test.
+Trong các mô hình cổ điển, LR Full đạt điểm cao nhất. Nó hơn Tree 1,66 điểm phần trăm và POS 10,57 điểm phần trăm macro-F1; CI paired của hai chênh lệch đều nằm trên 0. Với BERT ở seed chính, CI chênh lệch so với LR hoặc Tree vẫn chứa 0, nên chưa thể xếp hạng chắc chắn các mô hình này. Cần đọc CI của chênh lệch paired thay vì chỉ nhìn các CI riêng có chồng lấp hay không. LR có test cao hơn validation +0,0096; đây là khác biệt giữa hai tập dữ liệu, không phải một lần cải thiện mô hình sau test.
 
 Bảng 13. Precision, recall và F1 từng lớp của LR Full trên test
 
@@ -264,19 +273,19 @@ Bảng 13. Precision, recall và F1 từng lớp của LR Full trên test
 
 Nguồn: reports/final_evaluation/test_metrics.json
 
-Bảng 14. F1 từng lớp của bốn đối chứng
+Bảng 14. F1 từng lớp của các mô hình chính
 
-| Nhãn | Majority | POS rule | LR Full | Tree Full |
-| --- | --- | --- | --- | --- |
-| ArtOrDet | 0.5922 | 0.7731 | 0.8693 | 0.8329 |
-| Prep | 0.0000 | 0.9212 | 0.9149 | 0.9065 |
-| Nn | 0.0000 | 0.7170 | 0.7781 | 0.7519 |
-| Vform | 0.0000 | 0.5946 | 0.7084 | 0.6979 |
-| SVA | 0.0000 | 0.5470 | 0.8106 | 0.8090 |
+| Nhãn | Majority | POS rule | LR Full | Tree Full | BERT primary |
+| --- | --- | --- | --- | --- | --- |
+| ArtOrDet | 0.5922 | 0.7731 | 0.8693 | 0.8329 | 0.8823 |
+| Prep | 0.0000 | 0.9212 | 0.9149 | 0.9065 | 0.9218 |
+| Nn | 0.0000 | 0.7170 | 0.7781 | 0.7519 | 0.8098 |
+| Vform | 0.0000 | 0.5946 | 0.7084 | 0.6979 | 0.7198 |
+| SVA | 0.0000 | 0.5470 | 0.8106 | 0.8090 | 0.7392 |
 
 Nguồn: reports/final_evaluation/test_metrics.json
 
-![Hình 3. So sánh F1 từng nhãn trên test.](figures/03_per_class_f1.png)
+![Hình 3. F1 từng nhãn của các mô hình cổ điển; hình12 bổ sung BERT.](figures/03_per_class_f1.png)
 
 Nguồn: test_metrics.json
 
@@ -329,7 +338,7 @@ Nguồn: reports/final_evaluation/paired_differences.csv
 
 POS là bước tăng lớn nhất trong chuỗi bổ sung: LR tăng 0,0766 [0,0581; 0,0975], Tree tăng 0,1670 [0,1400; 0,1897] khi chuyển từ S+L sang S+L+P. Điều này phù hợp với taxonomy có liên hệ mạnh với loại từ, nhưng không chứng minh chỉ POS là đủ: LR Full vẫn hơn POS rule 0,1057.
 
-Lexical hữu ích đối với LR: bỏ toàn L làm giảm 0,0281 [0,0142; 0,0394]; chỉ che lexical span làm giảm 0,0134 [0,0049; 0,0201]. Hai phép so khác nhau vì nonlexical còn loại thông tin lexical lân cận. Đây là bằng chứng lợi ích của biểu diễn lexical trong pipeline, không phải phép đo tỷ lệ “học thuộc từ” thuần túy. Tree masked đạt 0,8006, nhỉnh hơn Full 0,7996 nhưng CI Full−masked chứa 0; không thay Tree Full bằng variant thắng test.
+Lexical hữu ích đối với LR: bỏ toàn L làm giảm 0,0281 [0,0142; 0,0394]; chỉ che lexical span làm giảm 0,0134 [0,0049; 0,0201]. Hai phép so khác nhau vì nonlexical còn loại thông tin lexical lân cận. Đây là bằng chứng lợi ích của biểu diễn lexical trong quy trình, không phải phép đo tỷ lệ “học thuộc từ” thuần túy. Tree masked đạt 0,8006, nhỉnh hơn Full 0,7996 nhưng CI Full−masked chứa 0; không thay Tree Full bằng biến thể thắng test.
 
 Bỏ P làm giảm LR 0,0181 và Tree 0,0186, với CI dương. Với morphology, Tree Full−Full−M là 0,0171 [0,0008; 0,0360]; LR chỉ 0,0040 [−0,0066; 0,0136]. Với dependency, CI của cả LR và Tree chứa 0. Kết luận phù hợp là chưa có bằng chứng đủ mạnh về cải thiện ổn định ở những phép so đó, không phải morphology/dependency vô ích. Thông tin giữa nhóm có thể trùng nhau và kích thước test hữu hạn.
 
@@ -354,7 +363,7 @@ Bảng 17. Các hướng nhầm lẫn lớn nhất của LR Full
 
 Nguồn: Tính từ confusion trong test_metrics.json
 
-LR có 389 lỗi trên 2.368 mẫu. Hai chiều Nn↔ArtOrDet chiếm 193/389 lỗi (49.61%); Vform↔SVA chiếm 47/389 (12.08%). Tổng hai cặp chiếm 61.70% lỗi LR. Đây là tỷ trọng trong prediction test, không phải tỷ lệ nguyên nhân ngôn ngữ hay tỷ lệ annotation sai.
+LR có 389 lỗi trên 2.368 mẫu. Hai chiều Nn↔ArtOrDet chiếm 193/389 lỗi (49.61%); Vform↔SVA chiếm 47/389 (12.08%). Tổng hai cặp chiếm 61.70% lỗi LR. Đây là tỷ trọng trong dự đoán test, không phải tỷ lệ nguyên nhân ngôn ngữ hay tỷ lệ annotation sai.
 
 Bảng 18. Kết quả theo span và cặp nhãn/POS trên test
 
@@ -401,7 +410,7 @@ Trên multi-token, LR−POS chỉ +0,0449 và CI [−0,0401; 0,1262] chứa 0; c
 
 ## 8.1. Audit ngôn ngữ và giới hạn diễn giải
 
-Audit test gồm 25 lỗi LR, 5 lỗi Tree khi LR đúng và 10 ca LR đúng; IDs được chọn có chủ đích theo seed trước khi đọc correction. Cả 40/40 ca được kiểm lại nguồn, offset, correction, tokens và đặc trưng. Đây là review có hỗ trợ AI, không phải chuyên gia độc lập và không phải mẫu ngẫu nhiên đại diện corpus.
+Audit test gồm 25 lỗi LR, 5 lỗi Tree khi LR đúng và 10 ca LR đúng; IDs được chọn có chủ đích theo seed trước khi đọc bản sửa. Cả 40/40 ca được kiểm lại nguồn, offset, bản sửa, tokens và đặc trưng. Đây là review có hỗ trợ AI, không phải chuyên gia độc lập và không phải mẫu ngẫu nhiên đại diện corpus.
 
 Bảng 20. Các kiểu khó quan sát được trong audit
 
@@ -417,7 +426,7 @@ Bảng 20. Các kiểu khó quan sát được trong audit
 
 Nguồn: reports/evaluation_followup/review_report.md; audit_followup.json; evaluation_tasks_report.md
 
-Hàng đợi chuyên gia gồm 17 ca: 7 ca nhãn/edit mơ hồ nổi bật, 2 ca phạm vi cấu trúc, 2 ca determiner phụ thuộc cách đọc và 6 ca nghi parser. Không khẳng định 17 annotation sai. Hai correction rỗng ở 26635 và 37909 là thao tác xóa thật, không phải trường bị parser làm mất. Không loại các ca khó rồi báo lại điểm test cao hơn.
+Hàng đợi chuyên gia gồm 17 ca: 7 ca nhãn/edit mơ hồ nổi bật, 2 ca phạm vi cấu trúc, 2 ca determiner phụ thuộc cách đọc và 6 ca nghi parser. Không khẳng định 17 annotation sai. Hai bản sửa rỗng ở 26635 và 37909 là thao tác xóa thật, không phải trường bị parser làm mất. Không loại các ca khó rồi báo lại điểm test cao hơn.
 
 Bảng 21. Phân rã logit ArtOrDet−Nn của LR tại ID 6079
 
@@ -435,11 +444,21 @@ Nguồn: reports/evaluation_followup/review_report.md; số làm tròn
 
 Tổng logit dương phù hợp với quyết định ArtOrDet của LR trong khi POS dự đoán Nn. Lexical có đóng góp dương lớn hơn đóng góp âm của P trong phép phân rã này. Đây là giải thích đại số của checkpoint cho một ca, không phải độ quan trọng nhân quả, không phải chứng minh một đặc trưng riêng khiến mô hình hiểu từ đang thiếu.
 
-# 9. Thử nghiệm BERT-small và chẩn đoán
+## 8.1. Audit bổ sung BERT và LR sau test
 
-Checkpoint google/bert_uncased_L-2_H-128_A-2, revision 30b0a37ccaaa32f332884b96992754e246e48c5f: 2 layers, hidden 128, 2 attention heads, khoảng 4,39 triệu tham số. Không phải BERT-base. Input đặt [SPAN_START]/[SPAN_END] quanh gold span, tokenize trái/span/phải riêng, max_length=128 và ưu tiên giữ toàn span. Có 5 train và 6 validation bị cắt context nhưng không span nào bị cắt. Encoder và head cùng fine-tune.
+Trên cùng 2.368 mẫu test, BERT và LR cùng đúng 1.860 ca. BERT đúng riêng 138 ca, LR đúng riêng 119 ca, còn 251 ca cả hai cùng sai. Đây là thống kê trên toàn tập test. Các con số trong mẫu audit dưới đây chỉ mô tả những ca đã chọn để đọc kỹ, không đại diện cho tần suất lỗi của corpus.
 
-Pooled CLS đi qua dropout/classifier; loss cross-entropy. Batch32, 5 epochs, AdamW, weight_decay=0,01 trừ bias/LayerNorm, warmup10% và linear decay, clip_norm1, CPU4 threads. Hai learning rate 3e−5/5e−5 chạy ở seed đầu; LR được chọn chạy thêm hai seed. Chọn checkpoint bằng validation macro-F1, không chọn seed tốt nhất để đại diện. Không có BERT test.
+Mẫu audit mới gồm 40 ca: 12 ca BERT sai nhưng LR đúng, 12 ca theo chiều ngược lại, 10 ca cả hai cùng sai và sáu ca cả hai cùng đúng để đối chiếu. Trong nhóm đầu, sáu ca gold SVA được ưu tiên vì đây là lớp BERT yếu hơn LR. Các ID được chọn bằng seed 20261028 trước khi đọc câu và bản sửa. Nhãn và span của cả 40 ca khớp SGML. Mỗi ca có ghi chú AI riêng, còn phần review và contribution của nhóm vẫn để trống. Do cách duyệt bucket, nhóm cùng sai có 9 ArtOrDet và 1 Nn; sự mất cân bằng này cần được giữ trong cách diễn giải.
+
+Các ca SVA cho thấy cần xét cả chủ ngữ dạng mệnh đề và chuỗi động từ phối hợp. Với lỗi thiếu từ, annotation có thể neo vào danh từ, động từ hoặc một phần của từ, nên loại lỗi không thể suy ra chỉ từ POS của substring. Sáu ID 23037, 34539, 16809, 30366, 32801 và 32874 được ưu tiên cho chuyên gia xem lại. Nhãn gốc được giữ nguyên. Không có phép kiểm trực tiếp để quy sai khác cho attention, POS hay việc cắt ngữ cảnh. Đáng chú ý, ca partial-token 38155 được cả hai mô hình dự đoán đúng; vì vậy không nên coi mọi span dạng mảnh từ đều gây lỗi.
+
+Nguồn: reports/bert_final_analysis/audit_summary.json; private/error_review_with_ai.csv giữ local do chứa corpus. AI review không phải adjudication độc lập của chuyên gia.
+
+# 9. BERT-small: đợt ban đầu, chẩn đoán và đợt mở rộng
+
+BERT sử dụng checkpoint google/bert_uncased_L-2_H-128_A-2, revision 30b0a37ccaaa32f332884b96992754e246e48c5f. Đây là mô hình nhỏ với 2 layer, hidden size 128 và 2 attention head, khoảng 4,39 triệu tham số, thay vì BERT-base. Hai marker [SPAN_START]/[SPAN_END] đánh dấu đoạn lỗi. Câu được tokenize riêng ở ba phần trái, span và phải; giới hạn max_length=128 ưu tiên giữ toàn bộ span. Có 5 mẫu train và 6 mẫu validation bị cắt bớt ngữ cảnh, nhưng không span nào bị cắt. Toàn bộ encoder và classifier đều được fine-tune.
+
+Pooled CLS đi qua dropout/classifier; loss cross-entropy. Batch32, 5 epochs, AdamW, weight_decay=0,01 trừ bias/LayerNorm, warmup10% và linear decay, clip_norm1, CPU4 threads. Hai learning rate 3e−5/5e−5 chạy ở seed đầu; LR được chọn chạy thêm hai seed. Chọn checkpoint bằng validation macro-F1, không chọn seed tốt nhất để đại diện. Đợt ban đầu không có BERT test; kết quả test của đợt mở rộng ngày 28/10 được trình bày ở mục 9.2.
 
 Bảng 22. Các lượt fine-tune BERT trên validation
 
@@ -450,7 +469,7 @@ Bảng 22. Các lượt fine-tune BERT trên validation
 | 5e-05 | 20261014 | 5 | 0.1999 | 209.6 |
 | 5e-05 | 20261015 | 4 | 0.1949 | 196.9 |
 
-Nguồn: docs/contextual_model_validation_report.md; bert run artifacts
+Nguồn: reports/summaries/contextual/contextual_model_validation_report.docx; bert run artifacts đợt cũ
 
 Bảng 23. So sánh validation gồm BERT và mô hình cổ điển
 
@@ -467,7 +486,7 @@ Bảng 23. So sánh validation gồm BERT và mô hình cổ điển
 
 Nguồn: reports/contextual_model_validation/comparison.csv
 
-![Hình 7. BERT-small và đối chứng trên cùng validation; không phải điểm test.](figures/07_bert_validation.png)
+![Hình 7. Đợt BERT ban đầu và đối chứng trên validation; không phải điểm test hoặc đợt mở rộng.](figures/07_bert_validation.png)
 
 Nguồn: contextual_model_validation/comparison.csv
 
@@ -484,7 +503,7 @@ Bảng 24. Bằng chứng chẩn đoán BERT: Nguồn / readout
 | saved_failed_run_cls | 6.074696 | 2.479423 | 1.680808 | 2.182717 | 0.000566 |
 | saved_failed_run_span_mean | 3.937057 | 1.633337 | 1.107149 | 1.935566 | 0.000566 |
 
-Nguồn: docs/bert_learning_diagnostics_report.md; reports/bert_learning_diagnostics
+Nguồn: reports/summaries/contextual/bert_learning_diagnostics_report.docx; reports/bert_learning_diagnostics
 
 Bảng 25. Bằng chứng chẩn đoán BERT: Readout dùng với encoder cũ
 
@@ -493,7 +512,7 @@ Bảng 25. Bằng chứng chẩn đoán BERT: Readout dùng với encoder cũ
 | cls | 28/100 | 0.3481 | 0.7959 |
 | span_mean | 11/100 | 0.3497 | 0.5967 |
 
-Nguồn: docs/bert_learning_diagnostics_report.md; reports/bert_learning_diagnostics
+Nguồn: reports/summaries/contextual/bert_learning_diagnostics_report.docx; reports/bert_learning_diagnostics
 
 Bảng 26. Bằng chứng chẩn đoán BERT: Readout
 
@@ -503,21 +522,66 @@ Bảng 26. Bằng chứng chẩn đoán BERT: Readout
 | cls | 0.001 | 50 | 100 | 100.0% | 0.0073 | Đạt |
 | span_mean | 0.001 | 50 | 75 | 100.0% | 0.0104 | Đạt |
 
-Nguồn: docs/bert_learning_diagnostics_report.md; reports/bert_learning_diagnostics
+Nguồn: reports/summaries/contextual/bert_learning_diagnostics_report.docx; reports/bert_learning_diagnostics
 
-![Hình 8. Đường học thuộc trên 100 mẫu train được chọn; không đo generalization.](C:/Hanu/year4/semester1/MLA/Final_project/reports/bert_learning_diagnostics/memorization_curves.png)
+![Hình 8. Đường học thuộc trên 100 mẫu train được chọn; không đo generalization.](../../bert_learning_diagnostics/memorization_curves.png)
 
 Nguồn: reports/bert_learning_diagnostics/memorization_curves.png
 
-Gradient probe kiểm pretrained model và checkpoint cũ: loss khớp cross-entropy độc lập, optimizer đủ tham số trainable, không gradient thiếu/NaN/Inf, marker/encoder/classifier đều cập nhật. Với CLS, gradient trực tiếp ở hidden target layer cuối bằng 0 là cấu trúc readout dự kiến; gradient qua self-attention ở layer trước vẫn tồn tại. Vì vậy không coi đó là bằng chứng đứt đường học.
+Gradient probe kiểm pretrained mô hình và checkpoint cũ: loss khớp cross-entropy độc lập, optimizer đủ tham số trainable, không gradient thiếu/NaN/Inf, marker/encoder/classifier đều cập nhật. Với CLS, gradient trực tiếp ở hidden target layer cuối bằng 0 là cấu trúc readout dự kiến; gradient qua self-attention ở layer trước vẫn tồn tại. Vì vậy không coi đó là bằng chứng đứt đường học.
 
-Dời marker trên 100 mẫu train làm CLS đổi prediction 28/100, cho thấy mô hình có phản ứng với marker nhưng chưa chứng minh định vị đúng lỗi. Trên 50 cặp target khác nhãn trong cùng câu train, CLS chỉ đổi prediction ở 7 cặp và đúng cả hai ở 2 cặp. Đây là stress test có chủ đích trên train, không phải đánh giá validation mới.
+Dời marker trên 100 mẫu train làm CLS đổi dự đoán 28/100, cho thấy mô hình có phản ứng với marker nhưng chưa chứng minh định vị đúng lỗi. Trên 50 cặp target khác nhãn trong cùng câu train, CLS chỉ đổi dự đoán ở 7 cặp và đúng cả hai ở 2 cặp. Đây là stress test có chủ đích trên train, không phải đánh giá validation mới.
 
-Học thuộc 100 mẫu: CLS 5e−5 đạt accuracy100% nhưng CE cuối0,1515 nên chưa qua ngưỡng confidence CE≤0,05. CLS1e−3 và span_mean1e−3 đạt tiêu chí chặt sau 100 và 75 updates. Phép thử nhỏ thay dropout, weight decay, schedule và số lần thấy lại mỗi ví dụ so với fine-tuning toàn tập. Không quy thất bại cũ chỉ cho learning rate; cũng không suy span_mean đã tốt hơn LR. Kết luận hiện tại là mô hình có thể tối ưu trên tập nhỏ, nhưng recipe đã thử chưa tổng quát hóa tốt.
+Học thuộc 100 mẫu: CLS 5e−5 đạt accuracy100% nhưng CE cuối0,1515 nên chưa qua ngưỡng confidence CE≤0,05. CLS 1e−3 và span_mean1e−3 đạt tiêu chí chặt sau 100 và 75 updates. Phép thử nhỏ thay dropout, weight decay, schedule và số lần thấy lại mỗi ví dụ so với fine-tuning toàn tập. Không quy thất bại cũ chỉ cho learning rate; cũng không suy span_mean đã tốt hơn LR. Kết luận hiện tại là mô hình có thể tối ưu trên tập nhỏ, nhưng recipe đã thử chưa tổng quát hóa tốt.
+
+## 9.2. Đợt mở rộng ngày 28/10/2026
+
+Đợt mở rộng giữ nguyên cách chia 11.052/2.368/2.368, checkpoint pretrained và quy tắc giữ trọn span. Bốn cấu hình kết hợp hai cách lấy biểu diễn CLS/span mean với hai head learning rate 1e−4/1e−3; encoder learning rate giữ ở 5e−5. Mỗi cấu hình được chạy với cùng ba seed đã khai báo.
+
+Mỗi lượt chạy tối đa 20 epochs và dừng sớm khi validation không cải thiện đủ mức trong bốn epochs liên tiếp: patience=4, min_delta=0,0001. Các thiết lập còn lại là batch size 32, max_length 128, AdamW, dropout 0,1, weight decay 0,01, warmup 10% và gradient clipping 1. Pooler cùng classifier dùng head learning rate, còn embeddings và transformer dùng encoder learning rate.
+
+Mọi lượt đều bắt đầu từ pretrained gốc, không tiếp tục checkpoint đã học thuộc 100 mẫu. Sau mỗi epoch, train và validation được đánh giá ở eval mode. Checkpoint có macro-F1 validation cao nhất được giữ lại; nếu hòa, chọn epoch sớm hơn.
+
+Bảng 27. Grid BERT mở rộng, mean/std validation qua ba seed
+
+| Readout | Encoder LR | Head LR | Val F1 mean | Sample std |
+| --- | --- | --- | --- | --- |
+| cls | 5e-05 | 0.0001 | 0.7164 | 0.0061 |
+| cls | 5e-05 | 0.001 | 0.7227 | 0.0147 |
+| span_mean | 5e-05 | 0.0001 | 0.8183 | 0.0011 |
+| span_mean | 5e-05 | 0.001 | 0.8177 | 0.0022 |
+
+Span mean với head learning rate 1e−4 được chọn vì có mean validation macro-F1 cao nhất, 0,8183 ± 0,0011. Seed chính được giữ là 20261013 như đã quy định, thay vì chọn seed có kết quả tốt nhất. Checkpoint của seed này nằm ở epoch 18, với train F1 0,9309 và validation F1 0,8173. Khoảng cách giữa train và validation vẫn đáng chú ý; việc chọn checkpoint dựa trên validation giúp tránh lấy trạng thái cuối chỉ vì nó học train tốt hơn.
+
+![Hình 9. Đường học train/validation của primary BERT; vạch epoch18 là checkpoint chọn trước test.](../../bert_final_analysis/figures/primary_learning_curve.png)
+
+Bảng 28. Ba seed BERT đã khóa trên cùng test
+
+| Seed | Epoch chọn | Val F1 | Test F1 | Test accuracy |
+| --- | --- | --- | --- | --- |
+| 20261013 | 18 | 0.8173 | 0.8146 | 0.8438 |
+| 20261014 | 14 | 0.8182 | 0.8177 | 0.8450 |
+| 20261015 | 14 | 0.8195 | 0.8222 | 0.8471 |
+
+Trên test, BERT đạt macro-F1 trung bình 0,8182 ± 0,0038 qua ba seed. Seed 20261015 có điểm 0,8222, nhưng không được dùng thay seed chính sau khi xem test. Kết quả primary là 0,8146, với CI95% [0,7919; 0,8350].
+
+Chênh lệch BERT−LR là −0,0017, CI [−0,0184; 0,0182]; BERT−Tree là +0,0149, CI [−0,0049; 0,0378]. Cả hai khoảng đều chứa 0, nên chưa đủ bằng chứng kết luận BERT tốt hơn hoặc kém hơn. Với POS, chênh lệch +0,1040 có CI [0,0785; 0,1343], cho thấy lợi ích rõ hơn trong phép so sánh này.
+
+![Hình 10. Benchmark năm mô hình; BERT dùng primary seed, cùng 1.000 group resamples.](../../bert_final_analysis/figures/benchmark_ci.png)
+
+![Hình 11. CI paired của BERT primary trừ LR/Tree/POS; đường 0 giúp đọc sự bất định.](../../bert_final_analysis/figures/paired_differences_focus.png)
+
+![Hình 12. F1 từng lớp: BERT cải thiện bốn lớp so với LR nhưng SVA thấp hơn.](../../bert_final_analysis/figures/per_class_f1.png)
+
+![Hình 13. Confusion LR và BERT primary trên cùng test; hàng gold, cột prediction.](../../bert_final_analysis/figures/confusion_comparison.png)
+
+Kết quả theo lớp giải thích vì sao accuracy và macro-F1 có thể dẫn đến cách nhìn khác nhau. BERT đạt SVA F1 0,7392, thấp hơn LR 0,8106, nhưng đạt Nn F1 0,8098, cao hơn LR 0,7781. Accuracy của BERT là 0,8438, còn LR là 0,8357. Dù dự đoán đúng nhiều mẫu hơn, BERT ở seed chính vẫn có macro-F1 thấp hơn một chút. Mean ba seed BERT được báo riêng; nó không thay thế phép so sánh paired giữa hai mô hình ở seed đã khóa.
+
+Nguồn: reports/bert_final_analysis/overall_results.csv, seed_results.csv, bootstrap.json và verification.json. Selection BERT có trước scoring BERT; đợt mở rộng diễn ra sau khi test cổ điển đã được xem, nên đây là mở rộng trên cùng test, không phải một test độc lập hoàn toàn mới. Không thay cấu hình sau khi xem BERT test; nghiên cứu tiếp nên dùng external test mới.
 
 # 10. Kiểm chứng, tái lập và độ tin cậy
 
-Bảng 27. Kết quả kiểm chứng đã lưu
+Bảng 29. Kết quả kiểm chứng đã lưu
 
 | Hạng mục | Kết quả |
 | --- | --- |
@@ -536,35 +600,41 @@ Bảng 27. Kết quả kiểm chứng đã lưu
 
 Nguồn: reports/evaluation_followup/review_report.md; pipeline_reproduction.json; evidence_review.json
 
-Pipeline replay mất 13,89 phút trong môi trường riêng, Python3.13.7, NumPy2.5.3, PyTorch2.14.0+cpu, spaCy3.8.7 và en_core_web_sm3.8.0, không dùng system-site-packages. Preparation có 7 data outputs giống byte; parse 11.272 câu, tạo 15.788 vectors/16.180 chiều; 52 fit tái tạo đúng cấu hình/metric/termination, 16 checkpoint riêng khớp nội dung và 20 tên pipeline×2.368 prediction test không khác. Đây là kết quả replay đã ghi trong artifact, không phải chạy lại trong lượt viết báo cáo.
+Pipeline replay mất 13,89 phút trong môi trường riêng, Python3.13.7, NumPy2.5.3, PyTorch2.14.0+cpu, spaCy3.8.7 và en_core_web_sm3.8.0, không dùng system-site-packages. Preparation có 7 data outputs giống byte; parse 11.272 câu, tạo 15.788 vectors/16.180 chiều; 52 fit tái tạo đúng cấu hình/metric/termination, 16 checkpoint riêng khớp nội dung và 20 tên quy trình×2.368 dự đoán test không khác. Đây là kết quả replay đã ghi trong tệp kết quả, không phải chạy lại trong lượt viết báo cáo.
 
-Kiểm số học độc lập đã đối chiếu 280 model–slice metrics, 40 CI F1, 30 CI chênh lệch và 1.000 bootstrap. Hai validation baseline trước đây nhập gần đúng, sai lệch tối đa khoảng 3,32×10⁻⁸; báo cáo này đọc reviewed_overall_results.csv để dùng số chính xác. Không đổi kết luận làm tròn bốn chữ số.
+Kiểm số học độc lập đã đối chiếu 280 mô hình–slice metrics, 40 CI F1, 30 CI chênh lệch và 1.000 bootstrap. Hai validation baseline trước đây nhập gần đúng, sai lệch tối đa khoảng 3,32×10⁻⁸; báo cáo này đọc reviewed_overall_results.csv để dùng số chính xác. Không đổi kết luận làm tròn bốn chữ số.
 
-Sensitivity v1/v2 giữ cấu hình LR: macro-F1 0,8069→0,8078 trong run 4 threads; baseline gốc 10 threads là 0,8067. Hai prediction khác giữa refit và baseline được giải thích bằng độ nhạy số học LBFGS/threads trong kiểm tra đã làm. Không lấy điểm refit cao hơn thay baseline. Cải thiện preprocessing nhỏ chưa có CI và không chứng minh tăng chất lượng mô hình.
+Sensitivity v1/v2 giữ cấu hình LR: macro-F1 0,8069→0,8078 trong run 4 threads; baseline gốc 10 threads là 0,8067. Hai dự đoán khác giữa refit và baseline được giải thích bằng độ nhạy số học LBFGS/threads trong kiểm tra đã làm. Không lấy điểm refit cao hơn thay baseline. Cải thiện tiền xử lý nhỏ chưa có CI và không chứng minh tăng chất lượng mô hình.
 
-Phạm vi tái lập đã bao phủ raw→features→52 fit đợt đánh giá→test replay. Review logs và cấu hình sáu variant lịch sử vẫn là input cố định; chưa chạy lại toàn bộ grid lịch sử hoặc BERT. Tái lập prediction trên cùng test không phải thêm bằng chứng từ một test độc lập. Corpus, encoder/vocabulary và checkpoints giữ local; người tái lập toàn bộ cần nguồn NUCLE hợp lệ và các inputs đã ghi trong docs/reproduction.md.
+Phạm vi tái lập đã bao phủ raw→các đặc trưng→52 fit đợt đánh giá→test replay. Review logs và cấu hình sáu biến thể lịch sử vẫn là đầu vào cố định; chưa chạy lại toàn bộ grid lịch sử hoặc BERT. Tái lập dự đoán trên cùng test không phải thêm bằng chứng từ một test độc lập. Corpus, encoder/vocabulary và checkpoints giữ trên máy nghiên cứu; người tái lập toàn bộ cần nguồn NUCLE hợp lệ và các inputs đã ghi trong docs/reproduction.md.
+
+## 10.1. Kiểm chứng đợt BERT và giới hạn workspace hiện tại
+
+Đợt BERT mới vượt qua 61 phép kiểm về lựa chọn cấu hình, mã nguồn, đầu vào, checkpoint và dự đoán đã lưu. Bootstrap sử dụng lại đúng ma trận trọng số 1.000×97 của đợt cổ điển, đồng thời tái tạo đúng các CI cổ điển. Các phép kiểm đọc kết quả đã có, không chạy thêm dự đoán test. Bộ 23 tests trên dữ liệu tổng hợp kiểm tra tokenization, cách lấy biểu diễn, chuỗi train→lock→test, khả năng tiếp tục sau gián đoạn và bootstrap theo nhóm. Đây là phạm vi khác với lần tái lập raw→52 lượt huấn luyện trước đó.
+
+Cần phân biệt tính đúng của số liệu với trạng thái nguyên vẹn của thư mục làm việc. Hiện 69/74 file trong lock cổ điển khớp byte. Bốn generator reporting đã bị xóa và CSV validation đổi padding; CSV test cũng khác hash trong bản ghi chấm điểm. Khi chuẩn hóa CSV trong bộ nhớ, hash gốc được tái tạo đúng; bốn source còn có bản đúng hash trong zip. Vì vậy, metric cổ điển vẫn được xác nhận, nhưng không thể nói verify_lock của workspace hiện tại đã qua. Báo cáo reports/maintenance/reports_check.md ghi chi tiết; lock lịch sử không được sửa.
 
 # 11. Thảo luận, trả lời RQ và kết luận
 
-Bảng 28. Trả lời ba câu hỏi nghiên cứu
+Bảng 30. Trả lời ba câu hỏi nghiên cứu
 
 | RQ | Kết luận trong phạm vi bằng chứng | Giới hạn |
 | --- | --- | --- |
-| RQ1 | LR Full là mô hình chính mạnh nhất: test F1 0,8163; hơn Tree/POS với paired CI dương. | Một grouped split; một seed cổ điển; known-span, không phải GEC end-to-end. |
+| RQ1 | LR Full test F1 0,8163; hơn Tree/POS với paired CI dương. BERT primary 0,8146, CI BERT−LR chứa 0; chưa đủ bằng chứng mô hình nào tốt hơn. | Một grouped split; một seed cổ điển; known-span, không phải GEC end-to-end. |
 | RQ2 | POS tăng mạnh từ S+L; lexical hữu ích với LR; morphology có bằng chứng rõ hơn ở Tree. | Từng variant tune riêng; nhóm có thông tin trùng; CI M/D ở LR chứa 0. |
 | RQ3 | Nhầm Nn/ArtOrDet và Vform/SVA chiếm phần lớn lỗi; LR vượt POS ở các slice cùng POS quan trọng. | Audit chủ đích có hỗ trợ AI; quan hệ mô tả không chứng minh nguyên nhân. |
 
 Nguồn: Các bảng test/ablation/slice và review_report.md
 
-Kết quả hỗ trợ lựa chọn LR Full làm mô hình tham chiếu của dự án: hiệu quả tốt trên tập test đã khóa, biểu diễn thưa và có thể phân rã logit theo nhóm feature. Không có benchmark latency/bộ nhớ chuẩn hóa để kết luận triển khai nhanh hơn BERT bao nhiêu; thời gian các run có ngân sách và môi trường khác nhau nên chỉ được dùng mô tả thực thi.
+LR Full vẫn là mô hình tham chiếu hữu ích: điểm test tốt, biểu diễn thưa và quyết định có thể được phân tích qua các thành phần logit. BERT span mean đạt kết quả gần LR trên cùng split, mở ra một cách biểu diễn khác chứ chưa chứng minh ưu thế thống kê. Nghiên cứu chưa có phép đo latency hoặc bộ nhớ được chuẩn hóa, nên thời gian chạy ở các thí nghiệm khác nhau chỉ được dùng để mô tả quá trình thực hiện.
 
 Bằng chứng mạnh nhất về giá trị đặc trưng là lợi ích của POS và lexical trong các phép so đã định. Bằng chứng yếu hơn nằm ở lợi ích bổ sung của dependency hoặc morphology cho LR. Một nhóm có CI chứa 0 có thể cung cấp thông tin trùng với nhóm khác, bị hạn chế bởi extractor hoặc cần dữ liệu nhiều hơn; thí nghiệm hiện tại không phân biệt được các khả năng đó.
 
-Kết quả BERT âm là một kết quả thực nghiệm cần giữ, không phải lý do bỏ ngữ cảnh. LR đã sử dụng dependency câu; BERT nhỏ, pooled CLS, marker mới và ngân sách ngắn là một cấu hình cụ thể. Chẩn đoán giúp loại trừ một số lỗi cơ học đã kiểm, đồng thời chỉ ra câu hỏi mới về readout và tối ưu hóa, chưa xác nhận giải pháp.
+Kết quả BERT ban đầu cần được giữ lại cùng kết quả mở rộng. Sự khác biệt cho thấy đánh giá phụ thuộc vào cách lấy biểu diễn và thiết lập huấn luyện đã thử. LR cũng đã sử dụng dependency từ cả câu, nên đối chiếu này không đơn giản là có ngữ cảnh so với không có ngữ cảnh. Đợt mở rộng kiểm tra readout trong cùng lưới và ngân sách, nhưng chưa tách riêng mọi yếu tố thay đổi giữa hai đợt.
 
 ## 11.1. Hạn chế và hướng tiếp theo
 
-Bảng 29. Hạn chế và hướng kiểm tra tiếp theo
+Bảng 31. Hạn chế và hướng kiểm tra tiếp theo
 
 | Giới hạn | Tác động | Hướng thực hiện sau báo cáo |
 | --- | --- | --- |
@@ -572,17 +642,17 @@ Bảng 29. Hạn chế và hướng kiểm tra tiếp theo
 | Một split/seed cổ điển | CI không bao phủ biến thiên training/split | Protocol nhiều seed/split hoặc external test mới. |
 | Parser và taxonomy | Một số lỗi có thể bắt nguồn từ biểu diễn hoặc nhãn | Chuyên gia xem 17 ca; lưu phiên bản gold mới nếu có adjudication. |
 | Subject chỉ là child trực tiếp | Bỏ quan hệ qua auxiliary/head/conj | Extractor kế thừa subject có kiểm soát, đánh giá trên dữ liệu mới. |
-| BERT-small chưa thành công | Chưa kiểm lợi ích contextual mạnh hơn | So CLS/span_mean cùng ngân sách, theo dõi learning curve; chưa dùng test cũ để tune. |
+| Một BERT nhỏ và test đã dùng trong nghiên cứu cổ điển | Kết quả gần LR không chứng minh mọi contextual model tương đương | External test mới; đăng ký trước thiết kế và không tune theo test đã xem. |
 | Nhiều CI pointwise | Không bảo đảm kết luận đồng thời | Đăng ký ít contrast chính hoặc hiệu chỉnh đa so sánh ở nghiên cứu tiếp. |
 | Đầu vào nguồn riêng | Checkout không đủ tái lập toàn nghiên cứu | Giữ hướng dẫn, hashes, môi trường và điều kiện truy cập nguồn rõ ràng. |
 
 Nguồn: Tổng hợp từ protocol, code và các kết quả kiểm chứng
 
-Dự án hoàn thành chuỗi từ chuẩn bị dữ liệu đến đánh giá test có khóa cấu hình, bootstrap theo nhóm, audit và replay. Kết luận trọng tâm là một classifier tuyến tính kết hợp đặc trưng lexical/cú pháp đã phân loại tốt năm nhãn trong thiết lập original-only known-span; các lỗi còn lại tập trung ở ranh giới taxonomy và cách biểu diễn span/ngữ cảnh. Các nhận định này không mở rộng thành tuyên bố hiểu ngữ pháp hoàn chỉnh, chất lượng sửa lỗi hay khả năng tổng quát hóa sang mọi corpus.
+Dự án đã nối các bước chuẩn bị dữ liệu, huấn luyện, lựa chọn cấu hình, đánh giá test và phân tích lỗi thành một quy trình có thể kiểm tra lại. Trên split NUCLE này, LR với đặc trưng từ vựng và cú pháp là một đối chứng mạnh; điểm BERT-small span mean gần LR, nhưng CI chưa cho phép kết luận mô hình nào tốt hơn. Các lỗi còn lại liên quan đến cách biểu diễn span, ngữ cảnh và ranh giới nhãn. Kết quả chưa thể mở rộng thành tuyên bố về khả năng hiểu ngữ pháp đầy đủ, sửa câu hoặc khái quát hóa sang mọi corpus.
 
 # Phụ lục A. Cấu hình được chọn và bảng đầy đủ
 
-Bảng 30. Cấu hình của toàn bộ tên pipeline LR/Tree
+Bảng 32. Cấu hình của toàn bộ tên quy trình LR/Tree
 
 | ID | Variant | Chiều | Cấu hình |
 | --- | --- | --- | --- |
@@ -607,7 +677,7 @@ Bảng 30. Cấu hình của toàn bộ tên pipeline LR/Tree
 
 Nguồn: reports/final_evaluation/selection_summary.json; Full−D alias của S+L+P+M
 
-Bảng 31. Toàn bộ 20 kết quả cuối, gồm CI và alias
+Bảng 33. Toàn bộ 20 kết quả cuối, gồm CI và alias
 
 | ID | Val F1 | Test F1 | CI95% test | Alias |
 | --- | --- | --- | --- | --- |
@@ -636,7 +706,7 @@ Nguồn: reports/evaluation_followup/reviewed_overall_results.csv
 
 # Phụ lục B. Ánh xạ code và bằng chứng
 
-Bảng 32. Vai trò các module trong pipeline
+Bảng 34. Vai trò các module trong quy trình
 
 | Nhóm module | Vai trò |
 | --- | --- |
@@ -653,19 +723,19 @@ Bảng 32. Vai trò các module trong pipeline
 | src/reporting/; notebooks/01–04 | Sinh bảng/hình/tài liệu; notebook là snapshot dữ liệu/validation |
 | tests/ | Kiểm invariants, feature/model, metric, bootstrap và serialization |
 
-Nguồn: Code hiện có; danh mục từng file và checksum trong source_manifest.json
+Nguồn: Code hiện có; source_manifest.json giữ snapshot 26/10. delivery_manifest.json ghi nguồn/output của bản cập nhật 28/10; không viết lại hash lịch sử.
 
 Artifact kiểm số liệu: reviewed_overall_results.csv; final_evaluation/test_metrics.json, paired_differences.csv, bootstrap.json, per_class_results.csv và per_class_deltas.csv. Artifact kiểm tái lập: evaluation_followup/pipeline_reproduction.json, evidence_review.json, audit_followup.json và expert_review_queue.csv. Báo cáo này không nhúng câu nguồn/correction riêng của NUCLE; dùng ID và mô tả lỗi để truy vết.
 
 # Phụ lục C. Trạng thái bàn giao, đóng góp cá nhân và sử dụng AI
 
-Đã hoàn tất đánh giá test cho các pipeline cổ điển, paired group-bootstrap, audit và kiểm chứng tái lập trong phạm vi mục 10. Báo cáo này là bản tổng kết kết quả hiện hành; các báo cáo tuần 1 và báo cáo task là snapshot lịch sử. BERT-small chỉ có kết quả validation và chẩn đoán train, chưa có điểm test. Theo dõi tiến độ hiện tại tại docs/status.md.
+Các mô hình cổ điển đã được đánh giá test và kiểm chứng trong phạm vi mục 10. Đợt BERT mở rộng hoàn tất 12 lượt huấn luyện, chọn span mean bằng validation rồi đánh giá ba seed trên test. Seed chính đạt F1 0,8146; trung bình là 0,8182 ± 0,0038. Báo cáo tổng kết này cập nhật các kết quả đó, còn các báo cáo tuần 1 và báo cáo công việc trước đây giữ mốc thực nghiệm riêng. Tiến độ hiện tại được ghi tại docs/status.md.
 
-Trước khi nộp bản cuối, nhóm cần xác nhận tên thành viên và nhiệm vụ thực tế, liên kết đến code/log hoặc phân tích do từng người phụ trách, quyết định đã kiểm tra và kết quả kiểm tra. Báo cáo hiện chưa có xác nhận phân công theo tên; không suy đóng góp cá nhân từ danh sách module hoặc từ kết quả chung. Không bổ sung nhật ký hồi tố như thể đã được ghi tại thời điểm thực nghiệm.
+Trước khi nộp, mỗi thành viên cần xác nhận phần việc mình thực sự thực hiện và dẫn tới mã, log hoặc phân tích liên quan. Mẫu điền thông tin nằm trong handover_checklist.md. Tên và phân công theo cá nhân chưa được cung cấp, nên báo cáo chưa thể xác nhận thay cho nhóm hoặc suy đóng góp từ danh sách module.
 
-Audit ngôn ngữ có hỗ trợ AI và chưa thay thế đánh giá độc lập của chuyên gia. Nhóm cần hoàn thiện khai báo tên công cụ AI đã dùng cho giải thích, viết, gỡ lỗi hoặc phân tích, phạm vi hỗ trợ và cách từng thành viên tự kiểm tra. Replay, kiểm số học và đối chiếu theo ID là bằng chứng kiểm chứng kỹ thuật trong phạm vi đã nêu; không tự xác nhận chất lượng phán đoán ngôn ngữ của AI. Có 17 ca chờ chuyên gia; chưa đổi gold.
+Phần rà soát ngôn ngữ có hỗ trợ AI và chưa thay thế đánh giá độc lập của chuyên gia. Nhóm cần khai báo công cụ đã sử dụng, phần công việc được hỗ trợ và cách từng thành viên tự kiểm tra. Kiểm tra hash, tính lại metric và đối chiếu theo ID xác nhận những khía cạnh kỹ thuật cụ thể, không tự xác nhận mọi nhận định ngôn ngữ. Hàng đợi cũ có 17 ca; sau khi gộp sáu ID ưu tiên của BERT và loại trùng, còn 22 ID cần xem lại. Nhãn gốc chưa thay đổi.
 
-Cho interview, lưu bản báo cáo hiện tại cùng script/cấu hình và output có thể xem ngoại tuyến; chuẩn bị một mẫu có ID từ đầu vào/đặc trưng đến prediction và gold, một trường hợp lỗi đã tự đọc, sơ đồ split và một kiểm tra nhỏ trên dữ liệu phát triển hoặc output đã lưu. Mỗi thành viên cần tự giải thích toàn bộ pipeline và phần việc của mình. Chuẩn bị PDF, kiểm tra bố cục và quyền truy cập trước hạn nộp trên LMS; chưa xác nhận việc nộp bài trong báo cáo này.
+Khi chuẩn bị phỏng vấn hoặc thuyết trình, nhóm nên chọn một mẫu có ID rõ ràng để giải thích từ câu đầu vào, đặc trưng hoặc encoding đến dự đoán và nhãn gốc. Mỗi thành viên cũng cần trình bày được cách chia nhóm, một ca dự đoán sai đã tự đọc và một phép kiểm nhỏ đã hiểu. Bộ PDF, slide và ghi chú có thể dùng ngoại tuyến; việc đối chiếu mẫu nộp, hạn LMS và xác nhận nộp bài vẫn do nhóm thực hiện.
 
 # Tài liệu tham khảo
 

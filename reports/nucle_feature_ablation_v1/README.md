@@ -1,5 +1,7 @@
 # Ablation sáu variant — validation
 
+Thư mục này lưu sáu biến thể đặc trưng đã thử trên validation. Các kết quả giúp xem từng nhóm thông tin đóng góp ra sao khi thêm dần, che từ vựng trong span hoặc bỏ toàn bộ từ vựng. Mỗi biến thể được chọn tham số riêng, nên chênh lệch phản ánh cả quy trình đã thử, không phải tác động nhân quả cô lập của một nhóm đặc trưng.
+
 | File | Vai trò |
 |---|---|
 | [summary.json](summary.json) | Grid và kết quả sáu variant |

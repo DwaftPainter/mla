@@ -1,14 +1,14 @@
- Báo cáo thực hiện task: ablation bổ sung, test, bootstrap và audit lỗi
+# Đánh giá mô hình: bổ sung đặc trưng, test, bootstrap và phân tích lỗi
 
-Ngày thực hiện task: 23/10/2026. Tài liệu ghi nhận công việc vừa chạy, đầu vào, code, cấu hình, kết quả và kiểm chứng. Đây là báo cáo task, không phải final report của dự án. Các nhận xét bên dưới giải thích bằng chứng thực nghiệm; việc tổng hợp lập luận và chốt câu trả lời RQ1–RQ3 trong báo cáo tổng kết được để lại cho bước sau theo yêu cầu người dùng.
+Báo cáo ghi lại đợt đánh giá ngày 23/10/2026, từ bổ sung các biến thể đặc trưng đến khóa cấu hình, chấm test và đọc lỗi. Nội dung tập trung vào những bước đã thực hiện và bằng chứng kiểm tra tại thời điểm đó. Phần tổng hợp trả lời RQ1–RQ3 được trình bày trong báo cáo tổng kết sau này.
 
 # 1. Phạm vi task và đầu ra đã có
 
 LR Full đạt test macro-F1 0,8163, CI95% [0,7876; 0,8382], vượt Majority 0,1184, POS 0,7106 và Tree Full 0,7996. Chênh LR–POS là 0,1057 [0,0829; 0,1288]; LR–Tree Full là 0,0166 [0,0018; 0,0301]. Đây là CI pointwise từ cùng 1.000 mẫu bootstrap theo 97 connected groups, không phải khoảng tin cậy từ nhiều seed huấn luyện.
 
-Nhận xét từ bảng ablation: POS bổ sung mạnh cho mốc S+L; lexical vẫn hữu ích trên test. Bỏ toàn L làm LR giảm 0,0281, lớn hơn mức giảm khoảng 0,0103 trên validation. Morphology có tác dụng rõ hơn với Tree; CI của tác dụng M và D với LR chứa 0 nên chưa đủ để khẳng định cải thiện ổn định. Không diễn giải kết quả này là thông tin hình thái/dependency vô ích.
+Các phép loại bỏ đặc trưng cho thấy POS bổ sung nhiều thông tin cho mốc S+L, còn từ vựng vẫn hữu ích trên test. Khi bỏ toàn bộ L, macro-F1 của LR giảm 0,0281, lớn hơn mức giảm khoảng 0,0103 trên validation. Hình thái đem lại bằng chứng rõ hơn ở Tree. Với LR, CI của chênh lệch liên quan M và D còn chứa 0, nên chưa đủ cơ sở khẳng định mức cải thiện ổn định; điều đó cũng không có nghĩa các thông tin này vô ích.
 
-Nhận xét từ phân tích lỗi: hai nhóm nhầm lớn vẫn là Nn/ArtOrDet và Vform/SVA. LR cải thiện rõ ở các tập con cùng POS nhưng vẫn gặp span rộng, lỗi thiếu từ neo vào token khác từ loại, parse đáng ngờ và gold/edit không khớp định nghĩa nhãn đơn giản. Audit 40 ca là review có hỗ trợ AI, chưa phải adjudication của chuyên gia.
+Hai cặp nhãn dễ nhầm nhất vẫn là Nn/ArtOrDet và Vform/SVA. So với POS, LR phân biệt tốt hơn ở một số nhóm có cùng POS, nhưng vẫn gặp khó với span rộng, lỗi thiếu từ neo vào token khác từ loại và những ca nhãn/bản sửa cần xem lại. Mẫu audit 40 ca giúp đọc kỹ các hiện tượng này. Các ghi chú có hỗ trợ AI, chưa phải kết luận độc lập của chuyên gia.
 
 | Hạng mục | Trạng thái / bằng chứng |
 |---|---|
@@ -22,7 +22,7 @@ Nhận xét từ phân tích lỗi: hai nhóm nhầm lớn vẫn là Nn/ArtOrDet
 
 # 2. Đầu vào và điều kiện thực hiện
 
-Tái sử dụng preparation v2, grouped split seed20261013, feature artifact và sáu biến thể đã chạy. Không chạy lại preprocessing, đổi split, sửa label hoặc thêm BERT trong đợt task này. Câu gốc/gold span là đầu vào; correction chỉ dùng audit sau prediction. Chi tiết thiết kế dữ liệu/mô hình nằm ở các báo cáo trước.
+Đợt đánh giá dùng lại preparation v2, grouped split với seed 20261013, các tệp đặc trưng và sáu biến thể đã có. Cách chia tập, nhãn và tiền xử lý được giữ nguyên; BERT chưa được bổ sung trong đợt này. Mô hình nhận câu gốc và vị trí lỗi đã biết, còn bản sửa chỉ phục vụ phân tích sau dự đoán.
 
 | Input | Vai trò |
 |---|---|
@@ -32,7 +32,7 @@ Tái sử dụng preparation v2, grouped split seed20261013, feature artifact v�
 | reports/nucle_feature_ablation_v1 | Configs/predictions validation sáu variants cũ để replay |
 | docs/final_evaluation_protocol.md | Protocol ghi trước chạy; không sửa lại theo điểm test |
 
-Feature NLP: spaCy3.8.7 + en_core_web_sm3.8.0. Numeric giữ giá trị gốc; giới hạn500 chỉ áp dụng pooled n-gram, không phải mọi lexical slot. D chứa thông tin POS/morph của head/subject, nên bỏ P/M chỉ bỏ nhóm feature tương ứng. Train1069 essays/1045 groups; validation142/99; test144/97.
+Đặc trưng ngôn ngữ được trích bằng spaCy 3.8.7 và en_core_web_sm 3.8.0. Các giá trị số giữ thang gốc; giới hạn 500 chỉ dành cho kênh n-gram dùng chung. Nhóm D cũng chứa POS và hình thái của head hoặc chủ ngữ, nên bỏ P hay M chưa loại hết mọi thông tin cùng loại. Train gồm 1069 bài và 1045 nhóm, validation gồm 142 bài và 99 nhóm, còn test gồm 144 bài và 97 nhóm.
 
 # 3. Phép tính dùng trong các task
 
@@ -44,7 +44,7 @@ Feature NLP: spaCy3.8.7 + en_core_web_sm3.8.0. Numeric giữ giá trị gốc; g
 (2) J(W,b)=[Σ_i α_(y_i)(−log p(y_i|x_i))/Σ_i α_(y_i)] + ||W||²_F/(2Cn)
 ```
 
-LR dùng code hiện hành: α=1 hoặc balanced α_k=n/(5n_k); intercept không L2. PyTorch LBFGS strong_wolfe,10 threads,seed20261013,max_iter1000/max_eval1250,tolerance_grad1e−6/change1e−9. Change-tolerance không đồng nghĩa gradient-converged.
+LR dùng code hiện hành: α=1 hoặc balanced α_k=n/(5n_k); intercept không L2. PyTorch LBFGS strong_wolfe,10 threads,seed 20261013,max_iter1000/max_eval1250,tolerance_grad1e−6/change1e−9. Change-tolerance không đồng nghĩa gradient-converged.
 
 ```text
 (3) Gini(t)=1−Σ_k p²_(k,t); gain=Gini(t)−(w_L/w_t)Gini(L)−(w_R/w_t)Gini(R)
@@ -162,13 +162,13 @@ Macro-F1 LR tăng so validation trong khi accuracy giảm: metric macro cân b�
 | Tree S+L+P+M+D minus Full_minus_M | 0.0171 | [0.0008; 0.0360] |
 | Tree S+L+P+M+D minus Full_minus_D | 0.0029 | [-0.0077; 0.0124] |
 
-Thêm POS vào S+L tăng LR0,0766 và Tree0,1670; CI đều dương. Trên nền Full, bỏ nhóm P chỉ giảm khoảng0,018 vì feature groups chồng thông tin. Hai phép đo trả lời hai câu hỏi có điều kiện khác nhau, không mâu thuẫn.
+Thêm POS vào S+L tăng LR 0,0766 và Tree 0,1670; CI đều dương. Trên nền Full, bỏ nhóm P chỉ giảm khoảng0,018 vì feature groups chồng thông tin. Hai phép đo trả lời hai câu hỏi có điều kiện khác nhau, không mâu thuẫn.
 
 Với LR, che lexical span giảm0,0134 [0,0049;0,0201], bỏ toàn L giảm0,0281 [0,0142;0,0394]. Lexical giúp ích trên test dù POS/nonlexical đã mạnh. Với Tree, chênh Full−masked là−0,0010 với CI chứa0; không khẳng định masking làm Tree tốt hơn. Không gọi masking là kiểm chứng model hiểu ngữ pháp.
 
-Thêm M sau P giúp LR0,0134 nhưng CI[−0,0004;0,0256] chứa0; bỏ M khỏi Full giảm0,0040 với CI cũng chứa0. Tree tăng0,0447 khi thêm M, giảm0,0171 khi bỏ M khỏi Full, các CI dương. Cấu trúc model và tuning tạo khác biệt; không gán hiệu ứng chung giống nhau cho LR/Tree.
+Thêm M sau P giúp LR 0,0134 nhưng CI[−0,0004;0,0256] chứa0; bỏ M khỏi Full giảm0,0040 với CI cũng chứa0. Tree tăng0,0447 khi thêm M, giảm0,0171 khi bỏ M khỏi Full, các CI dương. Cấu trúc model và tuning tạo khác biệt; không gán hiệu ứng chung giống nhau cho LR/Tree.
 
-Thêm D giúp LR0,0060 và Tree0,0029, cả CI chứa0. Chưa đủ bằng chứng lợi ích tăng thêm ổn định của D trong cấu hình hiện tại; không kết luận chủ ngữ/ngữ cảnh toàn câu vô ích. Extractor chỉ lấy subject child trực tiếp và parser có thể sai trên câu lỗi.
+Thêm D giúp LR 0,0060 và Tree 0,0029, cả CI chứa0. Chưa đủ bằng chứng lợi ích tăng thêm ổn định của D trong cấu hình hiện tại; không kết luận chủ ngữ/ngữ cảnh toàn câu vô ích. Extractor chỉ lấy subject child trực tiếp và parser có thể sai trên câu lỗi.
 
 ## F1 từng lớp và Δ so Full — LR
 
@@ -241,7 +241,7 @@ Hình 2. Confusion test của LR Full và POS; hàng gold, cột prediction.
 | Prep → ArtOrDet | 15 |
 | SVA → Nn | 13 |
 
-Nn→ArtOrDet134 và ArtOrDet→Nn59 là hai hướng nhầm lớn nhất; Vform→SVA29, SVA→Vform18. Số lượng chịu ảnh hưởng support nên đối chiếu per-class recall/F1, không chỉ xếp count. Chưa có span rỗng nên không thể nói phần lớn Nn→ArtOrDet nằm trong nhóm span rỗng; audit cho thấy missing-word edits có thể có span không rỗng.
+Nn→ArtOrDet134 và ArtOrDet→Nn59 là hai hướng nhầm lớn nhất; Vform→SVA 29, SVA→Vform18. Số lượng chịu ảnh hưởng support nên đối chiếu per-class recall/F1, không chỉ xếp count. Chưa có span rỗng nên không thể nói phần lớn Nn→ArtOrDet nằm trong nhóm span rỗng; audit cho thấy missing-word edits có thể có span không rỗng.
 
 ## 7.1 Audit sau prediction và cách giải thích
 
@@ -329,7 +329,7 @@ Một grouped split, một seed mô hình cổ điển; CI pointwise chưa hiệ
 
 # 12. Tài liệu và artifact đối chiếu
 
-Kế hoạch: note.md. Protocol trước chạy: docs/final_evaluation_protocol.md. Phương pháp dữ liệu/mô hình đã có: note_project_guide.md, data_preprocessing_report.docx, modeling_ablation_results_report.updated.docx. Nguồn học thuật: reference.md. Task report không thay thế các tài liệu này hay viết lại toàn bộ related work. Bảng số liệu được lấy từ reports/final_evaluation; không dùng kết quả chưa chạy.
+Kế hoạch: note.md. Protocol trước chạy: docs/final_evaluation_protocol.md. Phương pháp dữ liệu/mô hình đã có: docs/note_project_guide.md, reports/summaries/data/data_preprocessing_report.docx, reports/summaries/classical/modeling_ablation_results_report.docx. Nguồn học thuật: reference.md. Task report không thay thế các tài liệu này hay viết lại toàn bộ related work. Bảng số liệu được lấy từ reports/final_evaluation; không dùng kết quả chưa chạy.
 
 # Phụ lục A. Ghi chú audit theo ID
 
