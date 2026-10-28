@@ -1,5 +1,7 @@
 # Rà soát bằng chứng và tái lập
 
+Báo cáo trong thư mục này kiểm tra lại các kết quả cổ điển đã lưu: số liệu có tính đúng từ dự đoán hay không, các bảng có nhất quán không và quy trình tái lập được đến đâu. Đây là bằng chứng của đợt rà soát ngày 23/10/2026, không phải một lần chấm test độc lập mới.
+
 | File | Vai trò |
 |---|---|
 | [review_report.md](review_report.md) | Báo cáo task mới nhất |

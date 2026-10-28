@@ -1,5 +1,19 @@
 # Hướng dẫn chạy, kiểm tra và tái lập
 
+Bổ sung28/10/2026: BERT mở rộng đã có test/CI. Xem [hướng dẫn train](bert_small_training_guide.md), [phân tích cuối](../reports/bert_final_analysis/analysis_report.md) và [bàn giao](../reports/summaries/final/handover_checklist.md). Tái tính evidence vào output mới bằng `.venv/Scripts/python.exe -m src.evaluation.bert_final_analysis --output reports/bert_final_analysis_recheck`; không chạy scorer hoặc thay lock cũ.
+
+Xuất tài liệu dùng môi trường riêng để không đổi môi trường huấn luyện:
+
+```powershell
+uv venv .cache/reporting_env --python .venv/Scripts/python.exe --system-site-packages --cache-dir .cache/uv
+uv pip install --python .cache/reporting_env/Scripts/python.exe --cache-dir .cache/uv -r requirements-reporting.txt
+.cache/reporting_env/Scripts/python.exe -m src.reporting.build_bert_delivery --documents-only
+.cache/reporting_env/Scripts/python.exe -m src.reporting.build_nucle_slides
+.cache/reporting_env/Scripts/python.exe -m src.evaluation.verify_bert_delivery
+```
+
+Các lệnh export mặc định đọc bản Markdown hiện hành, giữ nguyên phần văn bản đã biên tập rồi cập nhật Word/PDF. Chỉ dùng `--refresh-evidence` khi muốn tạo lại bản nháp kỹ thuật từ số liệu; tùy chọn này sẽ thay phần diễn giải đã sửa. Các bản trước biên tập được lưu trong documentation_archive. Ghi chú AI và quyết định review là đầu vào riêng, không tự sinh lại từ phép tính metric. PDF và slide PDF được kiểm tra trong môi trường xuất; Word/PowerPoint có thể phân trang hoặc điều chỉnh chữ khác khi mở trên máy khác.
+
 Tài liệu vận hành hiện hành, đối chiếu code/artifact ngày 23/10/2026. [Project guide](note_project_guide.md) giải thích thuật toán/công thức; [status.md](status.md) ghi tiến độ. Các lệnh dùng PowerShell tại thư mục gốc repository.
 
 ## 1. Chọn đúng mức công việc

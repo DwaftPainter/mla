@@ -1,5 +1,7 @@
 # Span diagnostics v2 — validation
 
+Các kết quả ở đây nhìn sâu hơn vào những trường hợp POS của span chưa đủ để phân biệt nhãn. Phân tích được tính từ dự đoán validation đã có, theo độ dài span, cặp nhãn và nhóm POS; mô hình không được huấn luyện lại cho từng lát cắt.
+
 | File | Vai trò |
 |---|---|
 | [span_diagnostics_report.md](span_diagnostics_report.md) | Báo cáo đọc |

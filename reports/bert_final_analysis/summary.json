@@ -1,0 +1,439 @@
+{
+  "date": "2026-10-28",
+  "selected": {
+    "variant": {
+      "readout": "span_mean",
+      "encoder_lr": 5e-05,
+      "head_lr": 0.0001
+    },
+    "validation_macro_f1": {
+      "mean": 0.818324027011738,
+      "sample_std": 0.0011289296214977479
+    },
+    "runs": [
+      "span_mean_enc5e-05_head0.0001_seed20261013",
+      "span_mean_enc5e-05_head0.0001_seed20261014",
+      "span_mean_enc5e-05_head0.0001_seed20261015"
+    ]
+  },
+  "primary_run": "span_mean_enc5e-05_head0.0001_seed20261013",
+  "seed_test_macro_f1": {
+    "mean": 0.8181732797774238,
+    "sample_std": 0.00382890137303669
+  },
+  "test_seeds": [
+    {
+      "seed": 20261013,
+      "run": "span_mean_enc5e-05_head0.0001_seed20261013",
+      "validation_macro_f1": 0.8172616027129227,
+      "test_macro_f1": 0.8145949582165013,
+      "accuracy": 0.84375,
+      "best_epoch": 18,
+      "primary": true
+    },
+    {
+      "seed": 20261014,
+      "run": "span_mean_enc5e-05_head0.0001_seed20261014",
+      "validation_macro_f1": 0.8182010808872853,
+      "test_macro_f1": 0.8177136193490249,
+      "accuracy": 0.8450168918918919,
+      "best_epoch": 14,
+      "primary": false
+    },
+    {
+      "seed": 20261015,
+      "run": "span_mean_enc5e-05_head0.0001_seed20261015",
+      "validation_macro_f1": 0.8195093974350062,
+      "test_macro_f1": 0.8222112617667454,
+      "accuracy": 0.8471283783783784,
+      "best_epoch": 14,
+      "primary": false
+    }
+  ],
+  "metrics": {
+    "Majority": {
+      "macro_f1": 0.11843043995243759,
+      "accuracy": 0.4206081081081081,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.4206081081081081,
+          "recall": 1.0,
+          "f1": 0.5921521997621879,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          996,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          362,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          565,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          216,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          229,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "macro_precision": 0.08412162162162162,
+      "macro_recall": 0.2
+    },
+    "POS": {
+      "macro_f1": 0.7105899860842808,
+      "accuracy": 0.7440878378378378,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.8390129259694477,
+          "recall": 0.7168674698795181,
+          "f1": 0.773145641580942,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9224376731301939,
+          "recall": 0.919889502762431,
+          "f1": 0.921161825726141,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.6352459016393442,
+          "recall": 0.8230088495575221,
+          "f1": 0.7170393215111797,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.5099337748344371,
+          "recall": 0.7129629629629629,
+          "f1": 0.5945945945945946,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.7868852459016393,
+          "recall": 0.4192139737991266,
+          "f1": 0.547008547008547,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          714,
+          19,
+          228,
+          28,
+          7
+        ],
+        [
+          14,
+          333,
+          1,
+          12,
+          2
+        ],
+        [
+          90,
+          1,
+          465,
+          6,
+          3
+        ],
+        [
+          20,
+          3,
+          25,
+          154,
+          14
+        ],
+        [
+          13,
+          5,
+          13,
+          102,
+          96
+        ]
+      ],
+      "macro_precision": 0.7387031042950124,
+      "macro_recall": 0.7183885517923121
+    },
+    "LR_03": {
+      "macro_f1": 0.8162577160417342,
+      "accuracy": 0.8357263513513513,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.8365831012070566,
+          "recall": 0.9046184738955824,
+          "f1": 0.8692715870718765,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.923943661971831,
+          "recall": 0.9060773480662984,
+          "f1": 0.9149232914923292,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.818359375,
+          "recall": 0.7415929203539823,
+          "f1": 0.7780872794800372,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.7386934673366834,
+          "recall": 0.6805555555555556,
+          "f1": 0.708433734939759,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.8177777777777778,
+          "recall": 0.8034934497816594,
+          "f1": 0.8105726872246697,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          901,
+          19,
+          59,
+          13,
+          4
+        ],
+        [
+          15,
+          328,
+          1,
+          15,
+          3
+        ],
+        [
+          134,
+          1,
+          419,
+          6,
+          5
+        ],
+        [
+          18,
+          2,
+          20,
+          147,
+          29
+        ],
+        [
+          9,
+          5,
+          13,
+          18,
+          184
+        ]
+      ],
+      "macro_precision": 0.8270714766586698,
+      "macro_recall": 0.8072675495306156
+    },
+    "Tree_03": {
+      "macro_f1": 0.7996486300255187,
+      "accuracy": 0.809543918918919,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.8324974924774323,
+          "recall": 0.8333333333333334,
+          "f1": 0.8329152032112394,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9302325581395349,
+          "recall": 0.8839779005524862,
+          "f1": 0.9065155807365439,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.73,
+          "recall": 0.7752212389380531,
+          "f1": 0.7519313304721029,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.7061611374407583,
+          "recall": 0.6898148148148148,
+          "f1": 0.6978922716627635,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.8333333333333334,
+          "recall": 0.7860262008733624,
+          "f1": 0.8089887640449438,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          830,
+          18,
+          127,
+          19,
+          2
+        ],
+        [
+          23,
+          320,
+          2,
+          15,
+          2
+        ],
+        [
+          117,
+          1,
+          438,
+          4,
+          5
+        ],
+        [
+          18,
+          1,
+          21,
+          149,
+          27
+        ],
+        [
+          9,
+          4,
+          12,
+          24,
+          180
+        ]
+      ],
+      "macro_precision": 0.8064449042782118,
+      "macro_recall": 0.79367469770241
+    },
+    "BERT": {
+      "macro_f1": 0.8145949582165013,
+      "accuracy": 0.84375,
+      "per_label": {
+        "ArtOrDet": {
+          "precision": 0.852198316183349,
+          "recall": 0.9146586345381527,
+          "f1": 0.8823244552058112,
+          "support": 996
+        },
+        "Prep": {
+          "precision": 0.9155313351498637,
+          "recall": 0.9281767955801105,
+          "f1": 0.9218106995884773,
+          "support": 362
+        },
+        "Nn": {
+          "precision": 0.8651911468812877,
+          "recall": 0.7610619469026548,
+          "f1": 0.8097928436911488,
+          "support": 565
+        },
+        "Vform": {
+          "precision": 0.7085201793721974,
+          "recall": 0.7314814814814815,
+          "f1": 0.7198177676537586,
+          "support": 216
+        },
+        "SVA": {
+          "precision": 0.7688679245283019,
+          "recall": 0.7117903930131004,
+          "f1": 0.7392290249433107,
+          "support": 229
+        }
+      },
+      "confusion_matrix_true_rows_predicted_columns": [
+        [
+          911,
+          19,
+          46,
+          15,
+          5
+        ],
+        [
+          14,
+          336,
+          2,
+          9,
+          1
+        ],
+        [
+          120,
+          0,
+          430,
+          6,
+          9
+        ],
+        [
+          8,
+          7,
+          9,
+          158,
+          34
+        ],
+        [
+          16,
+          5,
+          10,
+          35,
+          163
+        ]
+      ],
+      "macro_precision": 0.8220617804229999,
+      "macro_recall": 0.8094338503031
+    }
+  },
+  "error_overlap": {
+    "both_correct": 1860,
+    "BERT_only_correct": 138,
+    "LR_only_correct": 119,
+    "both_wrong": 251
+  },
+  "test_samples": 2368,
+  "test_groups": 97,
+  "limitations": "One locked split; post-classical-test extension disclosed; no independent new test; no post-test tuning; fixed primary seed; pointwise CI"
+}

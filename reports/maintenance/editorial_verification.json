@@ -1,0 +1,296 @@
+{
+  "date": "2026-10-28",
+  "scope": "Language edit only; no retraining, new inference, relabeling or statistical changes",
+  "all_passed": true,
+  "protected_evidence_files": 354,
+  "changed_evidence": [],
+  "edited_markdown_files": 32,
+  "edited_word_files": 7,
+  "legacy_paragraph_edits": {
+    "summaries/classical/modeling_ablation_results_report.docx": 14,
+    "summaries/contextual/bert_learning_diagnostics_report.docx": 14,
+    "summaries/contextual/contextual_model_validation_report.docx": 11,
+    "summaries/data/data_preprocessing_report.docx": 8
+  },
+  "document_checks": [
+    {
+      "file": "README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "61692d876dec37437b45b4cdc9ec341770e79823b177195bf180d908b37681f0",
+      "table_sha256_after": "61692d876dec37437b45b4cdc9ec341770e79823b177195bf180d908b37681f0",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "bert_final_analysis/analysis_report.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "7b98a79eeefeea446aaec519cf836633d8b17d7faf72103ad8d9604b5c204aef",
+      "table_sha256_after": "7b98a79eeefeea446aaec519cf836633d8b17d7faf72103ad8d9604b5c204aef",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "bert_final_analysis/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "table_sha256_after": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "bert_learning_diagnostics/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "da0f2eb8b47a3546e6c054760aa10d447c870951594e1dd73a4129e1f25ccec6",
+      "table_sha256_after": "da0f2eb8b47a3546e6c054760aa10d447c870951594e1dd73a4129e1f25ccec6",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "contextual_model_validation/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "faa167bf66d27deec852c1ad40c68afe1515c7c3d48725af28b143279f30c039",
+      "table_sha256_after": "faa167bf66d27deec852c1ad40c68afe1515c7c3d48725af28b143279f30c039",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "evaluation_followup/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "44640551d65aeae76d9f5fc38bf19ccf7c98820b2aba5915dc5a052c15226bf9",
+      "table_sha256_after": "44640551d65aeae76d9f5fc38bf19ccf7c98820b2aba5915dc5a052c15226bf9",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "evaluation_followup/review_report.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "eaa2bde2ed8c4d3f134e2430f5be855f1b55da608dbba76c722bc8347c99ca21",
+      "table_sha256_after": "eaa2bde2ed8c4d3f134e2430f5be855f1b55da608dbba76c722bc8347c99ca21",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "final_evaluation/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "02e404c507dbf48c57c74f5fbfa514bfec863e0a9e63dd23c6a430c0e4e05cc9",
+      "table_sha256_after": "02e404c507dbf48c57c74f5fbfa514bfec863e0a9e63dd23c6a430c0e4e05cc9",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "maintenance/code_redundancy_review.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "fc862c1a5cc7ce662fdf0b7e3237399629b6d52a10daa639d5650be2884bf523",
+      "table_sha256_after": "fc862c1a5cc7ce662fdf0b7e3237399629b6d52a10daa639d5650be2884bf523",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "maintenance/documentation_review.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "45b5825622e0fa0c1e6c4a5a6d747796e2a92153ad83c0492ecbc8d2d192cb9b",
+      "table_sha256_after": "45b5825622e0fa0c1e6c4a5a6d747796e2a92153ad83c0492ecbc8d2d192cb9b",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "maintenance/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "51ac9e81aeec7794335cadc5590e9006011e2295e0f1ae5bbebb059c5100716d",
+      "table_sha256_after": "51ac9e81aeec7794335cadc5590e9006011e2295e0f1ae5bbebb059c5100716d",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "maintenance/reports_check.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "e06ede864b10556704bd622f7c3c9b487077a57654cc5e0304d46893a6eda307",
+      "table_sha256_after": "e06ede864b10556704bd622f7c3c9b487077a57654cc5e0304d46893a6eda307",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "nucle_feature_ablation_v1/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "97a85ce4437559ee6c130940fab9b29bd3f68c97d4598bc5ac32c50dcebc04b1",
+      "table_sha256_after": "97a85ce4437559ee6c130940fab9b29bd3f68c97d4598bc5ac32c50dcebc04b1",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "nucle_feature_benchmark_solver_v2/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "c5b092fb730b62cd2b8411832e18f51db768598296eef853c3315abb84f3a2d0",
+      "table_sha256_after": "c5b092fb730b62cd2b8411832e18f51db768598296eef853c3315abb84f3a2d0",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "nucle_pos_baseline_v1/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "58c2112c6d4c7543e21f78978d41a141f8b64ffd4a7ece7fc7179e1b78136438",
+      "table_sha256_after": "58c2112c6d4c7543e21f78978d41a141f8b64ffd4a7ece7fc7179e1b78136438",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "nucle_preparation_v2_comparison/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "ac07e32517c3b2b25aafb37658f4375dbdd31efcbae4cd0d9e369ae4698be228",
+      "table_sha256_after": "ac07e32517c3b2b25aafb37658f4375dbdd31efcbae4cd0d9e369ae4698be228",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "nucle_span_diagnostics_v1/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "26bf65f80f50dd9fc90249e2c5c4b1b257a1ce8a54175dd69b287a4232b1c3a9",
+      "table_sha256_after": "26bf65f80f50dd9fc90249e2c5c4b1b257a1ce8a54175dd69b287a4232b1c3a9",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "nucle_span_diagnostics_v2/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "af45378ded40ff1f95cf68e0f9998415c8388c3e7476fd0308c833de2bf16fd0",
+      "table_sha256_after": "af45378ded40ff1f95cf68e0f9998415c8388c3e7476fd0308c833de2bf16fd0",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "nucle_span_diagnostics_v2/span_diagnostics_report.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "5bb0a023e43253b9c70d1133dc317d688dd6c0473a60fdedb4aa93e6ddd06d24",
+      "table_sha256_after": "5bb0a023e43253b9c70d1133dc317d688dd6c0473a60fdedb4aa93e6ddd06d24",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "organization/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "table_sha256_after": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "summaries/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "dd88c60a6c19a47e7f4d2561c656eba24d27b7a58d6220b41969f6cffd17e59d",
+      "table_sha256_after": "dd88c60a6c19a47e7f4d2561c656eba24d27b7a58d6220b41969f6cffd17e59d",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "summaries/classical/modeling_ablation_results_report.docx",
+      "tables_unchanged": true,
+      "table_sha256_before": "3a2a3dc204bcc1ef94ca399d101ccdd1621fef19771c788f68772ba8a304bbe0",
+      "table_sha256_after": "3a2a3dc204bcc1ef94ca399d101ccdd1621fef19771c788f68772ba8a304bbe0",
+      "images_count_unchanged": true,
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "summaries/classical/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "table_sha256_after": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "summaries/contextual/bert_learning_diagnostics_report.docx",
+      "tables_unchanged": true,
+      "table_sha256_before": "5bf7ae520e661d0276de0d5e4d0ab73d54f9575426085e2216c3c6cdeb662fa0",
+      "table_sha256_after": "5bf7ae520e661d0276de0d5e4d0ab73d54f9575426085e2216c3c6cdeb662fa0",
+      "images_count_unchanged": true,
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "summaries/contextual/contextual_model_validation_report.docx",
+      "tables_unchanged": true,
+      "table_sha256_before": "5dd194c50e1bf6eb8cad4e03815d46c460f4670948d3c27c0bd456a76c8f2609",
+      "table_sha256_after": "5dd194c50e1bf6eb8cad4e03815d46c460f4670948d3c27c0bd456a76c8f2609",
+      "images_count_unchanged": true,
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "summaries/contextual/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "d7434982b655e1ed9a6b5b05074dd11db635c534c08567a5fea96c4bfd7de609",
+      "table_sha256_after": "d7434982b655e1ed9a6b5b05074dd11db635c534c08567a5fea96c4bfd7de609",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "summaries/data/data_preprocessing_report.docx",
+      "tables_unchanged": true,
+      "table_sha256_before": "131825689e4d911d19b59b9f6644749e06a97ae9b2e5663e8fa38de05e80a5ae",
+      "table_sha256_after": "131825689e4d911d19b59b9f6644749e06a97ae9b2e5663e8fa38de05e80a5ae",
+      "images_count_unchanged": true,
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "summaries/data/nucle_data_quality.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "70e75fcf7a613634e3f72387ba6a3c9d388cd69901bedae40a068d51aaaf2593",
+      "table_sha256_after": "70e75fcf7a613634e3f72387ba6a3c9d388cd69901bedae40a068d51aaaf2593",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "summaries/data/nucle_data_understanding.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "ff4efd56f7595a6fee26336e9d17445b891d30a5f4d4755b8c05f009b3abdedd",
+      "table_sha256_after": "ff4efd56f7595a6fee26336e9d17445b891d30a5f4d4755b8c05f009b3abdedd",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "summaries/data/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "bb848b089c698114a5e87f0f24ef9a78160c2b23f5ca8c112e1e3fba6de9664d",
+      "table_sha256_after": "bb848b089c698114a5e87f0f24ef9a78160c2b23f5ca8c112e1e3fba6de9664d",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "summaries/evaluation/evaluation_tasks_report.docx",
+      "tables_unchanged": true,
+      "table_sha256_before": "810ae90cb9bf9274e2e0c05f8261a0f7929c11d47eb2d608a935ca1cfbfdc686",
+      "table_sha256_after": "810ae90cb9bf9274e2e0c05f8261a0f7929c11d47eb2d608a935ca1cfbfdc686",
+      "images_count_unchanged": true
+    },
+    {
+      "file": "summaries/evaluation/evaluation_tasks_report.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "f9b889a8a9e4279d83114ebb5b9c8650e5bb3b931bb195bb9fcc529a53927ff3",
+      "table_sha256_after": "f9b889a8a9e4279d83114ebb5b9c8650e5bb3b931bb195bb9fcc529a53927ff3",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "summaries/evaluation/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "cada4c9ce77036f629b703045e708f209654e38fd337f6c6c3a2aa3e635b2241",
+      "table_sha256_after": "cada4c9ce77036f629b703045e708f209654e38fd337f6c6c3a2aa3e635b2241",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "summaries/final/bao_cao_tong_ket_NUCLE.docx",
+      "tables_unchanged": true,
+      "table_sha256_before": "3a7bca0632902257459fd3b60bb851c3353e75e41500d9f01234acc1794590ec",
+      "table_sha256_after": "3a7bca0632902257459fd3b60bb851c3353e75e41500d9f01234acc1794590ec",
+      "images_count_unchanged": true
+    },
+    {
+      "file": "summaries/final/bao_cao_tong_ket_NUCLE.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "ec400f14cfe07b9deb5cfd8c76479a865eeafd903ddaaa61282b86933fee84f7",
+      "table_sha256_after": "ec400f14cfe07b9deb5cfd8c76479a865eeafd903ddaaa61282b86933fee84f7",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "summaries/final/BERT_comparison_report.docx",
+      "tables_unchanged": true,
+      "table_sha256_before": "4866065b6c6e22c395d332854c0b4ad885e340ffcdfac9732c85ce593bfe8f3c",
+      "table_sha256_after": "4866065b6c6e22c395d332854c0b4ad885e340ffcdfac9732c85ce593bfe8f3c",
+      "images_count_unchanged": true
+    },
+    {
+      "file": "summaries/final/handover_checklist.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "9f2151fbe75fdfc384a1f2823c8bbb2fec2b4eb001144cdd0597ddc0a4b059db",
+      "table_sha256_after": "9f2151fbe75fdfc384a1f2823c8bbb2fec2b4eb001144cdd0597ddc0a4b059db",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "summaries/final/speaker_notes.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "table_sha256_after": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "executable_examples_unchanged": true
+    },
+    {
+      "file": "final_evaluation/reproducibility/README.md",
+      "tables_unchanged": true,
+      "table_sha256_before": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "table_sha256_after": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "executable_examples_unchanged": true
+    }
+  ],
+  "backup": "reports/documentation_archive/before_language_edit_20261028",
+  "limits": "Language revised for readability; original experiment dates, AI-use disclosures and pending independent review retained."
+}

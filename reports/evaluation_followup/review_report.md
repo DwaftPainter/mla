@@ -1,6 +1,6 @@
 # Báo cáo task rà soát bằng chứng và tái lập pipeline
 
-Ngày 23/10/2026. Đây là báo cáo các task kiểm chứng vừa thực hiện, không phải final report dự án. Không xuất DOCX hoặc tạo slide trong lượt này. Báo cáo đánh giá trước đó giữ nguyên như snapshot; tiến độ mới được ghi ở đây.
+Đợt rà soát ngày 23/10/2026 kiểm tra các kết quả đã lưu có nhất quán và tái lập được trong phạm vi nào. Báo cáo đánh giá ban đầu được giữ làm mốc đối chiếu; tài liệu này bổ sung kết quả kiểm số học, kiểm nguồn và tái lập quy trình. Đây chưa phải báo cáo tổng kết dự án tại thời điểm đó.
 
 ## 1. Phạm vi và kết quả kiểm chứng
 
@@ -21,7 +21,7 @@ Ngày 23/10/2026. Đây là báo cáo các task kiểm chứng vừa thực hi�
 
 Thời gian pipeline tái lập: 13.89 phút. Môi trường riêng `.cache/final_replay_env`, Python 3.13.7, NumPy 2.5.3, PyTorch 2.14.0+cpu, spaCy 3.8.7 và en_core_web_sm 3.8.0. Môi trường không dùng system-site-packages. Thư viện được cài đúng phiên bản đã ghi; môi trường `.venv` gốc không đổi.
 
-Manifest mới khác timestamp, đường dẫn input và danh mục code theo thời điểm chạy; đó không phải sai khác dữ liệu. Các file dữ liệu được so trực tiếp bằng SHA256, checkpoint được so tensor/tree, predictions được so từng mẫu. Toàn bộ lock và kết quả gốc giữ nguyên. Replay test là kiểm tái lập thiết kế cũ, không phải một test mới độc lập.
+Manifest của lần tái lập có thời gian, đường dẫn đầu vào và danh mục mã theo lúc chạy, nên không thể yêu cầu mọi trường đều giống bản cũ. Phần đối chiếu tập trung vào dữ liệu qua SHA256, trọng số hoặc cấu trúc checkpoint và dự đoán theo từng mẫu. Lock cùng kết quả gốc được giữ nguyên. Việc tái tạo dự đoán trên cùng test xác nhận khả năng tái lập thiết kế đã có, không tạo ra một test độc lập mới.
 
 ## 2. Phát hiện cần diễn giải chính xác
 
@@ -39,7 +39,7 @@ Hai ID 26635 và 37909 có correction rỗng thật, tương ứng thao tác xó
 
 Đã xác minh được dữ kiện parser và thao tác edit; chưa thể gọi đó là kết luận chuyên môn độc lập. Lập hàng đợi 17 ca ở `expert_review_queue.csv`, gồm 7 ca nhãn/edit mơ hồ nổi bật, 2 ca phạm vi cấu trúc, 2 ca determiner có thể phụ thuộc cách đọc và 6 ca nghi ngờ parser. Đây là danh sách xem lại, không khẳng định cả 17 annotation sai. Gold và phép chấm giữ nguyên.
 
-Các ghi chú cũ như “context dài hơn” chỉ là mô tả hai câu khác nhau. Không thể quy khác biệt prediction cho riêng độ dài câu. Việc LR khớp gold cũng chưa xác nhận correction là sửa đổi bắt buộc.
+Những mô tả như “ngữ cảnh dài hơn” giúp nhận diện khác biệt giữa hai câu, nhưng chưa đủ để giải thích nguyên nhân dự đoán khác nhau. Tương tự, việc LR khớp nhãn gốc chỉ xác nhận điểm chấm theo annotation; nó chưa chứng minh bản sửa là lựa chọn duy nhất hoặc bắt buộc về ngữ pháp.
 
 ### 2.4 Dependency không trực tiếp lấy được mọi chủ ngữ
 

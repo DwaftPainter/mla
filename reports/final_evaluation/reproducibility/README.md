@@ -1,10 +1,8 @@
-# Tái lập các task đánh giá NUCLE — hướng dẫn gói lịch sử
+# Tái lập các task đánh giá NUCLE
 
-> Phần hướng dẫn bên dưới giữ phạm vi lúc đóng gói, trước lượt raw reproduction. Hướng dẫn vận hành mới ở [docs/reproduction.md](../../../docs/reproduction.md); [followup](../../evaluation_followup/review_report.md) đã xác minh raw → preparation/NLP → 52 fit → test replay. Chưa rerun toàn grid lịch sử/BERT. Lệnh selection bên dưới chỉ áp dụng workspace riêng đủ input, không chạy lên thư mục kết quả hiện có.
+Gói tái lập lưu mã nguồn, thiết kế thực nghiệm, cấu hình khóa và các bảng kết quả tại thời điểm đóng gói. Corpus, câu gốc, bản sửa, từ vựng encoder, checkpoint và các ca audit riêng được giữ ngoài gói. Để chạy lại đầy đủ, người thực hiện cần có quyền sử dụng NUCLE và các đầu vào nghiên cứu tương ứng.
 
-README ngoài zip có thêm chỉ dẫn này; zip và bundle_manifest lịch sử vẫn giữ nguyên. Không dùng hash trong manifest cũ để kết luận README hiện hành đã bị hỏng.
-
-Gói này gồm source, protocol, configs/lock metadata, bảng tổng hợp và báo cáo. Không chứa corpus, sentences/correction, encoder vocabulary, checkpoint hay private audit packet. Không phải bộ dữ liệu phân phối lại. Không tự upload.
+README và zip này mô tả mốc đóng gói lịch sử. Báo cáo tổng kết hiện có ở [summaries/final](../../summaries/final/bao_cao_tong_ket_NUCLE.md). Kiểm tra workspace ngày 27/10/2026 phát hiện thiếu bốn source trong lock và hai CSV predictions đổi định dạng; số liệu vẫn khớp nhưng các lệnh verify/replay bên dưới cần điều kiện phục hồi được ghi ở [reports_check.md](../../maintenance/reports_check.md). Không dùng lệnh generator đã bị xóa như entry point hiện hành; bản source lịch sử còn trong zip.
 
 ## Bằng chứng đã kiểm
 
@@ -12,7 +10,7 @@ Gói này gồm source, protocol, configs/lock metadata, bảng tổng hợp và
 - Lock có trước test;20 tên pipeline gồm aliases,18 predictors riêng.
 - Reload checkpoint từ encoded test trong môi trường hiện tại và fresh venv khớp;20 metric và75 expanded-group checks khớp.
 - Restore zip vào .cache/evaluation_tasks_bundle_restore và đối chiếu SHA256 từng file.
-- Chưa chạy lại toàn grid hoặc spaCy từ raw trong fresh venv. Không gọi checkpoint replay là full training reproduction.
+- Chưa chạy lại toàn grid hoặc spaCy từ raw trong fresh venv. Không gọi checkpoint replay là tái lập toàn bộ quá trình huấn luyện.
 
 ## Input cần có cho tái lập đầy đủ
 

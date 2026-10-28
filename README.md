@@ -6,7 +6,7 @@ Phân loại **một lỗi tại vị trí đã biết trong câu tiếng Anh g�
 
 ## Trạng thái và kết quả
 
-Đã hoàn thành preparation v1/v2, grouped split, baseline/ablation validation, khóa cấu hình, chấm test, bootstrap và tái lập **52 fit của đợt đánh giá** từ dữ liệu nguồn. BERT-small đã thử trên validation và chẩn đoán trên train; dừng thử thêm, chưa có điểm test BERT. Final report dự án và slide tổng kết chưa chốt.
+Đã hoàn thành preparation, grouped split, baseline/ablation cổ điển và tái lập **52 fit của đợt đánh giá cổ điển**. BERT-small mở rộng hoàn tất 12 run, chọn span mean bằng validation rồi khóa và chấm test ba seed ngày 28/10/2026. [Báo cáo tổng kết](reports/summaries/final/bao_cao_tong_ket_NUCLE.md), DOCX/PDF và slide đã được cập nhật; [báo cáo BERT](reports/bert_final_analysis/analysis_report.md) lưu kiểm chứng, bảng/hình và bootstrap. Nhóm còn xác nhận tên/đóng góp/khai báo AI và tự nộp bài; xem [bàn giao](reports/summaries/final/handover_checklist.md).
 
 | Model | Macro-F1 validation | Macro-F1 test | CI95% test |
 |---|---:|---:|---|
@@ -14,10 +14,13 @@ Phân loại **một lỗi tại vị trí đã biết trong câu tiếng Anh g�
 | POS rule | 0.7048 | 0.7106 | [0.6766; 0.7365] |
 | LR Full | 0.8067 | 0.8163 | [0.7876; 0.8382] |
 | Tree Full | 0.7879 | 0.7996 | [0.7693; 0.8246] |
+| BERT-small primary seed 20261013 | 0.8173 | 0.8146 | [0.7919; 0.8350] |
+
+BERT mean ± sample std qua ba seed: validation **0.8183 ± 0.0011**, test **0.8182 ± 0.0038**. Mean/std không thay primary model/paired CI. BERT−LR −0.0017, CI95% [−0.0184; 0.0182]: chưa đủ bằng chứng mô hình nào tốt hơn. Đợt BERT mở rộng sau khi test cổ điển đã được xem; đây là cùng test đã dùng, không phải external test độc lập.
 
 Cấu hình chọn trên validation; giữ model fit train, không refit train+validation. Test có 2.368 samples thuộc 144 essays/97 connected groups; CI dùng 1.000 paired group-bootstrap, không đo biến thiên do seed huấn luyện. Bảng đủ chữ số: [reviewed_overall_results.csv](reports/evaluation_followup/reviewed_overall_results.csv). Kiểm chứng và giới hạn: [report rà soát](reports/evaluation_followup/review_report.md).
 
-LR vốn có thông tin dependency từ parse toàn câu. Kết quả BERT chưa thành công không chứng minh ngữ cảnh vô ích. Audit có hỗ trợ AI; 17 ca vẫn chờ chuyên gia, chưa sửa gold.
+LR vốn có thông tin dependency từ parse toàn câu. Giữ kết quả âm BERT đợt ban đầu cùng kết quả span mean mở rộng; không quy cải thiện giữa hai đợt chỉ cho readout. Audit có hỗ trợ AI; hàng chờ chuyên gia hợp nhất có 22 IDs, gold giữ nguyên.
 
 ## Đọc tài liệu theo nhu cầu
 
@@ -59,6 +62,6 @@ SGML có quyền sử dụng + review logs
   → kiểm chứng độc lập, tái lập và report task
 ```
 
-Git chứa source, tests, notebooks, tài liệu, 5 báo cáo DOCX và các bảng/hình tổng hợp đã rà soát. Corpus `data_set/`, review inputs chứa nguồn, encoder/vocabulary, checkpoint, predictions từng sample và private audit packet giữ local. Clone repo đủ để đọc kết quả và chạy phần lớn unit tests, **chưa đủ để chạy lại toàn bộ nghiên cứu**.
+Git chứa source, tests, notebooks, báo cáo DOCX/PDF, slide và các bảng/hình tổng hợp đã rà soát. Corpus `data_set/`, review inputs chứa nguồn, encoder/vocabulary, checkpoint, predictions từng sample và private audit packet giữ local. Clone repo đủ để đọc kết quả và chạy phần lớn unit tests, **chưa đủ để chạy lại toàn bộ nghiên cứu**.
 
 Điều kiện đầu vào và cách ghi output của từng script ở [hướng dẫn tái lập](docs/reproduction.md). Có 40 file source đã khóa checksum; `.gitattributes` giữ nguyên byte để bảo toàn kiểm chứng. Notebook 01–04 là báo cáo các mốc dữ liệu/validation, không phải pipeline huấn luyện hay bảng test mới nhất.

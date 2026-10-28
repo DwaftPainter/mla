@@ -1,6 +1,6 @@
 # Rà soát docs, README và báo cáo
 
-Ngày 23/10/2026, đối chiếu với implementation và artifact của commit nền `52349bd`. Mục tiêu là giúp người đọc phân biệt thiết kế, kết quả đã chạy, điều kiện tái lập và công việc còn lại. Đây là báo cáo bảo trì tài liệu, không phải final report hoặc một lượt thí nghiệm mới.
+Bản rà soát ngày 23/10/2026 đối chiếu tài liệu với mã nguồn và kết quả của commit nền `52349bd`. Mục đích là giúp người đọc nhận ra đâu là thiết kế ban đầu, đâu là thí nghiệm đã chạy và cần những điều kiện gì để kiểm tra lại. Đây là báo cáo bảo trì tài liệu, không bổ sung một lượt thực nghiệm mới.
 
 ## 1. Phạm vi đọc và đối chiếu
 

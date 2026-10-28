@@ -1,6 +1,8 @@
 # Rà soát code thừa — 23/10/2026
 
-Phạm vi: commit `52349bd`, gồm **46 file Python trong src, 12 file test và 4 notebook (20 code cells)**. Đã đọc cấu trúc AST, import, lời gọi, entry point, tài liệu, output và lock; đối chiếu các bản sao local. Không chạy train, chấm lại test hoặc gọi các generator có thể ghi đè artifact. Không sửa/xóa code trong lượt rà soát này.
+Ghi chú ngày 27/10/2026: đây là snapshot review trước khi dọn source. Sáu file reporting trong bảng đã bị xóa khỏi cây làm việc; tên file được giữ dạng đường dẫn chữ để không dẫn liên kết thiếu đích. Bốn source trong final lock có bản sao đúng checksum trong zip; xem [kiểm tra reports hiện tại](reports_check.md) trước khi chạy tái lập cũ.
+
+Phạm vi rà soát là commit `52349bd`, gồm **46 file Python trong src, 12 file test và 4 notebook (20 code cells)**. Việc xem xét dựa vào cấu trúc mã, import, lời gọi, cách chạy, tài liệu và các kết quả đã lưu. Không huấn luyện, chấm test hoặc chạy generator có thể ghi đè kết quả trong lần rà soát này. Các nhận xét về mã thừa được giữ theo đúng mốc trước khi dọn source.
 
 ## Kết luận
 
@@ -15,11 +17,11 @@ Phạm vi: commit `52349bd`, gồm **46 file Python trong src, 12 file test và 
 
 | Ưu tiên | Vị trí | Bằng chứng | Đề xuất |
 |---|---|---|---|
-| 1 | [update_validation_documentation.py](../../src/reporting/update_validation_documentation.py#L7) | Không có caller trong code/test/notebook. Đòi các report ở docs/ cũ; ghi đè status thành test chưa chấm; cập nhật note, reference và DOCX lịch sử. | Đánh dấu ngừng dùng. Giữ bản đã khóa tại chỗ; chỉ loại khỏi cây code làm việc khi đã có phương án giữ snapshot tái lập. Không sửa vài đường dẫn rồi chạy lại. |
-| 2 | [build_evaluation_tasks_report.py](../../src/reporting/build_evaluation_tasks_report.py#L18) | write_csv chỉ có definition; perclass/delta chỉ được tạo và append, không đọc/xuất; fits được đọc từ fit_progress.json rồi không dùng. overall vẫn được dùng trong bảng, cần giữ. | Có thể dọn các phần này cùng import thừa; file không nằm trong final lock. Khi dọn cần đối chiếu nội dung bảng báo cáo trước/sau ở output riêng. |
-| 3 | [build_contextual_validation_report.py](../../src/reporting/build_contextual_validation_report.py#L141) | Ghi Markdown và DOCX vào docs/ thay vì reports/summaries/contextual; nội dung là snapshot trước test. | Giữ generator lịch sử; nếu cần generator hiện hành thì dùng entry point/output mới, không sửa ngược bản đã khóa. |
-| 3 | [build_bert_diagnostics_report.py](../../src/reporting/build_bert_diagnostics_report.py#L91) | Ghi DOCX vào docs/; nội dung chứa đề xuất thử tiếp BERT của mốc chẩn đoán, trong khi kế hoạch hiện đã dừng. | Giữ để truy vết; không dùng generator này cập nhật trạng thái hiện hành. |
-| 4 | [package_final_reproducibility.py](../../src/reporting/package_final_reproducibility.py#L8) | README template còn nói chưa tái chạy spaCy từ raw; code vẫn có chức năng đóng gói và kiểm restore riêng. | Cần cập nhật template ở lần đóng gói mới; không phải file thừa và không ghi lại gói lịch sử chỉ để đồng bộ câu chữ. |
+| 1 | `src/reporting/update_validation_documentation.py` | Không có caller trong code/test/notebook. Đòi các report ở docs/ cũ; ghi đè status thành test chưa chấm; cập nhật note, reference và DOCX lịch sử. | Đánh dấu ngừng dùng. Giữ bản đã khóa tại chỗ; chỉ loại khỏi cây code làm việc khi đã có phương án giữ snapshot tái lập. Không sửa vài đường dẫn rồi chạy lại. |
+| 2 | `src/reporting/build_evaluation_tasks_report.py` | write_csv chỉ có definition; perclass/delta chỉ được tạo và append, không đọc/xuất; fits được đọc từ fit_progress.json rồi không dùng. overall vẫn được dùng trong bảng, cần giữ. | Có thể dọn các phần này cùng import thừa; file không nằm trong final lock. Khi dọn cần đối chiếu nội dung bảng báo cáo trước/sau ở output riêng. |
+| 3 | `src/reporting/build_contextual_validation_report.py` | Ghi Markdown và DOCX vào docs/ thay vì reports/summaries/contextual; nội dung là snapshot trước test. | Giữ generator lịch sử; nếu cần generator hiện hành thì dùng entry point/output mới, không sửa ngược bản đã khóa. |
+| 3 | `src/reporting/build_bert_diagnostics_report.py` | Ghi DOCX vào docs/; nội dung chứa đề xuất thử tiếp BERT của mốc chẩn đoán, trong khi kế hoạch hiện đã dừng. | Giữ để truy vết; không dùng generator này cập nhật trạng thái hiện hành. |
+| 4 | `src/reporting/package_final_reproducibility.py` | README template còn nói chưa tái chạy spaCy từ raw; code vẫn có chức năng đóng gói và kiểm restore riêng. | Cần cập nhật template ở lần đóng gói mới; không phải file thừa và không ghi lại gói lịch sử chỉ để đồng bộ câu chữ. |
 
 Updater cũ hiện sẽ vướng assert do thiếu report ở đường dẫn cũ trước khi chạy tới phần ghi đè. Rủi ro phát sinh nếu các điều kiện đó được khôi phục hoặc bỏ qua; đây không phải bằng chứng nó đã ghi đè tài liệu trong lượt kiểm tra này.
 
@@ -43,10 +45,10 @@ Updater cũ hiện sẽ vướng assert do thiếu report ở đường dẫn c�
 | [src/evaluation/review_saved_evidence.py](../../src/evaluation/review_saved_evidence.py) | `sys` | Không |
 | [src/evaluation/verify_final_results.py](../../src/evaluation/verify_final_results.py) | `csv`, `json` | Không |
 | [src/features/nucle_features.py](../../src/features/nucle_features.py) | `Iterable`, `PROJECT_ROOT` | Có |
-| [src/reporting/build_bert_diagnostics_report.py](../../src/reporting/build_bert_diagnostics_report.py) | `datetime`, `timezone` | Có |
-| [src/reporting/build_evaluation_tasks_report.py](../../src/reporting/build_evaluation_tasks_report.py) | `html`, `Counter`, `np`, `plt`, `RGBColor`, `dump`, `FULL`, `MASK`, `NONLEX` | Không |
-| [src/reporting/package_final_reproducibility.py](../../src/reporting/package_final_reproducibility.py) | `json` | Không |
-| [src/reporting/update_validation_documentation.py](../../src/reporting/update_validation_documentation.py) | `zipfile` | Có |
+| `src/reporting/build_bert_diagnostics_report.py` | `datetime`, `timezone` | Có |
+| `src/reporting/build_evaluation_tasks_report.py` | `html`, `Counter`, `np`, `plt`, `RGBColor`, `dump`, `FULL`, `MASK`, `NONLEX` | Không |
+| `src/reporting/package_final_reproducibility.py` | `json` | Không |
+| `src/reporting/update_validation_documentation.py` | `zipfile` | Có |
 | [src/training/nucle_final_selection.py](../../src/training/nucle_final_selection.py) | `Counter` | Có |
 
 15/28 binding trên thuộc sáu file ngoài final lock; 13 binding còn lại thuộc các file đã khóa. Sau khi bỏ write_csv, import csv trong report builder cũng sẽ không còn cần. Report builder chỉ chèn ảnh đã có, không dùng NumPy/pyplot để vẽ; cả block thiết lập matplotlib có thể được xem xét cùng lúc.
@@ -122,12 +124,12 @@ Số nơi import vào bao gồm source, tests và từng code cell notebook; kh�
 | [src/models/nucle_logistic.py](../../src/models/nucle_logistic.py) | 5 | Có | Implementation LR/LBFGS và convergence diagnostics. |
 | [src/models/nucle_tree.py](../../src/models/nucle_tree.py) | 4 | Có | Implementation cây Gini và prediction. |
 | [src/reporting/__init__.py](../../src/reporting/__init__.py) | 0 | Có | Giữ dấu mốc package; không phải code thừa. |
-| [src/reporting/build_ablation_notebook.py](../../src/reporting/build_ablation_notebook.py) | 0 | Có | Dựng notebook 04 từ artifact validation; có entry point độc lập. |
-| [src/reporting/build_bert_diagnostics_report.py](../../src/reporting/build_bert_diagnostics_report.py) | 0 | Có | Generator lịch sử; còn xuất vào docs/ và ghi đề xuất thử BERT của mốc cũ. |
-| [src/reporting/build_contextual_validation_report.py](../../src/reporting/build_contextual_validation_report.py) | 0 | Có | Generator lịch sử; còn xuất vào docs/ và ghi trạng thái trước test. |
-| [src/reporting/build_evaluation_tasks_report.py](../../src/reporting/build_evaluation_tasks_report.py) | 0 | Không | Generator report task hiện hành; có dead helper/import/biến cần dọn. |
-| [src/reporting/package_final_reproducibility.py](../../src/reporting/package_final_reproducibility.py) | 0 | Không | Đóng gói và kiểm restore; có chức năng riêng, README mẫu còn trạng thái cũ. |
-| [src/reporting/update_validation_documentation.py](../../src/reporting/update_validation_documentation.py) | 0 | Có | Updater một lần cho trạng thái tuần 1; không còn phù hợp workspace hiện tại. |
+| `src/reporting/build_ablation_notebook.py` | 0 | Có | Dựng notebook 04 từ artifact validation; có entry point độc lập. |
+| `src/reporting/build_bert_diagnostics_report.py` | 0 | Có | Generator lịch sử; còn xuất vào docs/ và ghi đề xuất thử BERT của mốc cũ. |
+| `src/reporting/build_contextual_validation_report.py` | 0 | Có | Generator lịch sử; còn xuất vào docs/ và ghi trạng thái trước test. |
+| `src/reporting/build_evaluation_tasks_report.py` | 0 | Không | Generator report task hiện hành; có dead helper/import/biến cần dọn. |
+| `src/reporting/package_final_reproducibility.py` | 0 | Không | Đóng gói và kiểm restore; có chức năng riêng, README mẫu còn trạng thái cũ. |
+| `src/reporting/update_validation_documentation.py` | 0 | Có | Updater một lần cho trạng thái tuần 1; không còn phù hợp workspace hiện tại. |
 | [src/training/__init__.py](../../src/training/__init__.py) | 0 | Có | Giữ dấu mốc package; không phải code thừa. |
 | [src/training/bert_span_classifier.py](../../src/training/bert_span_classifier.py) | 4 | Có | Training/tokenization benchmark BERT lịch sử; nhiều diagnostic và test còn dùng. |
 | [src/training/nucle_ablation.py](../../src/training/nucle_ablation.py) | 3 | Có | Sáu variants, masking và helper sparse/remap được final selection dùng. |
