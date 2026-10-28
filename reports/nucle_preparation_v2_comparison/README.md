@@ -1,5 +1,7 @@
 # So sánh preparation v1/v2
 
+Phần so sánh này kiểm tra hai cách chuẩn bị dữ liệu v1 và v2 có làm thay đổi câu, ngữ cảnh hoặc cách biểu diễn span hay không. ID, nhãn và offset nguồn được giữ để có thể đối chiếu từng mẫu. Đây là kiểm tra dữ liệu; mức ảnh hưởng lên mô hình được đánh giá trong một thí nghiệm riêng.
+
 | File | Vai trò |
 |---|---|
 | [comparison_summary.json](comparison_summary.json) | Tổng hợp khác biệt dữ liệu và input |
