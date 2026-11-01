@@ -43,11 +43,11 @@ Trên toàn bộ test, BERT và LR cùng đúng 1.860 ca. BERT đúng riêng 138
 
 Để đọc kỹ các sai khác này, phần audit chọn 40 ca: 12 ca BERT sai/LR đúng, 12 ca theo chiều ngược lại, 10 ca cả hai sai và sáu ca cả hai đúng để đối chiếu. Sáu ca gold SVA được ưu tiên trong nhóm đầu. ID được chọn trước khi đọc câu và bản sửa; nhãn cùng span của cả 40 ca đều khớp nguồn SGML.
 
-Nhóm đã hoàn tất rà soát và duyệt đầy đủ 40 review cùng nội dung contribution của từng ca ngày 01/11/2026. Đây là mẫu chọn có chủ đích: nhóm cùng sai có 9 ArtOrDet và 1 Nn do thứ tự duyệt bucket. Không thể dùng tỷ lệ trong mẫu này để suy tỷ lệ toàn corpus. Các nhận xét chưa xác định nguyên nhân nhân quả.
+Nhóm đã hoàn tất rà soát đầy đủ 40 review cùng nội dung contribution của từng ca ngày 01/11/2026. Đây là mẫu chọn có chủ đích: nhóm cùng sai có 9 ArtOrDet và 1 Nn do thứ tự duyệt bucket. Không thể dùng tỷ lệ trong mẫu này để suy tỷ lệ toàn corpus. Các nhận xét chưa xác định nguyên nhân nhân quả.
 
 Một số ca cho thấy span chỉ là mảnh từ, hoặc lỗi thiếu từ được neo vào từ bên cạnh. Một số khác cần xem lại quan hệ giữa nhãn và bản sửa. Sáu ID 23037, 34539, 16809, 30366, 32801 và 32874 được ưu tiên cho chuyên gia. Ca partial-token được cả hai mô hình dự đoán đúng cũng được giữ làm đối chiếu, tránh diễn giải rằng mọi mảnh từ đều gây lỗi.
 
-Hồ sơ có câu gốc, bản sửa và nhận xét từng ca được giữ trên máy nghiên cứu. [Kết quả audit được duyệt](review_summary.md) tổng hợp 40 review và 22 nhận định xử lý. Hàng đợi 22 ID có 9 nhận định giữ nhãn, 6 nhận định xem lại nhãn, 3 nghi vấn correction/phạm vi thay thế, 3 chỉnh sửa có thể tùy chọn và 1 bản sửa nhiều thành phần. Nhóm đã rà soát và duyệt toàn bộ nội dung ngày 01/11/2026. Việc duyệt chốt cách diễn giải, không thay nhãn gốc hoặc chấm lại test.
+Hồ sơ có câu gốc, bản sửa và nhận xét từng ca được giữ trên máy nghiên cứu. [Kết quả audit đã chốt](review_summary.md) tổng hợp 40 review và 22 nhận định xử lý. Hàng đợi 22 ID có 9 nhận định giữ nhãn, 6 nhận định xem lại nhãn, 3 nghi vấn correction/phạm vi thay thế, 3 chỉnh sửa có thể tùy chọn và 1 bản sửa nhiều thành phần. Nhóm đã rà soát và chốt toàn bộ nội dung ngày 01/11/2026. Việc rà soát chốt cách diễn giải, không thay nhãn gốc hoặc chấm lại test.
 
 ## Đọc và kiểm tra lại kết quả
 

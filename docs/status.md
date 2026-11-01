@@ -1,12 +1,12 @@
 # Trạng thái dự án
 
-Cập nhật ngày 01/11/2026. Đợt cổ điển/chẩn đoán ban đầu thuộc23/10; BERT mở rộng đã hoàn tất train, khóa cấu hình và chấm test ngày28/10. [Tổng kết Markdown](../reports/summaries/final/bao_cao_tong_ket_NUCLE.md), [Word](../reports/summaries/final/bao_cao_tong_ket_NUCLE.docx), [PDF](../reports/summaries/final/bao_cao_tong_ket_NUCLE.pdf) và [slide](../reports/summaries/final/NUCLE_presentation.pptx) đã được chuẩn bị. [Week 11](../reports/summaries/weekly/GROUP05_CLC02_WEEK11_REPORT.md) cập nhật kết quả và audit được nhóm duyệt. Phân công theo tên chỉ xác nhận cho bộ 18 annotation; chưa xác nhận nộp bài hoặc đóng góp toàn project.
+Cập nhật ngày 01/11/2026. Đợt cổ điển/chẩn đoán ban đầu thuộc23/10; BERT mở rộng đã hoàn tất train, khóa cấu hình và chấm test ngày28/10. [Tổng kết Markdown](../reports/summaries/final/bao_cao_tong_ket_NUCLE.md), [Word](../reports/summaries/final/bao_cao_tong_ket_NUCLE.docx), [PDF](../reports/summaries/final/bao_cao_tong_ket_NUCLE.pdf) và [slide](../reports/summaries/final/NUCLE_presentation.pptx) đã được chuẩn bị. [Week 11](../reports/summaries/weekly/GROUP05_CLC02_WEEK11_REPORT.md) cập nhật kết quả và audit được nhóm rà soát và chốt. Phân công theo tên chỉ xác nhận cho bộ 18 annotation; chưa xác nhận nộp bài hoặc đóng góp toàn project.
 
 ## BERT mở rộng và bàn giao ngày 28/10
 
 - Người dùng đã chạy đủ12 run CLS/span_mean × head LR1e−4/1e−3 × ba seed. Chọn span mean/head1e−4 bằng mean validation0,8183 ±0,0011; encoder LR5e−5; primary seed20261013 cố định. Đã khóa trước BERT test và chấm đủ ba seed; không refit train+validation.
 - Primary BERT test macro-F1 0,8146, accuracy0,8438, CI95% [0,7919;0,8350]. Mean test ba seed0,8182 ±0,0038. BERT−LR −0,0017, CI [−0,0184;0,0182]; chưa đủ bằng chứng hơn/kém. Test cổ điển đã được xem trước đợt mở rộng; không gọi đây là external test độc lập.
-- [Phân tích cuối](../reports/bert_final_analysis/analysis_report.md) lưu61 kiểm tra đã qua, paired bootstrap1.000×97 và bảng/hình. Nhóm đã rà soát và duyệt đủ40 review BERT/LR cùng22 nhận định xử lý ngày01/11; [kết quả audit](../reports/bert_final_analysis/review_summary.md) ghi phạm vi và hướng xử lý. 23 tests BERT/analysis tổng hợp đã qua ở lần kiểm trước; không đồng nhất với suite lịch sử.
+- [Phân tích cuối](../reports/bert_final_analysis/analysis_report.md) lưu61 kiểm tra đã qua, paired bootstrap1.000×97 và bảng/hình. Nhóm đã rà soát và chốt đủ40 review BERT/LR cùng22 nhận định xử lý ngày01/11; [kết quả audit](../reports/bert_final_analysis/review_summary.md) ghi phạm vi và hướng xử lý. 23 tests BERT/analysis tổng hợp đã qua ở lần kiểm trước; không đồng nhất với suite lịch sử.
 - [Bộ bàn giao](../reports/summaries/final/handover_checklist.md) có DOCX/PDF tổng kết, báo cáo BERT riêng, PPTX/PDF slide12 trang và speaker notes khoảng10 phút. Thông tin cá nhân, đóng góp ngoài bộ18 ca audit và xác nhận nộp bài do nhóm hoàn thiện.
 - Đã kiểm lại số liệu đã lưu: 280 model–slice metrics, 40 CI và 30 CI chênh lệch khớp; bốn run validation BERT và 18 IDs audit khớp. Đây là tính lại từ predictions, không gọi model scorer lên test.
 - Workspace hiện tại chưa qua verify lock cũ: 69/74 hash khớp, thiếu bốn source reporting và một CSV validation đổi định dạng; CSV test cũng lệch scoring hash do đổi định dạng. Chuẩn hóa CSV trong bộ nhớ tái tạo đúng hash gốc; source có bản sao đúng hash trong zip. Xem [báo cáo kiểm tra](../reports/maintenance/reports_check.md). Kết quả tái lập cũ bên dưới là bằng chứng ở thời điểm chạy, không xác nhận workspace hiện tại còn nguyên byte.
@@ -15,7 +15,7 @@ Cập nhật ngày 01/11/2026. Đợt cổ điển/chẩn đoán ban đầu thu�
 
 - Preparation, split và baseline/ablation/masking validation trước đây, giữ nguyên artifact.
 - Related work cho tuần 1; không sửa Excel/PRISMA.
-- Audit offset/alignment train+validation, review18 lỗi validation đã được nhóm duyệt và đối chiếu code–protocol.
+- Audit offset/alignment train+validation, review18 lỗi validation đã được nhóm rà soát và chốt và đối chiếu code–protocol.
 - Sensitivity v1/v2 với LR/POS trên cùng split; xác minh ảnh hưởng số threads đến refit LR.
 - Protocol, pilot và bốn lượt BERT-small: hai learning rate ở seed đầu, tổng ba seed cho learning rate chọn. Không phải BERT-base.
 - So sánh toàn validation, từng lớp, span, cặp nhãn và POS; mean/std theo seed, confusion matrix, report mới.
@@ -44,7 +44,7 @@ BERT-small mở rộng có macro-F1 validation trung bình0,8183 ±0,0011 và te
 
 ## Giới hạn và việc còn lại
 
-- Nhóm đã duyệt nhận định xử lý của17 ca trong [hàng đợi cũ](../reports/evaluation_followup/expert_review_queue.csv) và toàn bộ22 ID sau hợp nhất; gold giữ nguyên. Có9 ca được hỗ trợ giữ nhãn,6 ca xem lại nhãn,3 nghi vấn correction/span,3 chỉnh sửa có thể tùy chọn và1 bản sửa nhiều thành phần. Các vấn đề được đánh dấu vẫn được giữ rõ trong nhận định, chưa thay dữ liệu đã khóa.
+- Nhóm đã hoàn tất rà soát nhận định xử lý của17 ca trong [hàng đợi cũ](../reports/evaluation_followup/expert_review_queue.csv) và toàn bộ22 ID sau hợp nhất; gold giữ nguyên. Có9 ca được hỗ trợ giữ nhãn,6 ca xem lại nhãn,3 nghi vấn correction/span,3 chỉnh sửa có thể tùy chọn và1 bản sửa nhiều thành phần. Các vấn đề được đánh dấu vẫn được giữ rõ trong nhận định, chưa thay dữ liệu đã khóa.
 - Phạm vi là phân loại tại vị trí lỗi đã biết, không đánh giá phát hiện lỗi hoặc sửa câu. Một grouped split và seed cổ điển; CI bootstrap không đo biến thiên do seed huấn luyện.
 - Tái lập bao phủ 52 fit của đợt đánh giá, chưa chạy lại toàn bộ grid lịch sử hoặc BERT. Corpus và một số artifact giữ local; điều kiện tái lập ở [reproduction.md](reproduction.md).
 - Trước bàn giao: nhóm xác nhận đóng góp ngoài phạm vi18 ca audit và chuẩn bị mẫu có ID, trường hợp lỗi cùng kiểm tra nhỏ cho interview. Không suy đóng góp cá nhân từ kết quả chung hoặc tạo nhật ký hồi tố.
