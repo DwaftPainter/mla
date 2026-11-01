@@ -28,8 +28,10 @@ Các kết quả chính được trình bày trong [báo cáo tổng kết](summ
 | Chẩn đoán BERT | [bert_learning_diagnostics](bert_learning_diagnostics/README.md) | Học thuộc train nhỏ, gradients, marker/span, checkpoints |
 | BERT mở rộng đã khóa/test | [bert_final_analysis](bert_final_analysis/README.md) | 12 run validation, ba seed test, CI paired, bảng/hình và audit40 mới; private/ giữ local |
 | Đánh giá test đã khóa | [final_evaluation](final_evaluation/README.md) | Lock, checkpoint, predictions, bootstrap, audit, gói tái lập |
-| Rà soát và tái lập tiếp theo | [evaluation_followup](evaluation_followup/README.md) | Kiểm độc lập, tái lập raw → test, 17 ca chờ chuyên gia |
+| Rà soát và tái lập tiếp theo | [evaluation_followup](evaluation_followup/README.md) | Kiểm độc lập, tái lập raw → test, 17 nhận định đã được nhóm duyệt |
 | Tổ chức tài liệu | [organization](organization/README.md) | Ánh xạ đường dẫn, backup và kiểm tra sau di chuyển |
+
+[Báo cáo Week 11](summaries/weekly/GROUP05_CLC02_WEEK11_REPORT.md) bổ sung bảng train/validation và kết quả audit được nhóm duyệt ngày01/11/2026. [Bản tổng hợp audit](bert_final_analysis/review_summary.md) ghi đủ phạm vi18 review validation,40 review BERT/LR và22 nhận định xử lý.
 
 Tên thư mục `final_evaluation` chỉ giai đoạn chấm test; báo cáo tổng kết nằm riêng ở `summaries/final`. Không sửa manifest cũ chỉ để làm đẹp cây thư mục. Trong workspace hiện tại, lock cũ chưa qua kiểm toàn vẹn vì thiếu bốn source và một CSV đã đổi định dạng; xem báo cáo kiểm tra trước khi dùng các lệnh verify/replay lịch sử.
 
