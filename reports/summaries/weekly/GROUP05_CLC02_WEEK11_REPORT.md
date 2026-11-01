@@ -8,9 +8,9 @@
 
 Vướng mắc lớn nhất ở báo cáo trước là BERT-small chưa học được ngay trên tập train. Vì vậy, điểm validation thấp khi đó chưa đủ để nhận xét về khả năng dùng ngữ cảnh của mô hình. Báo cáo tuần này bổ sung kết quả đợt huấn luyện mở rộng, đối chiếu BERT với LR trên các nhóm khó đã xác định, và tổng hợp kết quả test cùng các mốc khóa thí nghiệm.
 
-Phần audit 18 annotation đã được hoàn thiện và toàn bộ 18 nhận xét đã được duyệt ngày 01/11/2026. File làm việc có nhận xét cho từng ca, bản sửa gốc, annotation liên quan và người phụ trách. Báo cáo chỉ trình bày những điểm làm rõ thêm, không lặp lại toàn bộ 18 nhận xét đã có trong Week 10. Phần contribution bên dưới chỉ dành cho việc audit này.
+Phần audit 18 annotation đã được hoàn thiện và toàn bộ 18 nhận xét đã được rà soát và chốt ngày 01/11/2026. File làm việc có nhận xét cho từng ca, bản sửa gốc, annotation liên quan và người phụ trách. Báo cáo chỉ trình bày những điểm làm rõ thêm, không lặp lại toàn bộ 18 nhận xét đã có trong Week 10. Phần contribution bên dưới chỉ dành cho việc audit này.
 
-Bản cập nhật này cũng hoàn tất nội dung phân tích cho 40 ca BERT/LR và nhận định xử lý cho cả 22 ID trong hàng đợi cần xem lại. Nhóm đã rà soát và duyệt toàn bộ kết quả ngày 01/11/2026; bộ 18 ca validation cũng đã được duyệt riêng.
+Bản cập nhật này cũng hoàn tất nội dung phân tích cho 40 ca BERT/LR và nhận định xử lý cho cả 22 ID trong hàng đợi cần xem lại. Nhóm đã rà soát và chốt toàn bộ kết quả ngày 01/11/2026; bộ 18 ca validation cũng đã được rà soát và chốt riêng.
 
 Các kết quả BERT bổ sung được lưu trong đợt phân tích ngày 28/10/2026. Lần cập nhật báo cáo này sử dụng kết quả và prediction đã lưu, không huấn luyện lại hoặc chấm lại test. Các bảng khảo sát tài liệu, ablation cũ và chẩn đoán gradient/memorization được giữ ở báo cáo trước.
 
@@ -111,7 +111,7 @@ Con số 18 là quy mô của phần đọc định tính, không xuất phát t
 
 ### 5.2. Những gì đã cập nhật
 
-File `reports/contextual_model_validation/audit/validation_18_errors_review.csv` trước đó còn trống hai cột `review` và `contribution`. Cả 18 dòng hiện đã có phân tích riêng, phân công cụ thể và trạng thái `approved`. File lưu bản sửa lấy từ SGML, ID annotation liên quan, nhóm vấn đề, người phụ trách và thông tin duyệt. Cột nguồn hỗ trợ review đã được bỏ khỏi bảng làm việc. Nhãn thật, prediction và dữ liệu câu gốc được giữ nguyên.
+File `reports/contextual_model_validation/audit/validation_18_errors_review.csv` đã hoàn thiện nhận xét và contribution cho cả 18 annotation. Mỗi dòng có phân tích riêng, phân công cụ thể, bản sửa lấy từ SGML và annotation liên quan khi cần. Phần rà soát kết quả đã hoàn thành; nhãn thật, prediction và dữ liệu câu gốc được giữ nguyên.
 
 Đối chiếu với nguồn cho thấy cả 18 span và gold đều khớp annotation gốc. Trong parse đã lưu, 17 ca có alignment exact; ca 11696 là whitespace_edge vì span chứa dấu cách cuối. Nhận xét phân biệt ba mức: điều thấy trực tiếp trong bản sửa, cách giải thích ngôn ngữ học, và giả thuyết về nguyên nhân mô hình dự đoán sai. Các giả thuyết về tác động của POS hoặc dependency chưa được ghi thành kết luận nhân quả.
 
@@ -139,7 +139,7 @@ Phân công dưới đây **chỉ áp dụng cho 18 annotation**, mỗi người
 | Duy | 6 | 12314, 14761, 14764, 12019, 14939, 15390 | Vform/SVA: thì, tình thái, hòa hợp chủ–vị và các bản sửa lân cận. |
 | Công | 6 | 1269, 18774, 19065, 19068, 19069, 19185 | Span dài hoặc nhiều thay đổi: xác định phần sửa chính và những chỗ cần thống nhất nhãn. |
 
-Toàn bộ **18/18 review đã được nhóm rà soát và duyệt ngày 01/11/2026**, theo xác nhận của người dùng. Cột `human_confirmation` có trạng thái `approved`, kèm ngày duyệt trong file CSV. Bảng contribution ghi phạm vi phụ trách của Quân, Duy và Công, mỗi người sáu ca.
+Nhóm đã hoàn tất rà soát kết quả audit **18/18 annotation** ngày 01/11/2026. Bảng contribution ghi phạm vi phụ trách của Quân, Duy và Công, mỗi người sáu ca.
 
 ## 6. Hoàn thiện 40 ca BERT/LR và đề xuất xử lý 22 ID
 
@@ -156,13 +156,13 @@ Phần đọc ca BERT/LR sử dụng prediction test đã lưu của BERT seed c
 
 Cả **40/40 ca đã có nội dung review và contribution hoàn chỉnh**, kèm người phân tích, ngày thực hiện và mức tin cậy định tính. Mẫu này không đại diện cho tỷ lệ lỗi trên toàn bộ test: riêng nhóm cả hai sai gồm chín ArtOrDet và một Nn do cách duyệt các nhóm chọn mẫu. Phần contribution của bộ 40 ca mô tả giá trị của từng ca đối với phân tích, không phân công thêm công việc cho Quân, Duy hoặc Công ngoài bộ 18 ca đã nêu.
 
-Nhóm đã rà soát và duyệt **40/40 review cùng 22/22 nhận định xử lý ngày 01/11/2026**, theo xác nhận của người dùng. Các trường nhận xét, đóng góp của từng ca và trạng thái duyệt đã được cập nhật đầy đủ. Hồ sơ giữ các căn cứ đối chiếu để có thể kiểm tra lại từng nhận định.
+Nhóm đã rà soát và chốt **40/40 review cùng 22/22 nhận định xử lý ngày 01/11/2026**. Các trường nhận xét, đóng góp của từng ca và trạng thái hoàn thành đã được cập nhật đầy đủ. Hồ sơ giữ các căn cứ đối chiếu để có thể kiểm tra lại từng nhận định.
 
 ### 6.2. Kết quả xử lý hàng đợi 22 ID
 
 Hàng đợi gồm 17 ID từ audit mô hình cổ điển và sáu ID ưu tiên từ audit BERT; ID 34539 xuất hiện ở cả hai, nên có 22 ID duy nhất. Tám ID trong hàng đợi cũng thuộc mẫu 40 ca BERT/LR. Tổng cộng **54 annotation khác nhau** đã được đối chiếu lại về span, gold và correction với SGML trong lượt hoàn thiện này.
 
-Đã hoàn thành và được nhóm duyệt **22/22 nhận định xử lý**, mỗi nhận định có căn cứ và annotation liên quan khi cần. Các nhóm dưới đây mô tả hướng xử lý chính của từng ca; chúng không phải số lượng nhãn đã được sửa.
+Đã hoàn thành và được nhóm rà soát và chốt **22/22 nhận định xử lý**, mỗi nhận định có căn cứ và annotation liên quan khi cần. Các nhóm dưới đây mô tả hướng xử lý chính của từng ca; chúng không phải số lượng nhãn đã được sửa.
 
 | Hướng xử lý đề xuất | Số ca | Annotation ID |
 | --- | --- | --- |
@@ -185,7 +185,7 @@ Ba ca được xếp vào nhóm có thể tùy chọn cần được đọc như
 
 Kết quả củng cố nhận xét rằng điểm đúng/sai theo gold và tính hợp lý của annotation là hai vấn đề cần đọc riêng. Ca cùng đúng vẫn có thể chứa correction cần kiểm tra, như 30366; một nghi vấn ban đầu cũng có thể được giải thích bằng annotation lân cận, như 32801. Các ca 24526, 9351, 41235 và 35455 có dấu hiệu POS hoặc dependency tự động chưa phù hợp với cách đọc câu, nhưng chưa có phép can thiệp thay parse để khẳng định tác động nhân quả lên prediction.
 
-Nhóm đã hoàn tất rà soát và duyệt **40 bản review cùng 22 nhận định xử lý**. Những ca còn điểm chưa rõ đã có nhận định và hướng xử lý cụ thể thay vì để trống. Việc duyệt chốt nội dung phân tích; các vấn đề về nhãn hoặc correction vẫn được ghi rõ trong kết quả. Không huấn luyện lại, sửa gold hoặc tính lại điểm sau review; các bảng kết quả mô hình trong báo cáo giữ nguyên.
+Nhóm đã hoàn tất rà soát **40 bản review cùng 22 nhận định xử lý**. Những ca còn điểm chưa rõ đã có nhận định và hướng xử lý cụ thể thay vì để trống. Việc rà soát chốt nội dung phân tích; các vấn đề về nhãn hoặc correction vẫn được ghi rõ trong kết quả. Không huấn luyện lại, sửa gold hoặc tính lại điểm sau review; các bảng kết quả mô hình trong báo cáo giữ nguyên.
 
 Bản tổng hợp công khai nằm tại `reports/bert_final_analysis/review_summary.md`. Hồ sơ chi tiết từng ID ở máy nghiên cứu gồm câu gốc, span, correction, prediction, nhận xét và căn cứ. Các file chứa câu nguồn tiếp tục được giữ nội bộ.
 
@@ -193,9 +193,9 @@ Bản tổng hợp công khai nằm tại `reports/bert_final_analysis/review_su
 
 Kết quả mới thay đổi cách nhìn về lần thử BERT ban đầu: sau đợt huấn luyện mở rộng, mô hình học được trên train và đạt validation quanh 0,818. Tuy nhiên, trên test hiện có, BERT seed chính và LR Full vẫn gần nhau về macro-F1; BERT cũng chưa cải thiện đồng đều trên mọi lớp và mọi nhóm dùng chung POS. Với kết quả này, LR Full tiếp tục là mốc so sánh phù hợp, còn lợi ích của biểu diễn ngữ cảnh cần được trình bày theo từng nhóm lỗi.
 
-Phần nội dung review của 18 annotation đã hoàn tất và được duyệt. Những ca có ranh giới nhãn chưa rõ vẫn được giữ trong danh sách cần đối chiếu thêm với hướng dẫn annotation; việc duyệt nhận xét không tự động thay đổi gold hoặc điểm đánh giá. Báo cáo giữ rõ hai giới hạn của thí nghiệm: cấu hình mở rộng chưa trùng hoàn toàn grid được gợi ý, và kết quả BERT là phần bổ sung sau khi test của mô hình cổ điển đã được xem. Không điều chỉnh mô hình dựa trên các kết quả test vừa tổng hợp.
+Phần rà soát kết quả audit 18 annotation đã hoàn tất. Những ca có ranh giới nhãn chưa rõ vẫn được giữ trong danh sách cần đối chiếu thêm với hướng dẫn annotation; việc chốt nhận xét không tự động thay đổi gold hoặc điểm đánh giá. Báo cáo giữ rõ hai giới hạn của thí nghiệm: cấu hình mở rộng chưa trùng hoàn toàn grid được gợi ý, và kết quả BERT là phần bổ sung sau khi test của mô hình cổ điển đã được xem. Không điều chỉnh mô hình dựa trên các kết quả test vừa tổng hợp.
 
-Phần bổ sung gồm 40 review BERT/LR và 22 nhận định xử lý đã được nhóm rà soát và duyệt đầy đủ. Nhóm giữ các nhận định ở đúng phạm vi bằng chứng: chốt cách diễn giải kết quả audit, đồng thời giữ nguyên nhãn và dữ liệu đã khóa.
+Phần bổ sung gồm 40 review BERT/LR và 22 nhận định xử lý đã được nhóm rà soát và chốt đầy đủ. Nhóm giữ các nhận định ở đúng phạm vi bằng chứng: chốt cách diễn giải kết quả audit, đồng thời giữ nguyên nhãn và dữ liệu đã khóa.
 
 Về khả năng tái lập, bản phân tích ngày 28/10 còn ghi nhận bốn file mã nguồn của khóa cổ điển không có trong workspace lúc kiểm tra và hai CSV đã đổi định dạng. Metric và CI vẫn đối chiếu được, nhưng bước kiểm tra đầy đủ khóa cổ điển chưa qua. Vì vậy, bản ghi 61/61 kiểm tra của phần phân tích BERT không được diễn giải thành xác nhận rằng mọi thành phần của thí nghiệm cổ điển đều đã tái lập đầy đủ.
 
@@ -209,4 +209,4 @@ Hai tài liệu đầu vào là `GROUP05_CLC02_WEEK10_REPORT.docx` và `Nhan_xet
 - `reports/bert_final_analysis/overall_results.csv`, `paired_differences.csv`, `summary.json` và `verification.json`: kết quả BERT, so sánh paired và trạng thái kiểm tra đã lưu.
 - `reports/final_evaluation/lock.json`, `test_scoring_started.json`; `reports/bert_small_experiment/selection.sha256`, `test/test_started.json`: mốc khóa và liên kết hash.
 - File audit CSV, packet parse đã lưu và annotation trong SGML gốc: căn cứ cho phần audit. Câu gốc được giữ ở file audit nội bộ; báo cáo không chép lại toàn bộ 18 câu.
-- `reports/bert_final_analysis/review_summary.md`: tổng hợp 40 review và 22 nhận định được nhóm duyệt; hồ sơ từng ca giữ nội bộ. Các ID tương ứng được đồng bộ trong `reports/evaluation_followup/expert_review_queue.csv`.
+- `reports/bert_final_analysis/review_summary.md`: tổng hợp 40 review và 22 nhận định được nhóm rà soát và chốt; hồ sơ từng ca giữ nội bộ. Các ID tương ứng được đồng bộ trong `reports/evaluation_followup/expert_review_queue.csv`.

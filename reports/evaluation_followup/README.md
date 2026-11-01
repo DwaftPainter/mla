@@ -9,7 +9,7 @@ Báo cáo trong thư mục này kiểm tra lại các kết quả cổ điển �
 | [evidence_review.json](evidence_review.json) | Metric, CI, CSV và report checks |
 | [audit_followup.json](audit_followup.json) | Kiểm lại 40 ca |
 | [reviewed_overall_results.csv](reviewed_overall_results.csv) | Bảng baseline đầy đủ chữ số |
-| [expert_review_queue.csv](expert_review_queue.csv) | 17 nhận định xử lý đã được nhóm rà soát và duyệt, nằm trong danh sách hợp nhất 22 ID |
+| [expert_review_queue.csv](expert_review_queue.csv) | 17 nhận định xử lý đã được nhóm rà soát và chốt, nằm trong danh sách hợp nhất 22 ID |
 | [tests.xml](tests.xml) | 13 tests của tập con trong môi trường tái lập; không phải toàn suite |
 
 Các file là bằng chứng của đợt rà soát. Artifact hash cũ ghi trạng thái code/tài liệu trước lần tổ chức này; ánh xạ và kiểm tra tổ chức nằm ở reports/organization. Không tự sửa manifest lịch sử.

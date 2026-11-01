@@ -10,7 +10,7 @@ Nếu cần đọc toàn bộ kết quả, hãy bắt đầu từ báo cáo tổ
 | 3 | [Mô hình ngữ cảnh](contextual/README.md) | BERT validation và chẩn đoán; thử nghiệm chưa thành công |
 | 4 | [Đánh giá và rà soát](evaluation/README.md) | Test, CI, audit và kiểm tái lập mới nhất |
 | 5 | [BERT mở rộng](../bert_final_analysis/analysis_report.md) | Kết quả ngày28/10: primary test0,8146; mean ba seed0,8182 ±0,0038 |
-| 6 | [Week 11 Markdown](weekly/GROUP05_CLC02_WEEK11_REPORT.md), [DOCX](weekly/GROUP05_CLC02_WEEK11_REPORT.docx) | Kết quả bổ sung,18 review validation,40 review BERT/LR và22 nhận định được nhóm duyệt ngày01/11 |
+| 6 | [Week 11 Markdown](weekly/GROUP05_CLC02_WEEK11_REPORT.md), [DOCX](weekly/GROUP05_CLC02_WEEK11_REPORT.docx) | Kết quả bổ sung,18 review validation,40 review BERT/LR và22 nhận định được nhóm rà soát và chốt ngày01/11 |
 
 Đọc nhanh [trạng thái](../../docs/status.md), [bàn giao PDF/slide](final/handover_checklist.md) và [kết quả BERT mới](../bert_final_analysis/analysis_report.md). Các báo cáo cũ giữ mốc thí nghiệm của chúng; câu “test chưa chấm” không mô tả trạng thái BERT hiện tại. Tên/MSSV, đóng góp thực tế và xác nhận nộp bài vẫn cần nhóm hoàn thiện.
 

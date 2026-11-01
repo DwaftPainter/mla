@@ -57,7 +57,7 @@ Phân rã logit(ArtOrDet) − logit(Nn) tại ID 6079: S=−0,0422; L=+1,6728; P
 |---|---|---|
 | RQ1 | Test macro-F1: LR Full 0,8163; Tree Full 0,7996; POS 0,7106; Majority 0,1184. LR−Tree +0,0166, CI [0,0018;0,0301]; LR−POS +0,1057, CI [0,0829;0,1288]. | Cùng grouped split và task known-span; không thay mô hình bằng variant thắng test. CI pointwise, một seed cổ điển. |
 | RQ2 | Với LR, bỏ toàn L giảm 0,0281; bỏ nhóm P giảm 0,0181, CI đều dương cho chênh Full−variant. M có bằng chứng rõ hơn ở Tree. | CI của M và D ở LR chứa 0; không kết luận vô ích. Bỏ nhóm P/M không loại hết thông tin POS/morph còn có trong D. Full−D là alias; các variant tune riêng. |
-| RQ3 | Nhầm lớn: Nn→ArtOrDet 134, chiều ngược 59; Vform→SVA 29, chiều ngược 18. LR tốt hơn POS trên hai cặp nhãn và các tập con Vform/SVA@VERB, Nn/ArtOrDet@NOUN. | Không cải thiện đồng đều trên mọi slice. Quan hệ với token neo, span rộng, parse và gold/edit là bằng chứng mô tả. Nhóm đã rà soát và duyệt nhận định audit; mẫu có chủ đích chưa xác minh nguyên nhân hay tỷ lệ corpus. |
+| RQ3 | Nhầm lớn: Nn→ArtOrDet 134, chiều ngược 59; Vform→SVA 29, chiều ngược 18. LR tốt hơn POS trên hai cặp nhãn và các tập con Vform/SVA@VERB, Nn/ArtOrDet@NOUN. | Không cải thiện đồng đều trên mọi slice. Quan hệ với token neo, span rộng, parse và gold/edit là bằng chứng mô tả. Nhóm đã rà soát và chốt nhận định audit; mẫu có chủ đích chưa xác minh nguyên nhân hay tỷ lệ corpus. |
 
 BERT giữ nguyên kết quả validation và diagnostics cũ; không có BERT test mới. Thử nghiệm BERT chưa thành công không chứng minh ngữ cảnh không hữu ích. LR vốn đã sử dụng một phần thông tin dependency từ parse câu.
 
@@ -65,7 +65,7 @@ BERT giữ nguyên kết quả validation và diagnostics cũ; không có BERT t
 
 Đã mở rộng kiểm chứng từ replay encoded test sang chuỗi SGML → Understanding/audit → preparation v2 → grouping/split → NLP/features → 52 fit của đợt đánh giá → test prediction replay. Review log annotation lịch sử và cấu hình được chọn của sáu variant cũ vẫn là input cố định. Chưa chạy lại toàn bộ grid lịch sử của sáu variant hoặc thí nghiệm BERT; không tuyên bố tái lập toàn bộ lịch sử nghiên cứu.
 
-Cập nhật 01/11/2026: nhóm đã rà soát và duyệt nhận định xử lý của cả 17 ca trong hàng đợi này, được đồng bộ với hàng đợi gộp 22 ID của đợt BERT. Toàn bộ 40 review BERT/LR cũng đã được duyệt. [Kết quả audit được duyệt](../bert_final_analysis/review_summary.md) ghi phạm vi, số đếm và hướng xử lý đã chốt. Gold, prediction và điểm đánh giá không thay đổi.
+Cập nhật 01/11/2026: nhóm đã rà soát và chốt nhận định xử lý của cả 17 ca trong hàng đợi này, được đồng bộ với hàng đợi gộp 22 ID của đợt BERT. Toàn bộ 40 review BERT/LR cũng đã được rà soát và chốt. [Kết quả audit đã chốt](../bert_final_analysis/review_summary.md) ghi phạm vi, số đếm và hướng xử lý đã chốt. Gold, prediction và điểm đánh giá không thay đổi.
 
 ## 5. Code và artifact
 
@@ -76,7 +76,7 @@ Cập nhật 01/11/2026: nhóm đã rà soát và duyệt nhận định xử l�
 - `evidence_review.json`: 280 metric checks, 70 CI checks, bảng report và sai lệch nhập số rất nhỏ.
 - `audit_followup.json`: kiểm 40 ca, đóng góp nhóm feature, giới hạn giải thích; không chứa câu/correction.
 - `reviewed_overall_results.csv`: bảng tổng thể với baseline validation chính xác.
-- `expert_review_queue.csv`: 17 ca đã có nhận định xử lý được nhóm duyệt; gold giữ nguyên.
+- `expert_review_queue.csv`: 17 ca đã có nhận định xử lý được nhóm rà soát và chốt; gold giữ nguyên.
 - `tests.xml`: 13 tests pass trong môi trường riêng.
 
 Raw/preparation/features/checkpoints tái dựng giữ local tại `.cache/evaluation_pipeline_reproduction`. Không upload, commit hoặc push trong lượt này.

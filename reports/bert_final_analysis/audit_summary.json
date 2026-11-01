@@ -17,9 +17,7 @@
     "32801",
     "32874"
   ],
-  "team_review_status": "approved",
-  "approved_by": "project team (user confirmation)",
-  "approved_on": "2026-11-01",
+  "team_review_status": "completed",
   "analytical_review_cases": 40,
   "expert_queue_cases": 22,
   "expert_queue_proposals_completed": 22,
@@ -30,7 +28,6 @@
     "supported": 9,
     "composite_edit": 1
   },
-  "expert_queue_review_decisions_approved": 22,
   "source_rechecked_unique_annotations": 54,
   "validation_review_cases": 18,
   "reviewed_consolidated_ids": [
@@ -57,5 +54,8 @@
     "32801",
     "32874"
   ],
-  "gold_changed": false
+  "gold_changed": false,
+  "review_confirmed_by": "user",
+  "review_confirmed_on": "2026-11-01",
+  "expert_queue_review_decisions_completed": 22
 }
