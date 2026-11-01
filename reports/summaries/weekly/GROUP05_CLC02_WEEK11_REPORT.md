@@ -10,7 +10,7 @@ Báo cáo tuần này bổ sung kết quả BERT-small mở rộng và phần ph
 
 Những phần đã hoàn thành gồm:
 
-- Tổng hợp điểm train và validation của 12 lượt BERT, đồng thời so sánh BERT với LR trên các nhóm validation đã dùng ở báo cáo trước.
+- Tổng hợp điểm train và validation của 12 lượt BERT, so sánh BERT với LR trên các nhóm validation đã dùng ở báo cáo trước, và bổ sung Precision, Recall, F1 theo từng lớp trên test.
 - Điền nhận xét và contribution cho 18 annotation validation; bổ sung bản sửa gốc và annotation liên quan để làm rõ những ca khó đọc khi xét riêng target.
 - Hoàn thiện 40 review BERT/LR và 22 nhận định xử lý trong danh sách cần xem lại. Mỗi ca có phần giải thích, căn cứ và hướng xử lý cụ thể.
 - Cập nhật báo cáo Word, Markdown, bản tổng hợp audit và mục lục tài liệu trên repo. Các file chứa câu nguồn vẫn được giữ ở máy nghiên cứu.
@@ -82,9 +82,38 @@ S, L, P, M và D là các nhóm đặc trưng cấu trúc câu/span, lexical, PO
 
 LR Full nhỉnh hơn BERT seed chính về macro-F1, còn BERT cao hơn về accuracy. Chênh lệch macro-F1 BERT − LR là **−0,0017**, với CI paired 95% **[−0,0184; 0,0182]**. Khoảng này chứa 0, nên dữ liệu hiện có chưa đủ để kết luận mô hình nào tốt hơn về macro-F1.
 
-Ba seed BERT đạt test macro-F1 lần lượt 0,8146; 0,8177; 0,8222, trung bình **0,8182 ± 0,0038**. Đây là thống kê giữa seed, không phải điểm ensemble. Ở từng lớp, BERT cao hơn LR trên Nn (0,8098 so với 0,7781), nhưng thấp hơn trên SVA (0,7392 so với 0,8106). Vì thế, accuracy cao hơn chưa đồng nghĩa kết quả tốt hơn trên mọi loại lỗi.
+Ba seed BERT đạt test macro-F1 lần lượt 0,8146; 0,8177; 0,8222, trung bình **0,8182 ± 0,0038**. Đây là thống kê giữa seed, không phải điểm ensemble.
 
 Các CI đã lưu được tính bằng 1.000 lượt bootstrap theo 97 nhóm liên kết trong test. Chúng không bao gồm biến động do đổi seed huấn luyện hoặc chia lại dữ liệu.
+
+### 4.3. Precision, Recall và F1 theo từng lớp
+
+Bảng dưới đối chiếu LR Full với BERT seed chính 20261013 trên cùng tập test. P là Precision, R là Recall và N là số annotation theo gold. Precision cho biết tỷ lệ đúng trong những ca được gán một nhãn; Recall cho biết tỷ lệ tìm được trong toàn bộ ca thực sự thuộc nhãn đó. F1 kết hợp hai chỉ số này.
+
+| Nhãn | N | LR P | LR R | LR F1 | BERT P | BERT R | BERT F1 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| ArtOrDet | 996 | 0,8366 | 0,9046 | 0,8693 | 0,8522 | 0,9147 | 0,8823 |
+| Prep | 362 | 0,9239 | 0,9061 | 0,9149 | 0,9155 | 0,9282 | 0,9218 |
+| Nn | 565 | 0,8184 | 0,7416 | 0,7781 | 0,8652 | 0,7611 | 0,8098 |
+| Vform | 216 | 0,7387 | 0,6806 | 0,7084 | 0,7085 | 0,7315 | 0,7198 |
+| SVA | 229 | 0,8178 | 0,8035 | 0,8106 | 0,7689 | 0,7118 | 0,7392 |
+| Macro | 2.368 | 0,8271 | 0,8073 | 0,8163 | 0,8221 | 0,8094 | 0,8146 |
+
+Các giá trị được làm tròn bốn chữ số thập phân sau khi tính. Dòng Macro là trung bình đều giữa năm lớp cho từng chỉ số; N ở dòng này là tổng số mẫu. Macro-F1 được tính bằng trung bình năm F1, không lấy F1 từ hai giá trị macro-Precision và macro-Recall.
+
+BERT có F1 cao hơn LR ở bốn lớp ArtOrDet, Prep, Nn và Vform. Tuy nhiên, F1 của SVA giảm khoảng 0,0713. Trong kết quả này, mức giảm ở SVA lớn hơn tổng mức tăng F1 của bốn lớp còn lại, nên macro-F1 của BERT vẫn thấp hơn khoảng 0,0017. Ở Vform cũng có sự đánh đổi: BERT tăng Recall nhưng giảm Precision, dù F1 cuối cùng tăng nhẹ.
+
+### 4.4. SVA: chênh lệch thể hiện ở cả Precision và Recall
+
+Với SVA, Recall của BERT thấp hơn LR khoảng **9,17 điểm phần trăm**, còn Precision thấp hơn khoảng **4,89 điểm phần trăm**. Các số đếm từ prediction đã lưu giúp đọc rõ hơn chênh lệch này:
+
+- Trong **229 ca gold SVA**, LR nhận diện đúng **184 ca**, bỏ sót **45 ca**; BERT nhận diện đúng **163 ca**, bỏ sót **66 ca**. BERT có ít hơn 21 ca nhận diện đúng SVA.
+- LR gán nhãn SVA cho **225 ca**, trong đó **41 ca thuộc nhãn khác**. BERT gán SVA cho **212 ca**, trong đó **49 ca thuộc nhãn khác**. Như vậy, dù số dự đoán SVA ít hơn, BERT vẫn có nhiều ca gán nhầm nhãn này hơn.
+- BERT nhầm **35 ca SVA sang Vform**, so với **18 ca** của LR. Ở chiều ngược lại, BERT nhầm **34 ca Vform sang SVA**, so với **29 ca** của LR.
+
+Khoảng hụt F1 ở SVA vì thế đi cùng cả việc bỏ sót nhiều hơn và gán nhầm nhiều hơn, trong đó nhầm lẫn với Vform là một hướng đáng chú ý. Các số đếm này mô tả lỗi quan sát được trên test; chúng chưa chứng minh nguyên nhân nằm ở attention, cách biểu diễn span hoặc khả năng dùng ngữ cảnh của BERT.
+
+Trong khi số ca SVA đúng giảm 21, tổng số ca đúng ở bốn lớp còn lại tăng 40. BERT vì vậy đúng thêm 19 ca trên toàn test, giải thích việc accuracy cao hơn nhưng macro-F1 thấp hơn LR. Phần bổ sung này chỉ tính lại chỉ số từ prediction đã lưu, không chạy lại mô hình.
 
 ## 5. Hoàn thiện audit 18 annotation validation
 
@@ -188,7 +217,7 @@ Hai tài liệu đầu vào là GROUP05_CLC02_WEEK10_REPORT.docx và Nhan_xet_We
 
 - Cấu hình, checkpoint và điểm train/validation: reports/bert_small_experiment/manifest.json, selection.json và 12 file summary.json của từng lượt chạy.
 - Nhóm validation khó: prediction đã lưu của POS, LR Full và ba seed BERT span mean.
-- Kết quả test và CI: reports/evaluation_followup/reviewed_overall_results.csv; reports/bert_final_analysis/overall_results.csv, paired_differences.csv và summary.json.
+- Kết quả test, từng lớp và CI: reports/evaluation_followup/reviewed_overall_results.csv; reports/bert_final_analysis/overall_results.csv, per_class_metrics.csv, confusions.csv, paired_differences.csv và summary.json. Bảng Precision/Recall/F1 và các số đếm SVA đã được đối chiếu lại với prediction test đã lưu của LR Full và BERT seed chính.
 - Mốc khóa: reports/final_evaluation/lock.json và test_scoring_started.json; reports/bert_small_experiment/selection.sha256 và test/test_started.json.
 - Audit: file CSV 18 annotation, hai bộ packet đã lưu, SGML gốc, các file review nội bộ và reports/bert_final_analysis/review_summary.md.
 
