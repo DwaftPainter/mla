@@ -75,6 +75,9 @@ __pycache__/
 /reports/**/documentation_archive/
 /reports/**/before_layout/
 
+# Private review records contain licensed source sentences and corrections.
+/reports/**/private/
+
 # Local credentials and editor settings.
 .env
 .env.*
