@@ -6,7 +6,7 @@ Phân loại **một lỗi tại vị trí đã biết trong câu tiếng Anh g�
 
 ## Trạng thái và kết quả
 
-Đã hoàn thành preparation, grouped split, baseline/ablation cổ điển và tái lập **52 fit của đợt đánh giá cổ điển**. BERT-small mở rộng hoàn tất 12 run, chọn span mean bằng validation rồi khóa và chấm test ba seed ngày 28/10/2026. [Báo cáo tổng kết](reports/summaries/final/bao_cao_tong_ket_NUCLE.md), DOCX/PDF và slide đã được cập nhật; [báo cáo BERT](reports/bert_final_analysis/analysis_report.md) lưu kiểm chứng, bảng/hình và bootstrap. Nhóm còn xác nhận tên/đóng góp/khai báo AI và tự nộp bài; xem [bàn giao](reports/summaries/final/handover_checklist.md).
+Đã hoàn thành preparation, grouped split, baseline/ablation cổ điển và tái lập **52 fit của đợt đánh giá cổ điển**. BERT-small mở rộng hoàn tất 12 run, chọn span mean bằng validation rồi khóa và chấm test ba seed ngày 28/10/2026. [Báo cáo tổng kết](reports/summaries/final/bao_cao_tong_ket_NUCLE.md), DOCX/PDF và slide đã được cập nhật; [báo cáo BERT](reports/bert_final_analysis/analysis_report.md) lưu kiểm chứng, bảng/hình và bootstrap. [Báo cáo Week 11](reports/summaries/weekly/GROUP05_CLC02_WEEK11_REPORT.md) bổ sung bảng train/validation, phân tích lỗi và kết quả audit được nhóm duyệt ngày 01/11/2026. Việc xác nhận nộp bài do nhóm thực hiện; xem [bàn giao](reports/summaries/final/handover_checklist.md).
 
 | Model | Macro-F1 validation | Macro-F1 test | CI95% test |
 |---|---:|---:|---|
@@ -20,7 +20,7 @@ BERT mean ± sample std qua ba seed: validation **0.8183 ± 0.0011**, test **0.8
 
 Cấu hình chọn trên validation; giữ model fit train, không refit train+validation. Test có 2.368 samples thuộc 144 essays/97 connected groups; CI dùng 1.000 paired group-bootstrap, không đo biến thiên do seed huấn luyện. Bảng đủ chữ số: [reviewed_overall_results.csv](reports/evaluation_followup/reviewed_overall_results.csv). Kiểm chứng và giới hạn: [report rà soát](reports/evaluation_followup/review_report.md).
 
-LR vốn có thông tin dependency từ parse toàn câu. Giữ kết quả âm BERT đợt ban đầu cùng kết quả span mean mở rộng; không quy cải thiện giữa hai đợt chỉ cho readout. Audit có hỗ trợ AI; hàng chờ chuyên gia hợp nhất có 22 IDs, gold giữ nguyên.
+LR vốn có thông tin dependency từ parse toàn câu. Giữ kết quả âm BERT đợt ban đầu cùng kết quả span mean mở rộng; không quy cải thiện giữa hai đợt chỉ cho readout. Nhóm đã rà soát và duyệt 18 review validation, 40 review BERT/LR và 22 nhận định xử lý; xem [kết quả audit](reports/bert_final_analysis/review_summary.md). Gold giữ nguyên.
 
 ## Đọc tài liệu theo nhu cầu
 
