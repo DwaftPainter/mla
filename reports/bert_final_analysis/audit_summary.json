@@ -8,7 +8,7 @@
   },
   "source_gold_span_exact": true,
   "review_scope": "Purposeful post-prediction sample; source correction only for audit; no gold changes; no causal attribution",
-  "human_review_status": "pending",
+  "human_review_status": "completed_review_confirmed_by_user",
   "corpus_text_location": "private/ (local only)",
   "ai_review_completed": true,
   "ai_review_scope": "40 purposefully selected cases; original sentence, span and correction inspected after predictions; no gold or model changes; no model-feature causal attribution",
@@ -49,5 +49,29 @@
     "32801",
     "32874"
   ],
-  "selection_limit": "Round-robin over sorted gold/pred buckets; both-wrong subset contains 9 ArtOrDet and 1 Nn; not a representative prevalence sample"
+  "selection_limit": "Round-robin over sorted gold/pred buckets; both-wrong subset contains 9 ArtOrDet and 1 Nn; not a representative prevalence sample",
+  "analytical_review_completed": true,
+  "analytical_review_cases": 40,
+  "analytical_reviewer": "Codex",
+  "review_completion_date": "2026-11-01",
+  "review_approval_status": "approved",
+  "expert_queue_cases": 22,
+  "expert_queue_proposals_completed": 22,
+  "expert_queue_proposal_categories": {
+    "label_mismatch": 6,
+    "source_correction_issue": 3,
+    "optional_edit": 3,
+    "supported": 9,
+    "composite_edit": 1
+  },
+  "independent_expert_status": "not_performed",
+  "source_rechecked_unique_annotations": 54,
+  "completion_scope": "Project team reviewed and approved all 40 case reviews and all 22 review decisions via user confirmation. Original gold and model predictions unchanged. Approval does not record independent expert adjudication.",
+  "team_review_status": "completed",
+  "approved_by": "project team (user confirmation)",
+  "approved_on": "2026-11-01",
+  "expert_queue_review_decisions_approved": 22,
+  "review_confirmed_by": "user",
+  "review_confirmed_on": "2026-11-01",
+  "expert_queue_review_decisions_completed": 22
 }
