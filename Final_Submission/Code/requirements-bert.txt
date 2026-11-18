@@ -1,0 +1,2 @@
+# Add to the existing uv.lock environment; actual full freeze in the run artifacts.
+transformers==4.57.6
