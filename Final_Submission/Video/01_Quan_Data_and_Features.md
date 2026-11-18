@@ -1,245 +1,240 @@
-# Quân — Complete individual video script: data and feature engineering
+﻿# Quân - Presentation and code walkthrough guide: data and features
 
-Project version: **NUCLE-final-20261117**. Language: English. There is **no target duration or time budget**. Record the scenes in order and give each explanation and demonstration the time it needs. This is a complete script, not a short presentation with optional technical inserts.
+Project: **NUCLE-final-20261117**. Prepare and present in English. **No duration limit.** This is an explanation guide, not a speech to memorise. Use the reasoning, code pointers and evidence to explain the project in your own words.
 
-All JSON/CSV basenames below refer to named records in Results/results.json. Use its json, tables or texts section, or the included evidence-view commands; these records are not separate files in the submission. Common setup, recording guidance and the personal-contribution checklist are in [README.md](../README.md).
+## How to use this guide
 
-## Recording brief and evidence boundaries
+For each topic, understand the problem, the design decision, the function implementing it and the evidence that supports the claim. During recording, choose a readable section of code and one example; explain the relationship rather than reading every line. Use the questions at the end to test your understanding.
 
-The assigned scope comes from new_task.md: read NUCLE/SGML, validate annotations and offsets, explain preparation v1/v2, split train/validation/test, run spaCy, extract S/L/P/M/D, fit the encoder on train, and produce vectors. The final handoff must identify prepared/split data, vectors, encoder and feature documentation.
+[README](../README.md) gives environment/setup/run order. [Results/results.json](../Results/results.json) contains json, tables and texts objects. An entry such as `json -> Results/evidence/feature_manifest.json` is a key inside that bundle, not a separate file. The report is [Final_Report.pdf](../Report/Final_Report.pdf), and [DATA_README](../Data/DATA_README.md) includes all six licence-page images.
 
-The video combines two evidence types. **REAL SAVED EVIDENCE** uses the final project's aggregate artifacts and real annotation 10824. **SYNTHETIC LIVE EXECUTION** runs actual project functions on newly authored text, allowing readable text, feature values and failures to be shown without redistributing learner essays. Keep these labels visible. A synthetic run is not a rerun of the research pipeline or its published score.
+Keep saved evidence, source inspection, conceptual examples and actual execution distinct. No additional demo program or test file is needed. Full learner text and lexical artifacts require authorised access. Commands, when used, run from a prepared Code/ workspace, not an unprepared public copy.
 
-Use a Python interpreter with the prepared research dependencies for the live lab commands. All paths below are relative to the submission root. The standard-library evidence commands also work without those dependencies. See README.md at the submission root for environment preparation and the exact production workflow. Before recording, complete your personal account using the checklist in README.md; choose only personal claims supported by your actual work.
+## 1. The central methodological question
 
-## Scene 1 — Introduce the problem and define your scope
+The data pipeline must convert a teacher annotation into a reliable model input without changing what was annotated or exposing the answer to the model.
 
-**Show:** face camera, then the README's task definition and responsibility row. Show the project version as a lower-third caption.
+An observation is one annotation, not one essay. Its predictor is an original sentence with a known character interval. Its target is one category: ArtOrDet, Prep, Nn, Vform or SVA. Several annotations may share a sentence. That creates dependence between rows and affects splitting and later uncertainty estimates.
 
-**Do:** point to the five output labels and the four input fields. Do not begin with a long repository tour.
+The categories concern articles/determiners, prepositions, noun number, verb form and subject-verb agreement, respectively. A POS tag describes a token's grammatical role; an error label describes the annotated problem. For example, a VERB tag alone cannot distinguish a verb-form error from an agreement error. The correction/context is relevant to human interpretation even though the correction is excluded from predictor input.
 
-**Narration:**
+The supplied error location is legitimate input for this task, but makes the task easier than detecting errors in arbitrary text. A good classifier here is not automatically a good detector or corrector. Keep that distinction in your opening explanation.
 
-“Hello, I am Quân. My assigned part of this project is the data and feature pipeline. I will explain how an annotation in NUCLE becomes a valid sample, how we keep related essays in the same partition, and how an original sentence becomes a vector for the classifier.
+### Code map
 
-“Our task is five-class grammatical error-type classification at an already known location. The output is ArtOrDet, Prep, Nn, Vform or SVA. We are not asking this model to find the error location or generate a corrected sentence. One annotation is one sample, so a sentence can contribute several related samples.
+| Stage | File / functions | Input -> output | Reason it matters |
+| --- | --- | --- | --- |
+| SGML parsing | [src/data/nucle_sgml.py](../Code/src/data/nucle_sgml.py): NucleSGMLParser, load_nucle | Raw text/stand-off annotations -> documents and mistakes | Preserve the coordinate system |
+| Annotation table | [src/data/parse_nucle.py](../Code/src/data/parse_nucle.py): reconstruct_span, documents_to_dataframe | Document/mistake -> span, validity, target and audit fields | Separate malformed endpoints from linguistic questions |
+| Sentence preparation | [src/data/prepare_nucle.py](../Code/src/data/prepare_nucle.py): segment_paragraph, construct_input, build_dataset | Paragraph coordinates -> sentence-relative sample | Preserve the original annotated substring |
+| Boundary repair | [src/data/sentence_boundaries.py](../Code/src/data/sentence_boundaries.py): repaired_starts | Source text/token offsets -> sentence starts | Handle difficult punctuation without target-label information |
+| Grouping/split | [src/data/group_split_nucle.py](../Code/src/data/group_split_nucle.py): build_grouping, UnionFind, stratified_group_assignment | Source-content graph -> partition manifest | Prevent related content crossing partitions |
+| Linguistic analysis | [src/features/nucle_pos.py](../Code/src/features/nucle_pos.py): load_tagger, align_span | Original sentence/span -> token/POS alignment | Connect character annotations with token analyses |
+| Features/encoding | [src/features/nucle_features.py](../Code/src/features/nucle_features.py): extract_features, TrainOnlyEncoder | Linguistic attributes -> fixed sparse coordinates | Learn vocabulary/categories only from train |
 
-“I will use real saved case 10824 to connect the stages. I will also execute the actual data functions on a clearly marked synthetic example so that the text, offsets and vectorization are visible.”
+All files are under Code/. A useful high-level flow is:
 
-**Completion cue:** a viewer can state the input, output and the part assigned to you before you move on.
+`SGML -> checked annotation -> sentence/span -> group split -> fixed linguistic features -> train-fitted encoder -> vectors and separate targets`
 
-## Scene 2 — Explain the source, version and annotation schema
+## 2. Why the parser is a state machine, not generic text cleanup
 
-**Show:** Data/DATA_README.md; Code/src/data/nucle_sgml.py, classes NucleDocument/NucleMistake and NucleSGMLParser; Code/src/data/parse_nucle.py, reconstruct_span.
+Read NucleMistake/NucleDocument first, then follow handle_starttag, handle_data and handle_endtag. The parser maintains flags such as _inside_p and _inside_correction and separate buffers for paragraph/type/correction text.
 
-**Do:** locate DOC/@nid, paragraph text, MISTAKE's four endpoints, TYPE, CORRECTION and the missing_correction flag. Keep the code at readable zoom and highlight one field at a time.
+When a DOC begins, it creates a document. A P or TITLE inside TEXT begins a paragraph-like block. MISTAKE creates an annotation with four endpoints. TYPE and CORRECTION accumulate into the current mistake. Closing blocks commits the buffers to their objects. If a new paragraph starts before the preceding one closes, the code finalises the previous block instead of silently merging them.
 
-**Narration:**
+This is selective parsing: it extracts the structure needed for annotation coordinates. It is not a claim to implement every SGML convention.
 
-“The experimental source is nucle3.2.sgml, identified by the SHA-256 checksum recorded here. A different file with a similar name would not necessarily reproduce the same IDs or samples. Our saved project records contain 1,397 essays and 44,912 annotations before restricting the task to five labels.
+### Two important details to point at
 
-“NUCLE stores text separately from its annotations. A mistake supplies a start paragraph, start character position, end paragraph and end character position. TYPE supplies the category. CORRECTION is useful for an audit, but it is not an input to our classifier. A missing correction and an explicitly empty correction are also different: an empty replacement may represent deletion.
+- `feed` protects ampersands before calling HTMLParser. HTML entity handling could otherwise change a literal source sequence and shift character positions. The protection and parser decoding must be understood together; seeing convert_charrefs=True alone does not explain the full behavior.
+- Paragraph export strips formatting newlines at the ends with `strip("\n\r")`. That is narrower than stripping all whitespace. Ordinary spaces remain part of the parsed paragraph's offset contract.
 
-“This parser collects the fields we need while preserving the paragraph characters used by its offset contract. It handles literal ampersands and formatting newlines as specified in the implementation. The contract is defined on the parsed paragraph, not on byte positions in the SGML markup. Preparation must preserve that parsed text rather than normalize it again.”
+Offsets are Python Unicode code-point positions in that parsed paragraph, not byte positions in markup. An accented character can use multiple UTF-8 bytes, and Unicode normalization can change a string's code-point sequence. Therefore replacing characters or globally cleaning whitespace after reading the annotations can point the same integers at different text.
 
-**Evidence to interpret:** the code shows why ordinary HTML cleanup, whitespace stripping or applying corrections first would be unsafe for character offsets. Do not claim that every possible SGML edge case is solved merely because the parser runs.
+**Explain naturally:** start with a concrete failure: removing one space before an error moves every later position. Then point to the parser's preservation choices. This makes the implementation decision meaningful without narrating every flag.
 
-## Scene 3 — Execute SGML parsing and trace paragraph-to-sentence offsets
+## 3. Separate endpoint validity, edit type and grammatical correctness
 
-**Show:** terminal and the lab source Code/video_lab.py, function pipeline. Add the caption “SYNTHETIC LIVE EXECUTION — actual project functions”.
+reconstruct_span checks paragraph indices and endpoint bounds. For a same-paragraph annotation, it slices `paragraph[start_off:end_off]`. A cross-paragraph annotation can have valid endpoints but no single-paragraph span; the returned flags distinguish those cases.
 
-**Run:**
+Do not equate a missing correction with an empty replacement. The missing_correction flag records whether a CORRECTION field was supplied. Empty replacement can be a deletion. These are audit distinctions, not class labels fed to the predictor.
+
+The annotation_id is a sequential index under one exact source ordering. Its meaning is tied to the source checksum. A different source release may assign the same integer to another annotation. The sample identity therefore includes source hash plus annotation ID. Sentence identities additionally depend on sentence segmentation, so they can change between v1 and v2 while the source annotation remains the same.
+
+The pipeline checks mechanics, not whether every teacher decision is uniquely justified. A valid slice is compatible with an ambiguous edit, an optional correction or several operations under one label.
+
+**Evidence:** DATA_README records the exact nucle3.2.sgml checksum. The preparation summary records 44,912 annotations, 29,124 outside the five-class task and 15,788 retained targets. Filtering to five labels defines the study cohort; it is not a detector deciding whether other grammatical phenomena exist.
+
+## 4. Understand sentence-relative conversion and its invariants
+
+Read segment_paragraph before construct_input. The former creates source intervals for sentences and verifies that concatenating their text reproduces the parsed paragraph. construct_input finds a sentence containing the complete annotation interval, then subtracts its paragraph start.
+
+Conceptual example, authored only for explanation:
+
+`She walk to school. They has books.`
+
+The second sentence starts at paragraph position 20. Paragraph span [25,28) selects `has`; its sentence-relative span is [5,8):
+
+`25 - 20 = 5; 28 - 20 = 8`
+
+The invariant is stronger than checking bounds:
+
+`sentence[relative_start:relative_end] == paragraph[source_start:source_end]`
+
+Then preparation also checks that the result equals the span reconstructed during data understanding. This gives a chain of consistent representations rather than one unchecked offset conversion.
+
+A rejection reason such as cross_sentence means the input contract cannot represent that annotation as one sentence/span. It does not mean the error itself is linguistically invalid. The final retained target set has zero not-constructible cases, but that is an observed project count, not a guarantee for every future corpus.
+
+### What v2 changes
+
+v1 relies on the initial sentencizer starts. v2 calls repaired_starts and still slices the original characters. The repair API receives source text/token offsets, not labels, corrections or prediction errors.
+
+The rules handle bounded citation-like regions, abbreviation continuations, opening brackets/quotes and punctuation attached to a following word. A boundary can fall inside an original tokenizer token; segment_paragraph explicitly constructs matching token fragments instead of editing the source to insert a space.
+
+These are conservative heuristics, not a universal sentence grammar. Explain one boundary situation, the character-preservation check and one residual uncertainty. Do not claim the repair understands every citation or grammatical clause.
+
+**Saved evidence:** preparation_comparison.json records 544 changed sentence inputs, 533 cases with changed sentence IDs, thirty changed context representations and two changed token-span representations across the same 15,788 targets. Annotation retention and source offsets are unchanged. The sets overlap. Changed context does not by itself prove a model-performance gain.
+
+## 5. Character spans and token spans are different objects
+
+align_span in nucle_pos.py selects every token with character overlap:
+
+`token.start < error_end and token.end > error_start`
+
+This is interval intersection, not a requirement that annotation boundaries exactly match token boundaries. A partial-token annotation therefore retains its character interval while receiving the analyses of overlapping tokens.
+
+The code distinguishes exact, partial_token, whitespace_edge, whitespace_only and insertion-related states. These states tell the reader how character input relates to a tokenization. They do not redefine the teacher's span.
+
+The final project's counts are 14,447 exact, 1,130 partial-token and 211 whitespace-edge cases. Ninety-six unresolved review flags and two boundary flags are separate concepts and must not be added as disjoint groups. The retained project spans are all nonempty even though some source functions support insertion boundaries.
+
+A useful explanation is: the target is specified in character space; linguistic attributes live in token space; alignment documents the information lost or approximated when connecting them.
+
+## 6. Why split a graph of related essays
+
+Read build_grouping and UnionFind. Treat essays as graph nodes; duplicate/shared-content rules create edges. UnionFind computes connected components, so if A connects to B and B to C, all three stay together even when A and C are not directly identical.
+
+Links come from exact/normalized complete essays, repeated normalized paragraphs and identical complete sentence-plus-span inputs. The code verifies actual tuples when grouping an input hash, rather than assuming a hash string alone establishes identity.
+
+A narrow boilerplate exemption avoids giant components caused by short repeated noninformative content: at least ten essays, at most ten normalized words/eighty characters, with no retained target annotation in any occurrence. Seven exemptions are recorded. Identical model inputs still connect essays even if a paragraph qualifies for exemption.
+
+Normalization is NFC, casefolding and collapsed whitespace for comparison. It does not replace the predictor text. This protects against exact/normalized content leakage, not every semantic paraphrase or shared author characteristic.
+
+### How allocation works
+
+stratified_group_assignment operates on whole components. A component carries a sample count and a count for each label. The greedy search considers the change in a partition's size/class-balance cost when adding a component. Class deviations have weight two in the implementation. Seeded order/ties vary across 128 restarts; candidate ranking prioritises avoiding missing classes and then lower objective.
+
+Groups cannot be divided to hit perfect percentages. The target is approximately 70/15/15 while preserving the grouping constraint. Gold labels are used for stratification before modelling; that is different from feeding labels into predictors or choosing a split from test performance.
+
+To explain the cost more precisely, let t be a partition's desired sample count and a its currently assigned count. The size term is `((a-t)/max(t,1))²`. Each class adds twice the same kind of relative-error term using that class's desired/actual counts. Relative deviations stop frequent labels from dominating purely through larger absolute counts. The greedy step chooses the smallest increase in cost, rather than the smallest absolute cost of a partly empty partition. The final restart objective also penalizes missing classes; restart ranking first minimizes the number of missing-class partitions. These are heuristics, not a proof of the globally optimal split. The saved split seed is 20261013.
+
+| Partition | Target annotations | Represented essays | Represented groups |
+| --- | --- | --- | --- |
+| Train | 11,052 | 1,069 | 1,045 |
+| Validation | 2,368 | 142 | 99 |
+| Test | 2,368 | 144 | 97 |
+
+The complete graph has 1,280 components over 1,397 source essays; some have no retained target samples. Do not confuse those counts with the supervised table, independent learners or the 97 test resampling units.
+
+## 7. What the fixed spaCy analysis does and does not learn here
+
+Preparation uses a blank tokenizer/sentencizer. Feature extraction uses spaCy 3.8.7/en_core_web_sm 3.8.0 with trained tagger/parser and disabled NER. These are different components with different roles.
+
+The parser is already trained; the project does not fine-tune it on all corpus labels. Parsing all original sentences with a fixed analyser is different from learning a vocabulary from validation/test. The learned encoder must still be fitted only on train.
+
+The code caches 11,272 distinct sentence analyses and extracts a separate row for every annotated location. Sharing a parse does not merge those samples or make them independent. Automatic morphology/dependencies can be wrong; a missing feature may mean an unavailable parser analysis, not absence of a real grammatical phenomenon.
+
+## 8. Read each feature family as a representation choice
+
+Use extract_features and real case 10824 side by side.
+
+| Family | Actual mechanism | Information and limitation |
+| --- | --- | --- |
+| S | Token/character lengths, relative positions and span kind | Structural context; not semantic meaning |
+| L | Casefolded unigrams/bigrams in separate span/left/right regions and lexical context slots | Direct lexical identity; can memorise dataset patterns |
+| P | Ordered POS signature, context POS and local pattern | Grammatical category patterns; parser errors remain |
+| M | Sorted unique Number/Person/Tense/VerbForm values from covered tokens | Compact morphology; loses token-specific attachment/order |
+| D | Dependency/head signatures, linear distances and direct subjects | Relations beyond a two-token window; incomplete syntactic coverage |
+
+lexical_candidates forms n-grams inside each region, not arbitrary bigrams crossing region boundaries. The left/right window is two tokens. The representation is not described as TF-IDF: lexical activations are binary and numeric values are kept as their actual numbers.
+
+D deserves careful explanation. head_distance is mean absolute token-index distance to heads, not dependency-tree path length. Subjects are direct children of covered tokens with the specified subject relations; the implementation does not traverse every coordination or long dependency chain. subject_distance averages linear distances over covered-token/subject pairs. Signatures compress analyses; they cannot preserve every token-level relation.
+
+Family names are not disjoint sources of linguistic information. D contains head/subject POS and Number/Person. Dropping P or M later removes explicit columns, not all traces of POS or morphology from the representation.
+
+## 9. Understand fit, transform and sparse storage precisely
+
+TrainOnlyEncoder.fit first requires nonempty, train-only rows and unique sample IDs. It collects numeric keys, observed categorical values and lexical term frequencies. Vocabulary/category ordering is deterministic. Missing, not-applicable and unknown categories receive explicit sentinels.
+
+Three mechanisms become one vector:
+
+- Numeric keys become N-prefixed coordinates with numeric values; there is no fitted standard-scaling stage here.
+- Categorical keys become C-prefixed one-hot coordinates.
+- The capped n-gram vocabulary becomes binary L coordinates; repeated occurrences do not increase the stored value above one.
+
+The cap is 500 n-gram entries. It is not a cap on all L coordinates: lexical position slots also generate categories. L|span_unigrams is an intermediate field skipped by fit; do not incorrectly describe it as an additional bag-of-counts or whole-span one-hot feature. The actual Full dimension is 16,180.
+
+transform_one uses the fixed index mapping. An unseen category activates __UNK__, not a newly added column. __MISSING__ means missing information; NOT_APPLICABLE and unseen-value handling have different meanings. Unknown n-grams activate a shared unknown coordinate. That fallback avoids shape errors but loses which unseen word occurred.
+
+A sparse dictionary `{column_index: value}` is a coordinate representation, not a prediction. It reduces storage/computation when most entries are zero. A model state without the matching coordinate map is unusable even if the vector dimension happens to match.
+
+For a small conceptual illustration, a raw `S|span_tokens` value of 2 becomes the value 2 at the coordinate named `N|S|span_tokens`. A known POS signature activates its categorical coordinate with value 1. If a later row has a signature absent from train, it activates that field's __UNK__ coordinate, still with value 1. Actual column integers come from the fitted encoder; do not invent them for a real case. This illustrates why numeric magnitude, category identity and column position are separate things.
+
+### Leakage controls: explain their scope
+
+extract_features explicitly reads sentence/span fields and checks document text and substring identity. Fit rejects non-train partitions. Features/targets are exported separately with IDs for joins. Keeping IDs for alignment is acceptable; using them as predictor values could memorise provenance.
+
+The bare provenance field alignment is excluded as a generic input field, while a deliberately constructed P|span_alignment feature describes known span/token geometry. Do not claim that every occurrence of the word alignment is forbidden. A guard protects a specified contract, not every conceivable future wrapper mistake.
+
+## 10. Connect the theory to real case 10824
+
+Open `json -> Results/evidence/real_example_10824.json` and trace:
+
+1. Source checksum + annotation ID identify the actual row in validation.
+2. [44,53) is an exact nine-character interval, covering two tokens in a 27-token sentence.
+3. The saved POS signature is DET+NOUN, morphology includes Number=Sing and dependency signature is det+nsubj.
+4. Full uses the train-fitted encoder; the public record contains only selected nonlexical coordinates.
+5. Both saved LR_03 and Tree_03 predict ArtOrDet, while gold is Nn.
+
+This example explains why a multi-token POS signature is not identical to error type: the annotated category concerns the edit, not simply every POS inside its anchor. A DET coordinate does not prove why a particular fitted classifier chose ArtOrDet. Full lexical features, coefficients/branches and surrounding edit evidence would be needed for a stronger interpretation.
+
+Do not invent a readable learner sentence to fill the redaction. Use the conceptual offset example separately and label it accurately.
+
+## 11. A flexible recording route
+
+Choose a narrative around one problem: preserving the annotated location while building a learnable representation.
+
+- Start with the task contract and your role.
+- Use the data guide/licence images to establish source and access; do not read six pages aloud or claim the form itself proves approval.
+- Explain one parser preservation decision and the coordinate example.
+- Move to v1/v2 evidence, then the graph/split table.
+- Explain the five families through case 10824 and finish at train-only coordinates and the saved mismatch.
+- Show one actual personal contribution and the data/features handoff.
+
+An optional CLI view from a prepared Code/ workspace is:
 
 ```powershell
-python Code/video_lab.py pipeline
+.venv/Scripts/python.exe -m src.data.prepare_nucle --help
 ```
 
-**Do:** stop at the first output section. Show the authored SGML and its two annotations. Then open Results/reproduced/video_lab/synthetic_data_pipeline.json and expand the two details entries. Highlight paragraph_span, sentence_start_par, error_start/error_end and error_span together.
+It demonstrates real options, not a completed corpus run. Prefer completed run output when explaining retention counts. There is no need to launch the whole pipeline during a take or overwrite an existing output directory.
 
-**Narration:**
+## 12. Questions you should be able to answer without memorising text
 
-“This small SGML document is newly authored for the demonstration; it is not NUCLE. The command imports the project's parser, reconstruct_span, sentence preparation and feature functions. The first paragraph is ‘She walk to school. They has books.’ The annotations select ‘walk’ and ‘has’.
-
-“For the first annotation, paragraph positions four to eight select ‘walk’. The end position is excluded. For the second annotation, the paragraph interval is twenty-five to twenty-eight. Its sentence begins at paragraph position twenty, so the sentence-relative interval becomes five to eight. The selected characters are still ‘has’.
-
-“This is the transformation I need to preserve: subtract the sentence start from both endpoints, then check that the paragraph slice and the sentence slice agree. Passing a bounds test alone is not enough. The interval could lie within the sentence while selecting the wrong text. The round-trip substring check catches that kind of mistake.”
-
-**Completion cue:** show the same selected word before and after the offset conversion. Do not rush past the numbers; annotate 25 − 20 = 5 and 28 − 20 = 8 on screen.
-
-## Scene 4 — Explain and demonstrate preparation v1 versus v2
-
-**Show:** the lab's v1_v2 output; Code/src/data/prepare_nucle.py, segment_paragraph; Code/src/data/sentence_boundaries.py, repaired_starts. Then open Results/results.json entry json["Results/evidence/preparation_comparison.json"].
-
-**Do:** compare the two arrays for the synthetic citation example. Highlight the boundary after “2009).” and before “The”. Show the round-trip assertion in the helper, followed by the real comparison counts.
-
-**Narration:**
-
-“The synthetic citation example contains punctuation attached to the next word. In the output I am showing, v1 leaves one sentence, while v2 creates a boundary before ‘The’. Both versions preserve all characters; joining their sentence slices recovers the original paragraph exactly. We are changing sentence intervals, not editing the learner's text.
-
-“The real saved comparison is separate from this small illustration. Across the same 15,788 target annotations, 544 sentence inputs change, 533 sentence IDs change, 30 context representations change, and two token-span representations change. Those sets overlap, so adding them would double-count cases. Source metadata and source-span offsets remain unchanged.
-
-“Boundary rules read original text rather than gold categories, corrections or reviewer conclusions. A difficult boundary is not an excuse to use the answer label when constructing the input. The two unresolved boundary cases are retained and flagged.”
-
-**Interpretation:** v2 changes what context a sample sees without silently relabeling it. Do not attribute a later model improvement to this change without a matching controlled comparison.
-
-## Scene 5 — Interpret preparation quality and retention evidence
-
-**Show:** Results/results.json entry json["Results/evidence/preparation_summary.json"] and the report's annotation disposition table.
-
-**Do:** highlight 44,912 total, 29,124 out of scope, 15,788 retained, and zero not_constructible. Then show alignment and review-status fields as separate objects.
-
-**Narration:**
-
-“Filtering is defined by the five target TYPE values. We do not relabel all other preposition-related categories into Prep. The saved counts show 29,124 annotations outside this task and 15,788 retained target samples. No target sample is counted as unconstructible in the final preparation.
-
-“Alignment is exact for 14,447 cases, partial-token for 1,130 and whitespace-edge for 211. A partial-token annotation can be valid at character level even though its covering token is wider. We preserve the annotation and record the mismatch instead of pretending that the full token was the original gold span.
-
-“The 96 unresolved review cases and two unresolved boundary cases describe different flags. They are not disjoint groups to add together. Retaining these cases makes the limitation visible rather than deleting difficult examples after seeing model errors.”
-
-**Completion cue:** identify one mechanical guarantee and one remaining uncertainty. A correct substring invariant does not certify the grammatical necessity or category of every edit.
-
-## Scene 6 — Show the connected-group split and explain leakage prevention
-
-**Show:** Code/src/data/group_split_nucle.py, build_grouping and UnionFind; the split view.
-
-**Run:**
-
-```powershell
-python Code/inspect_evidence.py split
-```
-
-**Do:** first highlight sample counts, then essay counts, then group counts. Draw or annotate A–B–C as a conceptual connection chain; label this an illustration rather than an actual group in the dataset.
-
-**Narration:**
-
-“Randomly splitting annotation rows would allow multiple errors from the same sentence or essay into different partitions. Splitting essays alone is also insufficient when essays share relevant content. The code builds connected components from the documented duplicate and shared-paragraph rules. If A connects to B and B connects to C, all three must stay together.
-
-“Grouping comparisons use Unicode normalization, casefolding and collapsed whitespace. That normalized comparison text is not substituted for the original predictor sentence. A narrow boilerplate exemption handles short content shared by at least ten essays, with at most ten words and eighty characters, and no target annotation. Identical sentence-plus-span inputs always connect essays.
-
-“The final assignment uses seed 20261013. We have 11,052 train annotations, 2,368 validation and 2,368 test. The test contains 144 essays in 97 connected groups. Counts of annotations, essays, groups and independent learners are not interchangeable. The split balances labels approximately while keeping components intact; it does not detect semantic paraphrases.”
-
-**Evidence to interpret:** the published grouping summary records seven boilerplate exemptions and 1,280 connected groups. Show these saved fields rather than inventing a new split during the recording.
-
-## Scene 7 — Distinguish sentence preparation from trained linguistic analysis
-
-**Show:** Code/src/data/prepare_nucle.py, make_nlp, and Code/src/features/nucle_pos.py, load_tagger. Return to the live lab's extracted features.
-
-**Do:** point to spacy.blank/sentencizer in preparation and the loaded en_core_web_sm tagger/parser in feature extraction.
-
-**Narration:**
-
-“There are two different uses of spaCy here. Sentence preparation uses the fixed tokenizer/sentencizer and source-only boundary rules. Feature extraction uses the trained English package en_core_web_sm version 3.8.0 with spaCy 3.8.7. Its tagger and parser provide linguistic attributes, while named-entity recognition is disabled.
-
-“The saved feature manifest records 11,272 distinct original sentences parsed. Reusing a sentence parse for several annotations does not merge those annotations: each location still gets its own span and context features. Automatic POS, morphology and dependencies are observations from a model, not expert gold linguistic analyses.”
-
-**Completion cue:** make clear which component decides sentence intervals and which supplies linguistic features. Do not use the terms sentencizer and dependency parser as synonyms.
-
-## Scene 8 — Explain all five feature families using visible values
-
-**Show:** Code/src/features/nucle_features.py, extract_features; live synthetic details/features; then the real case's nonlexical coordinates.
-
-**Run:**
-
-```powershell
-python Code/video_lab.py case --annotation-id 10824
-```
-
-**Narration:**
-
-“S is structural: span length, number of covering tokens, sentence length and relative position. Real case 10824 has a nine-character span covering two tokens in a 27-token sentence.
-
-“L contains lowercased unigrams and bigrams in the span and separate two-token left and right regions, plus position-specific lexical categories. The readable lexical values in the live lab belong only to the authored synthetic text. The real learner's lexical coordinates are excluded from the public demonstration.
-
-“P represents the span POS signature, local pattern and alignment. The real case's active signature is DET plus NOUN. M records Number, Person, Tense and VerbForm; this example contains a singular Number category. D records dependency signatures, head information, distances and direct subject information. Here the saved dependency signature is det plus nsubj.
-
-“A feature coordinate with value one is an encoded category, not a probability. Also, D contains some POS and morphology of heads or subjects. Dropping P or M in an ablation therefore does not remove every representation of that kind of linguistic information.”
-
-**Do:** point to one actual S coordinate, one P coordinate and one missing/unknown coordinate. Explain each before scrolling. Avoid reading every JSON key aloud.
-
-## Scene 9 — Fit on train, transform validation, and show the sparse vectors
-
-**Show:** TrainOnlyEncoder.fit and transform_one. Open the lab's synthetic_encoder.json and synthetic_vectors.json in separate tabs.
-
-**Do:** show fit_ids containing only synthetic-train-0 and synthetic-train-1. Match an active validation coordinate to the feature-name order. Highlight the live demo dimension and then the saved benchmark dimension in Results/results.json entry json["Results/evidence/feature_manifest.json"].
-
-**Narration:**
-
-“The encoder is fitted before validation transformation. It collects numeric keys and train-observed categories, adds the missing/not-applicable/unknown fallbacks, and keeps a deterministic coordinate order. The lexical n-gram vocabulary is limited to the most frequent five hundred train terms with deterministic tie breaking. That limit is not the entire L dimension, because local categorical lexical slots also contribute columns.
-
-“The validation illustration is ‘A cat eat fish.’ Transform uses the same fitted vocabulary and category order. It can activate unknown coordinates, but it cannot add a vocabulary entry because a validation word is new. The saved feature-name list remains unchanged.
-
-“The dimension printed by this live run belongs to an encoder trained on two synthetic rows. It must not be described as the published encoder. The actual project's Full representation has 16,180 dimensions. Both examples demonstrate the same fit/transform contract, but they use different data and fitted parameters.
-
-“Sparse storage keeps coordinate/value pairs instead of filling every zero explicitly. The real export writes features.jsonl and targets.jsonl separately, so the target label is not silently treated as an input coordinate.”
-
-**Completion cue:** viewers can trace raw features to an index/value vector and explain why the fitted encoder must accompany a trained classifier.
-
-## Scene 10 — Execute the guards instead of only claiming leakage safety
-
-**Show:** the final checks printed by the live pipeline; the corresponding fit/extraction guards in the source.
-
-**Run, using the prepared research interpreter:**
-
-```powershell
-python Code/video_lab.py pipeline
-```
-
-**Narration:**
-
-“The lab deliberately attempts to fit an encoder on a validation row and confirms that the project rejects it. It also changes label, correction and sample ID while preserving the original input, and checks that the features remain identical. Finally, it supplies the wrong saved substring and confirms that extraction fails.
-
-“These checks exercise specific failure conditions. They are stronger than saying that I remembered not to leak a label. The live pipeline also shows train-scoped unknown handling and offset failure on authored inputs. Its successful output does not prove that every corpus annotation or parse is semantically correct.”
-
-**Do:** show the actual lab output from your run; the earlier scene's output can remain open. Do not present historical development-test counts as new lab output. Keep the expected rejection messages visible and explain that they are successful guard demonstrations.
-
-## Scene 11 — Complete the real example's data-to-prediction trace
-
-**Show:** case 10824, then Results/reproduced/demo.html's real-case panel and main result table. Keep a “REAL SAVED VALIDATION EVIDENCE” label visible.
-
-**Run:**
-
-```powershell
-python Code/reproduce_main_result.py
-```
-
-**Narration:**
-
-“Now I return to the real project example. Annotation 10824 is in validation. Its original span becomes a valid prepared sample, is analysed by spaCy, and is transformed with the train-fitted encoder. The saved LR Full and Tree Full predictions are ArtOrDet, while source gold is Nn.
-
-“This is a real saved mismatch, not a new prediction from the redacted JSON. The full lexical vector and trained checkpoint are necessary for live benchmark inference. The two-token DET-plus-NOUN anchor shows why a POS signature alone does not identify an error type, but it does not prove that a particular coordinate caused the wrong decision.
-
-“The reproduction command checks aggregate results and regenerates the browser evidence. It is useful for demonstrating consistency, while its scope remains different from rerunning the raw data pipeline.”
-
-**Completion cue:** verbally name every link in the real trace and distinguish observed label mismatch from a causal explanation.
-
-## Scene 12 — Identify outputs, personal contribution and handoff
-
-**Show:** the personal contribution account completed from your own records, the saved member-ID assignment, and the output map below.
-
-| Required output from new_task.md | What you should show |
+| Question | Reasoning your answer should contain |
 | --- | --- |
-| Prepared and split data | Preparation/split summaries, source hash and the restricted artifact paths described in DATA_README |
-| Feature vectors | Live synthetic vector plus actual benchmark feature manifest; explain the restricted full export |
-| Fitted encoder | Live synthetic encoder; original export schema and benchmark hash/reference |
-| Feature description | S/L/P/M/D extraction code, representation table and one interpreted coordinate |
+| Why not clean all whitespace first? | Offsets refer to a particular character sequence; cleanup changes the target unless a verified coordinate mapping is maintained. |
+| Why can a partial-token sample still be valid? | Character annotation and tokenization are different layers; record their relationship instead of changing the annotation. |
+| Why graph components rather than essay IDs alone? | Shared content can connect distinct essays transitively. |
+| Does grouping use labels? | Allocation uses label counts for stratification; source-only boundary repair does not use labels/corrections; neither puts labels into predictors. |
+| Why is vocabulary fitted after splitting? | Test/validation content must not define learned categories or term selection. |
+| Why more than 500 dimensions? | The cap applies to n-grams, not numeric/categorical/context coordinates. |
+| Does __MISSING__ prove there is no subject? | It describes the available analysis/representation, not a grammatical truth. |
+| Can the redacted real case rerun a checkpoint? | It lacks full lexical inputs/encoder/state; it supports traceability, not complete inference. |
 
-**Narration, supported by the existing record:**
+For personal contribution, use an artifact from work actually performed: a parser/offset decision, a review correction or an independently executed check. The recorded assignments for Quân are 10824, 11696, 12352, 11501, 12050 and 12301 under audit_summary.json -> validation -> member_ids -> Quan. Those assignments are not a full authorship history. Attribute shared/AI work accurately.
 
-“My assigned scope is the data and feature stage. The saved validation-review assignment lists cases 10824, 11696, 12352, 11501, 12050 and 12301 under my name. In this demonstration I have traced case 10824 and executed the offset and train-only checks on authored data.”
+## What makes the presentation convincing
 
-**Personal claim to prepare before recording:** add one specific action you actually performed, one decision or correction you made, and the file/log/review evidence supporting it. If you implemented a component, name that component accurately. If you reviewed or verified it, describe that work instead of claiming authorship. Use the wording choices in the personal-contribution checklist in README.md; do not read an unfilled template as a factual claim.
+**Technical explanation:** connect invariants, graph grouping and representation choices to code behavior. **Evidence and demonstration:** open actual bundle records, source functions and the real mismatch. **Personal contribution:** explain an actual decision/check with its artifact. **Production quality:** readable code/JSON, visible keys/intervals, clear audio and accurate English captions.
 
-**Closing narration:**
-
-“The handoff to modelling consists of a fixed sample/split identity, feature and target records, a train-fitted encoder and the feature contract. A model must receive the matching coordinate order. The important limits are that gold locations are supplied, parses can be imperfect, and source-preserving mechanics do not resolve every annotation ambiguity. Those limits carry into the modelling and evaluation stages.”
-
-## Recording notes tied to the four marking criteria
-
-| Criterion | Observable evidence in this recording |
-| --- | --- |
-| Technical explanation | Paragraph-to-sentence arithmetic; v1/v2 difference; group leakage; all five feature families; fit versus transform and sparse coordinates |
-| Evidence and demonstration | Executed pipeline and guard assertions, real case 10824, saved count/feature tables, regenerated result output |
-| Personal contribution | Named role plus six-case record, a truthful personal action/decision/correction and supporting artifact |
-| Production quality | Consistent scope labels, readable code/terminal, clear numerical callouts, quiet audio, accurate English captions and evidence-based chapter transitions |
-
-Use chapter titles matching these scenes. Hold each highlighted item until the explanation is complete. Record code, output and interpretation in the same segment where practical; if a loading pause is cut, preserve the command and its result. Do not add a duration cap during editing. End when the required reasoning and evidence are complete.
+Speak from the logic: problem -> choice -> code mechanism -> observed evidence -> remaining limit. The guide is a reference for understanding, not a monologue or a fixed order to read.

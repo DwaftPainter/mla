@@ -18,35 +18,35 @@ NUCLE is governed by the NUS licensing agreement. Public download availability d
 
 ## Licence document
 
-The supplied [NUCLE licence PDF](nucle_license.pdf) is shown in full below. Select any page image to open the complete PDF.
+All six pages of the supplied NUCLE licence document are shown below as images. The official PDF source is linked in the access/terms section above.
 
 ### Page 1 of 6
 
-[![NUCLE licence - page 1 of 6](nucle_license_preview.png)](nucle_license.pdf)
+![NUCLE licence - page 1 of 6](nucle_license_preview.png)
 
 ### Page 2 of 6
 
-[![NUCLE licence - page 2 of 6](nucle_license_page_02.png)](nucle_license.pdf)
+![NUCLE licence - page 2 of 6](nucle_license_page_02.png)
 
 ### Page 3 of 6
 
-[![NUCLE licence - page 3 of 6](nucle_license_page_03.png)](nucle_license.pdf)
+![NUCLE licence - page 3 of 6](nucle_license_page_03.png)
 
 ### Page 4 of 6
 
-[![NUCLE licence - page 4 of 6](nucle_license_page_04.png)](nucle_license.pdf)
+![NUCLE licence - page 4 of 6](nucle_license_page_04.png)
 
 ### Page 5 of 6
 
-[![NUCLE licence - page 5 of 6](nucle_license_page_05.png)](nucle_license.pdf)
+![NUCLE licence - page 5 of 6](nucle_license_page_05.png)
 
 ### Page 6 of 6
 
-[![NUCLE licence - page 6 of 6](nucle_license_page_06.png)](nucle_license.pdf)
+![NUCLE licence - page 6 of 6](nucle_license_page_06.png)
 
 ## What is included
 
-This folder contains the access/preparation guide, the supplied licence PDF and images of all six pages. Results/results.json has saved JSON entries for real validation cases 10824, 15390 and 19068 that provide source checksums, offsets, selected nonlexical features, gold and saved predictions, without learner sentences, corrections or identities. These are metadata examples, not approved redistributable corpus samples or complete inputs for checkpoint inference.
+This folder contains the access/preparation guide and images of all six licence pages. Results/results.json has saved JSON entries for real validation cases 10824, 15390 and 19068 that provide source checksums, offsets, selected nonlexical features, gold and saved predictions, without learner sentences, corrections or identities. These are metadata examples, not approved redistributable corpus samples or complete inputs for checkpoint inference.
 
 Aggregate experimental evidence is consolidated in Results/results.json; the five headline scores are readable in Results/main_results.csv.
 

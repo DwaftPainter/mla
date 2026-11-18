@@ -40,7 +40,7 @@ The initial failed BERT result remains in the evidence. The extension reused the
 
 ## Student additions that remain necessary
 
-Assigned roles and six-case review assignments are documented, but a role is not an authorship history. Each student must use README.md's personal-contribution checklist to prepare an action actually performed, supporting artifact, decision/correction, personal check and shared/AI assistance. Assistant checks are not personal checks by Quan, Duy or Cong. Actual recordings and full student identities have not been supplied.
+Assigned roles and six-case review assignments are documented, but a role is not an authorship history. Each student must use the README role table and their video guide's contribution prompts to prepare an action actually performed, supporting artifact, decision/correction, personal check and shared/AI assistance. Assistant checks are not personal checks by Quan, Duy or Cong. Actual recordings and full student identities have not been supplied.
 
 For each historical AI use, add only information supported by your records: member/date, tool/model if known, affected task/file, saved prompt/output or accurate summary, personal check, correction/rejection and remaining uncertainty. Leave unknown details explicitly unknown. Do not invent a prompt, authorship claim, training run or numerical improvement.
 
@@ -73,3 +73,16 @@ All thirteen documented classical stages ran successfully on the real local corp
 BERT preflight passed for both readouts with finite logits and no test rows loaded. A separate one-epoch, one-variant, one-seed runtime smoke run completed training, saved/reloaded its best checkpoint and verified every validation prediction before locking its selection. It is not a replacement research result. The three existing selected BERT checkpoints were also evaluated read-only in the new environment: each reproduced all 2,368 saved validation labels with zero disagreements. The full twelve-run BERT training grid was not retrained in this check, and no new BERT test comparison was opened.
 
 Execution logs, the environment freeze, test XML, artifact comparisons and validation_summary.json remain under .cache/submission_runtime_20261118/, outside the submitted folders. Original research inputs/outputs, the report's numerical findings and submitted Python sources were not overwritten. These are assistant-executed runtime checks, not checks personally attested by the students.
+
+## Video-script alignment with the final submission
+
+The assistant rewrote the three existing English video scripts against the final folder layout and consolidated evidence. All calls to removed helper programs, test modules and generated demo pages were removed. The scripts retain 12/14/14 detailed scenes, no duration cap, real validation cases 10824/15390/19068, source walkthroughs, visuals, truthful personal-contribution prompts and the four marking criteria. Optional live commands use existing project modules and state their actual private-input/lock requirements; saved records and conceptual illustrations are labelled separately.
+
+Source-file paths, bundle-record keys, local links, the worked Nn calculation and the six licence-page images were checked. Case-specific interpretations not established by public metadata were rewritten as review questions rather than attributed to an unrelated aggregate review record. Quân's licence scene uses the six existing images; broken local PDF links in DATA_README.md were corrected without adding a PDF or code file. No recordings or new helper/test files were created, and project measurements were not changed.
+
+
+## Video guides expanded for understanding - 18 November 2026
+
+At the user's request, the assistant replaced the three existing video-script monologues with English presentation and code walkthrough guides. The new guides explain the methods, actual functions and data flow, design choices, worked calculations, limitations, evidence to display and questions for checking understanding. They retain no duration cap and cover technical explanation, evidence/demonstration, supported personal contribution and production quality. They are preparation references for natural explanation, not first-person speeches to memorise.
+
+The data guide follows source-preserving parsing, coordinate invariants, graph splitting and train-only sparse encoding. The modelling guide explains loss/optimization, Tree behavior, masking, BERT attention/pooling, training and selection. The evaluation guide derives scores and vectorized paired group bootstrap, distinguishes audit selectors and explains reproducibility scope. The assistant checked 56 referenced source symbols, local links, bundle keys and the displayed numerical examples against retained code/evidence. No model was rerun for this documentation edit. Research measurements, gold labels and Python sources were unchanged; no helper, test or recording file was added. Student authorship and personal checks are not inferred from these assistant-written guides.

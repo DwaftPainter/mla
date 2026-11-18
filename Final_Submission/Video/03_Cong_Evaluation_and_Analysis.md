@@ -1,288 +1,309 @@
-# Công — Complete individual video script: evaluation and analysis
+﻿# Công - Presentation and code walkthrough guide: evaluation and analysis
 
-Project version: **NUCLE-final-20261117**. Spoken language: English. **No duration limit or target length.** Give the calculation, demonstration, interpretation and personal evidence their full explanation; follow the scenes without an artificial time budget.
+Project: **NUCLE-final-20261117**. Prepare and present in English. **No duration limit.** This is a guide to understanding the evaluation, its implementation and its conclusions. Use the questions and worked calculations to explain naturally; there is no speech to memorise.
 
-All JSON/CSV basenames below refer to named records in Results/results.json. Use its json, tables or texts section, or the included evidence-view commands; these records are not separate files in the submission. Common setup, recording guidance and the personal-contribution checklist are in [README.md](../README.md).
+## How to use this guide
 
-## Recording brief and evidence boundaries
+Follow a claim back to its denominator, code and evidence. For each comparison, identify the evaluation unit, metric, direction of subtraction, uncertainty procedure and limit of interpretation. Showing a chart is useful only when you explain what calculation it represents.
 
-The assigned scope in new_task.md is test metrics, confusion matrices, group-bootstrap confidence intervals, model/ablation comparisons, the 18-validation/40-test audit, reproducibility and the report's conclusions and limitations. Required outputs: result tables/figures, error analysis and report.
+Open [README](../README.md), [the report](../Report/Final_Report.pdf), [main_results.csv](../Results/main_results.csv) and [results.json](../Results/results.json). The bundle stores original record names under json, tables and texts. For example, `json -> Results/evidence/test_confusions.json` names an entry inside the bundle, not another file to locate. Existing [figures](../Results/figures/benchmark_ci.png) can support the explanation. No extra helper program or test file is needed.
 
-Use **REAL SAVED EVIDENCE** for final experiment artifacts, **LIVE AGGREGATE RECALCULATION** when recomputing metrics from their confusion counts, and **SYNTHETIC LIVE EXECUTION** for the small group-resampling example. The synthetic example is not the research bootstrap. Complete your section of [personal-contribution checklist](../README.md#personal-contribution) before recording. Commands run from the submission root; see [submission README](../README.md) for the interpreter and preparation.
+Keep source inspection, saved experimental evidence and actual live execution clearly identified. Public aggregate evidence is sufficient for a saved-output demonstration; it does not contain all private rows, checkpoints or inputs needed to rerun inference.
 
-## Scene 1 — Define the evaluation question and your responsibility
+## 1. Define the question and trace the evaluator
 
-**Show:** face camera, project version, the five labels and your responsibility row in the main README.
+The task classifies a supplied error location into ArtOrDet, Prep, Nn, Vform or SVA. The observation is an annotation, not an essay. The predictor receives the original sentence and known span; it does not receive the correction or target label.
 
-**Do:** draw known error span → predicted error type → comparison with original gold → metrics and audit. Separate evaluation from changing training or gold.
+Evaluation asks how often a frozen predictor agrees with the original annotation category on held-out content groups. This definition matters: a mismatch is an error against the dataset convention. It does not by itself prove that the predicted grammatical interpretation is impossible. Supplied locations also mean these results do not measure full error detection or correction generation.
 
-**Say:**
+### Code map
 
-“Hello, I am Công. My assigned responsibility is test evaluation and interpretation: metrics and confusion matrices, grouped bootstrap intervals, model and ablation comparisons, validation and test case review synthesis, reproducibility checks, and the final conclusions and limitations.
+Paths below are relative to Code/.
 
-“The question is how well we classify an already located error into ArtOrDet, Prep, Nn, Vform or SVA. This is not full grammatical correction. My demonstration will calculate a real class score, explain the paired comparison, follow a real error into the review evidence, and distinguish what the public package can reproduce from what needs restricted inputs.”
-
-**Contribution boundary:** the assignment identifies the scope. Scene 14 must show a specific action you actually performed and the artifact supporting it.
-
-## Scene 2 - Reproduce the main result and state its scope
-
-**Run:**
-
-```powershell
-python Code/reproduce_main_result.py
-```
-
-**Show:** successful terminal output, then Results/reproduced/demo.html in a browser, main_results.csv, per_class_metrics.csv, checks.json and main_result.svg. Keep the command and output connected in the recording.
-
-**Say:**
-
-"This command calculates precision, recall, per-class F1, Macro-F1 and accuracy from saved confusion counts. It checks all twenty classical result names, twenty-five headline class records, twelve BERT validation runs and selected seed summaries. These are new arithmetic checks of saved evidence, not copied display values.
-
-"Results/results.json stores the original experiment records under named keys. The separate main_results.csv is the readable saved headline table. Consolidation changes the number of files, not the observations or predictions.
-
-"The generated HTML and chart display saved evidence. Expanding a table does not run checkpoint inference. This command does not train a predictor, restore private learner text or regenerate group-bootstrap intervals."
-
-**Expected output:** show actual PASS output, LR Full 0.8162577160 and primary BERT 0.8145949582. A successful aggregate check is not full experimental reproduction.
-
-## Scene 3 — Calculate Nn precision, recall and F1 from actual counts
-
-**Run:**
-
-```powershell
-python Code/inspect_evidence.py metrics --model LR_03 --label Nn
-```
-
-**Show:** the printed matrix and fractions beside Results/results.json entry json["Results/evidence/test_confusions.json"]. Use label order ArtOrDet, Prep, Nn, Vform, SVA.
-
-**Do:** outline the Nn gold row horizontally, the predicted Nn column vertically and diagonal cell 419. Add these callouts:
-
-| Quantity | Real LR test value | Meaning |
+| Question | File / functions | What to follow |
 | --- | --- | --- |
-| True positives | 419 | Gold Nn and predicted Nn |
-| Gold support | 565 | All gold Nn cases |
-| Predicted Nn | 512 | All cases assigned Nn |
-| False positives | 93 | Predicted Nn, different gold |
-| False negatives | 146 | Gold Nn, different prediction |
+| How are scores defined? | [src/evaluation/metrics.py](../Code/src/evaluation/metrics.py): scores | Gold-row/prediction-column counts, zero handling, fixed-label mean |
+| How are frozen predictors scored? | [src/evaluation/nucle_final_evaluation.py](../Code/src/evaluation/nucle_final_evaluation.py): verify_lock, predict, score_test | Identity checks, feature reconstruction, coordinate remapping, prediction and aligned output |
+| How are diagnostic slices defined? | Same file: subset_metrics, matrix_metric | Gold-based filtering, retained outside-pair predictions, selected-class F1 |
+| How are intervals calculated? | Same file: bootstrap | Per-group matrices, shared multinomial weights, percentile differences |
+| How is BERT compared on the same resamples? | [src/evaluation/bert_final_analysis.py](../Code/src/evaluation/bert_final_analysis.py): group_bootstrap, run | Group/row alignment, historical weights and paired differences |
+| How are the forty BERT/LR cases selected? | Same file: balanced_take, choose_audit, create_audit | Outcome quotas, SVA priority, frozen IDs before source review |
+| What is the separate classical audit? | [src/evaluation/nucle_final_error_audit.py](../Code/src/evaluation/nucle_final_error_audit.py): choose, run | Different LR/Tree selection, despite a similar case count |
+| What does replay verify? | [src/evaluation/nucle_final_evaluation.py](../Code/src/evaluation/nucle_final_evaluation.py): replay | Stored vectors -> saved states -> exact label agreement |
 
-**Say:**
+A useful explanation route is `frozen prediction -> aligned gold -> confusion counts -> class scores -> paired group uncertainty -> case review -> bounded conclusion`.
 
-“Rows are gold; columns are predictions. Nn precision is 419 divided by 512, or approximately 0.8184. Recall is 419 divided by 565, approximately 0.7416. False positives are 512 minus 419, which is ninety-three. False negatives are 565 minus 419, which is one hundred and forty-six.
+## 2. Derive Macro-F1 from real counts
 
-“Class F1 is twice TP divided by twice TP plus FP plus FN. Here that is 838 divided by 1,077, giving 0.778087279. This is a calculation of one real result, not an illustrative percentage.
+Start with `json -> Results/evidence/test_confusions.json -> matrices -> LR_03`. Label both axes explicitly: rows are gold, columns are predictions; order is ArtOrDet, Prep, Nn, Vform, SVA.
 
-“We calculate F1 for each of the five labels and take their arithmetic mean for Macro-F1. Taking the harmonic mean of macro precision and macro recall would be a different operation. The implementation uses zero for undefined class scores, so Majority's unpredicted classes do not disappear from the five-class average.”
+For class k, the diagonal is TP, the column sum is all predicted k, and the row sum is all gold k. Therefore FP = column sum - TP and FN = row sum - TP. This gives:
 
-**Interpretation:** Nn recall is lower than precision. Do not infer the cause from this matrix alone; it identifies the direction and amount of error.
+`precision_k = TP / (TP + FP)`
 
-## Scene 4 — Explain the five-model chart and paired comparison
+`recall_k = TP / (TP + FN)`
 
-**Show:** Results/figures/benchmark_ci.png, Results/results.json entry tables["Results/classical/overall_results.csv"], classical/paired_differences.csv and bert/paired_differences.csv. Zoom the chart legend and comparison direction.
+`F1_k = 2 TP / (2 TP + FP + FN) = 2 TP / (row_sum + column_sum)`
 
-**Say:**
+The second form explains the vectorized implementation in matrix_metric. It is the same metric, not a shortcut that changes the definition.
 
-“The test Macro-F1 values are 0.1184 for Majority, 0.7106 for POS, 0.8163 for LR Full, 0.7996 for Tree Full and 0.8146 for primary BERT-small. This uses the same 2,368 test annotations in ninety-seven groups.
+### Worked project example: LR Nn
 
-“LR minus POS is about 0.1057 with paired interval 0.0829 to 0.1288. LR minus Tree is about 0.0166 with interval 0.0018 to 0.0301. Both intervals are above zero in this saved evaluation. The BERT-minus-LR point difference is minus 0.0017, with interval minus 0.0184 to plus 0.0182. That comparison does not establish superiority or equivalence.
-
-“The uncertainty for a difference is computed directly from paired replicates. I should not infer significance merely from whether two separate model intervals overlap, and I should not subtract the endpoints of those separate intervals.”
-
-**Do:** place a zero reference line beside the paired intervals. Explain which direction favours which model before interpreting an endpoint. These are pointwise intervals, not a simultaneous guarantee for every comparison shown.
-
-## Scene 5 — Run group resampling so the sampling unit is visible
-
-**Run:**
-
-```powershell
-python Code/video_lab.py bootstrap
-```
-
-**Show:** Code/video_lab.py and group_bootstrap in Code/src/evaluation/bert_final_analysis.py; open Results/reproduced/video_lab/synthetic_group_resampling.json.
-
-**Do:** draw three authored groups: A has two rows, B has one, C has three. Highlight each replicate's A/B/C counts and expanded row indices. Preserve the synthetic label.
-
-**Say:**
-
-“This is a live call to the project's group-bootstrap function on six authored examples. It uses three deliberately chosen illustrative replicates, not a random research run and not a confidence-interval estimate.
-
-“The first replicate selects group A twice, B zero times and C once. That is three group draws but seven annotation rows. The next weights are zero, two and one, producing five rows. Weights one, one and one produce six. Group count stays fixed while annotation count varies because group sizes differ.
-
-“All rows from a selected group move together. The same group weights are applied to both toy predictors. Macro-F1 is recomputed for each model and their difference is taken inside that replicate. The demonstration asserts that the weighted group calculation equals explicitly repeating the rows.
-
-“If I sampled individual annotations independently, I would break this group structure. If I used different resamples for the two models, I would lose the paired comparison. Three selected replicates only explain the mechanics; I will now return to the saved research interval.”
-
-**Expected output:** annotation totals 7, 5 and 6, expanded row lists and paired differences. Do not relabel toy predictors as benchmark scores or estimate a 95 percent interval from this demonstration.
-
-## Scene 6 — State the actual research bootstrap and its limits
-
-**Show:** Results/results.json entry json["Results/bert/bootstrap.json"] and Results/results.json entry json["Results/classical/bootstrap.json"]; then Results/results.json entry json["Results/evidence/split_summary.json"]. Highlight replicate count, group count, seed and metric.
-
-**Say:**
-
-“The saved test uncertainty uses 1,000 group-bootstrap replicates over ninety-seven connected groups with seed 20261023. The groups reflect related source content and can contain more than one essay. The fixed five-label Macro-F1 calculation assigns zero when a class is absent in a replicate. Paired comparisons share group multiplicities.
-
-“These intervals describe this procedure's resampling uncertainty on the observed grouped test set. They do not include every source of uncertainty: new splits, new corpora, different annotation conventions or all training seeds. The sample standard deviation over three BERT seeds describes training-seed variation, not the same quantity as a group-bootstrap interval.
-
-“The public aggregate confusion matrices have lost the row-to-group allocation. They can reproduce point scores, but not recreate the saved group-bootstrap distribution. That requires the authorised row-level predictions and group mapping. I will display the saved intervals with their provenance rather than claim to have regenerated them.”
-
-**Interpretation:** one holdout with grouped uncertainty is not external validation. Avoid saying an interval containing zero proves that two predictors are equal.
-
-## Scene 7 — Compare ablations without overclaiming causality
-
-**Run:**
-
-```powershell
-python Code/inspect_evidence.py ablation
-```
-
-**Show:** Results/results.json entry tables["Results/classical/paired_differences.csv"]. Highlight the comparison row and pipeline IDs at the same time.
-
-**Say:**
-
-“For LR, Full minus target-span lexical masking is 0.0134, with paired interval 0.0049 to 0.0201. Full minus removing all L is 0.0281, with interval 0.0142 to 0.0394. The distinction matters: the first retains lexical context and the original parse, while the second removes the whole lexical family.
-
-“Full minus P is about 0.0181, with interval 0.0069 to 0.0296. Full minus M is about 0.0040 with an interval containing zero, and Full minus D is about 0.0060, also containing zero. This does not prove morphology or dependency information is useless. Families overlap, each pipeline is tuned, and sample uncertainty remains.
-
-“Tree does not reproduce every LR pattern. Its masked point score is slightly higher than Full and that paired interval includes zero. I should not generalize one model's result to every learner.
-
-“Full minus D is the S+L+P+M alias, so duplicate names are not independent confirmations. These comparisons explain already specified experiments; I am not using them to choose a new model after opening the test set.”
-
-**Do:** mark the alias and the intervals crossing zero. Keep the distinction between target masking and all-L removal visible.
-
-## Scene 8 — Explain why accuracy and Macro-F1 rank models differently
-
-**Show:** Results/figures/per_class_f1.png and confusion_comparison.png; run:
-
-```powershell
-python Code/inspect_evidence.py metrics --model BERT --label SVA
-```
-
-**Say:**
-
-“BERT has higher accuracy: 0.8438 versus LR's 0.8357, corresponding to 1,998 versus 1,979 correct predictions. Yet its primary Macro-F1 is slightly lower. Macro-F1 gives equal weight to each class, not to each annotation.
-
-“Nn F1 improves from LR's 0.7781 to BERT's 0.8098, while SVA falls from 0.8106 to 0.7392. That tradeoff is hidden by accuracy alone. The saved joint outcomes are 1,860 correct for both, 138 correct only for BERT, 119 correct only for LR and 251 wrong for both.
-
-“LR's directional confusions also matter. There are 134 Nn cases predicted as ArtOrDet and fifty-nine in the reverse direction. Vform to SVA has twenty-nine; SVA to Vform has eighteen. Reversing row and column would reverse the explanation. These counts suggest where to inspect cases; they are not proof of a single grammatical cause.”
-
-**Do:** stop on one gold row and one predicted column before switching charts. Do not read every cell aloud.
-
-## Scene 9 — Trace a real assigned error into the audit
-
-**Run:**
-
-```powershell
-python Code/video_lab.py case --annotation-id 19068
-```
-
-**Show:** Results/results.json entry json["Results/evidence/real_example_19068.json"] and Results/results.json entry texts["Results/reproducibility/team_review_record.md"]. Use a text-free annotated diagram: real validation ID → original interval → feature subset → saved decision → existing review note.
-
-**Say:**
-
-“This is real validation annotation 19068, one of the cases assigned to me. Its sentence-relative interval is ten to eighteen, eight characters, with exact alignment and two tokens. Gold is SVA; saved LR Full and Tree Full both predict Vform. The visible parse signature includes aux plus ROOT and singular-number features.
-
-“The source example, offsets, feature subset and saved prediction belong to the actual final project. The learner sentence, correction and lexical coordinates are deliberately omitted. This command reads evidence; it does not infer from redacted metadata.
-
-“The existing review describes a multi-operation interpretation involving subject number. I attribute that explanation to the review record. It is a reason to examine the annotation and correction boundary, not proof that the model's prediction is linguistically correct or that the parser caused the failure. Gold remains unchanged for scoring.”
-
-**Interpretation:** explain the path all the way to the review conclusion. Do not substitute an authored readable sentence and call it the real case.
-
-## Scene 10 — Explain how the review sets were selected
-
-**Run:**
-
-```powershell
-python Code/inspect_evidence.py audit
-```
-
-**Show:** Results/results.json entry json["Results/evidence/audit_summary.json"]. Draw separate boxes for validation selection, the forty-case test review and consolidated decisions, with the documented overlap.
-
-**Say:**
-
-“The eighteen validation cases were purposefully selected from 364 LR validation errors: three sorted IDs for each of four directional confusions, plus six multi-token cases. Eighteen is approximately 4.95 percent of those errors. The selection gives useful coverage; it does not estimate error-category prevalence.
-
-“The forty test cases include twelve correct only for LR, twelve correct only for BERT, ten wrong for both and six correct-for-both controls. The controls help us avoid a review containing only failures. These quotas are not a random sample of all test disagreements.
-
-“The consolidated twenty-two decisions overlap the forty-case test review in eight annotations, producing fifty-four distinct annotations in that extended union. I should not add eighteen, forty and twenty-two and call the result a verified unique-case count.
-
-“The saved 1 November team record documents accepted interpretations and follow-up actions. It is not independent expert adjudication and does not prove a new personal action by today's speaker. We do not edit gold after seeing predictions to raise the score.”
-
-**Do:** label the 18-case validation set separately. Make the 40 + 22 − 8 = 54 relation explicit without implying it also counts the validation set.
-
-## Scene 11 - Separate aggregate checks from historical replay
-
-**Run:**
-
-```powershell
-python Code/inspect_evidence.py ablation
-python Code/reproduce_main_result.py
-```
-
-**Show:** the actual command output and the historical_reproduction/current_lock_check records under json in Results/results.json. Distinguish present aggregate recalculation, recorded historical pipeline replay and a future authorised full restoration.
-
-**Say:**
-
-"The ablation view identifies saved aliases, and reproduction recalculates point metrics. The live bootstrap lab checked group weighting against explicit row expansion. These checks do not establish that every historical archival file currently matches.
-
-"The historical record describes raw-to-preparation-to-features replay and the fifty-two-fit final classical stage. It does not recreate every earlier grid, all BERT training or independent adjudication, and is not newly rerun by today's public command.
-
-"The recorded archival check found sixty-nine matches among seventy-four entries, four missing older reporting sources and one changed validation CSV. A historical test-prediction CSV representation difference is documented too. Those discrepancies remain visible; old hashes were not rewritten.
-
-"Aggregate score agreement, exact archival bytes and full experimental reproducibility are different claims. Full restoration needs the authorised inputs and recorded environment described in Data/DATA_README.md and README.md."
-
-**Interpretation:** show the recorded reasons and the scope of each claim. The submission contains no separate manifest or package-integrity utility.
-
-## Scene 12 — Connect results to the report and related work
-
-**Show:** Report/Final_Report.pdf, the Related Work comparison, Results section, Discussion and limitations. Zoom one comparison row and the corresponding task definition.
-
-**Say:**
-
-“The report must explain what these results mean for this task. The strong POS baseline shows that local grammatical information is useful. LR Full improves over that reference. The small encoder is competitive but primary-test superiority over LR is not established, and the class-level tradeoff matters.
-
-“The related-work comparison distinguishes error-type classification at a known span from correction generation, error explanation and other label systems. Those papers motivate design choices and limitations, but their reported scores are not our measured baselines. Different data, labels, inputs and metrics prevent a direct ranking from unrelated headline numbers.
-
-“Limitations include restricted data access, grouping that cannot detect every semantic paraphrase, automatic parse errors, purposeful rather than random case review, seed sensitivity and reuse of the holdout after classical results were known. No fresh external corpus evaluation was run. External evaluation and stronger independent annotation review are future work, not completed experiments.”
-
-**Evidence:** keep statements traceable to the report's comparison table and saved project artifacts; do not invent a new citation or external score for the video.
-
-## Scene 13 — Show the required evaluation outputs
-
-**Show:** the output paths below and point to their matching report figures or sections.
-
-| Required output | Artifact to demonstrate | What the viewer can check |
+| Quantity | Observed value | Meaning |
 | --- | --- | --- |
-| Result tables | Results/results.json entry tables["Results/classical/overall_results.csv"]; Results/results.json entry tables["Results/bert/overall_results.csv"] | Validation/test distinction and fixed primary |
-| Metrics and uncertainty | test_confusions.json; per-class CSVs; paired_differences.csv; bootstrap.json | Point-score arithmetic, direction and saved CI provenance |
-| Figures | Results/figures/benchmark_ci.png; per_class_f1.png; confusion_comparison.png | Overall comparison, class tradeoff and directional errors |
-| Error analysis | audit_summary.json; team_review_record.md; real_example_19068.json | Selection, overlap, actual saved mismatch and review limits |
-| Report | Report/Final_Report.pdf | Question, methods, related comparison, results and justified conclusions |
-| Public reproduction | Results/reproduced/checks.json; demo.html; saved evidence bundle | Aggregate consistency and aggregate consistency, not private pipeline restoration |
+| TP | 419 | Gold Nn, predicted Nn |
+| Gold support | 565 | Nn row sum |
+| Predicted Nn | 512 | Nn column sum |
+| FP | 93 | 512 - 419 |
+| FN | 146 | 565 - 419 |
 
-**Say:**
+Precision = 419/512 = 0.818359375. Recall = 419/565, about 0.741593. F1 = 838/1077 = 0.778087279. Nn recall is lower than precision: more of its gold cases are missed than its predictions are false, relative to the relevant denominators. That is a descriptive error pattern; the matrix does not identify its linguistic cause.
 
-“These outputs connect the numbers to inspectable counts, visual explanations and case evidence. I have shown what is recalculated live, what is displayed from the saved experiment, and what cannot be reconstructed from public aggregates alone.”
+Macro-F1 is `(F1_ArtOrDet + F1_Prep + F1_Nn + F1_Vform + F1_SVA) / 5`. It is not the harmonic mean of macro precision and macro recall. Accuracy is the diagonal total divided by all rows. In this single-label task, micro-F1 would equal accuracy; Macro-F1 gives each class equal influence instead.
 
-## Scene 14 — Substantiate your personal contribution and conclude
+### Read scores as an implementation contract
 
-**Show:** your completed the personal-contribution checklist in README.md and the specific artifact supporting your actual action.
+scores rejects empty or unequal-length input sequences and unknown labels. It allocates a fixed five-by-five matrix, increments one cell per aligned observation, computes class precision/recall with zero for undefined denominators, then averages all five class F1 values. Majority's unpredicted classes remain in that average; they are not removed to make the score larger.
 
-**Say:**
+The length check cannot detect a shuffled prediction list of the same length. Correct sample-ID alignment must be established upstream. This is why provenance and joins are part of evaluation correctness, not just file management.
 
-“The saved validation review assignments for me are 1269, 18774, 19065, 19068, 19069 and 19185. The evaluation responsibility is the assignment; this recorded review scope is a separate piece of evidence. I will now identify one evaluation, review or reporting action I actually performed, show the artifact, explain a decision or correction, and state what I personally checked and what involved shared or AI help.”
+## 3. Explain why higher accuracy can coexist with lower Macro-F1
 
-**Required personalised segment:** demonstrate an actual change, calculation check, review entry or interpretation correction from your own work. Explain its effect on the result or conclusion. If your activity was verification, describe verification accurately; do not claim sole implementation. Fill the worksheet before recording rather than reading placeholders or inventing a contribution history.
+The saved test set has 2,368 annotations in 97 connected groups. The five headline Macro-F1 values are Majority 0.1184, POS 0.7106, LR Full 0.8163, Tree Full 0.7996 and primary BERT-small 0.8146. Keep the primary checkpoint distinct from the three-seed mean.
 
-**Closing narration:**
+Primary BERT gets 1,998 predictions correct, accuracy 0.84375. LR gets 1,979 correct, accuracy about 0.83573. Yet BERT has slightly lower Macro-F1. Show [per_class_f1.png](../Results/figures/per_class_f1.png) and `tables -> Results/bert/per_class_metrics.csv` to resolve this apparent contradiction.
 
-“My conclusion is that evaluation quality requires more than a high number: a defined task, recoverable counts, the correct uncertainty unit, an honest comparison and review limits. On this version, LR is a strong reference and primary BERT has not demonstrated a Macro-F1 advantage. The package supports checking that conclusion while making its reproduction boundaries explicit.”
+| Class | LR Full F1 | Primary BERT F1 | BERT - LR, approximately |
+| --- | --- | --- | --- |
+| ArtOrDet | 0.869272 | 0.882324 | +0.013053 |
+| Prep | 0.914923 | 0.921811 | +0.006887 |
+| Nn | 0.778087 | 0.809793 | +0.031706 |
+| Vform | 0.708434 | 0.719818 | +0.011384 |
+| SVA | 0.810573 | 0.739229 | -0.071344 |
 
-## Recording acceptance checks
+The exact Macro-F1 difference equals one fifth of the sum of the five class differences. The SVA decline outweighs the other gains on this metric. Accuracy instead counts each annotation equally, so improving a more frequent class can offset many fewer correct predictions in another class. This is an arithmetic explanation, not a causal account of why BERT loses SVA.
 
-| Marking criterion | Required visible evidence |
+The joint prediction outcomes are both correct 1,860; BERT only correct 138; LR only correct 119; both wrong 251. These add to 2,368; 1,860+138 and 1,860+119 recover the respective correct totals. These are correlated outcomes on the same observations, not two unrelated accuracy samples.
+
+Use [confusion_comparison.png](../Results/figures/confusion_comparison.png) to inspect directions. LR has 134 Nn -> ArtOrDet errors and 59 reverse errors; Vform -> SVA is 29 and SVA -> Vform is 18. A large cell suggests cases to review. It does not establish that every cell contains the same grammatical phenomenon.
+
+## 4. Follow score_test from a lock to an evaluated label
+
+Explain why each check exists, rather than reading the function line by line.
+
+1. **verify_lock:** validate the lock-file hash and every recorded source/input/state hash. A changed encoder or checkpoint can make an old score incomparable even if the filename remains the same. Hashes establish expected byte identity; they do not prove that the scientific method is sound or who wrote the code.
+2. **Scoring guard:** reject a workspace already containing test_predictions.csv or test_scoring_started.json. The start marker is written before the expensive operation. This protects the intended frozen evaluation workflow; it is not a mathematical guarantee that nobody has ever seen test results elsewhere.
+3. **Select rows by split:** load test samples only and assert 2,368. Fit nothing on these rows. The full/masked encoders' fit-ID sets are checked against train membership.
+4. **Reconstruct representation:** parse each distinct sentence once, extract features, transform with the frozen encoder and assert exact agreement with stored test vectors. Reusing a parse reduces repeated work; it does not merge annotations into one observation.
+5. **Predict:** build an old-index -> local-index map from the selected keep list. LR uses sparse matrix multiplication plus bias and argmax; Tree restores its root and traverses it. The same coordinate mapping used in fitting must be used at inference.
+6. **Align output:** predictions are written alongside sample ID, gold, group and diagnostic metadata. Alias variants reuse the appropriate predictions. The evaluator then computes metrics and saves encoded rows for replay.
+
+A sparse vector coordinate is meaningful only relative to the exact encoder and keep list. Reordering columns without remapping changes the predictor even if every number still looks plausible. That is a useful concrete failure mode to explain while pointing at predict.
+
+Gold and group IDs legitimately enter scoring and resampling after prediction; they must not enter the predictor values. This distinction prevents the mistaken claim that evaluation cannot access labels at all.
+
+### Diagnostic slices need a separate explanation
+
+subset_metrics defines all, empty/single-token/multi-token spans, selected label pairs and some POS-conditioned pairs. The present retained samples have nonempty spans; supporting an empty slice in code does not mean the experiment evaluated insertion examples.
+
+For Vform/SVA, rows are filtered by gold membership. Predictions outside the pair stay in the five-by-five matrix and count as missed gold cases. Only the two specified class F1 values are averaged for the pair score. Dropping outside-pair predictions would silently remove errors and inflate performance. A slice metric has a different population/label average from the headline five-class score.
+
+## 5. Explain why bootstrap samples groups
+
+Multiple annotations can share a sentence, essay or connected source-content component. They are dependent. Treating every annotation as an independent resampling unit can misrepresent uncertainty. The split and bootstrap therefore use connected groups, which can contain more than one essay.
+
+The experiment has 97 test groups. Each bootstrap replicate draws 97 group identities with replacement and includes every annotation in each selected group, repeated according to that group's multiplicity. A group can be omitted or selected several times. The number of group draws stays fixed; the number of annotation rows can vary.
+
+### Conceptual example, not a new experimental result
+
+Let A contain two annotations, B one and C three.
+
+| Multiplicities for (A,B,C) | Group draws | Resampled annotations |
+| --- | --- | --- |
+| (2,0,1) | 3 | 2×2 + 0×1 + 1×3 = 7 |
+| (0,2,1) | 3 | 0×2 + 2×1 + 1×3 = 5 |
+| (1,1,1) | 3 | 2+1+3 = 6 |
+
+These three rows only explain the mechanism; they do not estimate a confidence interval. Present the actual recorded 1,000-replicate procedure separately. Group resampling addresses dependence represented by the grouping design; it cannot discover every unrecorded semantic relationship or guarantee external generalization.
+
+## 6. Derive the vectorized bootstrap code
+
+In nucle_final_evaluation.bootstrap, groups are sorted to define a stable group-index map. The generator uses the saved seed 20261023. A multinomial draw is an efficient representation of repeated group sampling:
+
+`W = rng.multinomial(G, [1/G, ..., 1/G], size=B)`
+
+Here B=1,000 and G=97. W has shape `(1000,97)`; every row sums to 97. Entry W[b,g] is how many times group g appears in replicate b.
+
+For each model, the code constructs C with shape `(97,5,5)`. C[g,i,j] counts gold i / prediction j in group g. Flatten the two class axes to 25 cells, multiply, then restore them:
+
+`boot = (W @ C.reshape(97,25)).reshape(1000,5,5)`
+
+This expression sums the selected group confusion counts for all replicates without physically duplicating text or prediction rows. It does not average scores. matrix_metric computes each replicate's class F1 from its aggregated row sums, column sums and diagonal, then takes the fixed-label mean.
+
+### Why averaging group F1 would be wrong
+
+F1 is a ratio. In general, `F1(C_A + C_B)` differs from `(F1(C_A)+F1(C_B))/2`. Averaging group F1 would give each group an equal score contribution regardless of its confusion counts and evaluate a different estimand. The actual procedure resamples groups but evaluates annotation-level Macro-F1 on the combined resample.
+
+matrix_metric accepts either one matrix or a stack; summing the last two axes and taking the diagonal preserves the leading replicate axis. Its divide operation sets zero where the class denominator is zero. The main score keeps all five labels even if a resample lacks a class. Missing-class replicates are recorded, not automatically discarded.
+
+For diagnostic slices, bootstrap first checks sufficient original support: at least 20 rows, 10 groups and gold presence for each selected class. A replicate is valid when it contains some slice rows. At least 950 valid replicates are required to publish its CI. That threshold is a completeness rule, not the definition of 95% confidence.
+
+A single overall five-by-five confusion matrix cannot reproduce this procedure: it has lost the allocation of counts to groups. Aggregate counts reproduce point scores; group-specific counts or aligned private predictions are needed for grouped uncertainty.
+
+## 7. Explain paired differences and confidence intervals carefully
+
+Both predictors must use the same row identities, gold labels, group order and W. In bert_final_analysis.group_bootstrap, group sets, weight shape and prediction lengths are checked. The analysis loads the historical classical resampling weights and checks them against the expected seeded draws, so BERT/LR comparisons share the same replicates.
+
+For each replicate b, compute `d_b = F1_BERT,b - F1_LR,b`. The saved percentile CI is the 2.5th and 97.5th percentiles of these differences. It is not a normal approximation of mean plus/minus 1.96 standard deviations, and it is not obtained by subtracting the endpoints of separate model CIs.
+
+Pairing retains the covariance from evaluating both models on the same content. The identity `Var(A-B) = Var(A)+Var(B)-2 Cov(A,B)` explains why independently resampling the models answers a different uncertainty question. Do not claim pairing must always make an interval narrower; the covariance matters.
+
+| Contrast, first minus second | Point difference | Saved 95% paired interval, rounded |
+| --- | --- | --- |
+| LR Full - POS | +0.105668 | [0.082916, 0.128835] |
+| LR Full - Tree Full | +0.016609 | [0.001793, 0.030061] |
+| Primary BERT - LR Full | -0.001663 | [-0.018410, 0.018153] |
+
+Use [paired_differences_focus.png](../Results/figures/paired_differences_focus.png) to show the zero line. Identify the subtraction direction before interpreting a sign. The first two intervals support a positive difference under this procedure. The BERT/LR interval spans zero; it does not establish BERT superiority, LR superiority or formal equivalence. Equivalence requires a prespecified practically acceptable margin and a suitable analysis, which was not performed.
+
+These are pointwise intervals. Many contrasts were inspected; no familywise multiplicity correction is claimed. A confidence interval is not a statement that a fixed true difference has a 95% probability of lying inside this particular observed interval. Present it as uncertainty from the stated repeated-sampling approximation and its assumptions.
+
+The procedure resamples observed test groups, conditional on the fitted predictors. It does not integrate all uncertainty from training seeds, split selection, a new corpus, parsing decisions or disputed annotation conventions.
+
+## 8. Separate seed variability, primary results and ensembling
+
+The selected BERT configuration was chosen by mean best-checkpoint validation Macro-F1 over three fixed seeds. The primary seed remains 20261013; it was not replaced by the seed with the best test score.
+
+The primary test Macro-F1 is about 0.814595. The three-seed test mean is about 0.818173 with sample SD about 0.003829. A mean of independently evaluated run scores is not an ensemble prediction. An ensemble would combine outputs and then evaluate the combined predictor; that was not done here.
+
+The sample SD uses three run scores and denominator n-1. It describes variation among these three fits. The group-bootstrap CI describes resampled test-content uncertainty for a fixed fit. Neither is interchangeable with the other, and three seeds are limited evidence about all possible training variation.
+
+The extension reused the holdout after classical test findings were available. Its own configuration selection used validation, but this history still limits claims of a completely untouched, independently confirmatory comparison. A genuinely new external test would answer a stronger question and was not run.
+
+## 9. Interpret ablations as defined pipeline comparisons
+
+Use the complete classical tables in the bundle, not just the five-row headline CSV. Identify both variant IDs and whether configurations were separately validation-selected.
+
+| LR Full minus variant | Point difference, approximately | Saved 95% CI, rounded |
+| --- | --- | --- |
+| Target lexical masking | 0.013423 | [0.004901, 0.020108] |
+| Remove all L | 0.028129 | [0.014188, 0.039407] |
+| Remove P | 0.018082 | [0.006950, 0.029620] |
+| Remove M | 0.003980 | [-0.006562, 0.013566] |
+| Remove D | 0.006019 | [-0.005397, 0.019113] |
+
+Target masking removes target lexical candidates while retaining lexical context and the original parser analysis. Removing all L removes the lexical family. These interventions answer different questions. They involve train-fitted encoders and retrained/tuned predictors, rather than zeroing a column at test time.
+
+POS, morphology and dependency families overlap in information: dependency attributes can include POS/morphological signals, and the fixed parser still saw the original words. An ablation difference is therefore not an isolated causal contribution of one linguistic ability. A CI crossing zero does not prove a family contains no information.
+
+Tree's masked point score is slightly above Full and its interval includes zero, so the LR trend is not universal. Full minus D aliases S+L+P+M; duplicate pipeline names are not independent confirmations. The twenty named classical pipelines correspond to sixteen distinct fitted states. Keep those counts separate when describing evidence strength.
+
+## 10. Trace real validation example 19068 without inventing its cause
+
+Open `json -> Results/evidence/real_example_19068.json`. Follow `annotation ID -> span -> linguistic feature subset -> gold/prediction -> review question`.
+
+| Publicly recorded fact | What it permits you to explain |
 | --- | --- |
-| Technical explanation | Real TP/FP/FN arithmetic; Macro-F1; grouped paired resampling; uncertainty versus seed dispersion; review selection and overlap |
-| Evidence and demonstration | Live aggregate reproduction, metrics command, synthetic group execution, real 19068 trace, aggregate checks and saved provenance |
-| Personal contribution | Actual-action worksheet with supporting artifact, decision/correction, personal checks and accurate attribution |
-| Production quality | English narration/captions, readable row/column and CI labels, persistent evidence labels, visible commands/results and clear audio |
+| Validation annotation 19068; exact [10,18) | Eight-character span with valid sentence-relative reconstruction |
+| Two covering tokens | This is a multi-token, not single-token, target |
+| aux + ROOT dependency signature; singular-number information | The visible parser-derived representation contains these signals |
+| Gold SVA; saved LR/Tree prediction Vform | Both predictors disagree with the dataset category |
+| No full sentence/correction/lexical vector in this record | Public metadata alone cannot reproduce inference or adjudicate the correction |
 
-Give the calculation its own screen; avoid displaying a full page of tiny tables. Hold the zero line and interval direction while discussing uncertainty. Check captions for Macro-F1, Nn, SVA, group counts, overlap arithmetic and minus signs. Preserve complete evidence explanations rather than cutting to a preset runtime.
+The auxiliary-plus-root pattern suggests a useful review question: might the source correction involve both agreement and verb-form changes? Answering requires the original correction and neighbouring annotations. It is a hypothesis to investigate, not a conclusion established by these fields.
+
+Distinguish three levels: the observed mismatch, a source-supported linguistic interpretation, and a causal explanation of the model's decision. Even a plausible interpretation does not prove that a specific dependency feature caused the prediction. No counterfactual attribution experiment was performed. Gold remains unchanged for reported scoring.
+
+Your assigned validation IDs are 1269, 18774, 19065, 19068, 19069 and 19185 under `json -> Results/evidence/audit_summary.json -> validation -> member_ids -> Cong`. The aggregate team review record documents group decisions; do not attribute a detailed comment about this case to that record if it is not actually present there.
+
+## 11. Explain what the audit samples can and cannot establish
+
+The eighteen validation cases were purposefully chosen from 364 LR errors: three sorted IDs in each of four principal confusion directions, plus six multi-token cases. Eighteen is about 4.95% of those errors, but this is coverage-oriented selection, not a random prevalence estimate.
+
+The required forty BERT/LR test cases use bert_final_analysis.choose_audit:
+
+- Twelve BERT-wrong/LR-correct, with six prioritized gold SVA cases and six additional cases.
+- Twelve BERT-correct/LR-wrong.
+- Ten both wrong.
+- Six both correct controls.
+
+balanced_take cycles gold/BERT/LR buckets with seeded within-bucket ordering, using seed 20261028. The IDs are fixed before looking up learner sentences and source corrections. This makes the selection traceable and reduces the opportunity to choose only persuasive correction stories. It does not turn quota sampling into a random sample of all test errors.
+
+create_audit joins those IDs to source annotations, checks source hash, gold and span identity, then prepares review material. It records edit-operation summaries from casefolded whitespace-token sequences. An automatic insert/delete/replace description is an alignment summary, not a grammatical adjudication. Missing correction and an empty replacement must remain distinct.
+
+### Do not confuse two forty-case code paths
+
+nucle_final_error_audit.choose is a separate classical packet: 25 LR errors across gold/prediction buckets, five LR-correct/Tree-wrong cases and ten LR-correct controls. Its seed and strata differ. A similar total count does not make it the BERT/LR forty-case audit. Point to the relevant selector for the claim being made.
+
+The 22 consolidated decisions contain nine supported, six reconsider, three boundary, three optional and one multi-operation status. Eight overlap the forty-case set, so the extended union has `40 + 22 - 8 = 54` distinct annotations. The eighteen validation cases form a separate set. Reconsider means further review is justified; it does not mean a gold error has been conclusively established.
+
+Correct-for-both controls matter because label agreement does not certify that a correction is unique or necessary. The 1 November approval records team interpretation and follow-up; it is not independent expert adjudication. Neither purposeful quotas nor team agreement supports a population percentage of annotation mistakes. No post-prediction gold changes were made.
+
+## 12. Distinguish levels of reproducibility
+
+A useful discussion separates claims that require different evidence:
+
+| Claim | Necessary evidence / scope |
+| --- | --- |
+| Recalculate a reported point score | Correct confusion counts and fixed metric definition |
+| Recompute grouped CIs | Aligned predictions plus group allocation and identical resampling procedure |
+| Replay a frozen predictor | Matching checkpoint, encoder/coordinates, encoded rows and valid lock |
+| Regenerate features | Authorised raw input, exact preparation/split/parser/encoder and versions |
+| Retrain the experiment | Training source/configuration/inputs/environment and actual completed runs |
+| Generalize externally | A new suitable evaluation dataset; replay cannot supply this |
+
+The later assistant-executed isolated check completed all thirteen classical stages. It produced sixteen byte-identical checkpoints; all twenty named pipelines' 2,368 test labels matched, 47,360 comparisons in total. All thirty compared paired CI rows matched. These are strong reproduction checks, but 47,360 comparisons are not 47,360 independent observations: the same 2,368 annotations in 97 groups are evaluated repeatedly, and some names alias states.
+
+The fresh execution created its own matching lock. The historical archival check still reports 69 matches out of 74 entries, four missing old reporting sources and a changed validation CSV; a test-CSV representation difference is also documented. Label agreement, metric agreement and byte identity are different claims. Line endings or column formatting can alter a CSV hash without changing its semantic predictions. Do not rewrite old hashes merely to make a check pass.
+
+The BERT check comprised a separate one-epoch smoke run and read-only validation inference from three existing selected checkpoints, reproducing all 2,368 validation labels per seed. It did not retrain the full twelve-run BERT grid or open a new BERT test comparison. Attribute these completed checks to the assistant, as recorded in [AI_Use_Log](../AI_Log/AI_Use_Log.md); they do not establish a student's personal execution history.
+
+### What the existing replay command actually does
+
+From a prepared Code/ workspace with matching private states, stored encoded rows, predictions and source/input lock:
+
+```powershell
+.venv/Scripts/python.exe -m src.evaluation.nucle_final_evaluation replay
+```
+
+replay verifies the lock, loads saved encoded rows, checks their ID order, obtains predictions from saved states and asserts zero label disagreements. A successful run prints CHECKPOINT REPLAY EXACT. It does not refit the encoder, reparse source text, retrain models or regenerate bootstrap intervals.
+
+The already prepared isolated workspace is `.cache/submission_runtime_20261118/Final Submission/Code/` in the working repository, outside the submission. A public-only copy is missing replay prerequisites. If you show saved evidence, identify it as saved evidence; do not call it live inference. Do not rerun score in an already scored workspace; the original guard deliberately rejects that operation.
+
+## 13. Build a natural presentation around evidence
+
+A coherent route is: define the question, calculate Nn F1, resolve the accuracy/Macro-F1 tradeoff, trace score_test, explain grouped paired uncertainty, inspect real case 19068, then discuss audits and limits. Use the detailed sections as preparation, not mandatory paragraphs to speak in order.
+
+For each displayed artifact, be ready to answer:
+
+- **What is this?** Name the split, predictor, metric and saved/live status.
+- **How was it produced?** Trace a relevant function and its inputs/outputs.
+- **What does it show?** State a concrete count, difference or diagnostic pattern.
+- **What remains uncertain?** Explain the methodological boundary that matters here.
+
+Keep the source block and corresponding artifact visible together when possible. Enlarge the Nn row/column, label the zero line on a paired chart and show the shapes beside the bootstrap multiplication. Avoid scrolling through a whole file while giving an unrelated explanation. If using a conceptual drawing, label it as conceptual; if executing replay, keep the actual terminal result visible.
+
+Connect the report's Related Work comparison to the task definition. External error detection, correction generation and explanation papers have different input information, outputs, corpora and metrics. A qualitative methodological comparison is useful; ranking their headline scores against known-span five-class Macro-F1 is not justified. Those papers were not rerun as external baselines here.
+
+The defensible conclusion is that the POS reference is strong, LR Full improves over it, and primary compact BERT is competitive without an established Macro-F1 advantage over LR. SVA behavior and source-aware case review explain why the overall table is incomplete on its own. Limits include supplied gold locations, residual content overlap, parser errors, purposeful audit selection, limited seeds and holdout reuse. No external-corpus, calibration or educational-intervention result is claimed.
+
+## 14. Questions to answer from understanding
+
+| Question | Reasoning to be able to reconstruct |
+| --- | --- |
+| Why not just report accuracy? | Frequent classes dominate row totals; equal-class F1 exposes a different tradeoff. |
+| Is Macro-F1 the F1 of averaged precision and recall? | No: calculate F1 per fixed class first, then average. |
+| Why do prediction IDs matter if list lengths match? | Equal lengths do not establish corresponding observations. |
+| Why group resampling? | Related annotations move together; the dependence unit differs from the scoring unit. |
+| Why not average the F1 of sampled groups? | F1 is nonlinear; aggregate confusion counts before scoring. |
+| Can the overall matrix recover the bootstrap CI? | It lacks row-to-group allocation. |
+| Why share W across models? | Paired differences preserve same-content covariance. |
+| Is 950 valid replicates the meaning of 95% CI? | No: it is a minimum completeness threshold; percentile endpoints define the interval here. |
+| Does a zero-crossing difference CI prove equality? | No; uncertainty includes both directions and equivalence was not tested. |
+| Is the three-seed mean an ensemble or CI? | Neither: it is the mean of three run scores with separately reported sample SD. |
+| Are forty purposefully selected cases representative percentages? | Their quotas target coverage; prevalence needs an appropriate sampling design. |
+| Does exact replay prove successful retraining or generalization? | It verifies saved-state label reproduction under its prerequisites. |
+
+For personal contribution, prepare one supported action: a metric check, an audit decision with its evidence, a figure interpretation/correction, or a reproduction check you actually performed. Explain the input, your reasoning, the resulting artifact and what you checked personally. An assigned role or review ID is not proof that you implemented every evaluator; distinguish shared work and AI assistance. Add no invented authorship, run or numerical improvement.
+
+**Technical explanation** is the metric/resampling/source reasoning. **Evidence and demonstration** is the real calculation, chart, code trace and case, with saved/live status clear. **Personal contribution** is a supported action and decision. **Production quality** is readable axes/equations/code, consistent version and model names, clear audio and a coherent argument. Use these as preparation goals rather than lines to recite.
