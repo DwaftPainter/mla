@@ -6,7 +6,7 @@ are glued together; preparation records the resulting exact text fragments.
 """
 import re
 
-RULE_VERSION = "nucle-sentence-boundaries-v2"
+RULE_VERSION = "nucle-sentence-boundaries"
 CITATION_MAX_CHARS = 300
 PARENTHETICAL = re.compile(r"\([^()\r\n]{1,300}\)|\[[^\[\]\r\n]{1,300}\]")
 CITATION_MARKER = re.compile(r"\b(?:18|19|20)\d{2}[a-z]?\b|\bn\s*\.\s*d\s*\.?|https?://|www\.", re.I)

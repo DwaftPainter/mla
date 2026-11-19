@@ -125,15 +125,15 @@ reconstruct_span checks paragraph indices and endpoint bounds. For a same-paragr
 
 Do not equate a missing correction with an empty replacement. The missing_correction flag records whether a CORRECTION field was supplied. Empty replacement can be a deletion. These are audit distinctions, not class labels fed to the predictor.
 
-The annotation_id is a sequential index under one exact source ordering. Its meaning is tied to the source checksum. A different source release may assign the same integer to another annotation. The sample identity therefore includes source hash plus annotation ID. Sentence identities additionally depend on sentence segmentation, so they can change between v1 and v2 while the source annotation remains the same.
+The annotation_id is a sequential index under one exact source ordering. Its meaning is tied to the source checksum. A different source release may assign the same integer to another annotation. The sample identity therefore includes source hash plus annotation ID. Sentence identities additionally depend on sentence segmentation. A later change to segmentation can change those IDs without changing the source annotation; the current delivery exposes only one preparation policy.
 
 The pipeline checks mechanics, not whether every teacher decision is uniquely justified. A valid slice is compatible with an ambiguous edit, an optional correction or several operations under one label.
 
 **Evidence:** DATA_README records the exact nucle3.2.sgml checksum. The preparation summary records 44,912 annotations, 29,124 outside the five-class task and 15,788 retained targets. Filtering to five labels defines the study cohort; it is not a detector deciding whether other grammatical phenomena exist.
 
-## Step 4 - Prepare source-preserving sentences and compare v1/v2
+## Step 4 - Prepare source-preserving sentences with one policy
 
-**On screen / action:** Show segment_paragraph and construct_input, the authored offset example, repaired_starts and the saved preparation comparison table.
+**On screen / action:** Show segment_paragraph and construct_input, the authored offset example, repaired_starts and the saved preparation summary table.
 
 **Spoken script:**
 
@@ -141,9 +141,9 @@ Preparation converts paragraph coordinates into a sentence/span input. segment_p
 
 The authored example on screen makes the arithmetic visible. The second sentence starts at position 20. Paragraph interval [25,28) becomes sentence interval [5,8), and both slices select has. This is a conceptual illustration, not a NUCLE quotation. The require statement checks not only the new bounds but exact substring equality. Preparation later checks that this span also agrees with the earlier reconstruction.
 
-Version two changes sentence-boundary handling while retaining source characters. repaired_starts receives source text and token offsets, not gold categories, corrections or prediction errors. Its conservative rules address citation-like punctuation, abbreviation continuations and related boundary situations. When a boundary crosses a tokenizer token, the segmenter builds matching fragments instead of inserting a character into the source.
+The preparation module applies one sentence-boundary policy while retaining source characters. repaired_starts receives source text and token offsets, not gold categories, corrections or prediction errors. Its conservative rules address citation-like punctuation, abbreviation continuations and related boundary situations. When a boundary crosses a tokenizer token, the segmenter builds matching fragments instead of inserting a character into the source.
 
-The comparison table retains the same 15,788 targets in both versions. It records 544 changed model inputs, 533 cases with changed sentence IDs, 30 changed contexts and two changed token-span representations. These sets overlap. Those numbers demonstrate representation changes, not a measured accuracy gain. The final target set has zero not-constructible cases, but the rules are not a universal sentence grammar for every future input.
+The saved preparation summary records 44,912 source annotations, 29,124 outside the five-class scope and 15,788 retained targets. No target is rejected as not constructible. These are checks of the single prepared dataset, not a comparison with a missing earlier dataset. The source rules are conservative heuristics, not a universal sentence grammar, so exact character preservation and ambiguity flags still matter.
 
 ### Code, evidence and technical notes
 
@@ -175,26 +175,27 @@ Then preparation also checks that the result equals the span reconstructed durin
 
 A rejection reason such as cross_sentence means the input contract cannot represent that annotation as one sentence/span. It does not mean the error itself is linguistically invalid. The final retained target set has zero not-constructible cases, but that is an observed project count, not a guarantee for every future corpus.
 
-### What v2 changes
+### Source-only sentence-boundary rules
 
-v1 relies on the initial sentencizer starts. v2 calls repaired_starts and still slices the original characters. The repair API receives source text/token offsets, not labels, corrections or prediction errors.
+Preparation always calls repaired_starts and slices the original characters. There is no alternate legacy policy or version-selection flag. The repair API receives source text/token offsets, not labels, corrections or prediction errors.
 
 The rules handle bounded citation-like regions, abbreviation continuations, opening brackets/quotes and punctuation attached to a following word. A boundary can fall inside an original tokenizer token; segment_paragraph explicitly constructs matching token fragments instead of editing the source to insert a space.
 
 These are conservative heuristics, not a universal sentence grammar. Explain one boundary situation, the character-preservation check and one residual uncertainty. Do not claim the repair understands every citation or grammatical clause.
 
-**Saved evidence:** preparation_comparison.json records 544 changed sentence inputs, 533 cases with changed sentence IDs, thirty changed context representations and two changed token-span representations across the same 15,788 targets. Annotation retention and source offsets are unchanged. The sets overlap. Changed context does not by itself prove a model-performance gain.
+### Saved single-policy preparation checks
 
-| Preparation check | Saved result | What it demonstrates |
+| Check | Saved result | Interpretation |
 | --- | --- | --- |
 | Source annotations | 44,912 | Inventory before task filtering |
-| Retained targets, v1 and v2 | 15,788 each | Preserved target cohort |
-| Changed model inputs | 544 | Input identity is checked separately from retention |
-| Cases with changed sentence IDs | 533 | Segmentation-derived IDs can change |
-| Changed context representations | 30 | Local context may change |
-| Changed token-span representations | 2 | Token-space changes are checked separately |
+| Out-of-scope annotations | 29,124 | Excluded by the fixed five-label task |
+| Retained targets | 15,788 | Inputs in the single prepared dataset |
+| Not-constructible targets | 0 | All target spans meet the input contract |
+| Exact alignment | 14,447 | Character/token boundaries agree |
+| Partial-token alignment | 1,130 | Original endpoints are preserved |
+| Whitespace-edge alignment | 211 | Token selection and character geometry are distinguished |
 
-Source: `json -> Results/evidence/preparation_summary.json` and `json -> Results/evidence/preparation_comparison.json`. Point to the distinct denominators; change categories overlap. This table shows preparation behavior, not a measured model improvement.
+Source: `json -> Results/evidence/preparation_summary.json`. The current command is `python -m src.data.prepare_nucle`, with output `data_set/processed/nucle_preparation/`. Historical comparison records, if inspected in the evidence archive, are not an executable step or a fresh comparison in this delivery.
 
 ## Step 5 - Align character intervals with token analyses
 
@@ -468,7 +469,7 @@ $bundle.json.'Results/evidence/real_example_10824.json' | ConvertTo-Json -Depth 
 
 **Spoken script:**
 
-The data result is a preserved and traceable set of 15,788 five-class annotations, assigned to connected-content partitions and represented using a training-fitted coordinate map. The preparation comparison distinguishes retention from representation changes. The real-case demonstration shows how that representation connects to a saved prediction and an actual error.
+The data result is a preserved and traceable set of 15,788 five-class annotations, assigned to connected-content partitions and represented using a training-fitted coordinate map. The preparation summary verifies task filtering, span construction and alignment within this single dataset. The real-case demonstration shows how that representation connects to a saved prediction and an actual error.
 
 For my personal contribution, I worked on [ACTUAL ARTIFACT AND ACTION]. I checked [ACTUAL CHECK] against [SUPPORTING EVIDENCE], and the supported outcome was [OBSERVED RESULT OR CORRECTION]. Shared work or AI assistance covered [SPECIFIC PART], while my own verification covered [SPECIFIC SCOPE]. These details must match my records; the role assignment by itself does not establish authorship of every module.
 

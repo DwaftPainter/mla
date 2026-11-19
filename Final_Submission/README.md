@@ -1,4 +1,4 @@
-﻿# Group 05 - NUCLE Error-Type Classification
+# Group 05 - NUCLE Error-Type Classification
 
 Project version: **NUCLE-final-20261117**. Given an original English sentence and a known error span, the project predicts one of five labels: ArtOrDet, Prep, Nn, Vform and SVA. The final report is [Report/Final_Report.pdf](Report/Final_Report.pdf).
 
@@ -6,11 +6,10 @@ Project version: **NUCLE-final-20261117**. Given an original English sentence an
 
 | Member | Contribution |
 | --- | --- |
-| Quân | NUCLE/SGML parsing; annotation and offset checks; preparation v1/v2; grouped train/validation/test split; spaCy analysis; S/L/P/M/D feature extraction; train-only encoder and feature vectors. |
+| Quân | NUCLE/SGML parsing; annotation and offset checks; source-preserving preparation; grouped train/validation/test split; spaCy analysis; S/L/P/M/D feature extraction; train-only encoder and feature vectors. |
 | Duy | Majority and POS baselines; Logistic Regression and Decision Tree; validation tuning; ablation and lexical masking; initial BERT-small experiments, extended training and diagnosis. |
 | Công | Test metrics, confusion matrices and grouped bootstrap intervals; model/ablation comparisons; synthesis of the 18-validation/40-test case reviews; reproducibility checks and report analysis. |
 
-These responsibilities follow the project assignment. The saved team record also lists six validation review cases per member. Roles and review assignments do not establish sole authorship of every module. Full student names/IDs were not supplied. AI assistance and verification details are documented in [AI_Log/AI_Use_Log.md](AI_Log/AI_Use_Log.md).
 
 ## 2. Setup instructions
 
@@ -41,19 +40,21 @@ Complete each stage's prerequisites before starting the next. The sequence below
 | --- | --- | --- |
 | 1 | `.venv/Scripts/python.exe -m src.data.data_understanding` | Parse the raw source and export annotation/statistical evidence. |
 | 2 | `.venv/Scripts/python.exe -m src.data.data_quality` | Produce annotation-audit and duplicate-content evidence. |
-| 3 | `.venv/Scripts/python.exe -m src.data.prepare_nucle --policy v2 --output data_set/processed/nucle_preparation_v2` | Prepare source-preserving sentence/span samples using the original review inputs. |
+| 3 | `.venv/Scripts/python.exe -m src.data.prepare_nucle` | Prepare source-preserving sentence/span samples using the original review inputs. |
 | 4 | `.venv/Scripts/python.exe -m src.data.group_split_nucle --seed 20261013` | Create the connected-group train/validation/test split. |
 | 5 | `.venv/Scripts/python.exe -m src.features.nucle_pos` | Fit the train-only POS rule and save validation evidence. |
 | 6 | `.venv/Scripts/python.exe -m src.features.nucle_features` | Extract S/L/P/M/D, fit the encoder on train and export vectors/targets. |
 | 7 | `.venv/Scripts/python.exe -m src.training.nucle_benchmark` | Run the classical train/validation benchmark. |
 | 8 | `.venv/Scripts/python.exe -m src.training.nucle_ablation` | Run the defined ablation/masking experiments. |
-| 9 | `.venv/Scripts/python.exe -m src.training.nucle_final_selection` | Fit the final-stage configurations; historical six-variant inputs are required. |
+| 9 | `.venv/Scripts/python.exe -m src.training.nucle_final_selection` | Fit the final-stage configurations; the six-variant validation outputs from stage 8 are required. |
 | 10 | `.venv/Scripts/python.exe -m src.training.nucle_final_selection --freeze` | Freeze selected states, inputs and source identities before test scoring. |
 | 11 | `.venv/Scripts/python.exe -m src.evaluation.nucle_final_evaluation score` | Generate classical test predictions and metrics. |
 | 12 | `.venv/Scripts/python.exe -m src.evaluation.nucle_final_evaluation bootstrap` | Generate paired connected-group bootstrap intervals. |
 | 13 | `.venv/Scripts/python.exe -m src.evaluation.nucle_final_error_audit` | Generate source-aware error analysis from the recorded predictions. |
 
-Preparation, selection and scoring runners protect existing outputs. Use a fresh workspace for a fresh execution; do not overwrite completed experiments or remove the test-scoring guard. For preparation sensitivity, `src.data.compare_preparation` compares separately generated v1/v2 outputs.
+Preparation, selection and scoring runners protect existing outputs. Use a fresh workspace for a fresh execution; do not overwrite completed experiments or remove the test-scoring guard. Preparation has one source-preserving policy and no version-selection or comparison step.
+
+The canonical output locations are `data_set/processed/nucle_preparation/`, `data_set/features/nucle_features/`, `reports/nucle_pos_baseline/`, `reports/nucle_feature_benchmark/` and `reports/nucle_feature_ablation/`. The BERT configuration uses the same prepared samples. Original evidence/protocol records keep their historical identifiers and hashes; the current path mapping is recorded under `current_pipeline` in Results/results.json. A historical lock is not made valid by renaming paths; use a fresh matching run and lock for the current source.
 
 After restoring BERT inputs, run the extension in this order:
 

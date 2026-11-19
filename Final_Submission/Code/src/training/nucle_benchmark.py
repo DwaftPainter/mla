@@ -37,9 +37,9 @@ except ModuleNotFoundError:
     )
     from src.models.nucle_tree import GiniTree
 
-FEATURE_DIR = DATA_ROOT / "features" / "nucle_features_v1"
+FEATURE_DIR = DATA_ROOT / "features" / "nucle_features"
 SPLIT_DIR = DATA_ROOT / "split" / "nucle_group_split"
-DEFAULT_OUTPUT = PROJECT_ROOT / "reports" / "nucle_feature_benchmark_solver_v2"
+DEFAULT_OUTPUT = PROJECT_ROOT / "reports" / "nucle_feature_benchmark"
 LABELS = tuple(TARGET_LABELS)
 
 
@@ -107,7 +107,7 @@ def run(feature_dir: Path = FEATURE_DIR, split_dir: Path = SPLIT_DIR, output_dir
     data_clock = perf_counter()
     manifest = json.loads((feature_dir / "manifest.json").read_text(encoding="utf-8"))
     encoder = json.loads((feature_dir / "encoder.json").read_text(encoding="utf-8"))
-    require(manifest["schema"] == encoder["schema"] == "nucle-slpmd-v1", "Feature schema mismatch")
+    require(manifest["schema"] == encoder["schema"] == "nucle-slpmd", "Feature schema mismatch")
     require(encoder["fit_partition"] == "train", "Encoder was not fit on train")
     features, targets, split, train_ids, val_ids = load_rows(feature_dir, split_dir)
     y_train = [LABELS.index(targets[sid]["error_type"]) for sid in train_ids]

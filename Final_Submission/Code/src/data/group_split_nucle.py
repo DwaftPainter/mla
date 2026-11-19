@@ -1,4 +1,4 @@
-"""Leakage-aware grouping and train/validation/test split for NUCLE v2.
+"""Leakage-aware grouping and train/validation/test split for NUCLE.
 
 This module stores identifiers and hashes only; it never writes source text.
 """
@@ -24,7 +24,7 @@ except ImportError:
     from nucle_sgml import load_nucle
     from prepare_nucle import canonical, file_hash, require
 
-PREPARED = DATA_ROOT / "processed" / "nucle_preparation_v2"
+PREPARED = DATA_ROOT / "processed" / "nucle_preparation"
 DUPLICATES = DATA_ROOT.parent / "reports" / "nucle_duplicate_content.json"
 OUTPUT = DATA_ROOT / "split" / "nucle_group_split"
 SEED = 20261013
@@ -202,7 +202,7 @@ def build_grouping(documents, samples, provenance, source_hash, prep_hash):
                                "label_counts": {label: counts[label] for label in TARGET_LABELS}})
 
     policy = {
-        "version": "nucle-grouping-v1",
+        "version": "nucle-grouping",
         "source_sha256": source_hash,
         "preparation_manifest_sha256": prep_hash,
         "normalization": "Unicode NFC, casefold, collapse all whitespace runs; no punctuation removal or stemming",

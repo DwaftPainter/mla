@@ -13,9 +13,9 @@ from src.models.nucle_logistic import fit_logistic
 from src.models.nucle_tree import GiniTree
 from src.evaluation.metrics import scores
 
-OUT=ROOT/'reports/final_evaluation'; FEAT=ROOT/'data_set/features/nucle_features_v1'
-PREP=ROOT/'data_set/processed/nucle_preparation_v2'; SPLIT=ROOT/'data_set/split/nucle_group_split'
-OLD=ROOT/'reports/nucle_feature_ablation_v1'
+OUT=ROOT/'reports/final_evaluation'; FEAT=ROOT/'data_set/features/nucle_features'
+PREP=ROOT/'data_set/processed/nucle_preparation'; SPLIT=ROOT/'data_set/split/nucle_group_split'
+OLD=ROOT/'reports/nucle_feature_ablation'
 LABELS=['ArtOrDet','Prep','Nn','Vform','SVA']
 FULL='S+L+P+M+D'; MASK='Full_mask_span_lexical'; NONLEX='S+P+M+D_nonlexical'
 EXTRA=[('Full_minus_P',set('SLMD'),'Remove explicit P family'),('Full_minus_M',set('SLPD'),'Remove explicit M family')]
@@ -76,7 +76,7 @@ def make_encoders(raw,split,train_ids):
     me=TrainOnlyEncoder().fit([r for r in masked if r['partition']=='train'])
     save_encoder(e,OUT/'full_encoder.json'); save_encoder(me,OUT/'masked_encoder.json')
     rule=POSRule().fit(pos_train)
-    saved={r['sample_id']:r['prediction'] for r in rows(ROOT/'reports/nucle_pos_baseline_v1/validation_predictions.csv')}
+    saved={r['sample_id']:r['prediction'] for r in rows(ROOT/'reports/nucle_pos_baseline/validation_predictions.csv')}
     assert all(rule.predict(p)==saved[sid] for sid,p in val_pos.items())
     dump(OUT/'pos_rule.json',{'majority':rule.majority,'lookup':{s:rule._winner(c) for s,c in rule.signature_counts.items()},'fixed':rule.FIXED})
     return {r['sample_id']:me.transform_one(r['features']) for r in masked},me.feature_names

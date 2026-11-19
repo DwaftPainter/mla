@@ -512,6 +512,8 @@ The fresh workspace created its own matching lock. The older archival record sti
 
 The BERT verification was a one-epoch runtime smoke run plus validation inference from the three existing selected checkpoints, reproducing all 2,368 validation labels per seed. It did not retrain the full twelve-run grid or open a new BERT test comparison.
 
+After the canonical-name cleanup, the assistant also reran the single preparation policy through feature extraction from the authorized source. Existing fitted states were restored for a fresh lock, scoring, bootstrap and replay. All test predictions, metrics and bootstrap outputs matched the previously verified final run. This verifies the naming/preparation change without claiming another checkpoint-training grid; the historical records retain their original identifiers.
+
 The replay function checks the lock and row order, predicts from stored vectors and saved states, and asserts zero disagreements before printing its success message. It does not reparse raw text, refit the encoder, retrain models or regenerate CIs. Showing its source explains the mechanism; calling a demonstration live requires actually running it with those prerequisites.
 
 ### Code, evidence and technical notes

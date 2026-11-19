@@ -58,10 +58,10 @@ def metric(ids, samples, predictions, labels):
 def run(output):
     if output.exists():
         raise FileExistsError(f"Use a new output directory: {output}")
-    prep = ROOT / "data_set/processed/nucle_preparation_v2"
+    prep = ROOT / "data_set/processed/nucle_preparation"
     split_dir = ROOT / "data_set/split/nucle_group_split"
-    pos_dir = ROOT / "reports/nucle_pos_baseline_v1"
-    ab_dir = ROOT / "reports/nucle_feature_ablation_v1"
+    pos_dir = ROOT / "reports/nucle_pos_baseline"
+    ab_dir = ROOT / "reports/nucle_feature_ablation"
     paths = {
         "samples": prep / "samples.jsonl", "split": split_dir / "split_manifest.csv",
         "pos_predictions": pos_dir / "validation_predictions.csv",
@@ -193,7 +193,7 @@ def run(output):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, default=ROOT / "reports/nucle_span_diagnostics_v1")
+    parser.add_argument("--output", type=Path, default=ROOT / "reports/nucle_span_diagnostics")
     args = parser.parse_args()
     result = run(args.output)
     print(json.dumps({k: result[k] for k in ("span_counts", "Nn_to_ArtOrDet_by_span",

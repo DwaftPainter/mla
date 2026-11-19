@@ -50,7 +50,7 @@ def load_data():
     with (ROOT/'data_set/split/nucle_group_split/split_manifest.csv').open(encoding='utf-8-sig',newline='') as f:
         splits={r['sample_id']:r['partition'] for r in csv.DictReader(f)}
     datasets={'train':[],'validation':[]}; samples={}; stats={p:[] for p in datasets}
-    with (ROOT/'data_set/processed/nucle_preparation_v2/samples.jsonl').open(encoding='utf-8') as f:
+    with (ROOT/'data_set/processed/nucle_preparation/samples.jsonl').open(encoding='utf-8') as f:
         for line in f:
             row=json.loads(line); sid=row['sample_id']; part=splits[sid]
             if part not in datasets: continue
@@ -94,7 +94,7 @@ def run(pilot=False):
         print('Pilot',seconds,'seconds',flush=True); return
     sha(ROOT/'docs/bert_experiment_protocol.md')  # Require the original file or its verified archived content.
     if (OUT/'selection.json').exists(): raise FileExistsError('Completed run already exists')
-    env={'started_utc':datetime.now(timezone.utc).isoformat(),'source':source,'tokenization':stats,'device':'cpu','threads':4,'torch':torch.__version__,'transformers':transformers.__version__,'python':platform.python_version(),'test_scored':False,'protocol_sha256':sha(ROOT/'docs/bert_experiment_protocol.md'),'code_sha256':sha(Path(__file__)),'split_sha256':sha(ROOT/'data_set/split/nucle_group_split/split_manifest.csv'),'samples_sha256':sha(ROOT/'data_set/processed/nucle_preparation_v2/samples.jsonl')}
+    env={'started_utc':datetime.now(timezone.utc).isoformat(),'source':source,'tokenization':stats,'device':'cpu','threads':4,'torch':torch.__version__,'transformers':transformers.__version__,'python':platform.python_version(),'test_scored':False,'protocol_sha256':sha(ROOT/'docs/bert_experiment_protocol.md'),'code_sha256':sha(Path(__file__)),'split_sha256':sha(ROOT/'data_set/split/nucle_group_split/split_manifest.csv'),'samples_sha256':sha(ROOT/'data_set/processed/nucle_preparation/samples.jsonl')}
     dump(OUT/'manifest.json',env)
     val_loader=make_loader(data['validation'],tok); runs=[]
     def train_one(lr,seed):

@@ -1,5 +1,5 @@
 {
-  "samples": "data_set/processed/nucle_preparation_v2/samples.jsonl",
+  "samples": "data_set/processed/nucle_preparation/samples.jsonl",
   "split": "data_set/split/nucle_group_split/split_manifest.csv",
   "model_source": "reports/contextual_model_validation/model_source.json",
   "expected_counts": {"train": 11052, "validation": 2368, "test": 2368},

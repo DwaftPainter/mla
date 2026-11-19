@@ -48,9 +48,9 @@ except ModuleNotFoundError:
     from src.features.nucle_pos import load_tagger
     from src.training.nucle_benchmark import load_rows, sha256
 
-FEATURE_DIR = DATA_ROOT / "features" / "nucle_features_v1"
+FEATURE_DIR = DATA_ROOT / "features" / "nucle_features"
 SPLIT_DIR = DATA_ROOT / "split" / "nucle_group_split"
-DEFAULT_OUTPUT = PROJECT_ROOT / "reports" / "nucle_feature_ablation_v1"
+DEFAULT_OUTPUT = PROJECT_ROOT / "reports" / "nucle_feature_ablation"
 LABELS = tuple(TARGET_LABELS)
 
 # The first four are the preregistered incremental sequence. The last two

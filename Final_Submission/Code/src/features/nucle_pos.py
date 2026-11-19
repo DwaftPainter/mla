@@ -1,4 +1,4 @@
-"""POS span contract and POS-only diagnostic baseline for prepared NUCLE v2.
+"""POS span contract and POS-only diagnostic baseline for prepared NUCLE.
 
 Run from the project root with ``.venv/Scripts/python.exe src/features/nucle_pos.py`` after installing
 the pinned English spaCy model. Only train labels fit the POS lookup; validation
@@ -30,9 +30,9 @@ MODEL_URL = (
     "en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl"
 )
 MODEL_WHEEL_SHA256 = "1932429db727d4bff3deed6b34cfc05df17794f4a52eeb26cf8928f7c1a0fb85"
-PREPARED_DIR = DATA_ROOT / "processed" / "nucle_preparation_v2"
+PREPARED_DIR = DATA_ROOT / "processed" / "nucle_preparation"
 SPLIT_DIR = DATA_ROOT / "split" / "nucle_group_split"
-DEFAULT_OUTPUT = PROJECT_ROOT / "reports" / "nucle_pos_baseline_v1"
+DEFAULT_OUTPUT = PROJECT_ROOT / "reports" / "nucle_pos_baseline"
 NA = "NOT_APPLICABLE"
 MISSING = "POS_MISSING"
 LABEL_ORDER = tuple(TARGET_LABELS)
@@ -266,7 +266,7 @@ def run(prepared_dir: Path = PREPARED_DIR, split_dir: Path = SPLIT_DIR,
         writer.writerows(rule.table())
 
     summary = {
-        "pos_contract": "nucle-pos-span-v1",
+        "pos_contract": "nucle-pos-span",
         "spacy_version": SPACY_VERSION,
         "model": MODEL_NAME,
         "model_version": MODEL_VERSION,

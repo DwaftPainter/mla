@@ -1,4 +1,4 @@
-"""Leakage-safe S/L/P/M/D feature extraction for prepared NUCLE v2.
+"""Leakage-safe S/L/P/M/D feature extraction for prepared NUCLE.
 
 Run from the repository root: .venv/Scripts/python.exe src/features/nucle_features.py
 The encoder is fitted on train rows only. Labels, IDs and provenance are
@@ -23,9 +23,9 @@ except ModuleNotFoundError:
     from src.data.constants import DATA_ROOT, PROJECT_ROOT
     from src.features.nucle_pos import align_span, load_tagger, require
 
-PREPARED_DIR = DATA_ROOT / "processed" / "nucle_preparation_v2"
+PREPARED_DIR = DATA_ROOT / "processed" / "nucle_preparation"
 SPLIT_DIR = DATA_ROOT / "split" / "nucle_group_split"
-DEFAULT_OUTPUT = DATA_ROOT / "features" / "nucle_features_v1"
+DEFAULT_OUTPUT = DATA_ROOT / "features" / "nucle_features"
 MORPH_FIELDS = ("Number", "Person", "Tense", "VerbForm")
 LEXICAL_LIMIT = 500
 SPECIAL = "__MISSING__"
@@ -233,12 +233,12 @@ def run(prepared_dir: Path = PREPARED_DIR, split_dir: Path = SPLIT_DIR, output_d
     with (output_dir / "targets.jsonl").open("w", encoding="utf-8", newline="\n") as f:
         for row in target_rows:
             json.dump(row, f, ensure_ascii=False, sort_keys=True); f.write("\n")
-    encoder_json = {"schema": "nucle-slpmd-v1", "fit_partition": "train", "train_sample_count": len(train),
+    encoder_json = {"schema": "nucle-slpmd", "fit_partition": "train", "train_sample_count": len(train),
                     "lexical_limit": LEXICAL_LIMIT, "lexical_vocabulary": [list(t) for t in encoder.lexical_vocab],
                     "feature_names": encoder.feature_names,
                     "train_sample_id_sha256": hashlib.sha256("\n".join(sorted(encoder.train_ids)).encode()).hexdigest()}
     (output_dir / "encoder.json").write_text(json.dumps(encoder_json, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    manifest = {"schema": "nucle-slpmd-v1", "sample_count": len(samples),
+    manifest = {"schema": "nucle-slpmd", "sample_count": len(samples),
                 "partition_counts": dict(Counter(r["partition"] for r in feature_rows)),
                 "feature_dimension": len(encoder.feature_names), "unique_sentences_parsed": len(parsed),
                 "test_scored": False, "inputs": {"prepared_manifest_sha256": (prepared_dir / "manifest.sha256").read_text(encoding="utf-8").strip(),
